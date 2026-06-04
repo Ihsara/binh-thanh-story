@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bình Thạnh: from infrastructure to neighbourhood life</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header class="hero">
+    <h1 id="title">Bình Thạnh</h1>
+    <p id="subtitle" class="subtitle"></p>
+    <div class="maps two-up">
+      <figure><img id="map-roads-2015" alt="Roads 2015"><figcaption>2015</figcaption></figure>
+      <figure><img id="map-roads-2025" alt="Roads 2025"><figcaption>2025</figcaption></figure>
+    </div>
+  </header>
+
+  <main>
+    <section id="sec-roads">
+      <h2>The roads multiplied</h2>
+      <p id="roads-lede" class="lede"></p>
+      <div id="bignum-roads" class="bignums"></div>
+      <div id="roads-bars" class="chart"></div>
+    </section>
+
+    <section id="sec-pois">
+      <h2>The neighbourhood came alive</h2>
+      <div class="maps two-up">
+        <figure><img id="map-pois-2015" alt="Places 2015"><figcaption>2015</figcaption></figure>
+        <figure><img id="map-pois-2025" alt="Places 2025"><figcaption>2025</figcaption></figure>
+      </div>
+      <div id="bignum-pois" class="bignums"></div>
+    </section>
+
+    <section id="sec-rankflip">
+      <h2>Cafés overtook fuel</h2>
+      <p class="lede">The top amenities mapped in the district, 2015 versus 2025.</p>
+      <div id="slopegraph" class="chart"></div>
+    </section>
+
+    <section id="sec-growth">
+      <h2>The growth curve</h2>
+      <p class="lede">Two points today; this becomes a timeline as yearly snapshots are added.</p>
+      <div id="growth" class="chart"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p id="boundary-note" class="note"></p>
+    <p class="note">Source: OpenStreetMap full history, self-hosted PostGIS. Clipped to the
+      historical district boundary. Built with osmkit.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

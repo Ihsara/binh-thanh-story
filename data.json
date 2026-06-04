@@ -1,0 +1,664 @@
+{
+  "schema": "v1",
+  "title": "Bình Thạnh: from infrastructure to neighbourhood life",
+  "subtitle": "How OpenStreetMap's picture of the district filled in, 2015 → 2025.",
+  "district": "Quận Bình Thạnh, Hồ Chí Minh City",
+  "boundary_note": "Clipped to the historical Quận Bình Thạnh boundary (OSM relation -3797166), the district as it existed 2015–mid-2025.",
+  "snapshots": [
+    {
+      "schema": "vn2015",
+      "year": 2015,
+      "total_ways": 963,
+      "total_km": 206.3,
+      "roads_by_type": [
+        {
+          "kind": "residential",
+          "ways": 452,
+          "km": 96.9
+        },
+        {
+          "kind": "service",
+          "ways": 271,
+          "km": 31.0
+        },
+        {
+          "kind": "primary",
+          "ways": 58,
+          "km": 21.5
+        },
+        {
+          "kind": "trunk",
+          "ways": 51,
+          "km": 19.6
+        },
+        {
+          "kind": "tertiary",
+          "ways": 31,
+          "km": 15.0
+        },
+        {
+          "kind": "secondary",
+          "ways": 22,
+          "km": 12.5
+        },
+        {
+          "kind": "primary_link",
+          "ways": 14,
+          "km": 2.1
+        },
+        {
+          "kind": "unclassified",
+          "ways": 12,
+          "km": 2.4
+        },
+        {
+          "kind": "footway",
+          "ways": 11,
+          "km": 0.9
+        },
+        {
+          "kind": "cycleway",
+          "ways": 9,
+          "km": 1.0
+        },
+        {
+          "kind": "trunk_link",
+          "ways": 9,
+          "km": 0.7
+        },
+        {
+          "kind": "steps",
+          "ways": 8,
+          "km": 0.1
+        },
+        {
+          "kind": "living_street",
+          "ways": 7,
+          "km": 0.8
+        },
+        {
+          "kind": "pedestrian",
+          "ways": 3,
+          "km": 1.0
+        },
+        {
+          "kind": "road",
+          "ways": 1,
+          "km": 0.6
+        },
+        {
+          "kind": "tertiary_link",
+          "ways": 1,
+          "km": 0.1
+        },
+        {
+          "kind": "track",
+          "ways": 1,
+          "km": 0.1
+        },
+        {
+          "kind": "path",
+          "ways": 1,
+          "km": 0.0
+        },
+        {
+          "kind": "secondary_link",
+          "ways": 1,
+          "km": 0.0
+        }
+      ],
+      "amenities": [
+        {
+          "value": "fuel",
+          "n": 24
+        },
+        {
+          "value": "atm",
+          "n": 20
+        },
+        {
+          "value": "restaurant",
+          "n": 18
+        },
+        {
+          "value": "school",
+          "n": 13
+        },
+        {
+          "value": "bank",
+          "n": 13
+        },
+        {
+          "value": "fast_food",
+          "n": 13
+        },
+        {
+          "value": "place_of_worship",
+          "n": 10
+        },
+        {
+          "value": "cafe",
+          "n": 6
+        },
+        {
+          "value": "marketplace",
+          "n": 3
+        },
+        {
+          "value": "hospital",
+          "n": 3
+        },
+        {
+          "value": "bus_station",
+          "n": 2
+        },
+        {
+          "value": "post_office",
+          "n": 2
+        },
+        {
+          "value": "doctors",
+          "n": 1
+        },
+        {
+          "value": "college",
+          "n": 1
+        },
+        {
+          "value": "kindergarten",
+          "n": 1
+        },
+        {
+          "value": "pharmacy",
+          "n": 1
+        },
+        {
+          "value": "police",
+          "n": 1
+        },
+        {
+          "value": "post_box",
+          "n": 1
+        },
+        {
+          "value": "university",
+          "n": 1
+        }
+      ],
+      "shops": [
+        {
+          "value": "supermarket",
+          "n": 8
+        },
+        {
+          "value": "convenience",
+          "n": 5
+        },
+        {
+          "value": "mobile_phone",
+          "n": 4
+        },
+        {
+          "value": "bakery",
+          "n": 4
+        },
+        {
+          "value": "optician",
+          "n": 2
+        },
+        {
+          "value": "motorcycle",
+          "n": 2
+        },
+        {
+          "value": "travel_agency",
+          "n": 2
+        },
+        {
+          "value": "books",
+          "n": 2
+        },
+        {
+          "value": "florist",
+          "n": 1
+        },
+        {
+          "value": "furniture",
+          "n": 1
+        },
+        {
+          "value": "hairdresser",
+          "n": 1
+        },
+        {
+          "value": "shoes",
+          "n": 1
+        }
+      ],
+      "total_amenities": 134,
+      "total_shops": 33
+    },
+    {
+      "schema": "vn2025",
+      "year": 2025,
+      "total_ways": 5268,
+      "total_km": 495.8,
+      "roads_by_type": [
+        {
+          "kind": "service",
+          "ways": 2539,
+          "km": 172.6
+        },
+        {
+          "kind": "residential",
+          "ways": 1663,
+          "km": 190.3
+        },
+        {
+          "kind": "footway",
+          "ways": 370,
+          "km": 27.3
+        },
+        {
+          "kind": "primary",
+          "ways": 214,
+          "km": 35.2
+        },
+        {
+          "kind": "tertiary",
+          "ways": 182,
+          "km": 31.9
+        },
+        {
+          "kind": "secondary",
+          "ways": 86,
+          "km": 11.3
+        },
+        {
+          "kind": "trunk",
+          "ways": 68,
+          "km": 12.0
+        },
+        {
+          "kind": "primary_link",
+          "ways": 48,
+          "km": 2.5
+        },
+        {
+          "kind": "steps",
+          "ways": 33,
+          "km": 0.6
+        },
+        {
+          "kind": "proposed",
+          "ways": 11,
+          "km": 1.6
+        },
+        {
+          "kind": "path",
+          "ways": 10,
+          "km": 2.5
+        },
+        {
+          "kind": "living_street",
+          "ways": 10,
+          "km": 0.6
+        },
+        {
+          "kind": "construction",
+          "ways": 8,
+          "km": 5.3
+        },
+        {
+          "kind": "pedestrian",
+          "ways": 8,
+          "km": 0.4
+        },
+        {
+          "kind": "secondary_link",
+          "ways": 7,
+          "km": 1.1
+        },
+        {
+          "kind": "tertiary_link",
+          "ways": 6,
+          "km": 0.3
+        },
+        {
+          "kind": "trunk_link",
+          "ways": 4,
+          "km": 0.1
+        },
+        {
+          "kind": "track",
+          "ways": 1,
+          "km": 0.2
+        }
+      ],
+      "amenities": [
+        {
+          "value": "restaurant",
+          "n": 77
+        },
+        {
+          "value": "cafe",
+          "n": 62
+        },
+        {
+          "value": "atm",
+          "n": 32
+        },
+        {
+          "value": "bank",
+          "n": 30
+        },
+        {
+          "value": "fuel",
+          "n": 24
+        },
+        {
+          "value": "pharmacy",
+          "n": 12
+        },
+        {
+          "value": "place_of_worship",
+          "n": 11
+        },
+        {
+          "value": "fast_food",
+          "n": 11
+        },
+        {
+          "value": "shelter",
+          "n": 9
+        },
+        {
+          "value": "parking",
+          "n": 8
+        },
+        {
+          "value": "fountain",
+          "n": 7
+        },
+        {
+          "value": "police",
+          "n": 7
+        },
+        {
+          "value": "school",
+          "n": 6
+        },
+        {
+          "value": "bar",
+          "n": 5
+        },
+        {
+          "value": "ice_cream",
+          "n": 4
+        },
+        {
+          "value": "marketplace",
+          "n": 4
+        },
+        {
+          "value": "university",
+          "n": 3
+        },
+        {
+          "value": "bus_station",
+          "n": 3
+        },
+        {
+          "value": "studio",
+          "n": 2
+        },
+        {
+          "value": "dentist",
+          "n": 2
+        },
+        {
+          "value": "ferry_terminal",
+          "n": 2
+        },
+        {
+          "value": "food_court",
+          "n": 2
+        },
+        {
+          "value": "kindergarten",
+          "n": 2
+        },
+        {
+          "value": "vending_machine",
+          "n": 2
+        },
+        {
+          "value": "brothel",
+          "n": 1
+        },
+        {
+          "value": "car_wash",
+          "n": 1
+        },
+        {
+          "value": "waste_basket",
+          "n": 1
+        },
+        {
+          "value": "veterinary",
+          "n": 1
+        },
+        {
+          "value": "social_facility",
+          "n": 1
+        },
+        {
+          "value": "pub",
+          "n": 1
+        },
+        {
+          "value": "post_box",
+          "n": 1
+        },
+        {
+          "value": "love_hotel",
+          "n": 1
+        },
+        {
+          "value": "karaoke_box",
+          "n": 1
+        },
+        {
+          "value": "bicycle_parking",
+          "n": 1
+        },
+        {
+          "value": "doctors",
+          "n": 1
+        },
+        {
+          "value": "college",
+          "n": 1
+        },
+        {
+          "value": "clinic",
+          "n": 1
+        },
+        {
+          "value": "cinema",
+          "n": 1
+        },
+        {
+          "value": "childcare",
+          "n": 1
+        }
+      ],
+      "shops": [
+        {
+          "value": "convenience",
+          "n": 56
+        },
+        {
+          "value": "supermarket",
+          "n": 23
+        },
+        {
+          "value": "jewelry",
+          "n": 11
+        },
+        {
+          "value": "bakery",
+          "n": 9
+        },
+        {
+          "value": "clothes",
+          "n": 6
+        },
+        {
+          "value": "optician",
+          "n": 6
+        },
+        {
+          "value": "motorcycle",
+          "n": 5
+        },
+        {
+          "value": "mobile_phone",
+          "n": 5
+        },
+        {
+          "value": "travel_agency",
+          "n": 4
+        },
+        {
+          "value": "hardware",
+          "n": 4
+        },
+        {
+          "value": "books",
+          "n": 4
+        },
+        {
+          "value": "hairdresser",
+          "n": 3
+        },
+        {
+          "value": "computer",
+          "n": 3
+        },
+        {
+          "value": "yes",
+          "n": 3
+        },
+        {
+          "value": "shoes",
+          "n": 3
+        },
+        {
+          "value": "laundry",
+          "n": 3
+        },
+        {
+          "value": "florist",
+          "n": 3
+        },
+        {
+          "value": "beverages",
+          "n": 2
+        },
+        {
+          "value": "car_repair",
+          "n": 2
+        },
+        {
+          "value": "copyshop",
+          "n": 2
+        },
+        {
+          "value": "furniture",
+          "n": 2
+        },
+        {
+          "value": "seafood",
+          "n": 2
+        },
+        {
+          "value": "doityourself",
+          "n": 1
+        },
+        {
+          "value": "lottery",
+          "n": 1
+        },
+        {
+          "value": "motorcycle_repair",
+          "n": 1
+        },
+        {
+          "value": "repair",
+          "n": 1
+        },
+        {
+          "value": "ticket",
+          "n": 1
+        },
+        {
+          "value": "tobacco",
+          "n": 1
+        },
+        {
+          "value": "toys",
+          "n": 1
+        },
+        {
+          "value": "tyres",
+          "n": 1
+        },
+        {
+          "value": "variety_store",
+          "n": 1
+        },
+        {
+          "value": "beauty",
+          "n": 1
+        },
+        {
+          "value": "bed",
+          "n": 1
+        },
+        {
+          "value": "butcher",
+          "n": 1
+        },
+        {
+          "value": "car",
+          "n": 1
+        }
+      ],
+      "total_amenities": 342,
+      "total_shops": 174
+    }
+  ],
+  "growth": {
+    "years": [
+      2015,
+      2025
+    ],
+    "ways": [
+      963,
+      5268
+    ],
+    "km": [
+      206.3,
+      495.8
+    ],
+    "amenities": [
+      134,
+      342
+    ],
+    "shops": [
+      33,
+      174
+    ]
+  }
+}
