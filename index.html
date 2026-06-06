@@ -3,29 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bình Thạnh: from infrastructure to neighbourhood life</title>
-  <link rel="stylesheet" href="app.css">
+  <title>Bình Thạnh, filling in — a decade in OpenStreetMap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,400&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="spine.css">
 </head>
 <body data-page="cover">
   <div id="site-nav"></div>
-  <header class="hero">
-    <h1 id="title">Bình Thạnh</h1>
-    <p id="subtitle" class="subtitle"></p>
-    <div id="bignum-hero" class="bignums" style="justify-content:center"></div>
-  </header>
   <main>
-    <section>
-      <h2>Ten years, one district</h2>
-      <p class="lede">From a sparse road skeleton to a dense alley mesh and a neighbourhood full
-        of places. Play the decade, or scrub a year.</p>
-      <div id="cover-timeline"><!-- noscript-grid:roads -->
-<noscript><div class="tl-grid tl-grid-fallback"><figure><img src="roads-vn2015.png" alt="roads 2015" loading="lazy"><figcaption>2015</figcaption></figure><figure><img src="roads-vn2016.png" alt="roads 2016" loading="lazy"><figcaption>2016</figcaption></figure><figure><img src="roads-vn2017.png" alt="roads 2017" loading="lazy"><figcaption>2017</figcaption></figure><figure><img src="roads-vn2018.png" alt="roads 2018" loading="lazy"><figcaption>2018</figcaption></figure><figure><img src="roads-vn2019.png" alt="roads 2019" loading="lazy"><figcaption>2019</figcaption></figure><figure><img src="roads-vn2020.png" alt="roads 2020" loading="lazy"><figcaption>2020</figcaption></figure><figure><img src="roads-vn2021.png" alt="roads 2021" loading="lazy"><figcaption>2021</figcaption></figure><figure><img src="roads-vn2022.png" alt="roads 2022" loading="lazy"><figcaption>2022</figcaption></figure><figure><img src="roads-vn2023.png" alt="roads 2023" loading="lazy"><figcaption>2023</figcaption></figure><figure><img src="roads-vn2024.png" alt="roads 2024" loading="lazy"><figcaption>2024</figcaption></figure><figure><img src="roads-vn2025.png" alt="roads 2025" loading="lazy"><figcaption>2025</figcaption></figure></div></noscript>
-<!-- /noscript-grid --></div>
-    </section>
+    <header>
+      <span class="kicker">A decade in OpenStreetMap · 2015 → 2025</span>
+      <h1 id="title">Bình Thạnh, <em style="font-style:italic;color:var(--accent)">filling in</em></h1>
+      <p id="subtitle" class="dek"></p>
+      <div id="bignum-hero" class="bignums"></div>
+    </header>
     <section>
       <h2>The growth curve</h2>
-      <p class="lede">Road ways mapped in the district each year.</p>
-      <div id="growth" class="chart"></div>
+      <p class="dek">Road ways mapped in the district each year — flat, then a leap.</p>
+      <div id="growth" class="chart"><!-- noscript-grid:roads -->
+<noscript><div class="tl-grid tl-grid-fallback"><figure><img src="roads-vn2015.png" alt="roads 2015" loading="lazy"><figcaption>2015</figcaption></figure><figure><img src="roads-vn2016.png" alt="roads 2016" loading="lazy"><figcaption>2016</figcaption></figure><figure><img src="roads-vn2017.png" alt="roads 2017" loading="lazy"><figcaption>2017</figcaption></figure><figure><img src="roads-vn2018.png" alt="roads 2018" loading="lazy"><figcaption>2018</figcaption></figure><figure><img src="roads-vn2019.png" alt="roads 2019" loading="lazy"><figcaption>2019</figcaption></figure><figure><img src="roads-vn2020.png" alt="roads 2020" loading="lazy"><figcaption>2020</figcaption></figure><figure><img src="roads-vn2021.png" alt="roads 2021" loading="lazy"><figcaption>2021</figcaption></figure><figure><img src="roads-vn2022.png" alt="roads 2022" loading="lazy"><figcaption>2022</figcaption></figure><figure><img src="roads-vn2023.png" alt="roads 2023" loading="lazy"><figcaption>2023</figcaption></figure><figure><img src="roads-vn2024.png" alt="roads 2024" loading="lazy"><figcaption>2024</figcaption></figure><figure><img src="roads-vn2025.png" alt="roads 2025" loading="lazy"><figcaption>2025</figcaption></figure></div></noscript>
+<!-- /noscript-grid --></div>
     </section>
     <section>
       <h2>Read the stories</h2>
@@ -35,10 +33,10 @@
   <footer>
     <p id="boundary-note" class="note"></p>
     <p class="note">Source: OpenStreetMap full history, self-hosted PostGIS. Clipped to the
-      historical district boundary. Built with osmkit.</p>
+      historical district boundary. Built with osmkit. <a class="how" href="method.html">How we know →</a></p>
   </footer>
   <script src="nav.js"></script>
-  <script src="timeline.js"></script>
-  <script src="index.js"></script>
+  <script src="growth.js"></script>
+  <script src="spine.js"></script>
 </body>
 </html>

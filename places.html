@@ -3,35 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Places — Bình Thạnh, 2015–2025</title>
-  <link rel="stylesheet" href="app.css">
+  <title>Places — how the neighbourhood filled with life</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,400&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="spine.css">
 </head>
 <body data-page="places">
   <div id="site-nav"></div>
-  <header class="hero">
-    <h1>The neighbourhood came alive</h1>
-    <p id="places-lede" class="subtitle"></p>
-  </header>
   <main>
-    <section>
-      <h2>Places, year by year</h2>
-      <p class="lede">Mapped amenities and shops across the decade. Play it, or scrub a year.</p>
-      <div id="places-timeline"><!-- noscript-grid:pois -->
+    <header>
+      <span class="kicker">Thread 2 of 3</span>
+      <h2>Places: how the neighbourhood filled with <em>life</em></h2>
+    </header>
+    <div id="places-stepper"><!-- noscript-grid:pois -->
 <noscript><div class="tl-grid tl-grid-fallback"><figure><img src="pois-vn2015.png" alt="pois 2015" loading="lazy"><figcaption>2015</figcaption></figure><figure><img src="pois-vn2016.png" alt="pois 2016" loading="lazy"><figcaption>2016</figcaption></figure><figure><img src="pois-vn2017.png" alt="pois 2017" loading="lazy"><figcaption>2017</figcaption></figure><figure><img src="pois-vn2018.png" alt="pois 2018" loading="lazy"><figcaption>2018</figcaption></figure><figure><img src="pois-vn2019.png" alt="pois 2019" loading="lazy"><figcaption>2019</figcaption></figure><figure><img src="pois-vn2020.png" alt="pois 2020" loading="lazy"><figcaption>2020</figcaption></figure><figure><img src="pois-vn2021.png" alt="pois 2021" loading="lazy"><figcaption>2021</figcaption></figure><figure><img src="pois-vn2022.png" alt="pois 2022" loading="lazy"><figcaption>2022</figcaption></figure><figure><img src="pois-vn2023.png" alt="pois 2023" loading="lazy"><figcaption>2023</figcaption></figure><figure><img src="pois-vn2024.png" alt="pois 2024" loading="lazy"><figcaption>2024</figcaption></figure><figure><img src="pois-vn2025.png" alt="pois 2025" loading="lazy"><figcaption>2025</figcaption></figure></div></noscript>
 <!-- /noscript-grid --></div>
-    </section>
-    <section>
-      <h2>Amenities and shops multiplied</h2>
-      <div id="bignum-pois" class="bignums"></div>
-      <div id="amen-bars" class="chart"></div>
-    </section>
   </main>
-  <footer>
-    <p id="boundary-note" class="note"></p>
-    <p class="note">Source: OpenStreetMap full history, self-hosted PostGIS. Clipped to the historical district boundary. Built with osmkit.</p>
-  </footer>
+  <footer><p class="note"><a class="how" href="method.html">How we know →</a></p></footer>
   <script src="nav.js"></script>
-  <script src="timeline.js"></script>
+  <script src="stepper.js"></script>
   <script src="places.js"></script>
 </body>
 </html>

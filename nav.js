@@ -1,24 +1,18 @@
-// Shared site header, injected into any page with <div id="site-nav">.
-// The active link is chosen from <body data-page="..."> (roads|places|cafe|method|cover).
+// Shared top nav. Brand + the three threads + Method. Marks the active page from
+// document.body.dataset.page.
 (function () {
-  const PAGES = [
-    { key: "cover", href: "index.html", label: "Bình Thạnh" },
-    { key: "roads", href: "roads.html", label: "Roads" },
-    { key: "places", href: "places.html", label: "Places" },
-    { key: "cafe", href: "cafe-fuel.html", label: "Café ↔ Fuel" },
-    { key: "method", href: "method.html", label: "Method" },
+  const LINKS = [
+    { href: "index.html", label: "Bình Thạnh", page: "cover", brand: true },
+    { href: "roads.html", label: "Roads", page: "roads" },
+    { href: "places.html", label: "Places", page: "places" },
+    { href: "cafe-fuel.html", label: "Café", page: "cafe" },
+    { href: "method.html", label: "Method", page: "method" },
   ];
-  const here = document.body.getAttribute("data-page") || "cover";
-  const mount = document.getElementById("site-nav");
-  if (!mount) return;
-  const nav = document.createElement("nav");
+  const active = document.body.dataset.page;
+  const nav = document.getElementById("site-nav");
+  if (!nav) return;
   nav.className = "site-nav";
-  PAGES.forEach((p) => {
-    const a = document.createElement("a");
-    a.href = p.href;
-    a.textContent = p.label;
-    if (p.key === here) a.className = "active";
-    nav.append(a);
-  });
-  mount.append(nav);
+  nav.innerHTML = LINKS.map((l) =>
+    `<a href="${l.href}" class="${l.brand ? "brand " : ""}${l.page === active ? "active" : ""}">${l.label}</a>`
+  ).join("");
 })();

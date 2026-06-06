@@ -3,32 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Café vs Fuel — Bình Thạnh, 2015–2025</title>
-  <link rel="stylesheet" href="app.css">
+  <title>Café culture — the lifestyle turn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,400&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="spine.css">
 </head>
 <body data-page="cafe">
   <div id="site-nav"></div>
-  <header class="hero">
-    <h1>Cafés overtook fuel</h1>
-    <p id="cafe-lede" class="subtitle"></p>
-  </header>
   <main>
-    <section>
-      <h2>The rank race</h2>
-      <p class="lede">Each line is one amenity's rank among all amenities mapped in the district, year by year. Lower is more common. Watch café climb past fuel.</p>
-      <div id="cafe-race"></div>
-    </section>
-    <section>
-      <h2>The honest version</h2>
-      <p class="lede" id="cafe-caveat"></p>
-    </section>
+    <header>
+      <span class="kicker">Thread 3 of 3</span>
+      <h2>Café culture: the lifestyle <em>turn</em></h2>
+    </header>
+    <div id="cafe-stepper"></div>
   </main>
-  <footer>
-    <p id="boundary-note" class="note"></p>
-    <p class="note">Source: OpenStreetMap full history, self-hosted PostGIS. Clipped to the historical district boundary. Built with osmkit.</p>
-  </footer>
+  <footer><p class="note"><a class="how" href="method.html">How we know →</a></p></footer>
   <script src="nav.js"></script>
-  <script src="timeline.js"></script>
+  <script src="stepper.js"></script>
   <script src="cafe.js"></script>
 </body>
 </html>

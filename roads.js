@@ -1,41 +1,44 @@
 const el = (id) => document.getElementById(id);
-function snapByYear(data, year) { return data.snapshots.find((s) => s.year === year); }
-function bignum(value, label) {
-  const d = document.createElement("div");
-  d.className = "bignum";
-  d.innerHTML = `<div class="v">${value}</div><div class="l">${label}</div>`;
-  return d;
+function snap(data, year) { return data.snapshots.find((s) => s.year === year); }
+function mapStage(src, alt) {
+  return (slot) => {
+    const f = document.createElement("div"); f.className = "map-frame";
+    const img = document.createElement("img"); img.src = src; img.alt = alt; img.loading = "lazy";
+    img.onerror = () => { f.textContent = "map unavailable"; };
+    f.append(img); slot.append(f);
+  };
 }
-function fold(arr) { return arr.at(-1) && arr[0] ? `${(arr.at(-1) / arr[0]).toFixed(1)}×` : "—"; }
-
+function barsStage(rows, max) {
+  return (slot) => {
+    rows.forEach((r) => {
+      const row = document.createElement("div"); row.className = "bar-row";
+      row.innerHTML = `<span>${r.kind}</span><span><span class="bar" style="width:${100*r.ways/max}%"></span></span><span>${r.ways.toLocaleString()}</span>`;
+      slot.append(row);
+    });
+  };
+}
 fetch("data.json").then((r) => r.json()).then((data) => {
-  el("boundary-note").textContent = data.boundary_note || "";
   const g = data.growth;
-  el("roads-lede").textContent =
-    `From ${g.ways[0].toLocaleString()} road ways (${g.km[0]} km) in ${g.years[0]} ` +
-    `to ${g.ways.at(-1).toLocaleString()} (${g.km.at(-1)} km) in ${g.years.at(-1)}.`;
-
-  Timeline.mapGrid(el("roads-timeline"), data, "roads");
-
-  const bn = el("bignum-roads");
-  bn.append(bignum(fold(g.ways), "more road ways"));
-  bn.append(bignum(fold(g.km), "more road length"));
-
-  const a = snapByYear(data, g.years[0]).roads_by_type;
-  const b = snapByYear(data, g.years.at(-1)).roads_by_type;
-  const map15 = Object.fromEntries(a.map((r) => [r.kind, r.ways]));
-  const top = b.slice(0, 6);
-  const max = Math.max(...top.map((r) => r.ways));
-  const host = el("roads-bars");
-  top.forEach((r) => {
-    const row = document.createElement("div");
-    row.className = "bar-row";
-    const w25 = (100 * r.ways) / max, w15 = (100 * (map15[r.kind] || 0)) / max;
-    row.innerHTML =
-      `<span>${r.kind}</span>` +
-      `<span><span class="bar y2015" style="width:${w15}%"></span> ${map15[r.kind] || 0}</span>` +
-      `<span><span class="bar" style="width:${w25}%"></span> ${r.ways}</span>`;
-    host.append(row);
-  });
-}).catch((e) => { document.body.insertAdjacentHTML("afterbegin",
-  `<pre style="color:#c00;padding:1rem">Failed to load data.json: ${e}</pre>`); });
+  const first = g.years[0], last = g.years.at(-1);
+  const byType = snap(data, last).roads_by_type.slice(0, 6);
+  const max = Math.max(...byType.map((r) => r.ways));
+  const steps = [
+    { kind: "intro", kicker: "Roads · 2015", headline: "Barely <em>drawn</em>.",
+      narrative: "In 2015, OpenStreetMap knew only Bình Thạnh's arteries — the big roads. The alleys where people actually live were blank." },
+    { kind: "data", kicker: "The skeleton", headline: `${g.ways[0].toLocaleString()} ways`,
+      narrative: `Just the main roads, and it stayed that way for three years — flat near a thousand ways through ${first}–2018.`,
+      render: mapStage(`roads-vn${first}.png`, `roads ${first}`) },
+    { kind: "intro", kicker: "2018 → 2019", headline: "Then the community came for the <em>alleys</em>.",
+      narrative: "A mapping push traced the dense service-alley mesh that defines the district." },
+    { kind: "data", kicker: "The mapping leap", headline: "The map <em>tripled</em>.",
+      narrative: `Road ways jumped 1,095 → 3,560 in a single year. The new mesh is drawn dark; the old skeleton stays pale.`,
+      render: mapStage("roads-cum-vn2019.png", "new roads in 2019") },
+    { kind: "data", kicker: "The mesh thickens", headline: `${g.ways.at(-1).toLocaleString()} ways by ${last}`,
+      narrative: "Mostly service alleys and residential lanes — the texture of a lived-in neighbourhood.",
+      render: barsStage(byType, max) },
+    { kind: "intro", kicker: "Next thread", headline: "A place you could finally <em>navigate</em>.",
+      narrative: "Structure in place — but who lives there? <a class='how' href='places.html'>Read Places →</a>" },
+  ];
+  Stepper.mount(el("roads-stepper"), steps);
+}).catch((e) => document.body.insertAdjacentHTML("afterbegin",
+  `<pre style="color:#c00;padding:1rem">Failed to load data.json: ${e}</pre>`));
