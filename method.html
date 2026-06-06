@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Method — Bình Thạnh, 2015–2025</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body data-page="method">
+  <div id="site-nav"></div>
+  <header class="hero">
+    <h1>How this was built</h1>
+    <p class="subtitle">Data provenance, the precise clip, and the honest caveats.</p>
+  </header>
+  <main>
+    <section>
+      <h2>From OSM full history to a yearly snapshot set</h2>
+      <p class="lede">The story draws on the OpenStreetMap full-history extract for Vietnam,
+        loaded into a self-hosted PostGIS database. For each year 2015–2025 we render a
+        point-in-time snapshot (1 January) into its own schema, then measure each schema
+        identically. Eleven schemas, one per year, give the decade as an annual series.</p>
+    </section>
+    <section>
+      <h2>The precise clip (decision #1)</h2>
+      <p class="lede">Every figure is clipped to the historical Quận Bình Thạnh polygon with a
+        true geometric intersection (<code>ST_Intersection</code>), not a bounding-box overlap.
+        The bbox shortcut over-counts edge features by 60–74%; the precise clip is what makes
+        the 963 → 5,268 road-way figures trustworthy.</p>
+    </section>
+    <section>
+      <h2>The cross-database boundary bridge (decision #2)</h2>
+      <p class="lede">The district polygon lives in the current-OSM database; the yearly history
+        lives in another. We pull the boundary as WKT from the current database and pass it as a
+        bound parameter into each history query — no cross-database federation, just one geometry
+        carried across.</p>
+    </section>
+    <section>
+      <h2>An abolished district</h2>
+      <p class="lede">Quận Bình Thạnh was dissolved in Hồ Chí Minh City's mid-2025 administrative
+        reform. Its OSM relation (-3797166) is now untagged but still carries a valid geometry, so
+        we fetch it by id. Every snapshot is clipped to the district as it existed from 2015 to
+        mid-2025 — a fixed footprint across the whole decade.</p>
+    </section>
+    <section>
+      <h2>What the numbers do and don't say</h2>
+      <p class="lede">Points of interest are counted as OSM <em>nodes</em> only; places mapped as
+        building polygons are not included, so amenity and shop counts are conservative. Café
+        genuinely overtook fuel under this clip (café 6 → 62, fuel flat at 24), but cafés are not
+        the clipped 2025 number-one amenity — restaurants are. We keep the page truthful to the
+        clipped figures rather than to a coarser earlier probe.</p>
+    </section>
+  </main>
+  <footer>
+    <p class="note">Source: OpenStreetMap full history, self-hosted PostGIS. Built with osmkit.</p>
+  </footer>
+  <script src="nav.js"></script>
+</body>
+</html>
