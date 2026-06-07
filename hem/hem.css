@@ -8,6 +8,22 @@
 }
 
 .hem-wrap { max-width: 860px; margin: 0 auto; padding: 2rem 1.2rem; }
+
+/* Wide variant for figure-led pages (the tree): the canvas wants room on a laptop
+   but the page must still read on a phone. max-width is fluid — it grows with the
+   viewport up to a cap, and on small screens 94vw keeps a comfortable gutter. The
+   prose blocks below re-cap their own measure so widening the page doesn't stretch
+   text into an unreadable line length. */
+.hem-wrap--wide { max-width: min(1280px, 94vw); }
+.hem-wrap--wide .lede,
+.hem-wrap--wide .tree-howto,
+.hem-wrap--wide .kicker,
+.hem-wrap--wide > h1,
+.hem-wrap--wide .tree-cap { max-width: 62ch; }
+/* Let the tree SVG claim most of the widened row; the stats card stays a fixed
+   rail. On a laptop this gives the fan/geo map a much larger drawing area; the
+   existing min-width + flex-wrap still stack it above the card on a phone. */
+.hem-wrap--wide .tree-layout svg { flex: 1 1 640px; }
 .hem-hero { padding: 3rem 1.2rem 1rem; }
 .hem-hero h1 { font-size: clamp(2rem, 6vw, 3.4rem); margin-bottom: .4rem; }
 .thesis { font-family: Fraunces, Georgia, serif; font-style: italic;
@@ -31,6 +47,24 @@
 .caveat { background:#fbeee6; border-left:3px solid var(--accent);
           padding:.6rem .9rem; font-size:.82rem; color:#7c2d16; border-radius:4px;
           margin:1rem 0; max-width:60ch; }
+/* The blind-spot caveat under the busiest-streets chart carries body-size copy
+   (it names Vạn Kiếp and explains the data gap) — a touch larger than the terse
+   one-liner .caveat default. */
+.caveat--blindspot { font-size:.9rem; line-height:1.5; max-width:64ch; }
+.caveat--blindspot b { color:var(--d2); }
+
+/* Busiest-streets section: a follow-up block under the depth-inversion chart. */
+.streets { margin-top:2.4rem; border-top:1px solid #e4ddcf; padding-top:1.4rem; }
+.streets h2 { font-family:Fraunces,Georgia,serif; font-size:clamp(1.4rem,4vw,2rem);
+              color:var(--ink); margin:.2rem 0 .4rem; }
+#streets-svg { width:100%; height:auto; display:block; margin:.6rem 0; }
+#streets-svg text { font-family:"Barlow",system-ui,sans-serif; }
+.streets-key { font-size:.8rem; color:#7a6f60; margin:.2rem 0 1rem;
+               display:flex; gap:.4rem; align-items:center; flex-wrap:wrap; }
+.streets-key .sk-bar { display:inline-block; width:22px; height:10px; border-radius:2px;
+                       background:var(--d0); vertical-align:middle; }
+.streets-key .sk-tick { display:inline-block; width:2px; height:14px;
+                        background:#7c2d16; vertical-align:middle; }
 
 .year-bar { display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; margin:1rem 0; }
 .year-readout { font-family:Fraunces,Georgia,serif; font-size:1.1rem; color:var(--ink); }

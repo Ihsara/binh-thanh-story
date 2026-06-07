@@ -28,10 +28,27 @@
   </div>
 
   <p id="inv-caveat" class="caveat"></p>
+
+  <section class="streets" aria-labelledby="streets-h">
+    <p class="kicker">And which streets drew the food?</p>
+    <h2 id="streets-h">The streets that filled with stalls</h2>
+    <p class="lede">The depth chart asks <em>how far in</em> the food lives. This one asks
+    <em>which streets</em>. Counting only the café-and-restaurant POIs OpenStreetMap has
+    pinned to each named road, here are the ten that carry the most today — with a tick
+    marking where each stood in 2015. The longer the run past its tick, the faster it filled.</p>
+
+    <svg id="streets-svg" role="img" aria-label="Top streets by mapped food POIs, 2025, with a 2015 marker"></svg>
+
+    <p class="streets-key"><span class="sk-bar"></span> food places mapped by 2025
+       &nbsp;·&nbsp; <span class="sk-tick"></span> where it stood in 2015</p>
+
+    <div id="streets-caveat" class="caveat caveat--blindspot"></div>
+  </section>
 </main>
 
 <script src="nav-hem.js"></script>
 <script src="inversion.js"></script>
+<script src="streets.js"></script>
 <script>renderHemNav("inversion.html");</script>
 </body>
 </html>

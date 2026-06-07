@@ -32,7 +32,13 @@ function fit(bounds){
 
 function visiblePoints(){
   const frame = DATA.frames.find(f=>f.year===year) || {points:[]};
-  return type==="t1" ? frame.points.filter(p=>p.klass==="PUBLIC") : frame.points;
+  // t1 = civic layer. A civic landmark that has its own glyph (school/clinic/
+  // worship/market) is drawn ONLY as that glyph by drawIcons(); drawing a dot
+  // under it too put a coloured circle and a glyph on the exact same spot — the
+  // "duplication on the same spot" the map showed. So here we keep only the
+  // PUBLIC points that have NO glyph (they still need a dot to be visible).
+  if (type==="t1") return frame.points.filter(p=>p.klass==="PUBLIC" && !ICON_FOR(p.value));
+  return frame.points;
 }
 
 const line = d3.line().x(d=>x(d[0])).y(d=>y(d[1]));
@@ -69,7 +75,10 @@ function drawIcons(){
   sel.exit().remove();
   sel.enter().append("text")
      .attr("text-anchor","middle").attr("dominant-baseline","central")
-     .attr("font-size", 7)
+     .attr("font-size", 7).style("cursor","pointer")
+     // glyphs are now the ONLY mark for civic landmarks, so they carry the click
+     // that used to live on the (removed) dot underneath them.
+     .on("click", (e,d)=>{ e.stopPropagation(); showCard(d, e); })
    .merge(sel)
      .attr("x", d=>x(d.lon)).attr("y", d=>y(d.lat))
      .attr("fill", d=>depthColor(d.depth))
@@ -118,10 +127,14 @@ function show(y){
 }
 
 function legendHover(){
+  // Dim by depth across BOTH layers — dots and the civic glyphs (which since the
+  // dedup fix are the only mark for school/clinic/worship/market points).
   document.querySelectorAll("#map-legend span").forEach(s=>{
     s.onmouseenter = ()=>{ const d=+s.dataset.depth;
-      gDots.selectAll("circle").attr("opacity", p=> (clampDepth(p.depth)===d)?0.95:0.12); };
-    s.onmouseleave = ()=> gDots.selectAll("circle").attr("opacity",0.85);
+      gDots.selectAll("circle").attr("opacity", p=> (clampDepth(p.depth)===d)?0.95:0.12);
+      gIcons.selectAll("text").attr("opacity", p=> (clampDepth(p.depth)===d)?1:0.12); };
+    s.onmouseleave = ()=>{ gDots.selectAll("circle").attr("opacity",0.85);
+      gIcons.selectAll("text").attr("opacity",1); };
   });
 }
 
