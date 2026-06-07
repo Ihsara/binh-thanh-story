@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The district, year by year — hẻm depth map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="hem.css">
+</head>
+<body>
+<div id="hem-nav"></div>
+
+<main class="hem-wrap">
+  <p class="kicker">Bình Thạnh, depth-coloured</p>
+  <h1>The district, year by year</h1>
+  <p class="lede">Each dot is a place; its colour is the depth of the road it sits on. Press
+  play and watch the alleys fill in — remembering this is when OpenStreetMap <em>mapped</em>
+  them, not when the city built them.</p>
+
+  <div class="maptype">
+    <label><input type="radio" name="maptype" value="t1" checked> Roads &amp; civic landmarks</label>
+    <label><input type="radio" name="maptype" value="t2"> Every place, by depth</label>
+  </div>
+
+  <div class="map-figure">
+    <img id="map-img" alt="Depth-coloured map of Bình Thạnh">
+  </div>
+
+  <div class="year-bar">
+    <button id="play">▶ Play</button>
+    <input type="range" id="year" min="2015" max="2025" step="1" value="2025">
+    <span id="year-readout" class="year-readout">as known to OpenStreetMap in 2025</span>
+  </div>
+
+  <div class="depth-legend">
+    <span><i style="background:var(--d-art)"></i> arterial</span>
+    <span><i style="background:var(--d0)"></i> d0</span>
+    <span><i style="background:var(--d1)"></i> d1</span>
+    <span><i style="background:var(--d2)"></i> d2</span>
+    <span><i style="background:var(--d3)"></i> d3+</span>
+  </div>
+
+  <p class="caveat">The year is a <strong>mapping</strong> date, not a building date. Alleys did
+  not appear in 2019 — the map did.</p>
+</main>
+
+<script src="nav-hem.js"></script>
+<script src="map.js"></script>
+<script>renderHemNav("map.html");</script>
+</body>
+</html>

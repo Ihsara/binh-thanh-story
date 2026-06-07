@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Read your address — the hẻm tree</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="hem.css">
+</head>
+<body>
+<div id="hem-nav"></div>
+
+<main class="hem-wrap">
+  <p class="kicker">Pick a boulevard — watch its alleys branch</p>
+  <h1>Read me your address and I'll walk you home</h1>
+  <p class="lede">Every arterial in Bình Thạnh is the root of a tree. Its house numbers fork into
+  alleys, and those alleys fork again. The colour of each branch is its <strong>depth</strong>:
+  pale at the boulevard, darkening as the address turns inward.</p>
+
+  <p style="margin:1rem 0">
+    <label for="arterial" style="font-size:.9rem;color:#5b5247">Boulevard:&nbsp;</label>
+    <select id="arterial"></select>
+  </p>
+
+  <svg id="tree-svg" viewBox="0 0 720 720" role="img" aria-label="Radial tree of one arterial's hẻm system"></svg>
+  <p id="tree-cap" class="tree-cap"></p>
+
+  <div class="depth-legend">
+    <span><i style="background:var(--d-art)"></i> arterial</span>
+    <span><i style="background:var(--d0)"></i> d0</span>
+    <span><i style="background:var(--d1)"></i> d1</span>
+    <span><i style="background:var(--d2)"></i> d2</span>
+    <span><i style="background:var(--d3)"></i> d3+</span>
+  </div>
+</main>
+
+<script src="vendor/d3.v7.min.js"></script>
+<script src="nav-hem.js"></script>
+<script src="tree.js"></script>
+<script>renderHemNav("tree.html");</script>
+</body>
+</html>

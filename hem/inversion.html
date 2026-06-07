@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The boulevard sells; the hẻm lives</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="hem.css">
+</head>
+<body>
+<div id="hem-nav"></div>
+
+<main class="hem-wrap">
+  <p class="kicker">What lives at each depth</p>
+  <h1>The boulevard sells; the hẻm lives</h1>
+  <p class="lede">Sort every mapped amenity by the depth of the road it sits on, then ask what
+  kind it is. On the boulevard frontage the mix tilts commercial — shops, banks, the things
+  you sell to a passer-by. Turn into the hẻm and the share of <strong>public, communal
+  life</strong> — schools, clinics, places of worship — climbs.</p>
+
+  <svg id="inv-svg" role="img" aria-label="Share of amenity kinds by alley depth"></svg>
+
+  <div class="bucket-legend">
+    <span><i style="background:#e8a679"></i> FOOD — cafés, restaurants</span>
+    <span><i style="background:#cdbfa6"></i> PRIVATE — shops, services</span>
+    <span><i style="background:#c0552f"></i> PUBLIC — schools, clinics, worship</span>
+  </div>
+
+  <p id="inv-caveat" class="caveat"></p>
+</main>
+
+<script src="nav-hem.js"></script>
+<script src="inversion.js"></script>
+<script>renderHemNav("inversion.html");</script>
+</body>
+</html>

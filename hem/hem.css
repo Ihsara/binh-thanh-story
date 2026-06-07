@@ -1,0 +1,62 @@
+/* hẻm sub-site — extends the warm-almanac language of the parent story. */
+@import url("../spine.css");
+
+:root {
+  --paper:#f7f3ea; --ink:#2b2622; --accent:#c0552f;
+  --d-art:#cdbfa6; --d0:#e8a679; --d1:#c0552f; --d2:#7c2d16; --d3:#3a160b;
+}
+
+.hem-wrap { max-width: 860px; margin: 0 auto; padding: 2rem 1.2rem; }
+.hem-hero { padding: 3rem 1.2rem 1rem; }
+.hem-hero h1 { font-size: clamp(2rem, 6vw, 3.4rem); margin-bottom: .4rem; }
+.thesis { font-family: Fraunces, Georgia, serif; font-style: italic;
+          font-size: clamp(1.1rem, 3vw, 1.5rem); color: var(--d1); margin: .6rem 0 1.4rem; }
+.lede { max-width: 54ch; color: #5b5247; }
+
+.worked-example { font-family: "Barlow", system-ui, sans-serif; background: #fbf3ec;
+                  border: 1px solid #ecdcc9; border-radius: 6px; padding: .5rem .8rem;
+                  display: inline-block; font-size: .95rem; }
+.worked-example b { color: var(--d1); }
+
+.depth-legend { display:flex; gap:.6rem; align-items:center; flex-wrap:wrap;
+                font-size:.8rem; color:#7a6f60; margin:1.2rem 0; }
+.depth-legend i { width:20px; height:20px; border-radius:5px; display:inline-block;
+                  vertical-align:middle; }
+.bucket-legend { display:flex; gap:1rem; align-items:center; flex-wrap:wrap;
+                 font-size:.82rem; color:#7a6f60; margin:.6rem 0 1.2rem; }
+.bucket-legend i { width:14px; height:14px; border-radius:3px; display:inline-block;
+                   vertical-align:middle; margin-right:.3rem; }
+
+.caveat { background:#fbeee6; border-left:3px solid var(--accent);
+          padding:.6rem .9rem; font-size:.82rem; color:#7c2d16; border-radius:4px;
+          margin:1rem 0; max-width:60ch; }
+
+.year-bar { display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; margin:1rem 0; }
+.year-readout { font-family:Fraunces,Georgia,serif; font-size:1.1rem; color:var(--ink); }
+.year-bar input[type=range] { flex:1; min-width:160px; accent-color: var(--accent); }
+.year-bar button { font-family:"Barlow",system-ui,sans-serif; font-size:.9rem;
+                   background:var(--accent); color:#fff; border:none; border-radius:5px;
+                   padding:.4rem .9rem; cursor:pointer; }
+.year-bar button:hover { background:#a8481f; }
+
+.maptype { display:flex; gap:1rem; font-size:.9rem; color:#5b5247; margin:.6rem 0; }
+
+.cta { display:inline-block; margin-top:1rem; font-family:"Barlow",system-ui,sans-serif;
+       background:var(--accent); color:#fff; text-decoration:none; border-radius:6px;
+       padding:.6rem 1.2rem; font-size:1rem; }
+.cta:hover { background:#a8481f; }
+
+#hem-nav { font-size:.9rem; color:#8a8175; text-align:center;
+           padding:1rem 1.2rem; border-bottom:1px solid #e4ddcf; }
+#hem-nav a { color:#8a8175; text-decoration:none; }
+#hem-nav a:hover { color:var(--ink); }
+#hem-nav a.is-active { color:var(--accent); font-weight:600; }
+
+select#arterial { font-family:"Barlow",system-ui,sans-serif; font-size:1rem;
+                  padding:.35rem .5rem; border:1px solid #d8c4a8; border-radius:5px;
+                  background:#fff; color:var(--ink); }
+
+svg#tree-svg, svg#inv-svg, svg#growth-svg { width:100%; height:auto; display:block; }
+.map-figure { text-align:center; margin:1rem 0; }
+.map-figure img { max-width:100%; height:auto; }
+.tree-cap, .fig-cap { color:#5b5247; font-size:.92rem; margin:.6rem 0; }
