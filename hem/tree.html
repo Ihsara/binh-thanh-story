@@ -23,7 +23,18 @@
     <select id="arterial"></select>
   </p>
 
-  <svg id="tree-svg" viewBox="0 0 720 720" role="img" aria-label="Radial tree of one arterial's hẻm system"></svg>
+  <div class="tree-mode">
+    <label><input type="radio" name="treemode" value="fan" checked> Abstract fan</label>
+    <label><input type="radio" name="treemode" value="geo"> Real geography</label>
+  </div>
+  <p id="tree-howto" class="tree-howto"></p>
+
+  <div class="tree-layout">
+    <svg id="tree-svg" viewBox="0 0 720 720" role="img"
+         aria-label="One arterial's hẻm system"></svg>
+    <aside id="tree-stats" class="tree-stats"></aside>
+  </div>
+  <div id="tree-tip" class="tree-tip" hidden></div>
   <p id="tree-cap" class="tree-cap"></p>
 
   <div class="depth-legend">

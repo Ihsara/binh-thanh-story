@@ -23,9 +23,12 @@
     <label><input type="radio" name="maptype" value="t2"> Every place, by depth</label>
   </div>
 
-  <div class="map-figure">
-    <img id="map-img" alt="Depth-coloured map of Bình Thạnh">
+  <div class="map-figure" id="map-figure">
+    <svg id="map-svg" role="img" aria-label="Interactive places by depth"></svg>
+    <button id="map-reset" title="Reset view">⤢ Reset view</button>
+    <div id="map-card" class="map-card" hidden></div>
   </div>
+  <p class="map-hint">Drag to pan, scroll to zoom, click a dot to identify it. Hover a legend key to isolate one depth.</p>
 
   <div class="year-bar">
     <button id="play">▶ Play</button>
@@ -33,12 +36,12 @@
     <span id="year-readout" class="year-readout">as known to OpenStreetMap in 2025</span>
   </div>
 
-  <div class="depth-legend">
-    <span><i style="background:var(--d-art)"></i> arterial</span>
-    <span><i style="background:var(--d0)"></i> d0</span>
-    <span><i style="background:var(--d1)"></i> d1</span>
-    <span><i style="background:var(--d2)"></i> d2</span>
-    <span><i style="background:var(--d3)"></i> d3+</span>
+  <div class="depth-legend depth-legend--keyed" id="map-legend">
+    <span data-depth="-1"><i style="background:var(--d-art)"></i> arterial frontage</span>
+    <span data-depth="0"><i style="background:var(--d0)"></i> d0 · first alley</span>
+    <span data-depth="1"><i style="background:var(--d1)"></i> d1</span>
+    <span data-depth="2"><i style="background:var(--d2)"></i> d2</span>
+    <span data-depth="3"><i style="background:var(--d3)"></i> d3+</span>
   </div>
 
   <p class="caveat">The year is a <strong>mapping</strong> date, not a building date. Alleys did
@@ -46,6 +49,7 @@
 </main>
 
 <script src="nav-hem.js"></script>
+<script src="vendor/d3.v7.min.js"></script>
 <script src="map.js"></script>
 <script>renderHemNav("map.html");</script>
 </body>

@@ -4,6 +4,7 @@
 :root {
   --paper:#f7f3ea; --ink:#2b2622; --accent:#c0552f;
   --d-art:#cdbfa6; --d0:#e8a679; --d1:#c0552f; --d2:#7c2d16; --d3:#3a160b;
+  --d-ghost:#e7ddca;
 }
 
 .hem-wrap { max-width: 860px; margin: 0 auto; padding: 2rem 1.2rem; }
@@ -46,11 +47,22 @@
        padding:.6rem 1.2rem; font-size:1rem; }
 .cta:hover { background:#a8481f; }
 
-#hem-nav { font-size:.9rem; color:#8a8175; text-align:center;
-           padding:1rem 1.2rem; border-bottom:1px solid #e4ddcf; }
-#hem-nav a { color:#8a8175; text-decoration:none; }
-#hem-nav a:hover { color:var(--ink); }
-#hem-nav a.is-active { color:var(--accent); font-weight:600; }
+#hem-nav { position:sticky; top:0; z-index:20; background:rgba(247,243,234,.96);
+           backdrop-filter:saturate(1.1) blur(2px); border-bottom:1px solid #e4ddcf; }
+.hem-bar { max-width:960px; margin:0 auto; display:flex; align-items:center;
+           justify-content:space-between; gap:1rem; padding:.5rem 1.2rem; flex-wrap:wrap; }
+.hem-brand { font-family:Fraunces,Georgia,serif; font-size:1.05rem; color:var(--ink);
+             text-decoration:none; font-weight:600; }
+.hem-brand span { color:#a99f8f; font-weight:400; }
+.hem-tabs { display:flex; gap:1rem; flex-wrap:wrap; }
+.hem-tabs a { font-family:"Barlow",system-ui,sans-serif; font-size:.9rem; color:#8a8175;
+              text-decoration:none; padding:.15rem 0; border-bottom:2px solid transparent; }
+.hem-tabs a:hover { color:var(--ink); }
+.hem-tabs a.is-active { color:var(--accent); font-weight:600; border-bottom-color:var(--accent); }
+.hem-strip { height:3px; background:linear-gradient(90deg,
+             var(--d-art) 0 20%, var(--d0) 20% 40%, var(--d1) 40% 60%,
+             var(--d2) 60% 80%, var(--d3) 80% 100%); }
+@media (max-width:560px){ .hem-bar{ justify-content:center; } .hem-brand{ flex-basis:100%; text-align:center; } }
 
 select#arterial { font-family:"Barlow",system-ui,sans-serif; font-size:1rem;
                   padding:.35rem .5rem; border:1px solid #d8c4a8; border-radius:5px;
@@ -60,3 +72,50 @@ svg#tree-svg, svg#inv-svg, svg#growth-svg { width:100%; height:auto; display:blo
 .map-figure { text-align:center; margin:1rem 0; }
 .map-figure img { max-width:100%; height:auto; }
 .tree-cap, .fig-cap { color:#5b5247; font-size:.92rem; margin:.6rem 0; }
+
+/* Interactive map: vector road basemap + d3-zoom SVG overlay, all in one group.
+   aspect-ratio:1 gives the figure height now that the (removed) PNG no longer
+   does — #map-svg is absolutely positioned, so the box needs its own height to
+   match the square 600×600 viewBox. */
+#map-figure { position:relative; max-width:600px; aspect-ratio:1; margin:1rem auto;
+              overflow:hidden; border-radius:6px; }
+#map-svg { position:absolute; inset:0; width:100%; height:100%; cursor:grab;
+           touch-action:none; }
+#map-svg:active { cursor:grabbing; }
+#map-reset { position:absolute; top:8px; right:8px; font:inherit; font-size:.8rem;
+             font-family:"Barlow",system-ui,sans-serif; background:#fff;
+             border:1px solid #d8c4a8; border-radius:5px; padding:.25rem .5rem;
+             cursor:pointer; color:var(--ink); z-index:6; }
+#map-reset:hover { background:var(--paper); }
+.map-hint { font-size:.8rem; color:#8a8175; text-align:center; margin:.3rem 0 0; }
+.map-card { position:absolute; min-width:150px; max-width:200px; background:#fbf3ec;
+            border:1px solid #ecdcc9; border-radius:6px; padding:.5rem .7rem;
+            font-size:.85rem; font-family:"Barlow",system-ui,sans-serif;
+            box-shadow:0 4px 14px rgba(60,30,10,.18); z-index:5; }
+.map-card b { color:var(--d1); }
+.map-card .mc-x { position:absolute; top:4px; right:6px; border:none; background:none;
+                  cursor:pointer; color:#a99f8f; line-height:1; }
+.map-card .mc-road { color:#5b5247; margin-top:.2rem; }
+.map-card .mc-year { color:#a08a72; font-size:.78rem; margin-top:.25rem; }
+.depth-legend--keyed span { display:inline-flex; align-items:center; gap:.3rem;
+                            cursor:default; }
+.depth-legend--keyed i { width:16px; height:16px; }
+
+/* Dual-mode tree: radio toggle · read-me caption · stats sidebar · node tooltip (Task 8). */
+.tree-mode { display:flex; gap:1rem; font-size:.9rem; color:#5b5247; margin:.4rem 0; }
+.tree-howto { font-size:.85rem; color:#7a6f60; font-style:italic; margin:.2rem 0 .6rem; max-width:60ch; }
+.tree-layout { display:flex; gap:1rem; align-items:flex-start; flex-wrap:wrap; position:relative; }
+.tree-layout svg { flex:1 1 420px; min-width:300px; }
+.tree-stats { flex:0 1 220px; font-family:"Barlow",system-ui,sans-serif; font-size:.9rem;
+              background:#fbf3ec; border:1px solid #ecdcc9; border-radius:6px; padding:.7rem .9rem; }
+.tree-stats h3 { margin:0 0 .4rem; font-family:Fraunces,Georgia,serif; color:var(--d1); }
+.tree-stats p { margin:.3rem 0; color:#5b5247; }
+.tree-stats b { color:var(--d1); }
+.tree-tip { position:absolute; background:#fbf3ec; border:1px solid #ecdcc9; border-radius:6px;
+            padding:.4rem .6rem; font-size:.8rem; color:#2b2622; pointer-events:none;
+            box-shadow:0 4px 14px rgba(60,30,10,.18); z-index:6; max-width:240px; }
+@media (max-width:640px){ .tree-stats { flex-basis:100%; } }
+
+/* Vector road basemap: hairline strokes that don't balloon when the map is
+   zoomed (mirrors the thin matplotlib lines the PNG basemap used to bake). */
+#map-svg path { vector-effect: non-scaling-stroke; fill: none; }
