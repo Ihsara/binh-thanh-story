@@ -3848,5 +3848,243 @@
         ]
       }
     ]
+  },
+  "streetlife": {
+    "overture": {
+      "release": "latest at download (overturemaps CLI, 2026-06-10)",
+      "total_places": 25379,
+      "food_drink": 5362,
+      "cafe_like": 2126,
+      "restaurant_like": 2719,
+      "confidence_hi": {
+        "threshold": 0.7,
+        "food_drink": 1814
+      },
+      "top_categories": [
+        {
+          "cat": "coffee_shop",
+          "n": 1230
+        },
+        {
+          "cat": "restaurant",
+          "n": 1218
+        },
+        {
+          "cat": "professional_services",
+          "n": 979
+        },
+        {
+          "cat": "real_estate",
+          "n": 965
+        },
+        {
+          "cat": "shopping",
+          "n": 774
+        },
+        {
+          "cat": "cafe",
+          "n": 560
+        },
+        {
+          "cat": "event_planning",
+          "n": 459
+        },
+        {
+          "cat": "flowers_and_gifts_shop",
+          "n": 450
+        }
+      ],
+      "chains": [
+        {
+          "name": "Highlands Coffee",
+          "n": 21
+        },
+        {
+          "name": "Trung Nguyên",
+          "n": 10
+        },
+        {
+          "name": "Trung Nguyên E-Coffee",
+          "n": 10
+        },
+        {
+          "name": "The Coffee House",
+          "n": 8
+        },
+        {
+          "name": "Passio Coffee Vietnam",
+          "n": 7
+        },
+        {
+          "name": "Bánh Mì Má Hải",
+          "n": 5
+        },
+        {
+          "name": "Napoli Coffee",
+          "n": 5
+        },
+        {
+          "name": "CaChi Tea",
+          "n": 4
+        }
+      ],
+      "oneoffs": [
+        "Lotteria Xô Viết Nghệ Tĩnh",
+        "Birdy",
+        "Nhà hàng Cây Sakê",
+        "Here & Now Vegetarian",
+        "Nha Nam Books and Coffee",
+        "Cọ",
+        "Bún BBQ House",
+        "Phở ngon Sài Gòn"
+      ]
+    },
+    "osm": {
+      "streets": [
+        {
+          "road": "Trần Trọng Kim",
+          "n": 8,
+          "cafes": 4,
+          "restaurants": 4,
+          "is_hem": false
+        },
+        {
+          "road": "Bình Quới",
+          "n": 6,
+          "cafes": 0,
+          "restaurants": 6,
+          "is_hem": false
+        },
+        {
+          "road": "Nơ Trang Long",
+          "n": 6,
+          "cafes": 1,
+          "restaurants": 4,
+          "is_hem": false
+        },
+        {
+          "road": "Lê Văn Duyệt",
+          "n": 5,
+          "cafes": 1,
+          "restaurants": 2,
+          "is_hem": false
+        },
+        {
+          "road": "Ngô Tất Tố",
+          "n": 4,
+          "cafes": 3,
+          "restaurants": 0,
+          "is_hem": false
+        },
+        {
+          "road": "Nguyễn Gia Trí",
+          "n": 4,
+          "cafes": 2,
+          "restaurants": 2,
+          "is_hem": false
+        },
+        {
+          "road": "Nguyễn Hữu Cảnh",
+          "n": 4,
+          "cafes": 0,
+          "restaurants": 4,
+          "is_hem": false
+        },
+        {
+          "road": "Phạm Viết Chánh",
+          "n": 4,
+          "cafes": 0,
+          "restaurants": 2,
+          "is_hem": false
+        },
+        {
+          "road": "Vạn Hoa 4",
+          "n": 4,
+          "cafes": 1,
+          "restaurants": 2,
+          "is_hem": false
+        },
+        {
+          "road": "Hẻm 317 Nơ Trang Long",
+          "n": 3,
+          "cafes": 0,
+          "restaurants": 3,
+          "is_hem": true
+        },
+        {
+          "road": "Hoàng Hoa Thám",
+          "n": 3,
+          "cafes": 3,
+          "restaurants": 0,
+          "is_hem": false
+        },
+        {
+          "road": "Lê Quang Định",
+          "n": 3,
+          "cafes": 1,
+          "restaurants": 2,
+          "is_hem": false
+        }
+      ],
+      "road_class_split": [
+        {
+          "value": "restaurant",
+          "big_road": 30,
+          "street": 25,
+          "hem": 22,
+          "total": 77
+        },
+        {
+          "value": "cafe",
+          "big_road": 20,
+          "street": 22,
+          "hem": 17,
+          "total": 62
+        },
+        {
+          "value": "fast_food",
+          "big_road": 7,
+          "street": 2,
+          "hem": 2,
+          "total": 11
+        },
+        {
+          "value": "bar",
+          "big_road": 0,
+          "street": 4,
+          "hem": 1,
+          "total": 5
+        },
+        {
+          "value": "pub",
+          "big_road": 1,
+          "street": 0,
+          "hem": 0,
+          "total": 1
+        }
+      ],
+      "survival": [
+        {
+          "cohort": 2016,
+          "then": 8,
+          "still": 3
+        },
+        {
+          "cohort": 2018,
+          "then": 27,
+          "still": 16
+        },
+        {
+          "cohort": 2020,
+          "then": 52,
+          "still": 40
+        },
+        {
+          "cohort": 2022,
+          "then": 56,
+          "still": 44
+        }
+      ]
+    }
   }
 }

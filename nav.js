@@ -5,7 +5,7 @@
     { href: "index.html", label: "Bình Thạnh", page: "cover", brand: true },
     { href: "roads.html", label: "Roads", page: "roads" },
     { href: "places.html", label: "Places", page: "places" },
-    { href: "cafe-fuel.html", label: "Café", page: "cafe" },
+    { href: "streetlife.html", label: "Streetlife", page: "streetlife" },
     { href: "method.html", label: "Method", page: "method" },
   ];
   const active = document.body.dataset.page;

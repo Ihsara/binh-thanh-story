@@ -29,7 +29,7 @@ fetch("data.json").then((r) => r.json()).then((data) => {
       narrative: "Restaurants and cafés lead — the everyday texture of the neighbourhood. <a class='how' href='method.html#shop-dip'>A note on the 2023 dip →</a>",
       render: amenityBars(mix, max) },
     { kind: "intro", kicker: "Next thread", headline: "The everyday <em>texture</em>.",
-      narrative: "One kind of place tells a story of its own. <a class='how' href='cafe-fuel.html'>Read Café culture →</a>" },
+      narrative: "One kind of place tells a story of its own. <a class='how' href='streetlife.html'>Read Streetlife →</a>" },
   ];
   Stepper.mount(el("places-stepper"), steps);
 }).catch((e) => document.body.insertAdjacentHTML("afterbegin",

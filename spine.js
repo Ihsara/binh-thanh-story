@@ -18,7 +18,7 @@ function bignum(value, label) {
 const CARDS = [
   { href: "roads.html", title: "Roads", blurb: "How the district became legible." },
   { href: "places.html", title: "Places", blurb: "How the neighbourhood filled with life." },
-  { href: "cafe-fuel.html", title: "Café culture", blurb: "The lifestyle turn." },
+  { href: "streetlife.html", title: "Streetlife", blurb: "The district that lives outside." },
 ];
 fetch("data.json").then((r) => r.json()).then((data) => {
   el("subtitle").textContent = data.subtitle;
