@@ -83,6 +83,16 @@
 
 #hem-nav { position:sticky; top:0; z-index:20; background:rgba(247,243,234,.96);
            backdrop-filter:saturate(1.1) blur(2px); border-bottom:1px solid #e4ddcf; }
+.hem-mag { max-width:960px; margin:0 auto; display:flex; gap:1rem; align-items:baseline;
+           font-size:.78rem; padding:.3rem 1.2rem; opacity:.85;
+           border-bottom:1px solid #ede6d8; }
+.hem-mag-brand { font-family:Fraunces,Georgia,serif; font-weight:700;
+                 color:var(--ink); text-decoration:none; }
+.hem-mag nav { display:flex; gap:.8rem; }
+.hem-mag a { font-family:"Barlow",system-ui,sans-serif; color:#8a8175;
+             text-decoration:none; }
+.hem-mag a:hover { color:var(--ink); }
+.hem-mag a.is-active { color:var(--accent); font-weight:600; }
 .hem-bar { max-width:960px; margin:0 auto; display:flex; align-items:center;
            justify-content:space-between; gap:1rem; padding:.5rem 1.2rem; flex-wrap:wrap; }
 .hem-brand { font-family:Fraunces,Georgia,serif; font-size:1.05rem; color:var(--ink);

@@ -12,6 +12,15 @@ function renderHemNav(active) {
     `<a href="${href}"${href === active ? ` class="is-active" aria-current="page"` : ""}>${label}</a>`
   ).join("");
   el.innerHTML =
+    `<div class="hem-mag">
+       <a class="hem-mag-brand" href="../index.html">Bình Thạnh</a>
+       <nav>
+         <a href="../map.html">The Map</a>
+         <a href="../street-life.html">Street Life</a>
+         <a class="is-active" href="index.html">The Alleys</a>
+         <a href="../method.html">Method</a>
+       </nav>
+     </div>` +
     `<div class="hem-bar">
        <a class="hem-brand" href="index.html">Bình Thạnh <span>· hẻm</span></a>
        <nav class="hem-tabs">${links}</nav>
