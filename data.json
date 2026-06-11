@@ -4085,6 +4085,219 @@
           "still": 44
         }
       ]
+    },
+    "lives": {
+      "release": "latest at download (overturemaps CLI, 2026-06-10)",
+      "total": 25359,
+      "dedup_removed": 20,
+      "counts": [
+        {
+          "life": "sustenance",
+          "label": "Sustenance",
+          "n": 2256,
+          "top": [
+            {
+              "cat": "grocery_store",
+              "n": 319
+            },
+            {
+              "cat": "health_food_store",
+              "n": 139
+            },
+            {
+              "cat": "convenience_store",
+              "n": 116
+            },
+            {
+              "cat": "pharmacy",
+              "n": 115
+            },
+            {
+              "cat": "hospital",
+              "n": 110
+            }
+          ]
+        },
+        {
+          "life": "anchors",
+          "label": "Anchors",
+          "n": 2153,
+          "top": [
+            {
+              "cat": "historic_site",
+              "n": 306
+            },
+            {
+              "cat": "education",
+              "n": 289
+            },
+            {
+              "cat": "college_university",
+              "n": 156
+            },
+            {
+              "cat": "school",
+              "n": 140
+            },
+            {
+              "cat": "elementary_school",
+              "n": 136
+            }
+          ]
+        },
+        {
+          "life": "third_places",
+          "label": "Third places",
+          "n": 5831,
+          "top": [
+            {
+              "cat": "coffee_shop",
+              "n": 1229
+            },
+            {
+              "cat": "restaurant",
+              "n": 1215
+            },
+            {
+              "cat": "cafe",
+              "n": 560
+            },
+            {
+              "cat": "diner",
+              "n": 439
+            },
+            {
+              "cat": "bakery",
+              "n": 270
+            }
+          ]
+        },
+        {
+          "life": "display",
+          "label": "Display",
+          "n": 7537,
+          "top": [
+            {
+              "cat": "flowers_and_gifts_store",
+              "n": 450
+            },
+            {
+              "cat": "beauty_salon",
+              "n": 449
+            },
+            {
+              "cat": "clothing_store",
+              "n": 410
+            },
+            {
+              "cat": "spa",
+              "n": 331
+            },
+            {
+              "cat": "personal_or_beauty_service",
+              "n": 301
+            }
+          ]
+        }
+      ],
+      "unclassified": {
+        "n": 7582,
+        "top": [
+          {
+            "cat": "real_estate_service",
+            "n": 1045
+          },
+          {
+            "cat": "professional_service",
+            "n": 979
+          },
+          {
+            "cat": "shopping",
+            "n": 838
+          },
+          {
+            "cat": "event_or_party_service",
+            "n": 459
+          },
+          {
+            "cat": "real_estate_agent",
+            "n": 235
+          }
+        ]
+      },
+      "sensitivity": [
+        {
+          "threshold": 0.5,
+          "total": 15215,
+          "counts": {
+            "sustenance": 1331,
+            "anchors": 1453,
+            "third_places": 3735,
+            "display": 4464
+          }
+        },
+        {
+          "threshold": 0.75,
+          "total": 5454,
+          "counts": {
+            "sustenance": 504,
+            "anchors": 686,
+            "third_places": 1635,
+            "display": 1579
+          }
+        },
+        {
+          "threshold": 0.9,
+          "total": 1654,
+          "counts": {
+            "sustenance": 146,
+            "anchors": 242,
+            "third_places": 612,
+            "display": 477
+          }
+        }
+      ],
+      "grid": {
+        "cell_m": 150.0,
+        "active": 728,
+        "all_four": 435,
+        "mono": 85,
+        "mono_top_life": "display"
+      },
+      "road_mix": [
+        {
+          "life": "sustenance",
+          "label": "Sustenance",
+          "big_road": 873,
+          "street": 745,
+          "hem": 579,
+          "total": 2256
+        },
+        {
+          "life": "anchors",
+          "label": "Anchors",
+          "big_road": 705,
+          "street": 799,
+          "hem": 618,
+          "total": 2153
+        },
+        {
+          "life": "third_places",
+          "label": "Third places",
+          "big_road": 2193,
+          "street": 2180,
+          "hem": 1307,
+          "total": 5831
+        },
+        {
+          "life": "display",
+          "label": "Display",
+          "big_road": 2625,
+          "street": 2645,
+          "hem": 2074,
+          "total": 7537
+        }
+      ]
     }
   }
 }

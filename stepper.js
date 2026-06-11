@@ -3,7 +3,28 @@
 //            render(stage) }  // render gets a clean <div class="stage-body"> to fill
 // Nav: Back/Next buttons, dot indicators, keyboard ArrowLeft/ArrowRight. Crossfade
 // between stages. Respects prefers-reduced-motion (CSS kills the transition).
+// Arrow keys drive the mounted stepper nearest the viewport centre (a page may
+// host several steppers; only the one on screen should respond).
 window.Stepper = (function () {
+  const instances = [];
+  function active() {
+    const mid = window.innerHeight / 2;
+    let best = null, bestD = Infinity;
+    for (const inst of instances) {
+      const r = inst.el.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) continue;
+      const d = Math.abs((r.top + r.bottom) / 2 - mid);
+      if (d < bestD) { bestD = d; best = inst; }
+    }
+    return best;
+  }
+  document.addEventListener("keydown", (e) => {
+    const inst = active();
+    if (!inst) return;
+    if (e.key === "ArrowRight") inst.next();
+    if (e.key === "ArrowLeft") inst.back();
+  });
+
   function mount(el, steps) {
     el.classList.add("stepper");
     el.innerHTML = "";
@@ -47,12 +68,10 @@ window.Stepper = (function () {
     function go(n) { i = (n + steps.length) % steps.length; draw(); }
     back.addEventListener("click", () => go(i - 1));
     next.addEventListener("click", () => go(i === steps.length - 1 ? 0 : i + 1));
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight") go(i + 1);
-      if (e.key === "ArrowLeft") go(i - 1);
-    });
     draw();
-    return { go };
+    const api = { el, go, next: () => go(i + 1), back: () => go(i - 1) };
+    instances.push(api);
+    return api;
   }
   return { mount };
 })();

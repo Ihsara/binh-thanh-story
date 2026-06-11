@@ -1,0 +1,6988 @@
+{
+ "rules": [
+  {
+   "prefix": [
+    "arts_and_entertainment",
+    "performing_arts_venue",
+    "music_venue",
+    "karaoke_venue"
+   ],
+   "life": "third_places"
+  },
+  {
+   "prefix": [
+    "arts_and_entertainment",
+    "nightlife_venue"
+   ],
+   "life": "third_places"
+  },
+  {
+   "prefix": [
+    "arts_and_entertainment",
+    "gaming_venue"
+   ],
+   "life": "third_places"
+  },
+  {
+   "prefix": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "pool_billiards"
+   ],
+   "life": "third_places"
+  },
+  {
+   "prefix": [
+    "sports_and_recreation",
+    "park"
+   ],
+   "life": "third_places"
+  },
+  {
+   "prefix": [
+    "shopping",
+    "specialty_store",
+    "pharmacy_and_drug_store"
+   ],
+   "life": "sustenance"
+  },
+  {
+   "prefix": [
+    "shopping",
+    "specialty_store",
+    "vehicle_parts_store"
+   ],
+   "life": "sustenance"
+  },
+  {
+   "prefix": [
+    "shopping",
+    "food_and_beverage_store"
+   ],
+   "life": "sustenance"
+  },
+  {
+   "prefix": [
+    "shopping",
+    "convenience_store"
+   ],
+   "life": "sustenance"
+  },
+  {
+   "prefix": [
+    "shopping",
+    "market"
+   ],
+   "life": "sustenance"
+  },
+  {
+   "prefix": [
+    "shopping",
+    "warehouse_club_store"
+   ],
+   "life": "sustenance"
+  },
+  {
+   "prefix": [
+    "services_and_business",
+    "financial_service"
+   ],
+   "life": "sustenance"
+  },
+  {
+   "prefix": [
+    "services_and_business",
+    "laundry_service"
+   ],
+   "life": "sustenance"
+  },
+  {
+   "prefix": [
+    "services_and_business",
+    "shipping_or_delivery_service"
+   ],
+   "life": "sustenance"
+  },
+  {
+   "prefix": [
+    "services_and_business",
+    "corporate_or_business_office"
+   ],
+   "life": "anchors"
+  },
+  {
+   "prefix": [
+    "travel_and_transportation",
+    "vehicle_service"
+   ],
+   "life": "sustenance"
+  },
+  {
+   "prefix": [
+    "travel_and_transportation",
+    "fueling_station"
+   ],
+   "life": "sustenance"
+  },
+  {
+   "prefix": [
+    "travel_and_transportation",
+    "parking"
+   ],
+   "life": "anchors"
+  },
+  {
+   "prefix": [
+    "travel_and_transportation",
+    "ground_transport_facility_or_service"
+   ],
+   "life": "anchors"
+  },
+  {
+   "prefix": [
+    "travel_and_transportation",
+    "air_transport_facility_or_service"
+   ],
+   "life": "anchors"
+  },
+  {
+   "prefix": [
+    "travel_and_transportation",
+    "travel_service"
+   ],
+   "life": "display"
+  },
+  {
+   "prefix": [
+    "food_and_drink"
+   ],
+   "life": "third_places"
+  },
+  {
+   "prefix": [
+    "health_care"
+   ],
+   "life": "sustenance"
+  },
+  {
+   "prefix": [
+    "education"
+   ],
+   "life": "anchors"
+  },
+  {
+   "prefix": [
+    "cultural_and_historic"
+   ],
+   "life": "anchors"
+  },
+  {
+   "prefix": [
+    "community_and_government"
+   ],
+   "life": "anchors"
+  },
+  {
+   "prefix": [
+    "shopping"
+   ],
+   "life": "display"
+  },
+  {
+   "prefix": [
+    "lifestyle_services"
+   ],
+   "life": "display"
+  },
+  {
+   "prefix": [
+    "lodging"
+   ],
+   "life": "display"
+  },
+  {
+   "prefix": [
+    "arts_and_entertainment"
+   ],
+   "life": "display"
+  },
+  {
+   "prefix": [
+    "sports_and_recreation"
+   ],
+   "life": "display"
+  }
+ ],
+ "resolved": [
+  {
+   "category": "coffee_shop",
+   "hierarchy": [
+    "food_and_drink",
+    "non_alcoholic_beverage_venue",
+    "coffee_shop"
+   ],
+   "life": "third_places",
+   "n": 1229
+  },
+  {
+   "category": "restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant"
+   ],
+   "life": "third_places",
+   "n": 1215
+  },
+  {
+   "category": "real_estate_service",
+   "hierarchy": [
+    "services_and_business",
+    "real_estate_service"
+   ],
+   "life": "unclassified",
+   "n": 1045
+  },
+  {
+   "category": "professional_service",
+   "hierarchy": [
+    "services_and_business",
+    "professional_service"
+   ],
+   "life": "unclassified",
+   "n": 979
+  },
+  {
+   "category": "shopping",
+   "hierarchy": [
+    "shopping"
+   ],
+   "life": "unclassified",
+   "n": 838
+  },
+  {
+   "category": "cafe",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "cafe"
+   ],
+   "life": "third_places",
+   "n": 560
+  },
+  {
+   "category": "event_or_party_service",
+   "hierarchy": [
+    "services_and_business",
+    "event_or_party_service"
+   ],
+   "life": "unclassified",
+   "n": 459
+  },
+  {
+   "category": "flowers_and_gifts_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "flowers_and_gifts_store"
+   ],
+   "life": "display",
+   "n": 450
+  },
+  {
+   "category": "beauty_salon",
+   "hierarchy": [
+    "lifestyle_services",
+    "personal_or_beauty_service",
+    "beauty_salon"
+   ],
+   "life": "display",
+   "n": 449
+  },
+  {
+   "category": "diner",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "diner"
+   ],
+   "life": "third_places",
+   "n": 439
+  },
+  {
+   "category": "clothing_store",
+   "hierarchy": [
+    "shopping",
+    "fashion_and_apparel_store",
+    "clothing_store"
+   ],
+   "life": "display",
+   "n": 410
+  },
+  {
+   "category": "spa",
+   "hierarchy": [
+    "lifestyle_services",
+    "wellness_service",
+    "spa"
+   ],
+   "life": "display",
+   "n": 331
+  },
+  {
+   "category": "grocery_store",
+   "hierarchy": [
+    "shopping",
+    "food_and_beverage_store",
+    "grocery_store"
+   ],
+   "life": "sustenance",
+   "n": 319
+  },
+  {
+   "category": "historic_site",
+   "hierarchy": [
+    "cultural_and_historic",
+    "historic_site"
+   ],
+   "life": "anchors",
+   "n": 306
+  },
+  {
+   "category": "personal_or_beauty_service",
+   "hierarchy": [
+    "lifestyle_services",
+    "personal_or_beauty_service"
+   ],
+   "life": "display",
+   "n": 301
+  },
+  {
+   "category": "hotel",
+   "hierarchy": [
+    "lodging",
+    "hotel"
+   ],
+   "life": "display",
+   "n": 294
+  },
+  {
+   "category": "education",
+   "hierarchy": [
+    "education"
+   ],
+   "life": "anchors",
+   "n": 289
+  },
+  {
+   "category": "beauty_supply_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "personal_care_and_beauty_store",
+    "beauty_supply_store"
+   ],
+   "life": "display",
+   "n": 287
+  },
+  {
+   "category": "furniture_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "hardware_home_and_garden_store",
+    "furniture_store"
+   ],
+   "life": "display",
+   "n": 282
+  },
+  {
+   "category": "bakery",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "bakery"
+   ],
+   "life": "third_places",
+   "n": 270
+  },
+  {
+   "category": "vietnamese_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "asian_restaurant",
+    "southeast_asian_restaurant",
+    "vietnamese_restaurant"
+   ],
+   "life": "third_places",
+   "n": 254
+  },
+  {
+   "category": "real_estate_agent",
+   "hierarchy": [
+    "services_and_business",
+    "real_estate_service",
+    "real_estate_agent"
+   ],
+   "life": "unclassified",
+   "n": 235
+  },
+  {
+   "category": "building_or_construction_service",
+   "hierarchy": [
+    "services_and_business",
+    "building_or_construction_service"
+   ],
+   "life": "unclassified",
+   "n": 216
+  },
+  {
+   "category": "mobile_phone_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "electronics_store",
+    "mobile_phone_store"
+   ],
+   "life": "display",
+   "n": 210
+  },
+  {
+   "category": "nail_salon",
+   "hierarchy": [
+    "lifestyle_services",
+    "personal_or_beauty_service",
+    "nail_salon"
+   ],
+   "life": "display",
+   "n": 209
+  },
+  {
+   "category": "bubble_tea_shop",
+   "hierarchy": [
+    "food_and_drink",
+    "non_alcoholic_beverage_venue",
+    "bubble_tea_shop"
+   ],
+   "life": "third_places",
+   "n": 202
+  },
+  {
+   "category": "barber",
+   "hierarchy": [
+    "lifestyle_services",
+    "personal_or_beauty_service",
+    "barber"
+   ],
+   "life": "display",
+   "n": 190
+  },
+  {
+   "category": "hair_salon",
+   "hierarchy": [
+    "lifestyle_services",
+    "personal_or_beauty_service",
+    "hair_salon"
+   ],
+   "life": "display",
+   "n": 186
+  },
+  {
+   "category": "shoe_store",
+   "hierarchy": [
+    "shopping",
+    "fashion_and_apparel_store",
+    "shoe_store"
+   ],
+   "life": "display",
+   "n": 168
+  },
+  {
+   "category": "interior_design",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "interior_design"
+   ],
+   "life": "unclassified",
+   "n": 166
+  },
+  {
+   "category": "fashion_and_apparel_store",
+   "hierarchy": [
+    "shopping",
+    "fashion_and_apparel_store"
+   ],
+   "life": "display",
+   "n": 161
+  },
+  {
+   "category": "college_university",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "college_university"
+   ],
+   "life": "anchors",
+   "n": 156
+  },
+  {
+   "category": "travel_service",
+   "hierarchy": [
+    "travel_and_transportation",
+    "travel_service"
+   ],
+   "life": "display",
+   "n": 153
+  },
+  {
+   "category": "womens_clothing_store",
+   "hierarchy": [
+    "shopping",
+    "fashion_and_apparel_store",
+    "clothing_store",
+    "womens_clothing_store"
+   ],
+   "life": "display",
+   "n": 152
+  },
+  {
+   "category": "fast_food_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "fast_food_restaurant"
+   ],
+   "life": "third_places",
+   "n": 150
+  },
+  {
+   "category": "school",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "school"
+   ],
+   "life": "anchors",
+   "n": 140
+  },
+  {
+   "category": "health_food_store",
+   "hierarchy": [
+    "shopping",
+    "food_and_beverage_store",
+    "health_food_store"
+   ],
+   "life": "sustenance",
+   "n": 139
+  },
+  {
+   "category": "food_and_drink",
+   "hierarchy": [
+    "food_and_drink"
+   ],
+   "life": "third_places",
+   "n": 137
+  },
+  {
+   "category": "elementary_school",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "school",
+    "elementary_school"
+   ],
+   "life": "anchors",
+   "n": 136
+  },
+  {
+   "category": "language_school",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "specialty_school",
+    "language_school"
+   ],
+   "life": "anchors",
+   "n": 136
+  },
+  {
+   "category": "printing_service",
+   "hierarchy": [
+    "services_and_business",
+    "printing_service"
+   ],
+   "life": "unclassified",
+   "n": 129
+  },
+  {
+   "category": "fashion_accessories_store",
+   "hierarchy": [
+    "shopping",
+    "fashion_and_apparel_store",
+    "fashion_accessories_store"
+   ],
+   "life": "display",
+   "n": 126
+  },
+  {
+   "category": "electronics_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "electronics_store"
+   ],
+   "life": "display",
+   "n": 117
+  },
+  {
+   "category": "seafood_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "seafood_restaurant"
+   ],
+   "life": "third_places",
+   "n": 117
+  },
+  {
+   "category": "convenience_store",
+   "hierarchy": [
+    "shopping",
+    "convenience_store"
+   ],
+   "life": "sustenance",
+   "n": 116
+  },
+  {
+   "category": "pharmacy",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "pharmacy_and_drug_store",
+    "pharmacy"
+   ],
+   "life": "sustenance",
+   "n": 115
+  },
+  {
+   "category": "social_or_community_service",
+   "hierarchy": [
+    "community_and_government",
+    "social_or_community_service"
+   ],
+   "life": "anchors",
+   "n": 114
+  },
+  {
+   "category": "hospital",
+   "hierarchy": [
+    "health_care",
+    "hospital"
+   ],
+   "life": "sustenance",
+   "n": 110
+  },
+  {
+   "category": "tattoo_and_piercing",
+   "hierarchy": [
+    "lifestyle_services",
+    "personal_or_beauty_service",
+    "body_modification",
+    "tattoo_and_piercing"
+   ],
+   "life": "display",
+   "n": 109
+  },
+  {
+   "category": "software_development",
+   "hierarchy": [
+    "services_and_business",
+    "technical_service",
+    "software_development"
+   ],
+   "life": "unclassified",
+   "n": 108
+  },
+  {
+   "category": "jewelry_store",
+   "hierarchy": [
+    "shopping",
+    "fashion_and_apparel_store",
+    "jewelry_store"
+   ],
+   "life": "display",
+   "n": 106
+  },
+  {
+   "category": "freight_and_cargo_service",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_transportation_and_storage_service",
+    "freight_and_cargo_service"
+   ],
+   "life": "unclassified",
+   "n": 102
+  },
+  {
+   "category": "gym",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "gym"
+   ],
+   "life": "display",
+   "n": 101
+  },
+  {
+   "category": "lodging",
+   "hierarchy": [
+    "lodging"
+   ],
+   "life": "display",
+   "n": 98
+  },
+  {
+   "category": "travel_and_transportation",
+   "hierarchy": [
+    "travel_and_transportation"
+   ],
+   "life": "unclassified",
+   "n": 94
+  },
+  {
+   "category": "childrens_clothing_store",
+   "hierarchy": [
+    "shopping",
+    "fashion_and_apparel_store",
+    "clothing_store",
+    "childrens_clothing_store"
+   ],
+   "life": "display",
+   "n": 90
+  },
+  {
+   "category": "computer_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "electronics_store",
+    "computer_store"
+   ],
+   "life": "display",
+   "n": 90
+  },
+  {
+   "category": "health_care",
+   "hierarchy": [
+    "health_care"
+   ],
+   "life": "sustenance",
+   "n": 87
+  },
+  {
+   "category": "industrial_equipment_manufacturer",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "manufacturer",
+    "machinery_and_tool_manufacturer",
+    "industrial_equipment_manufacturer"
+   ],
+   "life": "unclassified",
+   "n": 86
+  },
+  {
+   "category": "buddhist_place_of_worship",
+   "hierarchy": [
+    "cultural_and_historic",
+    "place_of_worship",
+    "buddhist_place_of_worship"
+   ],
+   "life": "anchors",
+   "n": 85
+  },
+  {
+   "category": "tour_operator",
+   "hierarchy": [
+    "travel_and_transportation",
+    "travel_service",
+    "tour_operator"
+   ],
+   "life": "display",
+   "n": 85
+  },
+  {
+   "category": "advertising_agency",
+   "hierarchy": [
+    "services_and_business",
+    "professional_service",
+    "advertising_agency"
+   ],
+   "life": "unclassified",
+   "n": 83
+  },
+  {
+   "category": "dental_clinic",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "dental_clinic"
+   ],
+   "life": "sustenance",
+   "n": 82
+  },
+  {
+   "category": "bank_or_credit_union",
+   "hierarchy": [
+    "services_and_business",
+    "financial_service",
+    "bank_or_credit_union"
+   ],
+   "life": "sustenance",
+   "n": 81
+  },
+  {
+   "category": "food_beverage_distributor",
+   "hierarchy": [
+    "services_and_business",
+    "business",
+    "food_beverage_distributor"
+   ],
+   "life": "unclassified",
+   "n": 79
+  },
+  {
+   "category": "arts_and_entertainment",
+   "hierarchy": [
+    "arts_and_entertainment"
+   ],
+   "life": "display",
+   "n": 78
+  },
+  {
+   "category": "health_spa",
+   "hierarchy": [
+    "lifestyle_services",
+    "wellness_service",
+    "spa",
+    "health_spa"
+   ],
+   "life": "display",
+   "n": 78
+  },
+  {
+   "category": "motorcycle_repair",
+   "hierarchy": [
+    "travel_and_transportation",
+    "vehicle_service",
+    "motorcycle_service",
+    "motorcycle_repair"
+   ],
+   "life": "sustenance",
+   "n": 77
+  },
+  {
+   "category": "tea_room",
+   "hierarchy": [
+    "food_and_drink",
+    "non_alcoholic_beverage_venue",
+    "tea_room"
+   ],
+   "life": "third_places",
+   "n": 77
+  },
+  {
+   "category": "bar",
+   "hierarchy": [
+    "food_and_drink",
+    "alcoholic_beverage_venue",
+    "bar"
+   ],
+   "life": "third_places",
+   "n": 76
+  },
+  {
+   "category": "laundromat",
+   "hierarchy": [
+    "services_and_business",
+    "laundry_service",
+    "laundromat"
+   ],
+   "life": "sustenance",
+   "n": 76
+  },
+  {
+   "category": "warehouse_club_store",
+   "hierarchy": [
+    "shopping",
+    "warehouse_club_store"
+   ],
+   "life": "sustenance",
+   "n": 74
+  },
+  {
+   "category": "japanese_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "asian_restaurant",
+    "east_asian_restaurant",
+    "japanese_restaurant"
+   ],
+   "life": "third_places",
+   "n": 73
+  },
+  {
+   "category": "manufacturer",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "manufacturer"
+   ],
+   "life": "unclassified",
+   "n": 73
+  },
+  {
+   "category": "marketing_agency",
+   "hierarchy": [
+    "services_and_business",
+    "professional_service",
+    "marketing_agency"
+   ],
+   "life": "unclassified",
+   "n": 73
+  },
+  {
+   "category": "preschool",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "school",
+    "preschool"
+   ],
+   "life": "anchors",
+   "n": 72
+  },
+  {
+   "category": "educational_service",
+   "hierarchy": [
+    "education",
+    "educational_service"
+   ],
+   "life": "anchors",
+   "n": 69
+  },
+  {
+   "category": "information_technology_company",
+   "hierarchy": [
+    "services_and_business",
+    "business",
+    "information_technology_company"
+   ],
+   "life": "unclassified",
+   "n": 67
+  },
+  {
+   "category": "vehicle_dealer",
+   "hierarchy": [
+    "shopping",
+    "vehicle_dealer"
+   ],
+   "life": "display",
+   "n": 67
+  },
+  {
+   "category": "auto_parts_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "vehicle_parts_store",
+    "auto_parts_store"
+   ],
+   "life": "sustenance",
+   "n": 65
+  },
+  {
+   "category": "home_goods_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "hardware_home_and_garden_store",
+    "home_goods_store"
+   ],
+   "life": "display",
+   "n": 63
+  },
+  {
+   "category": "it_service_and_computer_repair",
+   "hierarchy": [
+    "services_and_business",
+    "technical_service",
+    "it_service_and_computer_repair"
+   ],
+   "life": "unclassified",
+   "n": 62
+  },
+  {
+   "category": "animal_or_pet_service",
+   "hierarchy": [
+    "lifestyle_services",
+    "animal_or_pet_service"
+   ],
+   "life": "display",
+   "n": 61
+  },
+  {
+   "category": "architectural_designer",
+   "hierarchy": [
+    "services_and_business",
+    "design_service",
+    "architectural_designer"
+   ],
+   "life": "unclassified",
+   "n": 61
+  },
+  {
+   "category": "bookstore",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "books_music_and_video_store",
+    "bookstore"
+   ],
+   "life": "display",
+   "n": 59
+  },
+  {
+   "category": "shopping_mall",
+   "hierarchy": [
+    "shopping",
+    "shopping_mall"
+   ],
+   "life": "display",
+   "n": 59
+  },
+  {
+   "category": "sporting_goods_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "sporting_goods_store"
+   ],
+   "life": "display",
+   "n": 59
+  },
+  {
+   "category": "attorney_or_law_firm",
+   "hierarchy": [
+    "services_and_business",
+    "legal_service",
+    "attorney_or_law_firm"
+   ],
+   "life": "unclassified",
+   "n": 58
+  },
+  {
+   "category": "asian_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "asian_restaurant"
+   ],
+   "life": "third_places",
+   "n": 57
+  },
+  {
+   "category": "smoothie_juice_bar",
+   "hierarchy": [
+    "food_and_drink",
+    "non_alcoholic_beverage_venue",
+    "smoothie_juice_bar"
+   ],
+   "life": "third_places",
+   "n": 57
+  },
+  {
+   "category": "arts_crafts_and_hobby_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "arts_crafts_and_hobby_store"
+   ],
+   "life": "display",
+   "n": 56
+  },
+  {
+   "category": "automotive_repair",
+   "hierarchy": [
+    "travel_and_transportation",
+    "vehicle_service",
+    "automotive_service",
+    "automotive_repair"
+   ],
+   "life": "sustenance",
+   "n": 56
+  },
+  {
+   "category": "food_and_beverage_store",
+   "hierarchy": [
+    "shopping",
+    "food_and_beverage_store"
+   ],
+   "life": "sustenance",
+   "n": 56
+  },
+  {
+   "category": "yoga_studio",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "fitness_studio",
+    "yoga_studio"
+   ],
+   "life": "display",
+   "n": 55
+  },
+  {
+   "category": "corporate_or_business_office",
+   "hierarchy": [
+    "services_and_business",
+    "corporate_or_business_office"
+   ],
+   "life": "anchors",
+   "n": 54
+  },
+  {
+   "category": "food_truck_stand",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "food_truck_stand"
+   ],
+   "life": "third_places",
+   "n": 51
+  },
+  {
+   "category": "sport_or_recreation_club",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_recreation_club"
+   ],
+   "life": "display",
+   "n": 51
+  },
+  {
+   "category": "korean_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "asian_restaurant",
+    "east_asian_restaurant",
+    "korean_restaurant"
+   ],
+   "life": "third_places",
+   "n": 50
+  },
+  {
+   "category": "auto_dealer",
+   "hierarchy": [
+    "shopping",
+    "vehicle_dealer",
+    "auto_dealer"
+   ],
+   "life": "display",
+   "n": 49
+  },
+  {
+   "category": "religious_organization",
+   "hierarchy": [
+    "cultural_and_historic",
+    "religious_organization"
+   ],
+   "life": "anchors",
+   "n": 49
+  },
+  {
+   "category": "sports_and_recreation",
+   "hierarchy": [
+    "sports_and_recreation"
+   ],
+   "life": "display",
+   "n": 49
+  },
+  {
+   "category": "home_cleaning",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "home_cleaning"
+   ],
+   "life": "unclassified",
+   "n": 48
+  },
+  {
+   "category": "mens_clothing_store",
+   "hierarchy": [
+    "shopping",
+    "fashion_and_apparel_store",
+    "clothing_store",
+    "mens_clothing_store"
+   ],
+   "life": "display",
+   "n": 48
+  },
+  {
+   "category": "vegetarian_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "special_diet_restaurant",
+    "vegetarian_restaurant"
+   ],
+   "life": "third_places",
+   "n": 48
+  },
+  {
+   "category": "government_office",
+   "hierarchy": [
+    "community_and_government",
+    "government_office"
+   ],
+   "life": "anchors",
+   "n": 47
+  },
+  {
+   "category": "music_venue",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "performing_arts_venue",
+    "music_venue"
+   ],
+   "life": "display",
+   "n": 47
+  },
+  {
+   "category": "pool_billiards",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "pool_billiards"
+   ],
+   "life": "third_places",
+   "n": 47
+  },
+  {
+   "category": "social_media_agency",
+   "hierarchy": [
+    "services_and_business",
+    "professional_service",
+    "social_media_agency"
+   ],
+   "life": "unclassified",
+   "n": 47
+  },
+  {
+   "category": "christian_place_of_worship",
+   "hierarchy": [
+    "cultural_and_historic",
+    "religious_organization",
+    "place_of_worship",
+    "christian_place_of_worship"
+   ],
+   "life": "anchors",
+   "n": 46
+  },
+  {
+   "category": "costume_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "arts_crafts_and_hobby_store",
+    "costume_store"
+   ],
+   "life": "display",
+   "n": 46
+  },
+  {
+   "category": "automotive_service",
+   "hierarchy": [
+    "travel_and_transportation",
+    "vehicle_service",
+    "automotive_service"
+   ],
+   "life": "sustenance",
+   "n": 45
+  },
+  {
+   "category": "financial_service",
+   "hierarchy": [
+    "services_and_business",
+    "financial_service"
+   ],
+   "life": "sustenance",
+   "n": 43
+  },
+  {
+   "category": "musical_instrument_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "musical_instrument_and_pro_audio_store",
+    "musical_instrument_store"
+   ],
+   "life": "display",
+   "n": 43
+  },
+  {
+   "category": "web_designer",
+   "hierarchy": [
+    "services_and_business",
+    "design_service",
+    "web_designer"
+   ],
+   "life": "unclassified",
+   "n": 43
+  },
+  {
+   "category": "event_photography_service",
+   "hierarchy": [
+    "services_and_business",
+    "media_service",
+    "photography_service",
+    "event_photography_service"
+   ],
+   "life": "unclassified",
+   "n": 41
+  },
+  {
+   "category": "motorcycle_dealer",
+   "hierarchy": [
+    "shopping",
+    "vehicle_dealer",
+    "motorcycle_dealer"
+   ],
+   "life": "display",
+   "n": 41
+  },
+  {
+   "category": "ice_cream_shop",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "dessert_shop",
+    "ice_cream_shop"
+   ],
+   "life": "third_places",
+   "n": 40
+  },
+  {
+   "category": "pet_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "animal_and_pet_store",
+    "pet_store"
+   ],
+   "life": "display",
+   "n": 40
+  },
+  {
+   "category": "service_apartment",
+   "hierarchy": [
+    "lodging",
+    "service_apartment"
+   ],
+   "life": "display",
+   "n": 40
+  },
+  {
+   "category": "toy_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "toys_and_games_store",
+    "toy_store"
+   ],
+   "life": "display",
+   "n": 40
+  },
+  {
+   "category": "appraisal_service",
+   "hierarchy": [
+    "services_and_business",
+    "financial_service",
+    "appraisal_service"
+   ],
+   "life": "sustenance",
+   "n": 39
+  },
+  {
+   "category": "art_school",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "specialty_school",
+    "art_school"
+   ],
+   "life": "anchors",
+   "n": 39
+  },
+  {
+   "category": "building_supply_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "hardware_home_and_garden_store",
+    "building_supply_store"
+   ],
+   "life": "display",
+   "n": 38
+  },
+  {
+   "category": "eyewear_store",
+   "hierarchy": [
+    "shopping",
+    "fashion_and_apparel_store",
+    "eyewear_store"
+   ],
+   "life": "display",
+   "n": 37
+  },
+  {
+   "category": "home_staging",
+   "hierarchy": [
+    "services_and_business",
+    "real_estate_service",
+    "home_staging"
+   ],
+   "life": "unclassified",
+   "n": 37
+  },
+  {
+   "category": "graphic_designer",
+   "hierarchy": [
+    "services_and_business",
+    "design_service",
+    "graphic_designer"
+   ],
+   "life": "unclassified",
+   "n": 36
+  },
+  {
+   "category": "karaoke_venue",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "performing_arts_venue",
+    "music_venue",
+    "karaoke_venue"
+   ],
+   "life": "third_places",
+   "n": 36
+  },
+  {
+   "category": "aquatic_pet_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "animal_and_pet_store",
+    "pet_store",
+    "aquatic_pet_store"
+   ],
+   "life": "display",
+   "n": 35
+  },
+  {
+   "category": "chicken_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "meat_restaurant",
+    "chicken_restaurant"
+   ],
+   "life": "third_places",
+   "n": 35
+  },
+  {
+   "category": "chinese_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "asian_restaurant",
+    "east_asian_restaurant",
+    "chinese_restaurant"
+   ],
+   "life": "third_places",
+   "n": 35
+  },
+  {
+   "category": "home_improvement_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "hardware_home_and_garden_store",
+    "home_improvement_store"
+   ],
+   "life": "display",
+   "n": 35
+  },
+  {
+   "category": "luggage_store",
+   "hierarchy": [
+    "shopping",
+    "fashion_and_apparel_store",
+    "luggage_store"
+   ],
+   "life": "display",
+   "n": 35
+  },
+  {
+   "category": "campus_building",
+   "hierarchy": [
+    "education",
+    "educational_facility",
+    "campus_building"
+   ],
+   "life": "anchors",
+   "n": 34
+  },
+  {
+   "category": "jewelry_and_watches_manufacturer",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "manufacturer",
+    "jewelry_and_watches_manufacturer"
+   ],
+   "life": "unclassified",
+   "n": 34
+  },
+  {
+   "category": "appliance_repair_service",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "appliance_repair_service"
+   ],
+   "life": "unclassified",
+   "n": 33
+  },
+  {
+   "category": "community_center",
+   "hierarchy": [
+    "community_and_government",
+    "social_or_community_service",
+    "community_center"
+   ],
+   "life": "anchors",
+   "n": 33
+  },
+  {
+   "category": "financial_advising",
+   "hierarchy": [
+    "services_and_business",
+    "financial_service",
+    "financial_advising"
+   ],
+   "life": "sustenance",
+   "n": 33
+  },
+  {
+   "category": "park",
+   "hierarchy": [
+    "sports_and_recreation",
+    "park"
+   ],
+   "life": "third_places",
+   "n": 33
+  },
+  {
+   "category": "media_agency",
+   "hierarchy": [
+    "services_and_business",
+    "media_service",
+    "media_news_company",
+    "media_agency"
+   ],
+   "life": "unclassified",
+   "n": 32
+  },
+  {
+   "category": "sport_or_fitness_facility",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility"
+   ],
+   "life": "display",
+   "n": 32
+  },
+  {
+   "category": "sushi_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "asian_restaurant",
+    "east_asian_restaurant",
+    "japanese_restaurant",
+    "sushi_restaurant"
+   ],
+   "life": "third_places",
+   "n": 32
+  },
+  {
+   "category": "liquor_store",
+   "hierarchy": [
+    "shopping",
+    "food_and_beverage_store",
+    "liquor_store"
+   ],
+   "life": "sustenance",
+   "n": 31
+  },
+  {
+   "category": "barbecue_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "meat_restaurant",
+    "barbecue_restaurant"
+   ],
+   "life": "third_places",
+   "n": 30
+  },
+  {
+   "category": "produce_store",
+   "hierarchy": [
+    "shopping",
+    "food_and_beverage_store",
+    "specialty_foods_store",
+    "produce_store"
+   ],
+   "life": "sustenance",
+   "n": 30
+  },
+  {
+   "category": "bridal_shop",
+   "hierarchy": [
+    "shopping",
+    "fashion_and_apparel_store",
+    "clothing_store",
+    "bridal_shop"
+   ],
+   "life": "display",
+   "n": 29
+  },
+  {
+   "category": "linen_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "hardware_home_and_garden_store",
+    "linen_store"
+   ],
+   "life": "display",
+   "n": 29
+  },
+  {
+   "category": "vitamin_and_supplement_store",
+   "hierarchy": [
+    "shopping",
+    "food_and_beverage_store",
+    "vitamin_and_supplement_store"
+   ],
+   "life": "sustenance",
+   "n": 29
+  },
+  {
+   "category": "art_gallery",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "arts_and_crafts_space",
+    "art_gallery"
+   ],
+   "life": "display",
+   "n": 28
+  },
+  {
+   "category": "audio_visual_equipment_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "electronics_store",
+    "audio_visual_equipment_store"
+   ],
+   "life": "display",
+   "n": 28
+  },
+  {
+   "category": "caterer",
+   "hierarchy": [
+    "services_and_business",
+    "event_or_party_service",
+    "caterer"
+   ],
+   "life": "unclassified",
+   "n": 28
+  },
+  {
+   "category": "engineering_service",
+   "hierarchy": [
+    "services_and_business",
+    "building_or_construction_service",
+    "engineering_service"
+   ],
+   "life": "unclassified",
+   "n": 28
+  },
+  {
+   "category": "industrial_company",
+   "hierarchy": [
+    "services_and_business",
+    "business",
+    "industrial_company"
+   ],
+   "life": "unclassified",
+   "n": 28
+  },
+  {
+   "category": "passport_and_visa_service",
+   "hierarchy": [
+    "travel_and_transportation",
+    "travel_service",
+    "passport_and_visa_service"
+   ],
+   "life": "display",
+   "n": 28
+  },
+  {
+   "category": "cosmetic_dentistry",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "dental_clinic",
+    "cosmetic_dentistry"
+   ],
+   "life": "sustenance",
+   "n": 27
+  },
+  {
+   "category": "hair_supply_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "personal_care_and_beauty_store",
+    "beauty_supply_store",
+    "hair_supply_store"
+   ],
+   "life": "display",
+   "n": 27
+  },
+  {
+   "category": "indian_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "asian_restaurant",
+    "south_asian_restaurant",
+    "indian_restaurant"
+   ],
+   "life": "third_places",
+   "n": 27
+  },
+  {
+   "category": "insurance_agency",
+   "hierarchy": [
+    "services_and_business",
+    "financial_service",
+    "insurance_agency"
+   ],
+   "life": "sustenance",
+   "n": 27
+  },
+  {
+   "category": "legal_service",
+   "hierarchy": [
+    "services_and_business",
+    "legal_service"
+   ],
+   "life": "unclassified",
+   "n": 27
+  },
+  {
+   "category": "makeup_artist",
+   "hierarchy": [
+    "lifestyle_services",
+    "beauty_service",
+    "skin_care_and_makeup",
+    "makeup_artist"
+   ],
+   "life": "display",
+   "n": 27
+  },
+  {
+   "category": "pub",
+   "hierarchy": [
+    "food_and_drink",
+    "alcoholic_beverage_venue",
+    "bar",
+    "pub"
+   ],
+   "life": "third_places",
+   "n": 27
+  },
+  {
+   "category": "telecommunications_company",
+   "hierarchy": [
+    "services_and_business",
+    "business",
+    "telecommunications_company"
+   ],
+   "life": "unclassified",
+   "n": 27
+  },
+  {
+   "category": "wedding_planning",
+   "hierarchy": [
+    "services_and_business",
+    "event_or_party_service",
+    "wedding_planning"
+   ],
+   "life": "unclassified",
+   "n": 27
+  },
+  {
+   "category": "atm",
+   "hierarchy": [
+    "services_and_business",
+    "financial_service",
+    "atm"
+   ],
+   "life": "sustenance",
+   "n": 26
+  },
+  {
+   "category": "commercial_industrial",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "commercial_industrial"
+   ],
+   "life": "unclassified",
+   "n": 26
+  },
+  {
+   "category": "department_store",
+   "hierarchy": [
+    "shopping",
+    "department_store"
+   ],
+   "life": "display",
+   "n": 26
+  },
+  {
+   "category": "driving_school",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "specialty_school",
+    "driving_school"
+   ],
+   "life": "anchors",
+   "n": 26
+  },
+  {
+   "category": "home_service",
+   "hierarchy": [
+    "services_and_business",
+    "home_service"
+   ],
+   "life": "unclassified",
+   "n": 26
+  },
+  {
+   "category": "police_station",
+   "hierarchy": [
+    "community_and_government",
+    "public_safety_service",
+    "police_station"
+   ],
+   "life": "anchors",
+   "n": 26
+  },
+  {
+   "category": "beer_garden",
+   "hierarchy": [
+    "food_and_drink",
+    "alcoholic_beverage_venue",
+    "beer_garden"
+   ],
+   "life": "third_places",
+   "n": 25
+  },
+  {
+   "category": "cocktail_bar",
+   "hierarchy": [
+    "food_and_drink",
+    "alcoholic_beverage_venue",
+    "bar",
+    "cocktail_bar"
+   ],
+   "life": "third_places",
+   "n": 25
+  },
+  {
+   "category": "mattress_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "hardware_home_and_garden_store",
+    "mattress_store"
+   ],
+   "life": "display",
+   "n": 25
+  },
+  {
+   "category": "music_production",
+   "hierarchy": [
+    "services_and_business",
+    "media_service",
+    "media_news_company",
+    "music_production"
+   ],
+   "life": "unclassified",
+   "n": 25
+  },
+  {
+   "category": "music_school",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "specialty_school",
+    "music_school"
+   ],
+   "life": "anchors",
+   "n": 25
+  },
+  {
+   "category": "skin_care_and_makeup",
+   "hierarchy": [
+    "lifestyle_services",
+    "personal_or_beauty_service",
+    "skin_care_and_makeup"
+   ],
+   "life": "display",
+   "n": 25
+  },
+  {
+   "category": "computer_hardware_company",
+   "hierarchy": [
+    "services_and_business",
+    "technical_service",
+    "computer_hardware_company"
+   ],
+   "life": "unclassified",
+   "n": 24
+  },
+  {
+   "category": "veterinarian",
+   "hierarchy": [
+    "lifestyle_services",
+    "animal_or_pet_service",
+    "veterinary_care",
+    "veterinarian"
+   ],
+   "life": "display",
+   "n": 24
+  },
+  {
+   "category": "broadcasting_media_production",
+   "hierarchy": [
+    "services_and_business",
+    "media_service",
+    "media_news_company",
+    "broadcasting_media_production"
+   ],
+   "life": "unclassified",
+   "n": 23
+  },
+  {
+   "category": "dessert_shop",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "dessert_shop"
+   ],
+   "life": "third_places",
+   "n": 23
+  },
+  {
+   "category": "nursery_and_gardening_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "hardware_home_and_garden_store",
+    "nursery_and_gardening_store"
+   ],
+   "life": "display",
+   "n": 23
+  },
+  {
+   "category": "breakfast_and_brunch_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "breakfast_and_brunch_restaurant"
+   ],
+   "life": "third_places",
+   "n": 22
+  },
+  {
+   "category": "chemical_plant",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_industrial_and_machine_service",
+    "chemical_plant"
+   ],
+   "life": "unclassified",
+   "n": 22
+  },
+  {
+   "category": "contractor",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "contractor"
+   ],
+   "life": "unclassified",
+   "n": 22
+  },
+  {
+   "category": "hardware_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "hardware_home_and_garden_store",
+    "hardware_store"
+   ],
+   "life": "display",
+   "n": 22
+  },
+  {
+   "category": "organic_grocery_store",
+   "hierarchy": [
+    "shopping",
+    "food_and_beverage_store",
+    "grocery_store",
+    "organic_grocery_store"
+   ],
+   "life": "sustenance",
+   "n": 22
+  },
+  {
+   "category": "pawn_shop",
+   "hierarchy": [
+    "shopping",
+    "second_hand_store",
+    "pawn_shop"
+   ],
+   "life": "display",
+   "n": 22
+  },
+  {
+   "category": "thai_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "asian_restaurant",
+    "southeast_asian_restaurant",
+    "thai_restaurant"
+   ],
+   "life": "third_places",
+   "n": 22
+  },
+  {
+   "category": "agriculture",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_agriculture_service",
+    "agriculture"
+   ],
+   "life": "unclassified",
+   "n": 21
+  },
+  {
+   "category": "car_rental_service",
+   "hierarchy": [
+    "services_and_business",
+    "real_estate",
+    "real_estate_service",
+    "rental_service",
+    "vehicle_rental_service",
+    "car_rental_service"
+   ],
+   "life": "unclassified",
+   "n": 21
+  },
+  {
+   "category": "charity_organization",
+   "hierarchy": [
+    "community_and_government",
+    "civic_organization",
+    "charity_organization"
+   ],
+   "life": "anchors",
+   "n": 21
+  },
+  {
+   "category": "delicatessen",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "delicatessen"
+   ],
+   "life": "third_places",
+   "n": 21
+  },
+  {
+   "category": "fabric_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "arts_crafts_and_hobby_store",
+    "fabric_store"
+   ],
+   "life": "display",
+   "n": 21
+  },
+  {
+   "category": "office_supply_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "office_supply_store"
+   ],
+   "life": "display",
+   "n": 21
+  },
+  {
+   "category": "ramen_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "asian_restaurant",
+    "ramen_restaurant"
+   ],
+   "life": "third_places",
+   "n": 21
+  },
+  {
+   "category": "auto_detailing",
+   "hierarchy": [
+    "travel_and_transportation",
+    "vehicle_service",
+    "automotive_service",
+    "auto_detailing"
+   ],
+   "life": "sustenance",
+   "n": 20
+  },
+  {
+   "category": "b2b_advertising_and_marketing_service",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_office_and_professional_service",
+    "b2b_advertising_and_marketing_service"
+   ],
+   "life": "unclassified",
+   "n": 20
+  },
+  {
+   "category": "home_developer",
+   "hierarchy": [
+    "services_and_business",
+    "real_estate_service",
+    "builder",
+    "home_developer"
+   ],
+   "life": "unclassified",
+   "n": 20
+  },
+  {
+   "category": "lighting_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "hardware_home_and_garden_store",
+    "lighting_store"
+   ],
+   "life": "display",
+   "n": 20
+  },
+  {
+   "category": "real_estate_investment",
+   "hierarchy": [
+    "services_and_business",
+    "financial_service",
+    "real_estate_investment"
+   ],
+   "life": "sustenance",
+   "n": 20
+  },
+  {
+   "category": "tutoring_service",
+   "hierarchy": [
+    "education",
+    "educational_service",
+    "tutoring_service"
+   ],
+   "life": "anchors",
+   "n": 20
+  },
+  {
+   "category": "beauty_product_supplier",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "supplier_or_distributor",
+    "beauty_product_supplier"
+   ],
+   "life": "unclassified",
+   "n": 19
+  },
+  {
+   "category": "camera_and_photography_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "electronics_store",
+    "camera_and_photography_store"
+   ],
+   "life": "display",
+   "n": 19
+  },
+  {
+   "category": "community_and_government",
+   "hierarchy": [
+    "community_and_government"
+   ],
+   "life": "anchors",
+   "n": 19
+  },
+  {
+   "category": "internet_service_provider",
+   "hierarchy": [
+    "services_and_business",
+    "technical_service",
+    "internet_service_provider"
+   ],
+   "life": "unclassified",
+   "n": 19
+  },
+  {
+   "category": "theme_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "theme_restaurant"
+   ],
+   "life": "third_places",
+   "n": 19
+  },
+  {
+   "category": "elevator_service",
+   "hierarchy": [
+    "services_and_business",
+    "technical_service",
+    "elevator_service"
+   ],
+   "life": "unclassified",
+   "n": 18
+  },
+  {
+   "category": "holiday_rental_home",
+   "hierarchy": [
+    "lodging",
+    "private_lodging",
+    "holiday_rental_home"
+   ],
+   "life": "display",
+   "n": 18
+  },
+  {
+   "category": "internet_cafe",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "cafe",
+    "internet_cafe"
+   ],
+   "life": "third_places",
+   "n": 18
+  },
+  {
+   "category": "physical_therapy",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "physical_medicine_and_rehabilitation",
+    "physical_therapy"
+   ],
+   "life": "sustenance",
+   "n": 18
+  },
+  {
+   "category": "pizza_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "european_restaurant",
+    "mediterranean_restaurant",
+    "italian_restaurant",
+    "pizza_restaurant"
+   ],
+   "life": "third_places",
+   "n": 18
+  },
+  {
+   "category": "accountant",
+   "hierarchy": [
+    "services_and_business",
+    "financial_service",
+    "accountant"
+   ],
+   "life": "sustenance",
+   "n": 17
+  },
+  {
+   "category": "agricultural_service",
+   "hierarchy": [
+    "services_and_business",
+    "agricultural_service"
+   ],
+   "life": "unclassified",
+   "n": 17
+  },
+  {
+   "category": "butcher_shop",
+   "hierarchy": [
+    "shopping",
+    "food_and_beverage_store",
+    "butcher_shop"
+   ],
+   "life": "sustenance",
+   "n": 17
+  },
+  {
+   "category": "day_care_preschool",
+   "hierarchy": [
+    "services_and_business",
+    "family_service",
+    "child_care_and_day_care",
+    "day_care_preschool"
+   ],
+   "life": "unclassified",
+   "n": 17
+  },
+  {
+   "category": "family_practice",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "primary_care_or_general_clinic",
+    "family_practice"
+   ],
+   "life": "sustenance",
+   "n": 17
+  },
+  {
+   "category": "fashion_boutique",
+   "hierarchy": [
+    "shopping",
+    "fashion_and_apparel_store",
+    "fashion_boutique"
+   ],
+   "life": "display",
+   "n": 17
+  },
+  {
+   "category": "metal_supplier",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "supplier_or_distributor",
+    "metal_supplier"
+   ],
+   "life": "unclassified",
+   "n": 17
+  },
+  {
+   "category": "shipping_center",
+   "hierarchy": [
+    "services_and_business",
+    "shipping_or_delivery_service",
+    "shipping_center"
+   ],
+   "life": "sustenance",
+   "n": 17
+  },
+  {
+   "category": "b2b_science_and_technology_service",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_science_and_technology_service"
+   ],
+   "life": "unclassified",
+   "n": 16
+  },
+  {
+   "category": "bank",
+   "hierarchy": [
+    "services_and_business",
+    "financial_service",
+    "bank_or_credit_union",
+    "bank"
+   ],
+   "life": "sustenance",
+   "n": 16
+  },
+  {
+   "category": "dance_studio",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "dance_studio"
+   ],
+   "life": "display",
+   "n": 16
+  },
+  {
+   "category": "lounge",
+   "hierarchy": [
+    "food_and_drink",
+    "alcoholic_beverage_venue",
+    "lounge"
+   ],
+   "life": "third_places",
+   "n": 16
+  },
+  {
+   "category": "media_news_company",
+   "hierarchy": [
+    "services_and_business",
+    "media_service",
+    "media_news_company"
+   ],
+   "life": "unclassified",
+   "n": 16
+  },
+  {
+   "category": "medical_service_organization",
+   "hierarchy": [
+    "health_care",
+    "medical_service",
+    "medical_service_organization"
+   ],
+   "life": "sustenance",
+   "n": 16
+  },
+  {
+   "category": "pilates_studio",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "fitness_studio",
+    "pilates_studio"
+   ],
+   "life": "display",
+   "n": 16
+  },
+  {
+   "category": "shoe_repair",
+   "hierarchy": [
+    "lifestyle_services",
+    "personal_or_beauty_service",
+    "shoe_repair"
+   ],
+   "life": "display",
+   "n": 16
+  },
+  {
+   "category": "solar_installation",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "solar_installation"
+   ],
+   "life": "unclassified",
+   "n": 16
+  },
+  {
+   "category": "stadium_arena",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "stadium_arena"
+   ],
+   "life": "display",
+   "n": 16
+  },
+  {
+   "category": "airline",
+   "hierarchy": [
+    "travel_and_transportation",
+    "air_transport_facility_or_service",
+    "airline"
+   ],
+   "life": "anchors",
+   "n": 15
+  },
+  {
+   "category": "appliance_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "hardware_home_and_garden_store",
+    "appliance_store"
+   ],
+   "life": "display",
+   "n": 15
+  },
+  {
+   "category": "b2b_surgical_appliances_and_supplies",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_medical_support_service",
+    "b2b_surgical_appliances_and_supplies"
+   ],
+   "life": "unclassified",
+   "n": 15
+  },
+  {
+   "category": "bike_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "sporting_goods_store",
+    "bike_store"
+   ],
+   "life": "display",
+   "n": 15
+  },
+  {
+   "category": "cupcake_shop",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "dessert_shop",
+    "cupcake_shop"
+   ],
+   "life": "third_places",
+   "n": 15
+  },
+  {
+   "category": "hostel",
+   "hierarchy": [
+    "lodging",
+    "hostel"
+   ],
+   "life": "display",
+   "n": 15
+  },
+  {
+   "category": "investing",
+   "hierarchy": [
+    "services_and_business",
+    "financial_service",
+    "investing"
+   ],
+   "life": "sustenance",
+   "n": 15
+  },
+  {
+   "category": "movie_theater",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "movie_theater"
+   ],
+   "life": "display",
+   "n": 15
+  },
+  {
+   "category": "pet_sitting",
+   "hierarchy": [
+    "lifestyle_services",
+    "animal_or_pet_service",
+    "pet_care_service",
+    "pet_sitting"
+   ],
+   "life": "display",
+   "n": 15
+  },
+  {
+   "category": "property_management",
+   "hierarchy": [
+    "services_and_business",
+    "real_estate_service",
+    "property_management"
+   ],
+   "life": "unclassified",
+   "n": 15
+  },
+  {
+   "category": "restaurant_equipment_and_supply",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "supplier_or_distributor",
+    "restaurant_equipment_and_supply"
+   ],
+   "life": "unclassified",
+   "n": 15
+  },
+  {
+   "category": "swimming_pool",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "swimming_pool"
+   ],
+   "life": "display",
+   "n": 15
+  },
+  {
+   "category": "travel_company",
+   "hierarchy": [
+    "services_and_business",
+    "business",
+    "travel_company"
+   ],
+   "life": "unclassified",
+   "n": 15
+  },
+  {
+   "category": "beer_bar",
+   "hierarchy": [
+    "food_and_drink",
+    "alcoholic_beverage_venue",
+    "bar",
+    "beer_bar"
+   ],
+   "life": "third_places",
+   "n": 14
+  },
+  {
+   "category": "gas_station",
+   "hierarchy": [
+    "travel_and_transportation",
+    "fueling_station",
+    "gas_station"
+   ],
+   "life": "sustenance",
+   "n": 14
+  },
+  {
+   "category": "internet_marketing_service",
+   "hierarchy": [
+    "services_and_business",
+    "professional_service",
+    "internet_marketing_service"
+   ],
+   "life": "unclassified",
+   "n": 14
+  },
+  {
+   "category": "landscaping",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "landscaping"
+   ],
+   "life": "unclassified",
+   "n": 14
+  },
+  {
+   "category": "outpatient_care_facility",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility"
+   ],
+   "life": "sustenance",
+   "n": 14
+  },
+  {
+   "category": "print_media",
+   "hierarchy": [
+    "services_and_business",
+    "media_service",
+    "print_media"
+   ],
+   "life": "unclassified",
+   "n": 14
+  },
+  {
+   "category": "smoke_and_vape_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "smoke_and_vape_store"
+   ],
+   "life": "display",
+   "n": 14
+  },
+  {
+   "category": "soup_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "soup_restaurant"
+   ],
+   "life": "third_places",
+   "n": 14
+  },
+  {
+   "category": "sportswear_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "sporting_goods_store",
+    "sportswear_store"
+   ],
+   "life": "display",
+   "n": 14
+  },
+  {
+   "category": "doctor",
+   "hierarchy": [
+    "health_care",
+    "doctor"
+   ],
+   "life": "sustenance",
+   "n": 13
+  },
+  {
+   "category": "dry_cleaning",
+   "hierarchy": [
+    "services_and_business",
+    "laundry_service",
+    "dry_cleaning"
+   ],
+   "life": "sustenance",
+   "n": 13
+  },
+  {
+   "category": "fishmonger",
+   "hierarchy": [
+    "shopping",
+    "food_and_beverage_store",
+    "fishmonger"
+   ],
+   "life": "sustenance",
+   "n": 13
+  },
+  {
+   "category": "sewing_and_alterations",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "sewing_and_alterations"
+   ],
+   "life": "unclassified",
+   "n": 13
+  },
+  {
+   "category": "storage_facility",
+   "hierarchy": [
+    "services_and_business",
+    "storage_facility"
+   ],
+   "life": "unclassified",
+   "n": 13
+  },
+  {
+   "category": "b2b_energy_and_utility_service",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_energy_and_utility_service"
+   ],
+   "life": "unclassified",
+   "n": 12
+  },
+  {
+   "category": "bridge",
+   "hierarchy": [
+    "geographic_entities",
+    "built_feature",
+    "bridge"
+   ],
+   "life": "unclassified",
+   "n": 12
+  },
+  {
+   "category": "commercial_real_estate",
+   "hierarchy": [
+    "services_and_business",
+    "real_estate_service",
+    "commercial_real_estate"
+   ],
+   "life": "unclassified",
+   "n": 12
+  },
+  {
+   "category": "dermatology",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "specialized_health_care",
+    "medical_skin_care",
+    "dermatology"
+   ],
+   "life": "sustenance",
+   "n": 12
+  },
+  {
+   "category": "farm",
+   "hierarchy": [
+    "services_and_business",
+    "agricultural_service",
+    "farm"
+   ],
+   "life": "unclassified",
+   "n": 12
+  },
+  {
+   "category": "lottery_vendor",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "gaming_venue",
+    "lottery_vendor"
+   ],
+   "life": "third_places",
+   "n": 12
+  },
+  {
+   "category": "martial_arts_club",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_recreation_club",
+    "martial_arts_club"
+   ],
+   "life": "display",
+   "n": 12
+  },
+  {
+   "category": "pharmaceutical_company",
+   "hierarchy": [
+    "services_and_business",
+    "corporate_or_business_office",
+    "pharmaceutical_company"
+   ],
+   "life": "anchors",
+   "n": 12
+  },
+  {
+   "category": "roman_catholic_place_of_worship",
+   "hierarchy": [
+    "cultural_and_historic",
+    "religious_organization",
+    "place_of_worship",
+    "christian_place_of_worship",
+    "roman_catholic_place_of_worship"
+   ],
+   "life": "anchors",
+   "n": 12
+  },
+  {
+   "category": "bottled_water_company",
+   "hierarchy": [
+    "services_and_business",
+    "business",
+    "bottled_water_company"
+   ],
+   "life": "unclassified",
+   "n": 11
+  },
+  {
+   "category": "car_wash",
+   "hierarchy": [
+    "travel_and_transportation",
+    "vehicle_service",
+    "automotive_service",
+    "car_wash"
+   ],
+   "life": "sustenance",
+   "n": 11
+  },
+  {
+   "category": "employment_agency",
+   "hierarchy": [
+    "services_and_business",
+    "professional_service",
+    "employment_agency"
+   ],
+   "life": "unclassified",
+   "n": 11
+  },
+  {
+   "category": "environmental_conservation_organization",
+   "hierarchy": [
+    "services_and_business",
+    "environmental_or_ecological_service",
+    "environmental_conservation_organization"
+   ],
+   "life": "unclassified",
+   "n": 11
+  },
+  {
+   "category": "high_school",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "school",
+    "high_school"
+   ],
+   "life": "anchors",
+   "n": 11
+  },
+  {
+   "category": "hvac_service",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "hvac_service"
+   ],
+   "life": "unclassified",
+   "n": 11
+  },
+  {
+   "category": "rental_service",
+   "hierarchy": [
+    "services_and_business",
+    "real_estate",
+    "real_estate_service",
+    "rental_service"
+   ],
+   "life": "unclassified",
+   "n": 11
+  },
+  {
+   "category": "video_game_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "books_music_and_video_store",
+    "video_game_store"
+   ],
+   "life": "display",
+   "n": 11
+  },
+  {
+   "category": "candy_store",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "candy_store"
+   ],
+   "life": "third_places",
+   "n": 10
+  },
+  {
+   "category": "carpet_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "hardware_home_and_garden_store",
+    "carpet_store"
+   ],
+   "life": "display",
+   "n": 10
+  },
+  {
+   "category": "computer_coaching",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "specialty_school",
+    "computer_coaching"
+   ],
+   "life": "anchors",
+   "n": 10
+  },
+  {
+   "category": "discount_store",
+   "hierarchy": [
+    "shopping",
+    "discount_store"
+   ],
+   "life": "display",
+   "n": 10
+  },
+  {
+   "category": "energy_company",
+   "hierarchy": [
+    "services_and_business",
+    "business",
+    "energy_company"
+   ],
+   "life": "unclassified",
+   "n": 10
+  },
+  {
+   "category": "home_security",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "home_security"
+   ],
+   "life": "unclassified",
+   "n": 10
+  },
+  {
+   "category": "janitorial_service",
+   "hierarchy": [
+    "services_and_business",
+    "professional_service",
+    "cleaning_service",
+    "janitorial_service"
+   ],
+   "life": "unclassified",
+   "n": 10
+  },
+  {
+   "category": "lingerie_store",
+   "hierarchy": [
+    "shopping",
+    "fashion_and_apparel_store",
+    "clothing_store",
+    "lingerie_store"
+   ],
+   "life": "display",
+   "n": 10
+  },
+  {
+   "category": "media_service",
+   "hierarchy": [
+    "services_and_business",
+    "media_service"
+   ],
+   "life": "unclassified",
+   "n": 10
+  },
+  {
+   "category": "movie_television_studio",
+   "hierarchy": [
+    "services_and_business",
+    "media_service",
+    "media_news_company",
+    "movie_television_studio"
+   ],
+   "life": "unclassified",
+   "n": 10
+  },
+  {
+   "category": "nutrition_service",
+   "hierarchy": [
+    "lifestyle_services",
+    "wellness_service",
+    "nutrition_service"
+   ],
+   "life": "display",
+   "n": 10
+  },
+  {
+   "category": "obstetrics_and_gynecology",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "reproductive_perinatal_and_womens_care",
+    "obstetrics_and_gynecology"
+   ],
+   "life": "sustenance",
+   "n": 10
+  },
+  {
+   "category": "steakhouse",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "meat_restaurant",
+    "steakhouse"
+   ],
+   "life": "third_places",
+   "n": 10
+  },
+  {
+   "category": "badminton_court",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "sport_court",
+    "badminton_court"
+   ],
+   "life": "display",
+   "n": 9
+  },
+  {
+   "category": "behavioral_or_mental_health_clinic",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "behavioral_or_mental_health_clinic"
+   ],
+   "life": "sustenance",
+   "n": 9
+  },
+  {
+   "category": "post_office",
+   "hierarchy": [
+    "services_and_business",
+    "shipping_or_delivery_service",
+    "post_office"
+   ],
+   "life": "sustenance",
+   "n": 9
+  },
+  {
+   "category": "psychology",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "behavioral_or_mental_health_clinic",
+    "psychiatry_or_psychology_service",
+    "psychology"
+   ],
+   "life": "sustenance",
+   "n": 9
+  },
+  {
+   "category": "second_hand_store",
+   "hierarchy": [
+    "shopping",
+    "second_hand_store"
+   ],
+   "life": "display",
+   "n": 9
+  },
+  {
+   "category": "television_service_provider",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "television_service_provider"
+   ],
+   "life": "unclassified",
+   "n": 9
+  },
+  {
+   "category": "cooking_school",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "specialty_school",
+    "cooking_school"
+   ],
+   "life": "anchors",
+   "n": 8
+  },
+  {
+   "category": "educational_research_institute",
+   "hierarchy": [
+    "education",
+    "research_institute",
+    "educational_research_institute"
+   ],
+   "life": "anchors",
+   "n": 8
+  },
+  {
+   "category": "fishing_club",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_recreation_club",
+    "fishing_club"
+   ],
+   "life": "display",
+   "n": 8
+  },
+  {
+   "category": "food_delivery_service",
+   "hierarchy": [
+    "lifestyle_services",
+    "food_service",
+    "food_delivery_service"
+   ],
+   "life": "display",
+   "n": 8
+  },
+  {
+   "category": "french_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "european_restaurant",
+    "western_european_restaurant",
+    "french_restaurant"
+   ],
+   "life": "third_places",
+   "n": 8
+  },
+  {
+   "category": "funeral_service",
+   "hierarchy": [
+    "services_and_business",
+    "family_service",
+    "funeral_service"
+   ],
+   "life": "unclassified",
+   "n": 8
+  },
+  {
+   "category": "hardware_home_and_garden_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "hardware_home_and_garden_store"
+   ],
+   "life": "display",
+   "n": 8
+  },
+  {
+   "category": "immigration_law",
+   "hierarchy": [
+    "services_and_business",
+    "legal_service",
+    "attorney_or_law_firm",
+    "immigration_law"
+   ],
+   "life": "unclassified",
+   "n": 8
+  },
+  {
+   "category": "installment_loans",
+   "hierarchy": [
+    "services_and_business",
+    "financial_service",
+    "installment_loans"
+   ],
+   "life": "sustenance",
+   "n": 8
+  },
+  {
+   "category": "library",
+   "hierarchy": [
+    "education",
+    "library"
+   ],
+   "life": "anchors",
+   "n": 8
+  },
+  {
+   "category": "massage_therapy",
+   "hierarchy": [
+    "lifestyle_services",
+    "wellness_service",
+    "massage_therapy"
+   ],
+   "life": "display",
+   "n": 8
+  },
+  {
+   "category": "merchandising_service",
+   "hierarchy": [
+    "services_and_business",
+    "professional_service",
+    "merchandising_service"
+   ],
+   "life": "unclassified",
+   "n": 8
+  },
+  {
+   "category": "optometry",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "vision_or_eye_care_clinic",
+    "optometry"
+   ],
+   "life": "sustenance",
+   "n": 8
+  },
+  {
+   "category": "political_organization",
+   "hierarchy": [
+    "community_and_government",
+    "civic_organization",
+    "political_organization"
+   ],
+   "life": "anchors",
+   "n": 8
+  },
+  {
+   "category": "record_label",
+   "hierarchy": [
+    "services_and_business",
+    "media_service",
+    "record_label"
+   ],
+   "life": "unclassified",
+   "n": 8
+  },
+  {
+   "category": "resort",
+   "hierarchy": [
+    "lodging",
+    "resort"
+   ],
+   "life": "display",
+   "n": 8
+  },
+  {
+   "category": "sign_making",
+   "hierarchy": [
+    "services_and_business",
+    "design_service",
+    "sign_making"
+   ],
+   "life": "unclassified",
+   "n": 8
+  },
+  {
+   "category": "specialty_school",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "specialty_school"
+   ],
+   "life": "anchors",
+   "n": 8
+  },
+  {
+   "category": "t_shirt_printing_service",
+   "hierarchy": [
+    "services_and_business",
+    "printing_service",
+    "screen_printing_service",
+    "t_shirt_printing_service"
+   ],
+   "life": "unclassified",
+   "n": 8
+  },
+  {
+   "category": "trusts",
+   "hierarchy": [
+    "services_and_business",
+    "financial_service",
+    "trusts"
+   ],
+   "life": "sustenance",
+   "n": 8
+  },
+  {
+   "category": "used_auto_dealer",
+   "hierarchy": [
+    "shopping",
+    "vehicle_dealer",
+    "auto_dealer",
+    "used_auto_dealer"
+   ],
+   "life": "display",
+   "n": 8
+  },
+  {
+   "category": "youth_organization",
+   "hierarchy": [
+    "community_and_government",
+    "social_or_community_service",
+    "youth_organization"
+   ],
+   "life": "anchors",
+   "n": 8
+  },
+  {
+   "category": "auto_company",
+   "hierarchy": [
+    "services_and_business",
+    "corporate_or_business_office",
+    "auto_company"
+   ],
+   "life": "anchors",
+   "n": 7
+  },
+  {
+   "category": "bartending_school",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "specialty_school",
+    "bartending_school"
+   ],
+   "life": "anchors",
+   "n": 7
+  },
+  {
+   "category": "boxing_class",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "boxing_class"
+   ],
+   "life": "display",
+   "n": 7
+  },
+  {
+   "category": "broker",
+   "hierarchy": [
+    "services_and_business",
+    "financial_service",
+    "broker"
+   ],
+   "life": "sustenance",
+   "n": 7
+  },
+  {
+   "category": "buffet_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "buffet_restaurant"
+   ],
+   "life": "third_places",
+   "n": 7
+  },
+  {
+   "category": "electronic_equipment_supplier",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "supplier_or_distributor",
+    "electronic_equipment_supplier"
+   ],
+   "life": "unclassified",
+   "n": 7
+  },
+  {
+   "category": "environmental_or_ecological_service",
+   "hierarchy": [
+    "services_and_business",
+    "environmental_or_ecological_service"
+   ],
+   "life": "unclassified",
+   "n": 7
+  },
+  {
+   "category": "fitness_trainer",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "fitness_trainer"
+   ],
+   "life": "display",
+   "n": 7
+  },
+  {
+   "category": "gift_shop",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "flowers_and_gifts_store",
+    "gift_shop"
+   ],
+   "life": "display",
+   "n": 7
+  },
+  {
+   "category": "health_food_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "special_diet_restaurant",
+    "health_food_restaurant"
+   ],
+   "life": "third_places",
+   "n": 7
+  },
+  {
+   "category": "italian_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "european_restaurant",
+    "mediterranean_restaurant",
+    "italian_restaurant"
+   ],
+   "life": "third_places",
+   "n": 7
+  },
+  {
+   "category": "machine_shop",
+   "hierarchy": [
+    "services_and_business",
+    "technical_service",
+    "machine_shop"
+   ],
+   "life": "unclassified",
+   "n": 7
+  },
+  {
+   "category": "occupational_safety",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_industrial_and_machine_service",
+    "occupational_safety"
+   ],
+   "life": "unclassified",
+   "n": 7
+  },
+  {
+   "category": "parking",
+   "hierarchy": [
+    "travel_and_transportation",
+    "parking"
+   ],
+   "life": "anchors",
+   "n": 7
+  },
+  {
+   "category": "psychic_advising",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "spiritual_advising",
+    "psychic_advising"
+   ],
+   "life": "display",
+   "n": 7
+  },
+  {
+   "category": "tire_dealer_and_repair",
+   "hierarchy": [
+    "travel_and_transportation",
+    "vehicle_service",
+    "automotive_service",
+    "automotive_repair",
+    "tire_dealer_and_repair"
+   ],
+   "life": "sustenance",
+   "n": 7
+  },
+  {
+   "category": "windows_installation",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "windows_installation"
+   ],
+   "life": "unclassified",
+   "n": 7
+  },
+  {
+   "category": "appliance_manufacturer",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "manufacturer",
+    "appliance_manufacturer"
+   ],
+   "life": "unclassified",
+   "n": 6
+  },
+  {
+   "category": "aromatherapy",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "complementary_and_alternative_medicine",
+    "aromatherapy"
+   ],
+   "life": "sustenance",
+   "n": 6
+  },
+  {
+   "category": "b2b_business_management_service",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_office_and_professional_service",
+    "b2b_business_management_service"
+   ],
+   "life": "unclassified",
+   "n": 6
+  },
+  {
+   "category": "credit_union",
+   "hierarchy": [
+    "services_and_business",
+    "financial_service",
+    "bank_or_credit_union",
+    "credit_union"
+   ],
+   "life": "sustenance",
+   "n": 6
+  },
+  {
+   "category": "frozen_yogurt_shop",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "dessert_shop",
+    "frozen_yogurt_shop"
+   ],
+   "life": "third_places",
+   "n": 6
+  },
+  {
+   "category": "furniture_assembly",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "furniture_assembly"
+   ],
+   "life": "unclassified",
+   "n": 6
+  },
+  {
+   "category": "gymnastics_center",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "gymnastics_center"
+   ],
+   "life": "display",
+   "n": 6
+  },
+  {
+   "category": "hobby_shop",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "arts_crafts_and_hobby_store",
+    "hobby_shop"
+   ],
+   "life": "display",
+   "n": 6
+  },
+  {
+   "category": "hunting_and_fishing_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "sporting_goods_store",
+    "hunting_and_fishing_store"
+   ],
+   "life": "display",
+   "n": 6
+  },
+  {
+   "category": "lake",
+   "hierarchy": [
+    "geographic_entities",
+    "water_feature",
+    "lake"
+   ],
+   "life": "unclassified",
+   "n": 6
+  },
+  {
+   "category": "medical_supply_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "medical_supply_store"
+   ],
+   "life": "display",
+   "n": 6
+  },
+  {
+   "category": "metal_fabricator",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "manufacturer",
+    "metal_fabricator"
+   ],
+   "life": "unclassified",
+   "n": 6
+  },
+  {
+   "category": "non_governmental_association",
+   "hierarchy": [
+    "community_and_government",
+    "civic_organization",
+    "non_governmental_association"
+   ],
+   "life": "anchors",
+   "n": 6
+  },
+  {
+   "category": "outdoor_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "sporting_goods_store",
+    "outdoor_store"
+   ],
+   "life": "display",
+   "n": 6
+  },
+  {
+   "category": "soccer_field",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "sport_field",
+    "soccer_field"
+   ],
+   "life": "display",
+   "n": 6
+  },
+  {
+   "category": "uniform_store",
+   "hierarchy": [
+    "shopping",
+    "fashion_and_apparel_store",
+    "clothing_store",
+    "uniform_store"
+   ],
+   "life": "display",
+   "n": 6
+  },
+  {
+   "category": "wine_bar",
+   "hierarchy": [
+    "food_and_drink",
+    "alcoholic_beverage_venue",
+    "bar",
+    "wine_bar"
+   ],
+   "life": "third_places",
+   "n": 6
+  },
+  {
+   "category": "agricultural_cooperative",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_agriculture_service",
+    "agricultural_cooperative"
+   ],
+   "life": "unclassified",
+   "n": 5
+  },
+  {
+   "category": "apparel_manufacturer",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "manufacturer",
+    "apparel_manufacturer"
+   ],
+   "life": "unclassified",
+   "n": 5
+  },
+  {
+   "category": "arcade",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "gaming_venue",
+    "arcade"
+   ],
+   "life": "third_places",
+   "n": 5
+  },
+  {
+   "category": "automotive_consultant",
+   "hierarchy": [
+    "travel_and_transportation",
+    "vehicle_service",
+    "automotive_service",
+    "automotive_consultant"
+   ],
+   "life": "sustenance",
+   "n": 5
+  },
+  {
+   "category": "b2b_water_treatment_service",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_environmental_service",
+    "b2b_water_treatment_service"
+   ],
+   "life": "unclassified",
+   "n": 5
+  },
+  {
+   "category": "bus_station",
+   "hierarchy": [
+    "travel_and_transportation",
+    "ground_transport_facility_or_service",
+    "public_transit_facility_or_service",
+    "bus_station"
+   ],
+   "life": "anchors",
+   "n": 5
+  },
+  {
+   "category": "clothing_company",
+   "hierarchy": [
+    "services_and_business",
+    "business",
+    "clothing_company"
+   ],
+   "life": "unclassified",
+   "n": 5
+  },
+  {
+   "category": "countertop_installation",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "countertop_installation"
+   ],
+   "life": "unclassified",
+   "n": 5
+  },
+  {
+   "category": "cultural_center",
+   "hierarchy": [
+    "cultural_and_historic",
+    "cultural_center"
+   ],
+   "life": "anchors",
+   "n": 5
+  },
+  {
+   "category": "farmers_market",
+   "hierarchy": [
+    "shopping",
+    "market",
+    "farmers_market"
+   ],
+   "life": "sustenance",
+   "n": 5
+  },
+  {
+   "category": "flea_market",
+   "hierarchy": [
+    "shopping",
+    "second_hand_store",
+    "flea_market"
+   ],
+   "life": "display",
+   "n": 5
+  },
+  {
+   "category": "hair_removal",
+   "hierarchy": [
+    "lifestyle_services",
+    "personal_or_beauty_service",
+    "hair_removal"
+   ],
+   "life": "display",
+   "n": 5
+  },
+  {
+   "category": "hat_store",
+   "hierarchy": [
+    "shopping",
+    "fashion_and_apparel_store",
+    "fashion_accessories_store",
+    "hat_store"
+   ],
+   "life": "display",
+   "n": 5
+  },
+  {
+   "category": "hotel_supply_service",
+   "hierarchy": [
+    "services_and_business",
+    "business",
+    "hotel_supply_service"
+   ],
+   "life": "unclassified",
+   "n": 5
+  },
+  {
+   "category": "labor_union",
+   "hierarchy": [
+    "community_and_government",
+    "civic_organization",
+    "labor_union"
+   ],
+   "life": "anchors",
+   "n": 5
+  },
+  {
+   "category": "medical_spa",
+   "hierarchy": [
+    "lifestyle_services",
+    "wellness_service",
+    "spa",
+    "medical_spa"
+   ],
+   "life": "display",
+   "n": 5
+  },
+  {
+   "category": "pediatric_clinic",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "pediatric_clinic"
+   ],
+   "life": "sustenance",
+   "n": 5
+  },
+  {
+   "category": "pet_groomer",
+   "hierarchy": [
+    "lifestyle_services",
+    "animal_or_pet_service",
+    "pet_care_service",
+    "pet_groomer"
+   ],
+   "life": "display",
+   "n": 5
+  },
+  {
+   "category": "plastic_and_reconstructive_surgery",
+   "hierarchy": [
+    "health_care",
+    "specialized_medical_facility",
+    "surgery",
+    "plastic_and_reconstructive_surgery"
+   ],
+   "life": "sustenance",
+   "n": 5
+  },
+  {
+   "category": "playground",
+   "hierarchy": [
+    "sports_and_recreation",
+    "park",
+    "playground"
+   ],
+   "life": "third_places",
+   "n": 5
+  },
+  {
+   "category": "superstore",
+   "hierarchy": [
+    "shopping",
+    "superstore"
+   ],
+   "life": "display",
+   "n": 5
+  },
+  {
+   "category": "swimming_instructor",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "swimming_pool",
+    "swimming_instructor"
+   ],
+   "life": "display",
+   "n": 5
+  },
+  {
+   "category": "swimwear_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "sporting_goods_store",
+    "swimwear_store"
+   ],
+   "life": "display",
+   "n": 5
+  },
+  {
+   "category": "translating_and_interpreting_service",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_office_and_professional_service",
+    "translating_and_interpreting_service"
+   ],
+   "life": "unclassified",
+   "n": 5
+  },
+  {
+   "category": "videographer",
+   "hierarchy": [
+    "services_and_business",
+    "event_or_party_service",
+    "videographer"
+   ],
+   "life": "unclassified",
+   "n": 5
+  },
+  {
+   "category": "vision_or_eye_care_clinic",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "vision_or_eye_care_clinic"
+   ],
+   "life": "sustenance",
+   "n": 5
+  },
+  {
+   "category": "weight_loss_center",
+   "hierarchy": [
+    "lifestyle_services",
+    "wellness_service",
+    "weight_loss_center"
+   ],
+   "life": "display",
+   "n": 5
+  },
+  {
+   "category": "american_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "north_american_restaurant",
+    "american_restaurant"
+   ],
+   "life": "third_places",
+   "n": 4
+  },
+  {
+   "category": "b2b_marketing_consultant",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_office_and_professional_service",
+    "b2b_advertising_and_marketing_service",
+    "b2b_marketing_consultant"
+   ],
+   "life": "unclassified",
+   "n": 4
+  },
+  {
+   "category": "bar_and_grill_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "bar_and_grill_restaurant"
+   ],
+   "life": "third_places",
+   "n": 4
+  },
+  {
+   "category": "dance_club",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "nightlife_venue",
+    "dance_club"
+   ],
+   "life": "third_places",
+   "n": 4
+  },
+  {
+   "category": "educational_camp",
+   "hierarchy": [
+    "education",
+    "educational_facility",
+    "educational_camp"
+   ],
+   "life": "anchors",
+   "n": 4
+  },
+  {
+   "category": "electric_utility_provider",
+   "hierarchy": [
+    "community_and_government",
+    "public_utility",
+    "electric_utility_provider"
+   ],
+   "life": "anchors",
+   "n": 4
+  },
+  {
+   "category": "employment_law",
+   "hierarchy": [
+    "services_and_business",
+    "legal_service",
+    "attorney_or_law_firm",
+    "employment_law"
+   ],
+   "life": "unclassified",
+   "n": 4
+  },
+  {
+   "category": "gardener",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "landscaping",
+    "gardener"
+   ],
+   "life": "unclassified",
+   "n": 4
+  },
+  {
+   "category": "glass_and_mirror_sales_service",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "glass_and_mirror_sales_service"
+   ],
+   "life": "unclassified",
+   "n": 4
+  },
+  {
+   "category": "inn",
+   "hierarchy": [
+    "lodging",
+    "inn"
+   ],
+   "life": "display",
+   "n": 4
+  },
+  {
+   "category": "media_news_website",
+   "hierarchy": [
+    "services_and_business",
+    "media_service",
+    "media_news_website"
+   ],
+   "life": "unclassified",
+   "n": 4
+  },
+  {
+   "category": "middle_school",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "school",
+    "middle_school"
+   ],
+   "life": "anchors",
+   "n": 4
+  },
+  {
+   "category": "motorsports_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "vehicle_parts_store",
+    "motorsports_store"
+   ],
+   "life": "sustenance",
+   "n": 4
+  },
+  {
+   "category": "naturopathic_medicine",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "complementary_and_alternative_medicine",
+    "naturopathic_medicine"
+   ],
+   "life": "sustenance",
+   "n": 4
+  },
+  {
+   "category": "outlet_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "outlet_store"
+   ],
+   "life": "display",
+   "n": 4
+  },
+  {
+   "category": "painting",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "painting"
+   ],
+   "life": "unclassified",
+   "n": 4
+  },
+  {
+   "category": "pest_control_service",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "pest_control_service"
+   ],
+   "life": "unclassified",
+   "n": 4
+  },
+  {
+   "category": "plastic_manufacturer",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "manufacturer",
+    "plastic_manufacturer"
+   ],
+   "life": "unclassified",
+   "n": 4
+  },
+  {
+   "category": "plumbing",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "plumbing"
+   ],
+   "life": "unclassified",
+   "n": 4
+  },
+  {
+   "category": "second_hand_clothing_store",
+   "hierarchy": [
+    "shopping",
+    "second_hand_store",
+    "second_hand_clothing_store"
+   ],
+   "life": "display",
+   "n": 4
+  },
+  {
+   "category": "sightseeing_tour_agency",
+   "hierarchy": [
+    "travel_and_transportation",
+    "travel_service",
+    "tour_operator",
+    "sightseeing_tour_agency"
+   ],
+   "life": "display",
+   "n": 4
+  },
+  {
+   "category": "tobacco_shop",
+   "hierarchy": [
+    "shopping",
+    "food_and_beverage_store",
+    "tobacco_shop"
+   ],
+   "life": "sustenance",
+   "n": 4
+  },
+  {
+   "category": "traffic_school",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "specialty_school",
+    "traffic_school"
+   ],
+   "life": "anchors",
+   "n": 4
+  },
+  {
+   "category": "truck_dealer",
+   "hierarchy": [
+    "shopping",
+    "vehicle_dealer",
+    "truck_dealer"
+   ],
+   "life": "display",
+   "n": 4
+  },
+  {
+   "category": "water_utility_provider",
+   "hierarchy": [
+    "community_and_government",
+    "public_utility",
+    "water_utility_provider"
+   ],
+   "life": "anchors",
+   "n": 4
+  },
+  {
+   "category": "acupuncture",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "complementary_and_alternative_medicine",
+    "acupuncture"
+   ],
+   "life": "sustenance",
+   "n": 3
+  },
+  {
+   "category": "amusement_park",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "amusement_attraction",
+    "amusement_park"
+   ],
+   "life": "display",
+   "n": 3
+  },
+  {
+   "category": "auto_customization",
+   "hierarchy": [
+    "travel_and_transportation",
+    "vehicle_service",
+    "automotive_service",
+    "auto_customization"
+   ],
+   "life": "sustenance",
+   "n": 3
+  },
+  {
+   "category": "auto_leasing",
+   "hierarchy": [
+    "shopping",
+    "vehicle_dealer",
+    "auto_dealer",
+    "auto_leasing"
+   ],
+   "life": "display",
+   "n": 3
+  },
+  {
+   "category": "b2b_service",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service"
+   ],
+   "life": "unclassified",
+   "n": 3
+  },
+  {
+   "category": "biotechnology_company",
+   "hierarchy": [
+    "services_and_business",
+    "business",
+    "biotechnology_company"
+   ],
+   "life": "unclassified",
+   "n": 3
+  },
+  {
+   "category": "burger_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "meat_restaurant",
+    "burger_restaurant"
+   ],
+   "life": "third_places",
+   "n": 3
+  },
+  {
+   "category": "carpenter",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "carpenter"
+   ],
+   "life": "unclassified",
+   "n": 3
+  },
+  {
+   "category": "chocolatier",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "candy_store",
+    "chocolatier"
+   ],
+   "life": "third_places",
+   "n": 3
+  },
+  {
+   "category": "condominium",
+   "hierarchy": [
+    "services_and_business",
+    "housing_or_property_service",
+    "condominium"
+   ],
+   "life": "unclassified",
+   "n": 3
+  },
+  {
+   "category": "damage_restoration",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "damage_restoration"
+   ],
+   "life": "unclassified",
+   "n": 3
+  },
+  {
+   "category": "dim_sum_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "asian_restaurant",
+    "east_asian_restaurant",
+    "chinese_restaurant",
+    "dim_sum_restaurant"
+   ],
+   "life": "third_places",
+   "n": 3
+  },
+  {
+   "category": "driving_range",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "golf_course",
+    "driving_range"
+   ],
+   "life": "display",
+   "n": 3
+  },
+  {
+   "category": "educational_supply_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "educational_supply_store"
+   ],
+   "life": "display",
+   "n": 3
+  },
+  {
+   "category": "fish_farm",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_agriculture_service",
+    "fish_farm_hatchery",
+    "fish_farm"
+   ],
+   "life": "unclassified",
+   "n": 3
+  },
+  {
+   "category": "food_consultant",
+   "hierarchy": [
+    "lifestyle_services",
+    "food_service",
+    "food_consultant"
+   ],
+   "life": "display",
+   "n": 3
+  },
+  {
+   "category": "football_stadium",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "stadium_arena",
+    "stadium",
+    "football_stadium"
+   ],
+   "life": "display",
+   "n": 3
+  },
+  {
+   "category": "gastropub",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "gastropub"
+   ],
+   "life": "third_places",
+   "n": 3
+  },
+  {
+   "category": "home_health_care",
+   "hierarchy": [
+    "health_care",
+    "medical_service",
+    "home_health_care"
+   ],
+   "life": "sustenance",
+   "n": 3
+  },
+  {
+   "category": "key_and_locksmith",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "key_and_locksmith"
+   ],
+   "life": "unclassified",
+   "n": 3
+  },
+  {
+   "category": "life_coach",
+   "hierarchy": [
+    "lifestyle_services",
+    "personal_or_beauty_service",
+    "life_coach"
+   ],
+   "life": "display",
+   "n": 3
+  },
+  {
+   "category": "masonry_concrete",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "masonry_concrete"
+   ],
+   "life": "unclassified",
+   "n": 3
+  },
+  {
+   "category": "maternity_center",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "reproductive_perinatal_and_womens_care",
+    "maternity_center"
+   ],
+   "life": "sustenance",
+   "n": 3
+  },
+  {
+   "category": "meat_wholesaler",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "wholesaler",
+    "meat_wholesaler"
+   ],
+   "life": "unclassified",
+   "n": 3
+  },
+  {
+   "category": "medical_research_institute",
+   "hierarchy": [
+    "education",
+    "research_institute",
+    "medical_research_institute"
+   ],
+   "life": "anchors",
+   "n": 3
+  },
+  {
+   "category": "mexican_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "latin_american_restaurant",
+    "mexican_restaurant"
+   ],
+   "life": "third_places",
+   "n": 3
+  },
+  {
+   "category": "military_site",
+   "hierarchy": [
+    "community_and_government",
+    "military_site"
+   ],
+   "life": "anchors",
+   "n": 3
+  },
+  {
+   "category": "motel",
+   "hierarchy": [
+    "lodging",
+    "hotel",
+    "motel"
+   ],
+   "life": "display",
+   "n": 3
+  },
+  {
+   "category": "mountain_bike_trail",
+   "hierarchy": [
+    "sports_and_recreation",
+    "recreational_trail_or_path",
+    "mountain_bike_trail"
+   ],
+   "life": "display",
+   "n": 3
+  },
+  {
+   "category": "oil_change_station",
+   "hierarchy": [
+    "travel_and_transportation",
+    "vehicle_service",
+    "automotive_service",
+    "oil_change_station"
+   ],
+   "life": "sustenance",
+   "n": 3
+  },
+  {
+   "category": "pool_cleaning",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "pool_cleaning"
+   ],
+   "life": "unclassified",
+   "n": 3
+  },
+  {
+   "category": "psychotherapy",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "behavioral_or_mental_health_clinic",
+    "psychiatry_or_psychology_service",
+    "psychotherapy"
+   ],
+   "life": "sustenance",
+   "n": 3
+  },
+  {
+   "category": "reproductive_perinatal_and_womens_care",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "reproductive_perinatal_and_womens_care"
+   ],
+   "life": "sustenance",
+   "n": 3
+  },
+  {
+   "category": "salad_bar",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "salad_bar"
+   ],
+   "life": "third_places",
+   "n": 3
+  },
+  {
+   "category": "sandwich_shop",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "sandwich_shop"
+   ],
+   "life": "third_places",
+   "n": 3
+  },
+  {
+   "category": "soccer_stadium",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "stadium_arena",
+    "stadium",
+    "soccer_stadium"
+   ],
+   "life": "display",
+   "n": 3
+  },
+  {
+   "category": "tennis_court",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "sport_court",
+    "tennis_court"
+   ],
+   "life": "display",
+   "n": 3
+  },
+  {
+   "category": "textile_manufacturer",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "manufacturer",
+    "textile_manufacturer"
+   ],
+   "life": "unclassified",
+   "n": 3
+  },
+  {
+   "category": "wig_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "personal_care_and_beauty_store",
+    "beauty_supply_store",
+    "wig_store"
+   ],
+   "life": "display",
+   "n": 3
+  },
+  {
+   "category": "winery",
+   "hierarchy": [
+    "food_and_drink",
+    "alcoholic_beverage_venue",
+    "winery"
+   ],
+   "life": "third_places",
+   "n": 3
+  },
+  {
+   "category": "abuse_and_addiction_treatment_center",
+   "hierarchy": [
+    "health_care",
+    "specialized_medical_facility",
+    "abuse_and_addiction_treatment_center"
+   ],
+   "life": "sustenance",
+   "n": 2
+  },
+  {
+   "category": "african_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "african_restaurant"
+   ],
+   "life": "third_places",
+   "n": 2
+  },
+  {
+   "category": "amateur_sport_team",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_team",
+    "amateur_sport_team"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "antique_store",
+   "hierarchy": [
+    "shopping",
+    "second_hand_store",
+    "antique_store"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "aquarium",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "animal_attraction",
+    "aquarium"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "asian_fusion_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "international_fusion_restaurant",
+    "asian_fusion_restaurant"
+   ],
+   "life": "third_places",
+   "n": 2
+  },
+  {
+   "category": "auto_glass_service",
+   "hierarchy": [
+    "travel_and_transportation",
+    "vehicle_service",
+    "automotive_service",
+    "auto_glass_service"
+   ],
+   "life": "sustenance",
+   "n": 2
+  },
+  {
+   "category": "automation_service",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_industrial_and_machine_service",
+    "automation_service"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "b2b_promotional_products_and_services",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_office_and_professional_service",
+    "b2b_advertising_and_marketing_service",
+    "b2b_promotional_products_and_services"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "b2b_telemarketing_service",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_office_and_professional_service",
+    "b2b_advertising_and_marketing_service",
+    "b2b_telemarketing_service"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "beach",
+   "hierarchy": [
+    "geographic_entities",
+    "land_feature",
+    "beach"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "betting_center",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "gaming_venue",
+    "betting_center"
+   ],
+   "life": "third_places",
+   "n": 2
+  },
+  {
+   "category": "bike_repair_maintenance",
+   "hierarchy": [
+    "services_and_business",
+    "technical_service",
+    "bike_repair_maintenance"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "boat_dealer",
+   "hierarchy": [
+    "shopping",
+    "vehicle_dealer",
+    "boat_dealer"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "boat_parts_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "vehicle_parts_store",
+    "boat_parts_store"
+   ],
+   "life": "sustenance",
+   "n": 2
+  },
+  {
+   "category": "boat_service",
+   "hierarchy": [
+    "travel_and_transportation",
+    "vehicle_service",
+    "boat_service"
+   ],
+   "life": "sustenance",
+   "n": 2
+  },
+  {
+   "category": "campground",
+   "hierarchy": [
+    "lodging",
+    "campground"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "career_counseling",
+   "hierarchy": [
+    "services_and_business",
+    "professional_service",
+    "career_counseling"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "child_protection_service",
+   "hierarchy": [
+    "community_and_government",
+    "social_or_community_service",
+    "child_protection_service"
+   ],
+   "life": "anchors",
+   "n": 2
+  },
+  {
+   "category": "chiropractic",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "complementary_and_alternative_medicine",
+    "chiropractic"
+   ],
+   "life": "sustenance",
+   "n": 2
+  },
+  {
+   "category": "comic_books_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "books_music_and_video_store",
+    "bookstore",
+    "comic_books_store"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "cottage",
+   "hierarchy": [
+    "lodging",
+    "cottage"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "courthouse",
+   "hierarchy": [
+    "community_and_government",
+    "government_office",
+    "courthouse"
+   ],
+   "life": "anchors",
+   "n": 2
+  },
+  {
+   "category": "day_spa",
+   "hierarchy": [
+    "lifestyle_services",
+    "wellness_service",
+    "spa",
+    "day_spa"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "dj_service",
+   "hierarchy": [
+    "services_and_business",
+    "event_or_party_service",
+    "dj_service"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "dog_trainer",
+   "hierarchy": [
+    "lifestyle_services",
+    "animal_or_pet_service",
+    "pet_care_service",
+    "pet_training",
+    "dog_trainer"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "e_commerce_service",
+   "hierarchy": [
+    "services_and_business",
+    "professional_service",
+    "e_commerce_service"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "electrician",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "electrician"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "emergency_roadside_service",
+   "hierarchy": [
+    "travel_and_transportation",
+    "vehicle_service",
+    "automotive_service",
+    "emergency_roadside_service"
+   ],
+   "life": "sustenance",
+   "n": 2
+  },
+  {
+   "category": "fire_protection_service",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "fire_protection_service"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "fire_station",
+   "hierarchy": [
+    "community_and_government",
+    "public_safety_service",
+    "fire_station"
+   ],
+   "life": "anchors",
+   "n": 2
+  },
+  {
+   "category": "food_tour",
+   "hierarchy": [
+    "travel_and_transportation",
+    "travel_service",
+    "tour_operator",
+    "food_tour"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "game_publisher",
+   "hierarchy": [
+    "services_and_business",
+    "media_service",
+    "media_news_company",
+    "game_publisher"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "golf_instructor",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "golf_instructor"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "home_decor_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "hardware_home_and_garden_store",
+    "home_decor_store"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "hookah_bar",
+   "hierarchy": [
+    "food_and_drink",
+    "alcoholic_beverage_venue",
+    "bar",
+    "hookah_bar"
+   ],
+   "life": "third_places",
+   "n": 2
+  },
+  {
+   "category": "ice_skating_rink",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "skating_rink",
+    "ice_skating_rink"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "image_consultant",
+   "hierarchy": [
+    "lifestyle_services",
+    "personal_or_beauty_service",
+    "image_consultant"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "medical_school",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "specialty_school",
+    "medical_school"
+   ],
+   "life": "anchors",
+   "n": 2
+  },
+  {
+   "category": "meditation_center",
+   "hierarchy": [
+    "lifestyle_services",
+    "wellness_service",
+    "meditation_center"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "metal_material_expert",
+   "hierarchy": [
+    "services_and_business",
+    "building_or_construction_service",
+    "metal_material_expert"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "metro_station",
+   "hierarchy": [
+    "travel_and_transportation",
+    "ground_transport_facility_or_service",
+    "public_transit_facility_or_service",
+    "metro_station"
+   ],
+   "life": "anchors",
+   "n": 2
+  },
+  {
+   "category": "miniature_golf_course",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "miniature_golf_course"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "money_transfer_service",
+   "hierarchy": [
+    "services_and_business",
+    "financial_service",
+    "money_transfer_service"
+   ],
+   "life": "sustenance",
+   "n": 2
+  },
+  {
+   "category": "motorcycle_rental_service",
+   "hierarchy": [
+    "services_and_business",
+    "real_estate",
+    "real_estate_service",
+    "rental_service",
+    "vehicle_rental_service",
+    "motorcycle_rental_service"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "mover",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "mover"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "notary_public",
+   "hierarchy": [
+    "services_and_business",
+    "legal_service",
+    "notary_public"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "oncology",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "specialized_health_care",
+    "internal_medicine",
+    "oncology"
+   ],
+   "life": "sustenance",
+   "n": 2
+  },
+  {
+   "category": "orthodontics",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "dental_clinic",
+    "orthodontics"
+   ],
+   "life": "sustenance",
+   "n": 2
+  },
+  {
+   "category": "private_school",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "school",
+    "private_school"
+   ],
+   "life": "anchors",
+   "n": 2
+  },
+  {
+   "category": "prosthodontics",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "dental_clinic",
+    "prosthodontics"
+   ],
+   "life": "sustenance",
+   "n": 2
+  },
+  {
+   "category": "public_relations",
+   "hierarchy": [
+    "services_and_business",
+    "professional_service",
+    "public_relations"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "public_school",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "school",
+    "public_school"
+   ],
+   "life": "anchors",
+   "n": 2
+  },
+  {
+   "category": "reflexology",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "complementary_and_alternative_medicine",
+    "reflexology"
+   ],
+   "life": "sustenance",
+   "n": 2
+  },
+  {
+   "category": "restaurant_wholesale",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "wholesaler",
+    "restaurant_wholesale"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "river",
+   "hierarchy": [
+    "geographic_entities",
+    "water_feature",
+    "river"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "rock_climbing_gym",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "rock_climbing_gym"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "rock_climbing_spot",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "adventure_sport",
+    "rock_climbing_spot"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "roofing",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "ceiling_and_roofing_repair_and_service",
+    "roofing"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "self_storage_facility",
+   "hierarchy": [
+    "services_and_business",
+    "storage_facility",
+    "self_storage_facility"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "sex_therapy",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "behavioral_or_mental_health_clinic",
+    "counseling",
+    "sex_therapy"
+   ],
+   "life": "sustenance",
+   "n": 2
+  },
+  {
+   "category": "southern_american_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "north_american_restaurant",
+    "american_restaurant",
+    "southern_american_restaurant"
+   ],
+   "life": "third_places",
+   "n": 2
+  },
+  {
+   "category": "sports_bar",
+   "hierarchy": [
+    "food_and_drink",
+    "alcoholic_beverage_venue",
+    "bar",
+    "sports_bar"
+   ],
+   "life": "third_places",
+   "n": 2
+  },
+  {
+   "category": "tanning_salon",
+   "hierarchy": [
+    "lifestyle_services",
+    "personal_or_beauty_service",
+    "tanning_salon"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "tiling",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "tiling"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "town_hall",
+   "hierarchy": [
+    "community_and_government",
+    "government_office",
+    "town_hall"
+   ],
+   "life": "anchors",
+   "n": 2
+  },
+  {
+   "category": "tree_service",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "landscaping",
+    "tree_service"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "vegan_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "special_diet_restaurant",
+    "vegan_restaurant"
+   ],
+   "life": "third_places",
+   "n": 2
+  },
+  {
+   "category": "writing_service",
+   "hierarchy": [
+    "services_and_business",
+    "professional_service",
+    "writing_service"
+   ],
+   "life": "unclassified",
+   "n": 2
+  },
+  {
+   "category": "zoo",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "animal_attraction",
+    "zoo"
+   ],
+   "life": "display",
+   "n": 2
+  },
+  {
+   "category": "adult_education_center",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "adult_education_center"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "adult_entertainment_venue",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "nightlife_venue",
+    "adult_entertainment_venue"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "aircraft_dealer",
+   "hierarchy": [
+    "shopping",
+    "vehicle_dealer",
+    "aircraft_dealer"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "airport",
+   "hierarchy": [
+    "travel_and_transportation",
+    "air_transport_facility_or_service",
+    "airport"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "ambulance_or_ems_service",
+   "hierarchy": [
+    "health_care",
+    "emergency_or_urgent_care_facility",
+    "ambulance_or_ems_service"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "animal_shelter",
+   "hierarchy": [
+    "lifestyle_services",
+    "animal_or_pet_service",
+    "animal_adoption_or_rescue",
+    "animal_shelter"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "apartment",
+   "hierarchy": [
+    "services_and_business",
+    "housing_or_property_service",
+    "apartment"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "architect",
+   "hierarchy": [
+    "services_and_business",
+    "design_service",
+    "architect"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "art_restoration_service",
+   "hierarchy": [
+    "services_and_business",
+    "media_service",
+    "art_restoration_service"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "audiovisual_equipment_rental",
+   "hierarchy": [
+    "services_and_business",
+    "event_or_party_service",
+    "audiovisual_equipment_rental"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "auditorium",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "event_venue",
+    "auditorium"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "auto_restoration_service",
+   "hierarchy": [
+    "travel_and_transportation",
+    "vehicle_service",
+    "automotive_service",
+    "auto_restoration_service"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "avionics_shop",
+   "hierarchy": [
+    "travel_and_transportation",
+    "air_transport_facility_or_service",
+    "aircraft_parts_and_supplies",
+    "avionics_shop"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "b2b_environmental_service",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_environmental_service"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "bagel_shop",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "bagel_shop"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "bartender",
+   "hierarchy": [
+    "services_and_business",
+    "event_or_party_service",
+    "bartender"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "basketball_court",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "sport_court",
+    "basketball_court"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "beach_resort",
+   "hierarchy": [
+    "lodging",
+    "resort",
+    "beach_resort"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "bike_rental",
+   "hierarchy": [
+    "sports_and_recreation",
+    "recreational_equipment_rental",
+    "bike_rental"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "bingo_hall",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "gaming_venue",
+    "bingo_hall"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "boat_tour",
+   "hierarchy": [
+    "travel_and_transportation",
+    "travel_service",
+    "tour_operator",
+    "boat_tour"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "book_magazine_distribution",
+   "hierarchy": [
+    "services_and_business",
+    "media_service",
+    "media_news_company",
+    "book_magazine_distribution"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "books_music_and_video_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "books_music_and_video_store"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "boxing_gym",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "boxing_gym"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "brazilian_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "latin_american_restaurant",
+    "south_american_restaurant",
+    "brazilian_restaurant"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "business_law",
+   "hierarchy": [
+    "services_and_business",
+    "legal_service",
+    "attorney_or_law_firm",
+    "business_law"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "cabin",
+   "hierarchy": [
+    "lodging",
+    "cabin"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "car_stereo_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "electronics_store",
+    "car_stereo_store"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "car_window_tinting",
+   "hierarchy": [
+    "travel_and_transportation",
+    "vehicle_service",
+    "automotive_service",
+    "auto_glass_service",
+    "car_window_tinting"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "carpet_cleaning",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "carpet_cleaning"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "casino",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "gaming_venue",
+    "casino"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "cave",
+   "hierarchy": [
+    "geographic_entities",
+    "land_feature",
+    "cave"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "cheese_shop",
+   "hierarchy": [
+    "shopping",
+    "food_and_beverage_store",
+    "cheese_shop"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "collection_agency",
+   "hierarchy": [
+    "services_and_business",
+    "financial_service",
+    "collection_agency"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "comedy_club",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "performing_arts_venue",
+    "comedy_club"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "commercial_refrigeration",
+   "hierarchy": [
+    "services_and_business",
+    "technical_service",
+    "commercial_refrigeration"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "computer_wholesaler",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "wholesaler",
+    "computer_wholesaler"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "contract_law",
+   "hierarchy": [
+    "services_and_business",
+    "legal_service",
+    "attorney_or_law_firm",
+    "contract_law"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "cosmetology_school",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "specialty_school",
+    "cosmetology_school"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "credit_and_debt_counseling",
+   "hierarchy": [
+    "services_and_business",
+    "financial_service",
+    "credit_and_debt_counseling"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "criminal_defense_law",
+   "hierarchy": [
+    "services_and_business",
+    "legal_service",
+    "attorney_or_law_firm",
+    "criminal_defense_law"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "department_of_motor_vehicles",
+   "hierarchy": [
+    "community_and_government",
+    "government_office",
+    "government_department",
+    "department_of_motor_vehicles"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "designer_clothing",
+   "hierarchy": [
+    "shopping",
+    "fashion_and_apparel_store",
+    "clothing_store",
+    "designer_clothing"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "disability_services_and_support_organization",
+   "hierarchy": [
+    "community_and_government",
+    "community_service",
+    "disability_services_and_support_organization"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "doner_kebab_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "middle_eastern_restaurant",
+    "turkish_restaurant",
+    "doner_kebab_restaurant"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "drive_in_theater",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "movie_theater",
+    "drive_in_theater"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "ear_nose_and_throat",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "specialized_health_care",
+    "ear_nose_and_throat"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "electronic_parts_supplier",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "supplier_or_distributor",
+    "electronic_parts_supplier"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "embassy",
+   "hierarchy": [
+    "community_and_government",
+    "government_office",
+    "embassy"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "endodontics",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "dental_clinic",
+    "endodontics"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "esports_team",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_team",
+    "esports_team"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "european_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "european_restaurant"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "fish_and_chips_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "seafood_restaurant",
+    "fish_and_chips_restaurant"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "fishing_charter",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "water_sport",
+    "fishing",
+    "fishing_charter"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "fitness_exercise_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "sporting_goods_store",
+    "fitness_exercise_store"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "food_bank",
+   "hierarchy": [
+    "community_and_government",
+    "social_or_community_service",
+    "food_bank"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "forestry_service",
+   "hierarchy": [
+    "services_and_business",
+    "environmental_or_ecological_service",
+    "forestry_service"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "freight_forwarding_agency",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_transportation_and_storage_service",
+    "freight_and_cargo_service",
+    "freight_forwarding_agency"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "garage_door_service",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "garage_door_service"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "garbage_collection_service",
+   "hierarchy": [
+    "community_and_government",
+    "public_utility",
+    "garbage_collection_service"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "gay_bar",
+   "hierarchy": [
+    "food_and_drink",
+    "alcoholic_beverage_venue",
+    "bar",
+    "gay_bar"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "gelato_shop",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "dessert_shop",
+    "gelato_shop"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "generator_installation_repair",
+   "hierarchy": [
+    "services_and_business",
+    "technical_service",
+    "generator_installation_repair"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "german_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "european_restaurant",
+    "central_european_restaurant",
+    "german_restaurant"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "golf_cart_dealer",
+   "hierarchy": [
+    "shopping",
+    "vehicle_dealer",
+    "golf_cart_dealer"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "golf_course",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "golf_course"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "granite_supplier",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "supplier_or_distributor",
+    "granite_supplier"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "handyman",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "handyman"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "health_department",
+   "hierarchy": [
+    "community_and_government",
+    "government_office",
+    "government_department",
+    "health_department"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "hiking_trail",
+   "hierarchy": [
+    "sports_and_recreation",
+    "recreational_trail_or_path",
+    "hiking_trail"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "historic_mission",
+   "hierarchy": [
+    "cultural_and_historic",
+    "historic_site",
+    "historic_mission"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "history_museum",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "museum",
+    "history_museum"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "hong_kong_style_cafe",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "cafe",
+    "hong_kong_style_cafe"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "hospice",
+   "hierarchy": [
+    "health_care",
+    "medical_service",
+    "hospice"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "hot_dog_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "meat_restaurant",
+    "hot_dog_restaurant"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "housing_authority",
+   "hierarchy": [
+    "community_and_government",
+    "social_or_community_service",
+    "housing_authority"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "indo_chinese_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "asian_restaurant",
+    "east_asian_restaurant",
+    "chinese_restaurant",
+    "indo_chinese_restaurant"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "indonesian_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "asian_restaurant",
+    "southeast_asian_restaurant",
+    "indonesian_restaurant"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "internal_medicine",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "specialized_health_care",
+    "internal_medicine"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "jewish_place_of_worship",
+   "hierarchy": [
+    "cultural_and_historic",
+    "place_of_worship",
+    "jewish_place_of_worship"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "junk_removal_and_hauling",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "junk_removal_and_hauling"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "land_surveying",
+   "hierarchy": [
+    "services_and_business",
+    "real_estate_service",
+    "land_surveying"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "laser_tag",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "laser_tag"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "laundry_service",
+   "hierarchy": [
+    "services_and_business",
+    "laundry_service"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "logging_contractor",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_environmental_service",
+    "logging_contractor"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "logging_service",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "b2b_environmental_service",
+    "logging_service"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "marina",
+   "hierarchy": [
+    "geographic_entities",
+    "built_feature",
+    "marina"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "matchmaker",
+   "hierarchy": [
+    "lifestyle_services",
+    "personal_or_beauty_service",
+    "matchmaker"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "mattress_manufacturing",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "manufacturer",
+    "mattress_manufacturing"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "media_restoration_service",
+   "hierarchy": [
+    "services_and_business",
+    "media_service",
+    "media_restoration_service"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "modern_art_museum",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "museum",
+    "art_museum",
+    "modern_art_museum"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "mortgage_broker",
+   "hierarchy": [
+    "services_and_business",
+    "financial_service",
+    "mortgage_broker"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "mountain",
+   "hierarchy": [
+    "geographic_entities",
+    "land_feature",
+    "mountain"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "muay_thai_club",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_recreation_club",
+    "martial_arts_club",
+    "muay_thai_club"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "museum",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "museum"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "music_and_dvd_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "books_music_and_video_store",
+    "music_and_dvd_store"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "nursing",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "specialized_health_care",
+    "nursing"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "opera_and_ballet",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "performing_arts_venue",
+    "music_venue",
+    "opera_and_ballet"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "orthopedics",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "specialized_health_care",
+    "musculoskeletal_medicine",
+    "orthopedics"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "osteopathic_medicine",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "specialized_health_care",
+    "osteopathic_medicine"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "paddleboarding_center",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "paddleboarding_center"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "panamanian_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "latin_american_restaurant",
+    "central_american_restaurant",
+    "panamanian_restaurant"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "pet_boarding",
+   "hierarchy": [
+    "lifestyle_services",
+    "animal_or_pet_service",
+    "pet_care_service",
+    "pet_boarding"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "pet_breeder",
+   "hierarchy": [
+    "lifestyle_services",
+    "animal_or_pet_service",
+    "pet_breeder"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "plastics_company",
+   "hierarchy": [
+    "services_and_business",
+    "business",
+    "plastics_company"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "political_party_office",
+   "hierarchy": [
+    "community_and_government",
+    "civic_organization",
+    "political_organization",
+    "political_party_office"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "pop_up_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "pop_up_store"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "prenatal_and_perinatal_care",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "reproductive_perinatal_and_womens_care",
+    "prenatal_and_perinatal_care"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "psychiatry",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "behavioral_or_mental_health_clinic",
+    "psychiatry_or_psychology_service",
+    "psychiatry"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "public_plaza",
+   "hierarchy": [
+    "community_and_government",
+    "public_facility",
+    "public_plaza"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "public_utility",
+   "hierarchy": [
+    "community_and_government",
+    "public_utility"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "publisher",
+   "hierarchy": [
+    "services_and_business",
+    "media_service",
+    "media_news_company",
+    "publisher"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "radio_station",
+   "hierarchy": [
+    "services_and_business",
+    "media_service",
+    "media_news_company",
+    "radio_station"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "retirement_home",
+   "hierarchy": [
+    "services_and_business",
+    "housing_or_property_service",
+    "senior_living_facility",
+    "retirement_home"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "rheumatology",
+   "hierarchy": [
+    "health_care",
+    "outpatient_care_facility",
+    "specialized_health_care",
+    "internal_medicine",
+    "rheumatology"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "roller_skating_rink",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_or_fitness_facility",
+    "skating_rink",
+    "roller_skating_rink"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "school_sport_team",
+   "hierarchy": [
+    "sports_and_recreation",
+    "sport_team",
+    "school_sport_team"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "security_service",
+   "hierarchy": [
+    "services_and_business",
+    "security_service"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "singaporean_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "asian_restaurant",
+    "southeast_asian_restaurant",
+    "singaporean_restaurant"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "skate_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "sporting_goods_store",
+    "skate_store"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "souvenir_store",
+   "hierarchy": [
+    "shopping",
+    "specialty_store",
+    "souvenir_store"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "supplier_or_distributor",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "supplier_or_distributor"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "surgery",
+   "hierarchy": [
+    "health_care",
+    "specialized_medical_facility",
+    "surgery"
+   ],
+   "life": "sustenance",
+   "n": 1
+  },
+  {
+   "category": "taiwanese_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "asian_restaurant",
+    "east_asian_restaurant",
+    "taiwanese_restaurant"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "tapas_bar",
+   "hierarchy": [
+    "food_and_drink",
+    "casual_eatery",
+    "tapas_bar"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "taxi_service",
+   "hierarchy": [
+    "travel_and_transportation",
+    "ground_transport_facility_or_service",
+    "taxi_or_ride_share_service",
+    "taxi_service"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "tennis_stadium",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "stadium_arena",
+    "stadium",
+    "tennis_stadium"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "test_preparation",
+   "hierarchy": [
+    "education",
+    "educational_service",
+    "test_preparation"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "theatre_venue",
+   "hierarchy": [
+    "arts_and_entertainment",
+    "performing_arts_venue",
+    "theatre_venue"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "tobacco_company",
+   "hierarchy": [
+    "services_and_business",
+    "business",
+    "tobacco_company"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "truck_rental_service",
+   "hierarchy": [
+    "services_and_business",
+    "real_estate",
+    "real_estate_service",
+    "rental_service",
+    "vehicle_rental_service",
+    "truck_rental_service"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "urban_farm",
+   "hierarchy": [
+    "services_and_business",
+    "agricultural_service",
+    "farm",
+    "urban_farm"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "vending_machine_supplier",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "supplier_or_distributor",
+    "vending_machine_supplier"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "venezuelan_restaurant",
+   "hierarchy": [
+    "food_and_drink",
+    "restaurant",
+    "latin_american_restaurant",
+    "south_american_restaurant",
+    "venezuelan_restaurant"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "video_film_production",
+   "hierarchy": [
+    "services_and_business",
+    "media_service",
+    "video_film_production"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "visitor_center",
+   "hierarchy": [
+    "travel_and_transportation",
+    "travel_service",
+    "visitor_center"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "vocational_and_technical_school",
+   "hierarchy": [
+    "education",
+    "place_of_learning",
+    "specialty_school",
+    "vocational_and_technical_school"
+   ],
+   "life": "anchors",
+   "n": 1
+  },
+  {
+   "category": "washer_and_dryer_repair_service",
+   "hierarchy": [
+    "services_and_business",
+    "home_service",
+    "washer_and_dryer_repair_service"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "waterfall",
+   "hierarchy": [
+    "geographic_entities",
+    "water_feature",
+    "waterfall"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "waxing",
+   "hierarchy": [
+    "lifestyle_services",
+    "personal_or_beauty_service",
+    "hair_removal",
+    "waxing"
+   ],
+   "life": "display",
+   "n": 1
+  },
+  {
+   "category": "web_hosting_service",
+   "hierarchy": [
+    "services_and_business",
+    "technical_service",
+    "internet_service_provider",
+    "web_hosting_service"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "whiskey_bar",
+   "hierarchy": [
+    "food_and_drink",
+    "alcoholic_beverage_venue",
+    "bar",
+    "whiskey_bar"
+   ],
+   "life": "third_places",
+   "n": 1
+  },
+  {
+   "category": "wholesale_grocer",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "wholesaler",
+    "wholesale_grocer"
+   ],
+   "life": "unclassified",
+   "n": 1
+  },
+  {
+   "category": "wholesaler",
+   "hierarchy": [
+    "services_and_business",
+    "b2b_service",
+    "wholesaler"
+   ],
+   "life": "unclassified",
+   "n": 1
+  }
+ ]
+}

@@ -32,6 +32,29 @@
       a per-place confidence score; the page states how many venues clear 0.7. Facebook
       pages include closed businesses and duplicates, so treat the haze as
       "order of magnitude", not a census.</p></section>
+    <section id="lives"><h3>The "four lives" are a published crosswalk, not a vibe</h3>
+      <p class="dek">Part 2 sorts every in-district Overture place into four kinds of street life by
+      <strong>exact-prefix rules on the taxonomy hierarchy</strong> — never substring
+      matches — with the full category→life table published as
+      <a href="lives-crosswalk.json">lives-crosswalk.json</a>. The lives borrow their
+      definitions: <em>Sustenance</em> = Gehl's necessary errands; <em>Anchors</em> =
+      Jacobs's primary uses; <em>Third places</em> = Oldenburg (the cà phê is Vietnam's);
+      <em>Display</em> = Gehl's optional, comparison-goods street. Pages too generic to
+      read (bare "shopping", professional services, real estate, B2B) stay in an explicit
+      unclassified bucket rather than being forced into a life. Same-name pages within
+      150&nbsp;m are collapsed first (Meta service-area spam repeats one page dozens of
+      times). Existence confidence in this snapshot is modest (median ≈ 0.55), so
+      data.json bakes the four lives' counts at confidence ≥ 0.5 / 0.75 / 0.9 — and the
+      table is honest about what moves: display is the biggest bucket of raw pages, but
+      from ≥ 0.75 upward third places lead the street the data is surest actually
+      exists. And one honest limit: all of this is <em>fixed</em>
+      commerce. The itinerant sidewalk layer documented in Annette Kim's <em>Sidewalk
+      City</em> (2015) — carts, baskets, evening stalls — is invisible to OSM and
+      Overture alike. Sources: Gehl, <em>Life Between Buildings</em> (1971); Oldenburg,
+      <em>The Great Good Place</em> (1989); Botta &amp; Gutiérrez-Roig, <em>PLoS One</em>
+      (2021); Gómez-Varo et al., <em>Cities</em> (2022); Gibert-Flutre, <em>EPA</em>
+      (2018); Jamme, <em>JAPA</em> (2024).</p>
+    </section>
     <section id="churn"><h3>Café "survival" is mapping churn, not business churn</h3>
       <p class="dek">We follow cafés across years by stable OSM node id. A café that was
       deleted and re-drawn as a new node counts as a death and a birth, so the survival
