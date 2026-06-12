@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chains vs độc lập</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,400&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="spine.css">
+</head>
+<body data-page="chains">
+  <div id="site-nav"></div>
+  <main>
+    <header>
+      <span class="kicker">Street Life · Story 3</span>
+      <h2>Chains vs <em>độc lập</em></h2>
+      <p class="dek">169 chain outlets across 42 brands. They don't spread out —
+        they pile into a handful of corners. Here's where.</p>
+    </header>
+    <figure id="chains-map" class="chains-map" aria-label="Street map of Bình Thạnh showing where retail chains cluster"></figure>
+    <div id="chains-legend" class="chains-legend"></div>
+    <div id="chains-stepper"></div>
+  </main>
+  <footer><p class="note">Places: Overture Maps (CDLA-Permissive-2.0). Streets:
+    OpenStreetMap. Catchments are walked network distance, not circles.
+    <a class="how" href="method.html#chains">Method, parameters &amp; limits →</a></p></footer>
+  <script src="hem/vendor/d3.v7.min.js"></script>
+  <script src="nav.js"></script>
+  <script src="stepper.js"></script>
+  <script src="chains.js"></script>
+</body>
+</html>

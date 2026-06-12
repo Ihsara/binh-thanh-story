@@ -18,9 +18,9 @@ function bignum(value, label) {
   d.append(v, l); countUp(v, value); return d;
 }
 const FEATURED = {
-  href: "four-lives.html", kicker: "Street Life",
-  title: "The four lives of the street",
-  blurb: "Sort 25,000 places by what people come to DO, and the district resolves into four overlapping lives.",
+  href: "chains.html", kicker: "Street Life",
+  title: "Chains vs độc lập",
+  blurb: "169 chain outlets pile into a handful of corners — see where the brands cluster and the independents hold the rest.",
 };
 const SECTION_BLOCKS = [
   { label: "The Map", href: "map.html", stories: [
@@ -30,6 +30,7 @@ const SECTION_BLOCKS = [
   { label: "Street Life", href: "street-life.html", stories: [
     { href: "yardstick.html", title: "The yardstick", blurb: "The open commercial graph vs ten years of OSM." },
     { href: "four-lives.html", title: "The four lives", blurb: "Sustenance, anchors, third places, display." },
+    { href: "chains.html", title: "Chains vs độc lập", blurb: "169 chain outlets pile into a handful of corners." },
   ]},
   { label: "The Alleys", href: "hem/", stories: [
     { href: "hem/", title: "The hẻm story", blurb: "The boulevard sells; the hẻm lives." },

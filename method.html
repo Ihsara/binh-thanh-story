@@ -61,6 +61,54 @@
       deleted and re-drawn as a new node counts as a death and a birth, so the survival
       numbers mix real closures with remapping. They say "the map churns like the street
       does" — they do not certify any particular closure.</p></section>
+    <section id="chains"><h3>“Chains vs độc lập” is a hub-first, walked-catchment model</h3>
+      <p class="dek">Story 3 asks where retail chains land in Bình Thạnh. We take every
+      Overture place whose brand matches a curated chain roster and whose existence
+      confidence clears 0.75, then model reach two ways that matter. First,
+      <strong>hub-first</strong>: before drawing any territory we cluster co-located
+      outlets into shared-ground <em>hubs</em> on network (walked) distance, so that two
+      chains 40&nbsp;m apart on the same corner read as one shared knot rather than a
+      knife-edge border that is really just geocode noise. Second, <strong>walked
+      catchments</strong>: each outlet's 1&nbsp;km reach follows the pedestrian street
+      graph — the hẻm mesh included — not a circle, because nobody walks through walls.
+      Every segment is then assigned to whichever seed reaches it first; segments two
+      seeds reach within a small margin of each other are <em>contested</em>; segments no
+      chain reaches within 1&nbsp;km are <em>unclaimed</em>.</p>
+      <p class="dek">The model is pinned to these parameters (baked into
+      <a href="chains.json">chains.json</a>, guarded by a test):</p>
+      <table class="params">
+        <thead><tr><th>Parameter</th><th>Value</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr><td><code>conf_min</code></td><td>0.75</td><td>minimum Overture existence confidence for an outlet to count</td></tr>
+          <tr><td><code>dedupe_m</code></td><td>50&nbsp;m</td><td>collapse same-brand duplicate pages within this radius (Meta service-area spam)</td></tr>
+          <tr><td><code>hub_cutoff_m</code></td><td>200&nbsp;m</td><td>walked distance under which outlets cluster into one shared hub</td></tr>
+          <tr><td><code>contested_margin_m</code></td><td>30&nbsp;m</td><td>two reaches this close ⇒ the segment is a frontier, not owned</td></tr>
+          <tr><td><code>reach_m</code></td><td>1000&nbsp;m</td><td>the walked catchment radius — one kilometre on foot</td></tr>
+        </tbody>
+      </table>
+      <p class="dek"><em>Why 30&nbsp;m, not 100?</em> A sensitivity run re-pinned
+      <code>contested_margin_m</code> from 100 to 30. The district is so chain-saturated
+      that a 100&nbsp;m margin painted 34% of all streets “contested”, which reads as mush;
+      30&nbsp;m yields a legible 15.8% frontier while still honouring genuine ties.</p>
+      <p class="dek">The two reach models follow the network-buffer / network-Voronoi
+      literature: walked (network) catchments rather than Euclidean circles after
+      <a class="how" href="https://doi.org/10.1186/1476-072X-6-41">Oliver, Schuurman &amp;
+      Hall, <em>Int. J. Health Geographics</em> (2007)</a>; the first-reach tessellation is
+      a generalized network Voronoi diagram after Okabe, Satoh &amp; Sugihara,
+      <em>Int. J. Geographical Information Science</em> (2008). A gravity (Huff) model was
+      considered and rejected: it spreads probability mass everywhere and would have made
+      the saturation point illegible, where a hard first-reach assignment makes the rare
+      <em>unclaimed</em> streets pop.</p>
+      <p class="dek"><strong>Limitations.</strong> The walk graph treats street crossings
+      as free, so a wide arterial like Điện&nbsp;Biên&nbsp;Phủ is crossed as if it were a
+      footpath — real catchments are slightly smaller. Geocode jitter survives the dedupe;
+      the curated roster mitigates brand-field noise but cannot erase a mis-placed pin. The
+      independents are a <em>partial</em> view — Overture/Meta coverage, not a census of
+      every shop — so the “beyond reach” count is a floor, not a tally. And the honest
+      headline: Bình Thạnh is chain-saturated. Only 328 of 9,551 street segments (3.4%) and
+      121 of 25,158 independents (0.48%) lie beyond every chain's kilometre, so
+      <em>unclaimed</em> is genuinely rare — that is the finding, not an artifact.</p>
+    </section>
     <section><h3>Source &amp; build</h3>
       <p class="dek">OpenStreetMap full history → self-hosted PostGIS (<code>osm_vn_history</code>)
       → clipped per snapshot → static page. Streetlife reality layer: Overture Maps places

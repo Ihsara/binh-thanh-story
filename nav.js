@@ -14,6 +14,7 @@
       stories: [
         { href: "yardstick.html", label: "The yardstick", page: "yardstick" },
         { href: "four-lives.html", label: "The four lives", page: "four-lives" },
+        { href: "chains.html", label: "Chains vs độc lập", page: "chains" },
       ] },
     { id: "alleys", label: "The Alleys", href: "hem/", stories: [] },
     { id: "method", label: "Method", href: "method.html", stories: [] },

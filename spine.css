@@ -100,6 +100,54 @@ header.part2{margin-top:3rem}
 .bar.third_places{background:#c0532a}
 .bar.display{background:#c99a2e}
 @media (max-width:520px){.lives-grid,.lives-pair{grid-template-columns:1fr}}
+/* --- chains story: persistent map + legend chips --- */
+.chains-map{margin:1.25rem 0 .5rem;border:1px solid var(--rule);border-radius:8px;
+  background:var(--paper-2);padding:.4rem}
+.chains-map svg{width:100%;height:auto;display:block;background:var(--paper,#faf6ef)}
+.chains-legend{display:flex;flex-wrap:wrap;gap:.5rem;margin:.25rem 0 .5rem}
+.chains-legend:empty{display:none}
+.chains-legend .chip{display:inline-flex;align-items:center;gap:.4rem;min-height:44px;
+  padding:.35rem .7rem;border:1px solid var(--rule);border-radius:.7rem;
+  background:#fff;color:var(--ink);font-size:.82rem;cursor:default}
+.chains-legend .chip .sw{width:12px;height:12px;border-radius:50%;display:inline-block}
+.chains-legend .chip{cursor:pointer;transition:border-color .15s,box-shadow .15s,background .15s}
+.chains-legend .chip .n{opacity:.55;font-variant-numeric:tabular-nums}
+.chains-legend .chip.on{background:#3a2c20;color:#fff;border-color:#3a2c20}
+.chains-legend .chip.on .n{opacity:.7}
+.chains-legend .chip:focus-visible{outline:2px solid var(--accent,#c0532a);outline-offset:2px}
+/* ranked-hub labels drawn on the SVG */
+.hubs .knot{pointer-events:auto}
+text.hub-label{font:600 11px Barlow,system-ui,sans-serif;fill:#3a2c20}
+text.hub-label-bg{font:600 11px Barlow,system-ui,sans-serif;fill:none;
+  stroke:var(--paper,#faf6ef);stroke-width:3px;stroke-linejoin:round;paint-order:stroke}
+/* gentle pulse on the top-5 ranked knots — motion-gated below */
+@media (prefers-reduced-motion: no-preference){
+  .knot.pulse .g-core{animation:knot-pulse 2.4s ease-in-out infinite}
+  @keyframes knot-pulse{0%,100%{opacity:.95}50%{opacity:.6}}
+}
+/* hub tooltip (custom; the native <title> is the no-JS fallback) */
+.chains-tip{position:fixed;z-index:50;max-width:230px;pointer-events:none;
+  background:#2b211a;color:#f4ecdf;padding:.45rem .6rem;border-radius:.5rem;
+  font:.78rem/1.35 Barlow,system-ui,sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.28)}
+.chains-tip b{display:block;font-size:.8rem;margin-bottom:.2rem}
+.chains-tip .tip-list{opacity:.85}
+/* mobile: sticky map above the scrolling stepper (matches place-names' map-stage).
+   The persistent #chains-map pins to the top so it never scrolls away while the
+   step cards + nav scroll beneath; a paper background masks content sliding under
+   it. The legend chips sit with the map and wrap to as many rows as needed. */
+@media (max-width:640px){
+  .chains-map{position:sticky;top:0;z-index:3;margin:.75rem 0 .4rem;
+    background:var(--paper);padding-top:.5rem}
+  .chains-map svg{max-height:46dvh;width:auto;max-width:100%;margin:0 auto}
+  .chains-legend{position:sticky;top:46dvh;z-index:3;background:var(--paper);
+    margin:0 0 .4rem;padding:.15rem 0}
+}
+/* method parameter table */
+table.params{border-collapse:collapse;margin:.4rem 0 .8rem;font-size:.86rem;width:100%;max-width:640px}
+table.params th,table.params td{text-align:left;padding:.32rem .55rem;border-bottom:1px solid var(--rule,#e4ddcf);vertical-align:top}
+table.params thead th{font-weight:600;color:var(--muted,#8a8175);font-size:.78rem;
+  text-transform:uppercase;letter-spacing:.04em}
+table.params td:nth-child(2){white-space:nowrap;font-variant-numeric:tabular-nums}
 /* --- cover: featured card + section blocks --- */
 .featured-card { display: block; padding: 1.4rem 1.6rem; border: 1px solid var(--rule, #e4ddcf);
   border-left: 4px solid var(--accent, #c0532a); text-decoration: none; color: inherit; }
