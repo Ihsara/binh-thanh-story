@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A Hub · Bình Thạnh Atlas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,400&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="spine.css">
+  <link rel="stylesheet" href="hubs.css">
+  <link rel="stylesheet" href="hub.css">
+</head>
+<body data-page="hubs">
+  <div id="site-nav"></div>
+  <main id="hub-main">
+    <p class="hub-back"><a href="hubs.html">← The Hub Atlas</a></p>
+    <header>
+      <span class="kicker">Street Life · The Hubs</span>
+      <h2 id="title">…</h2>
+      <p id="sig" class="dek"></p>
+    </header>
+    <section class="hub-map">
+      <svg id="lmap" aria-label="Local map of this hub"></svg>
+    </section>
+    <section class="hub-bars">
+      <h3>The four lives here</h3><div id="lives"></div>
+      <h3>Chain vs independent</h3><div id="split"></div>
+    </section>
+    <section class="hub-cats">
+      <h3>What's here</h3><ul id="cats"></ul>
+      <h3>For example</h3><ul id="examples"></ul>
+    </section>
+    <nav class="hub-pager"><a id="prev"></a><a id="next"></a></nav>
+  </main>
+  <footer><p class="note">Places: Overture Maps (CDLA-Permissive-2.0). Streets:
+    OpenStreetMap. A hub owns every place whose nearest walked node is the hub's.
+    Diversity is Pielou evenness across the four lives — balance, not breadth.
+    <a class="how" href="method.html#chains">Method, parameters &amp; limits →</a></p></footer>
+  <script src="hem/vendor/d3.v7.min.js"></script>
+  <script src="nav.js"></script>
+  <script src="hub.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Hub Atlas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,400&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="spine.css">
+  <link rel="stylesheet" href="hubs.css">
+</head>
+<body data-page="hubs">
+  <div id="site-nav"></div>
+  <main>
+    <header>
+      <span class="kicker">Street Life · The Hubs</span>
+      <h2>The Hub Atlas</h2>
+      <p class="dek">Bình Thạnh has 22 chain hubs. They are not all alike — some are
+        a balanced slice of street life, some are one note played loud. Open any hub
+        to see what is actually there.</p>
+    </header>
+    <figure class="atlas-map" aria-label="District map of Bình Thạnh's 22 chain hubs, sized by how many places fall in each">
+      <svg id="map"></svg>
+    </figure>
+    <div class="atlas-controls">
+      <span>Sort by</span>
+      <button data-sort="diversity" class="active">Diversity</button>
+      <button data-sort="chain">Chain share</button>
+      <button data-sort="size">Size</button>
+    </div>
+    <div id="cards" class="atlas-cards"></div>
+    <p id="between" class="atlas-foot"></p>
+  </main>
+  <footer><p class="note">Places: Overture Maps (CDLA-Permissive-2.0). Streets:
+    OpenStreetMap. A hub owns every place whose nearest walked node is the hub's.
+    Diversity is Pielou evenness across the four lives — balance, not breadth.
+    <a class="how" href="method.html#chains">Method, parameters &amp; limits →</a></p></footer>
+  <script src="hem/vendor/d3.v7.min.js"></script>
+  <script src="nav.js"></script>
+  <script src="hubs.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+/* hubs.css — the atlas index, on the magazine's warm paper ground. */
+.atlas-map svg{width:100%;height:auto;background:#faf6ef;
+  border:1px solid var(--rule,#e4ddcf);border-radius:8px}
+.atlas-controls{display:flex;gap:.4rem;align-items:center;margin:1rem 0 .5rem}
+.atlas-controls button{border:1px solid var(--rule,#e4ddcf);background:#fff;
+  border-radius:.7rem;padding:.2rem .7rem;cursor:pointer;font:inherit}
+.atlas-controls button.active{background:#7a3f1d;color:#fff;border-color:#7a3f1d}
+.atlas-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:.8rem}
+.hub-card{display:block;text-decoration:none;color:inherit;
+  border:1px solid var(--rule,#e4ddcf);border-radius:10px;padding:.8rem;
+  background:#fff;transition:box-shadow .15s}
+.hub-card:hover{box-shadow:0 2px 12px rgba(122,63,29,.18)}
+.hub-card h3{margin:0 0 .3rem;font-size:1rem}
+.hub-stat{font-size:.8rem;opacity:.7;margin-bottom:.5rem}
+.hub-split{font-size:.75rem;opacity:.7;margin-top:.35rem}
+.mini-bar{display:flex;height:9px;border-radius:5px;overflow:hidden;margin:.25rem 0}
+.mini-bar span{display:block;height:100%}
+.atlas-foot{margin:1.5rem 0;font-size:.85rem;opacity:.7;font-style:italic}
+@media(max-width:520px){.atlas-cards{grid-template-columns:1fr 1fr}}

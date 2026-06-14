@@ -1,0 +1,16 @@
+/* hub.css — one hub's profile page. */
+.hub-map svg{width:100%;height:auto;background:#faf6ef;
+  border:1px solid var(--rule,#e4ddcf);border-radius:8px}
+.hub-bars h3,.hub-cats h3{font-size:1rem;margin:1.2rem 0 .4rem}
+.big-bar{display:flex;height:22px;border-radius:6px;overflow:hidden}
+.big-bar span{display:block;height:100%}
+.bar-key{display:flex;flex-wrap:wrap;gap:.8rem;font-size:.8rem;margin:.4rem 0 0}
+.bar-key i{display:inline-block;width:.7rem;height:.7rem;border-radius:2px;
+  margin-right:.3rem;vertical-align:middle}
+.hub-cats ul{columns:2;list-style:none;padding:0}
+.hub-cats li{margin:.15rem 0}
+.tag{font-size:.65rem;border-radius:.6rem;padding:.05rem .45rem;margin-left:.4rem;color:#fff}
+.tag.chain{background:#7a3f1d}.tag.indep{background:#44608c}
+.hub-pager{display:flex;justify-content:space-between;margin:2rem 0 1rem}
+.hub-pager a{color:#7a3f1d;text-decoration:none}
+@media(max-width:520px){.hub-cats ul{columns:1}}
