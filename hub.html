@@ -20,8 +20,10 @@
       <h2 id="title">…</h2>
       <p id="sig" class="dek"></p>
     </header>
-    <section class="hub-map">
-      <svg id="lmap" aria-label="Local map of this hub"></svg>
+    <section class="hub-map" style="position:relative">
+      <svg id="lmap" aria-label="Local streets of this hub"></svg>
+      <canvas id="ldots" aria-hidden="true"></canvas>
+      <div id="fieldchips" class="field-chips"></div>
     </section>
     <section class="hub-bars">
       <h3>The four lives here</h3><div id="lives"></div>
