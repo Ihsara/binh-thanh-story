@@ -109,6 +109,50 @@
       121 of 25,158 independents (0.48%) lie beyond every chain's kilometre, so
       <em>unclaimed</em> is genuinely rare — that is the finding, not an artifact.</p>
     </section>
+    <section id="hub-atlas"><h3>The Hub Atlas reads signals off the same data — none of them are definitions</h3>
+      <p class="dek">The atlas profiles each of the 22 hubs the chains model already
+      found. Every number on a hub page is <em>inferred</em> from the same Overture
+      places and the same walked street graph as “Chains vs độc lập” — we never drew a
+      new boundary or hand-labelled a hub. The catchment of a hub is unchanged: a place
+      belongs to whichever hub owns the graph node it snaps to (the territory class from
+      story 3). What the atlas adds is description, not new math.</p>
+      <p class="dek"><strong>Why it reads as a hub</strong> is two things, both inferred.
+      Its <em>street form</em> comes from the walk graph: if the top two named streets
+      near the centroid each carry ≥ 25% of the local edge length it is a
+      <em>crossroads</em>; if one street dominates, a <em>spine</em>; if no street is
+      named, a <em>cluster</em>. Its <em>demand-generators</em> — schools, clinics,
+      offices, hotels, markets — are counted from the very same Overture places by exact
+      <code>taxonomy.primary</code> sets (never substrings: “bar” must not catch
+      “barber”). These say <em>why a corner pulls a crowd</em>; they are a reading of the
+      places, not an independent survey.</p>
+      <p class="dek"><strong>Built-up is a footprint proxy, not population.</strong> The
+      “built density” bar is the total building-footprint area (m²) inside a hub's
+      catchment, min-max normalised across the 22 hubs so the busiest reads 1 and the
+      emptiest 0. This is <em>ground covered</em>, not people: Overture's buildings here
+      carry no usable floor count or height, so we cannot lift footprint into volume, and
+      apartments are too sparsely tagged to split residential from commercial. Read the
+      bar as “how much of this catchment is built over”, never as “how many live here”.
+      The building footprints come from the Overture buildings release
+      <code>2026-05-20.0</code>, which may differ from the places release — built density
+      is a coarse backdrop signal, and that small release gap is acceptable for it.</p>
+      <p class="dek"><strong>Hub relations</strong> are drawn from the same per-node reach
+      distances. Two hubs share a <em>frontier node</em> when both reach it within the
+      1&nbsp;km walked catchment and their distances to it fall within the 30&nbsp;m
+      contested margin — the identical tie rule the territory map uses. From the count of
+      shared frontier nodes (and the hubs' four-lives mix) each adjacent pair is typed:
+      <em>compete</em> when they share ≥ 20 frontier nodes (they fight for the same
+      walkers); <em>complement</em> when they touch over fewer nodes but their four-lives
+      mix is far apart (cosine distance ≥ 0.05 — adjacent, serving different needs);
+      <em>border</em> otherwise. The two cut-offs (<code>compete_min_nodes</code> = 20,
+      <code>mix_far</code> = 0.05) were swept over the 22 hubs and pinned to these values.
+      One honest note on the cut-offs: Bình Thạnh is a homogeneous district, so adjacent
+      hubs serve nearly the same four-lives mix and cosine distance never exceeds ≈ 0.14 —
+      <code>mix_far</code> has to sit below that ceiling for <em>complement</em> to exist
+      at all. With these values the bake splits the 86 adjacent pairs into 22 <em>compete</em>,
+      14 <em>complement</em>, and 50 <em>border</em>: most neighbours simply abut without
+      strongly competing or diverging, which is the honest shape of a dense, similar
+      district.</p>
+    </section>
     <section><h3>Source &amp; build</h3>
       <p class="dek">OpenStreetMap full history → self-hosted PostGIS (<code>osm_vn_history</code>)
       → clipped per snapshot → static page. Streetlife reality layer: Overture Maps places

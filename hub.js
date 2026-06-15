@@ -16,6 +16,7 @@
     education:"Education",health:"Health",electronics:"Electronics",
     finance:"Finance",hotel:"Hotel",other:"Other/office"};
   let activeFields = null;  // null = all; else a Set of fields to keep
+  let showGen = false;      // generator-ring underlay toggle on the local map
 
   const want = Math.max(1, parseInt(
     new URLSearchParams(location.search).get("h") || "1", 10) || 1);
@@ -30,6 +31,9 @@
     drawLocal(h);
     drawBars(h);
     drawCats(h);
+    drawWhy(h);
+    drawGenerators(h);
+    drawNeighbours(h, byRank, data.relations);
     pager(h, data.hubs.length);
   }).catch((e) => document.getElementById("hub-main").innerHTML =
     `<pre style="color:#c00">Failed to load hubs.json: ${e}</pre>`);
@@ -62,6 +66,17 @@
     function paint() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
+      if (showGen && h.gen_points) {
+        const GEN_RING = {school:"#4a8fb0", health:"#3fae6a", office:"#7a7f96",
+                          hotel:"#b08a4a", market:"#3e7a5e"};
+        h.gen_points.forEach((p) => {
+          const X = x(p.lon), Y = y(p.lat);
+          ctx.beginPath(); ctx.arc(X, Y, 9, 0, 2 * Math.PI);
+          ctx.lineWidth = 2; ctx.globalAlpha = 0.8;
+          ctx.strokeStyle = GEN_RING[p.type] || "#999"; ctx.stroke();
+        });
+        ctx.globalAlpha = 1;
+      }
       h.places.forEach((p, i) => {
         if (activeFields && !activeFields.has(p.field)) return;
         const jx = jit(p.lon * 1000 + i) * 5, jy = jit(p.lat * 1000 + i * 7) * 5;
@@ -76,6 +91,13 @@
     }
     paint();
     drawChips(h, paint);
+    const gt = document.getElementById("genToggle");
+    if (gt) gt.onclick = () => {
+      showGen = !showGen;
+      gt.classList.toggle("on", showGen);
+      gt.textContent = showGen ? "Hide what draws people" : "Show what draws people";
+      paint();
+    };
   }
 
   function drawChips(h, repaint) {
@@ -112,6 +134,66 @@
     stacked("split", {chain:h.split.chain, indep:h.split.indep},
             ["chain","indep"], {chain:CHAIN, indep:INDEP},
             {chain:"Chain", indep:"Independent"});
+  }
+
+  const GEN_LABEL = {school:"Schools", health:"Health", office:"Offices",
+                     hotel:"Hotels", market:"Markets"};
+  const GEN_GLYPH = {school:"🎓", health:"🏥", office:"🏢", hotel:"🏨", market:"🛒"};
+  const BUILTUP_WORD = (s) => s >= 0.66 ? "high" : s >= 0.33 ? "medium" : "low";
+
+  function drawWhy(h) {
+    const f = h.form || {kind:"cluster", streets:[]};
+    let where;
+    if (f.kind === "crossroads" && f.streets.length >= 2)
+      where = `Where ${f.streets[0]} meets ${f.streets[1]}`;
+    else if (f.kind === "spine" && f.streets.length)
+      where = `Along the ${f.streets[0]} spine`;
+    else where = "A dense local cluster";
+    const g = h.generators || {};
+    const parts = ["school","health","office","hotel"]
+      .filter(k => g[k]).map(k => `${g[k]} ${GEN_LABEL[k].toLowerCase()}`);
+    const draw = parts.length ? ` with ${parts.join(", ")} within a five-minute walk` : "";
+    document.getElementById("why").textContent =
+      `${where}${draw} — the crowd that the ${h.split.chain} chains and ${h.split.indep} independents feed.`;
+    // built-up mini-bar
+    const s = (h.builtup && h.builtup.score) || 0;
+    const pct = Math.round(s * 100);
+    const cov = h.builtup ? h.builtup.count.toLocaleString() : "0";
+    document.getElementById("builtup").innerHTML =
+      `<span class="bu-label">Built-up</span>` +
+      `<span class="bu-track"><span class="bu-fill" style="width:${pct}%"></span></span>` +
+      `<span class="bu-word">${BUILTUP_WORD(s)}</span>` +
+      `<span class="bu-note">${cov} buildings (footprint proxy, not population)</span>`;
+  }
+
+  function drawGenerators(h) {
+    const g = h.generators || {};
+    const order = ["school","health","office","hotel","market"];
+    const html = order.filter(k => g[k]).map(k =>
+      `<span class="gen"><b>${GEN_GLYPH[k]}</b> ${GEN_LABEL[k]} <b>${g[k]}</b></span>`
+    ).join("");
+    document.getElementById("generators").innerHTML =
+      (html || "<span class='gen muted'>No standout draws nearby</span>") +
+      `<p class="gen-cap">within ~5-min walk</p>`;
+  }
+
+  function drawNeighbours(h, byRank, relations) {
+    const mine = (relations || []).filter(r => r.a === h.id || r.b === h.id);
+    const other = (r) => r.a === h.id ? r.b : r.a;
+    const idToHub = new Map([...byRank.values()].map(x => [x.id, x]));
+    const ICON = {compete:"⚔", complement:"🤝", border:"·"};
+    const VERB = {compete:"Competes with", complement:"Complements", border:"Borders"};
+    const rank = {compete:0, complement:1, border:2};
+    mine.sort((p, q) => rank[p.type] - rank[q.type] || q.shared_nodes - p.shared_nodes);
+    document.getElementById("neighbours").innerHTML = mine.map(r => {
+      const o = idToHub.get(other(r)); if (!o) return "";
+      const detail = r.type === "compete"
+        ? `${r.shared_nodes} shared-reach nodes`
+        : r.type === "complement" ? "different life-mix" : "adjacent";
+      return `<li><span class="rel ${r.type}">${ICON[r.type]}</span> ` +
+             `${VERB[r.type]} <a href="hub.html?h=${o.rank}">${o.title}</a> ` +
+             `<span class="rel-note">— ${detail}</span></li>`;
+    }).join("") || "<li class='muted'>Stands alone — no reachable neighbour.</li>";
   }
 
   function drawCats(h) {

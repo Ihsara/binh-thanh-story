@@ -21,3 +21,24 @@
   padding:4px 10px;font-size:12px;color:#5a5040;cursor:pointer}
 .field-chips .fchip i{width:9px;height:9px;border-radius:50%}
 .field-chips .fchip.off{opacity:.35}
+.why-line{font-size:1.02rem;line-height:1.5;color:#4a4030;margin:.6rem 0 .2rem;
+  border-left:3px solid var(--accent,#c0532a);padding-left:.7rem}
+.builtup{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;
+  font-size:.82rem;color:#5a5040;margin:.4rem 0 0}
+.bu-track{display:inline-block;width:120px;height:8px;border-radius:5px;
+  background:#e7dfce;overflow:hidden}
+.bu-fill{display:block;height:100%;background:#9c7a4a}
+.bu-label{font-weight:600;color:#4a4030}
+.bu-word{font-weight:600}.bu-note{color:#8a7f6a;font-size:.74rem}
+#generators{display:flex;flex-wrap:wrap;gap:.4rem .9rem;align-items:baseline}
+.gen{font-size:.86rem;color:#4a4030}.gen.muted{color:#9a8f7a}
+.gen-cap{flex-basis:100%;margin:.2rem 0 0;font-size:.72rem;color:#8a7f6a}
+.gen-toggle{position:absolute;top:8px;right:8px;z-index:2;background:#fffdf8;
+  border:1px solid #d8cdb8;border-radius:14px;padding:4px 10px;font-size:12px;
+  color:#5a5040;cursor:pointer}
+.gen-toggle.on{background:#3e7a5e;color:#fff;border-color:#3e7a5e}
+.hub-rel ul{list-style:none;padding:0}.hub-rel li{margin:.3rem 0;font-size:.9rem}
+.rel{display:inline-block;width:1.3em}.rel.compete{color:#c0453a}
+.rel.complement{color:#3e7a5e}.rel-note{color:#8a7f6a;font-size:.8rem}
+.hub-rel a{color:#7a3f1d;text-decoration:none}
+.muted{color:#9a8f7a}

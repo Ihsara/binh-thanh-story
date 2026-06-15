@@ -29,3 +29,11 @@
 .kpop .kgo{display:inline-block;margin-top:8px;background:#7a3f1d;color:#fff;
   font-weight:600;font-size:12px;padding:7px 12px;border-radius:7px;text-decoration:none}
 .kpop .kx{position:absolute;top:6px;right:9px;color:#a89b86;cursor:pointer;font-size:16px}
+
+/* Territories <-> Relations view toggle */
+.atlas-views{display:flex;gap:.4rem;margin:.6rem 0}
+.vbtn{background:#fffdf8;border:1px solid #d8cdb8;border-radius:14px;
+  padding:5px 14px;font-size:13px;color:#5a5040;cursor:pointer}
+.vbtn.on{background:#7a3f1d;color:#fff;border-color:#7a3f1d}
+.relmap{width:100%;height:auto;background:#faf6ef;border:1px solid #e4ddcf;
+  border-radius:8px}

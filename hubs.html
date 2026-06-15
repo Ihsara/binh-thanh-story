@@ -20,12 +20,19 @@
         its little kingdom. Click a territory to see what is actually there, then
         dive into any corner.</p>
     </header>
+    <div class="atlas-views">
+      <button id="viewTerr" class="vbtn on">Territories</button>
+      <button id="viewRel" class="vbtn">Relations</button>
+    </div>
     <figure class="atlas-map" style="position:relative" aria-label="District map
       of Bình Thạnh's chain hubs as colored street territories; click a territory
       for its profile">
       <svg id="map"></svg>
       <div class="kpop" id="kpop"></div>
     </figure>
+    <svg id="relmap" class="relmap" hidden aria-label="How Bình Thạnh's hubs relate:
+      a node-link map placing each hub at its true location, linked where their
+      street territories share nodes — competing or merely bordering"></svg>
     <div class="atlas-controls">
       <span>Sort by</span>
       <button data-sort="diversity" class="active">Diversity</button>

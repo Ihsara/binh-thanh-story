@@ -16,6 +16,8 @@
 
   function render(data) {
     drawMap(data);
+    drawRelations(data);
+    wireViewToggle();
     let sort = "diversity";
     drawCards(data, sort);
     document.querySelectorAll(".atlas-controls button").forEach((b) =>
@@ -80,6 +82,77 @@
       }
     }).catch((e) => d3.select("#map").append("text").attr("x", 16).attr("y", 28)
       .attr("fill", "#c00").text(`Failed to load chains-territory.json: ${e}`));
+  }
+
+  // Relations view: a node-link map. Hubs sit at true lon/lat; edges link hubs
+  // whose street territories touch — red where they compete for the same blocks,
+  // faint sand where they merely border. Edge weight = shared boundary nodes.
+  function drawRelations(data) {
+    const svg = d3.select("#relmap"), W = 720, H = 560, pad = 48;
+    svg.attr("viewBox", `0 0 ${W} ${H}`); svg.selectAll("*").remove();
+    const hubs = data.hubs, byId = new Map(hubs.map(h => [h.id, h]));
+    const x = d3.scaleLinear(d3.extent(hubs, h => h.lon), [pad, W - pad]);
+    const y = d3.scaleLinear(d3.extent(hubs, h => h.lat), [H - pad, pad]);
+    const REL = {compete: "#c0453a", complement: "#3e7a5e", border: "#cabfa8"};
+    const maxShared = d3.max(data.relations, r => r.shared_nodes) || 1;
+    const w = d3.scaleSqrt([1, maxShared], [1, 7]);
+
+    svg.append("g").selectAll("line").data(data.relations).join("line")
+      .attr("x1", r => x(byId.get(r.a).lon)).attr("y1", r => y(byId.get(r.a).lat))
+      .attr("x2", r => x(byId.get(r.b).lon)).attr("y2", r => y(byId.get(r.b).lat))
+      .attr("stroke", r => REL[r.type] || REL.border)
+      .attr("stroke-width", r => w(r.shared_nodes))
+      .attr("stroke-linecap", "round")
+      .attr("stroke-opacity", r => r.type === "border" ? 0.45 : 0.82)
+      .append("title").text(r =>
+        `${byId.get(r.a).title} ↔ ${byId.get(r.b).title}: ` +
+        `${r.type}, ${r.shared_nodes} shared node${r.shared_nodes === 1 ? "" : "s"}`);
+
+    const sz = d3.scaleSqrt(
+      d3.extent(hubs, h => h.split.chain + h.split.indep), [5, 20]);
+    const g = svg.append("g").selectAll("a").data(hubs).join("a")
+      .attr("href", h => `hub.html?h=${h.rank}`)
+      .attr("aria-label", h => `${h.title} — open hub profile`)
+      .style("cursor", "pointer");
+    g.append("circle").attr("cx", h => x(h.lon)).attr("cy", h => y(h.lat))
+      .attr("r", h => sz(h.split.chain + h.split.indep))
+      .attr("fill", "#fffdf8").attr("stroke", "#7a3f1d").attr("stroke-width", 1.5)
+      .append("title").text(h =>
+        `${h.title}: ${h.split.chain + h.split.indep} places`);
+    g.append("text").attr("x", h => x(h.lon)).attr("y", h => y(h.lat) - 12)
+      .attr("text-anchor", "middle").attr("font-size", 10).attr("fill", "#4a4030")
+      .attr("paint-order", "stroke").attr("stroke", "#faf6ef").attr("stroke-width", 2.5)
+      .text(h => h.title);
+
+    const lg = svg.append("g").attr("transform", `translate(${pad},${H - 22})`);
+    [["compete", "Compete"], ["complement", "Complement"], ["border", "Border"]]
+      .forEach(([k, lab], i) => {
+        lg.append("line").attr("x1", i * 130).attr("x2", i * 130 + 22)
+          .attr("y1", 0).attr("y2", 0)
+          .attr("stroke", REL[k]).attr("stroke-width", 3).attr("stroke-linecap", "round");
+        lg.append("text").attr("x", i * 130 + 28).attr("y", 4).attr("font-size", 11)
+          .attr("fill", "#5a5040").text(lab);
+      });
+  }
+
+  function wireViewToggle() {
+    const terr = document.getElementById("viewTerr");
+    const rel = document.getElementById("viewRel");
+    const relmap = document.getElementById("relmap");
+    // REAL territory container: the <figure class="atlas-map"> wrapping the
+    // #map svg AND the #kpop overlay — toggle the wrapper so the popup hides too.
+    const terrEl = document.querySelector("figure.atlas-map") ||
+                   relmap.previousElementSibling;
+    function show(which) {
+      const isRel = which === "rel";
+      relmap.hidden = !isRel;
+      if (terrEl) terrEl.hidden = isRel;
+      if (isRel) dismissPop();
+      terr.classList.toggle("on", !isRel);
+      rel.classList.toggle("on", isRel);
+    }
+    terr.onclick = () => show("terr");
+    rel.onclick = () => show("rel");
   }
 
   function openPop(hub, edges, col, x, y) {
