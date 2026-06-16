@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Where the food is · Bình Thạnh Atlas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,400&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="spine.css">
+  <link rel="stylesheet" href="hubs.css">
+  <link rel="stylesheet" href="cuisine.css">
+</head>
+<body data-page="cuisine">
+  <div id="site-nav"></div>
+  <main id="cuisine-main">
+    <header>
+      <span class="kicker">Street Life · The Hubs</span>
+      <h2>Where the food is</h2>
+      <p class="dek">Every place that names its dish, mapped across Bình Thạnh.
+        Colour = kind of food; isolate one to see where it gathers.</p>
+    </header>
+    <section class="cuisine-map" style="position:relative">
+      <canvas id="ddots" role="img"
+        aria-label="Every classified food place in Bình Thạnh, coloured by kind of food"></canvas>
+    </section>
+    <div id="dchips" class="field-chips"></div>
+    <p class="note">Dishes are detected from each place's <em>name</em> (phở, bún,
+      cơm, bánh mì, …); foreign cuisines from the Overture category. Only the food
+      that announces itself is classed — a “Quán Ăn” with no dish in its name stays
+      in <b>Eateries</b>. Not a census of every kitchen.
+      <a class="how" href="method.html#cuisine">Method →</a></p>
+  </main>
+  <footer><p class="note">Places: Overture Maps (CDLA-Permissive-2.0). Streets:
+    OpenStreetMap.</p></footer>
+  <script src="hem/vendor/d3.v7.min.js"></script>
+  <script src="nav.js"></script>
+  <script src="food_groups.js"></script>
+  <script src="cuisine.js"></script>
+</body>
+</html>

@@ -42,3 +42,29 @@
 .rel.complement{color:#3e7a5e}.rel-note{color:#8a7f6a;font-size:.8rem}
 .hub-rel a{color:#7a3f1d;text-decoration:none}
 .muted{color:#9a8f7a}
+
+/* cuisine-lens additions */
+.specialty-key{font-size:.78rem;color:#7a6f5c;margin:4px 0 0}
+.specialty-key b{color:#b8860b}
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip-row .chip-lbl{font-size:.78rem;color:#9c8a72;align-self:center}
+.lchip{font:inherit;font-size:.78rem;border:1px solid #cdbfa6;background:transparent;
+  color:#7a6f5c;border-radius:11px;padding:2px 9px;cursor:pointer}
+.lchip.on{background:#7a6f5c;color:#fff;border-color:#7a6f5c}
+.fchip.off{opacity:.32}
+#dot-tip{position:fixed;z-index:50;display:none;max-width:320px;
+  background:#23201c;color:#ece7df;border-radius:8px;padding:9px 11px;
+  font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;
+  box-shadow:0 6px 24px rgba(0,0,0,.28);pointer-events:none}
+#dot-tip .tip-name{font-family:Fraunces,serif;font-size:14px;color:#9cd1a0}
+#dot-tip .tip-sub{color:#9c948a;margin-bottom:5px}
+#dot-tip .tip-final{margin:4px 0}
+#dot-tip .tip-rule{color:#9c948a}
+#dot-tip .tip-lbl{color:#9c948a;display:inline-block;width:66px}
+#dot-tip .tip-tags{margin-top:2px}
+#dot-tip .tag-chip{display:inline-block;color:#fff;border-radius:9px;
+  padding:0 7px;margin:1px 2px}
+.hub-food .food-stat{display:inline-flex;align-items:center;gap:5px;
+  margin:3px 12px 3px 0;font-size:.9rem}
+.hub-food .food-stat i{width:11px;height:11px;border-radius:50%;display:inline-block}
+.food-line{color:#7a6f5c;font-style:italic;margin-top:6px}

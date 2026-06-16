@@ -15,8 +15,54 @@
     beauty:"Beauty/care",property:"Property",fashion:"Fashion",
     education:"Education",health:"Health",electronics:"Electronics",
     finance:"Finance",hotel:"Hotel",other:"Other/office"};
-  let activeFields = null;  // null = all; else a Set of fields to keep
+  const FG = window.FOOD_GROUPS, FREG = window.FOOD_REGION_ORDER;
+  function isSpecialty(group, countInHub) {
+    const g = FG[group];
+    return g && !g.is_style && group !== "unclassified" &&
+           group !== "vn_other" && countInHub <= 2;
+  }
+  // food-group / non-food-layer filter state
+  let activeGroups = null;        // null = all food groups shown; else Set of shown groups
+  let activeLayers = new Set();   // non-food fields toggled ON (hidden by default)
+  function passesFilter(p) {
+    if (p.food) return !activeGroups || activeGroups.has(p.food.group);
+    return activeLayers.has(p.field);   // non-food only if its layer is on
+  }
   let showGen = false;      // generator-ring underlay toggle on the local map
+
+  // --- debug tooltip helpers (module scope) ---
+  let _tip = null;
+  function ensureTip() {
+    if (!_tip) { _tip = document.createElement("div"); _tip.id = "dot-tip";
+      document.body.appendChild(_tip); }
+    return _tip;
+  }
+  function chip(text, color) {
+    return `<span class="tag-chip" style="background:${color}">${text}</span>`;
+  }
+  function tooltipHTML(p) {
+    if (!p.food) {
+      return `<div class="tip-name">${p.name || "(unnamed)"}</div>` +
+             `<div class="tip-sub">non-food · ${p.field || "—"}</div>`;
+    }
+    const f = p.food;
+    const g = FG[f.group] || FG.unclassified;
+    let html = `<div class="tip-name">${p.name || "(unnamed)"}</div>` +
+      `<div class="tip-sub">${p.chain ? "chain" : "independent"}</div>` +
+      `<div class="tip-final">→ ${chip(g.label, g.color)} ` +
+      `<span class="tip-rule">(${f.rule})</span></div>`;
+    if (f.primary)
+      html += `<div class="tip-tags"><span class="tip-lbl">primary</span>` +
+              `${chip(f.primary, g.color)}</div>`;
+    if (f.hierarchy && f.hierarchy.length)
+      html += `<div class="tip-tags"><span class="tip-lbl">hierarchy</span>` +
+        f.hierarchy.map(t => chip(t, (FG[t] && FG[t].color) || "#6b6b6b")).join("") +
+        `</div>`;
+    if (f.alternates && f.alternates.length)
+      html += `<div class="tip-tags"><span class="tip-lbl">alternates</span>` +
+        f.alternates.map(t => chip(t, "#777")).join("") + `</div>`;
+    return html;
+  }
 
   const want = Math.max(1, parseInt(
     new URLSearchParams(location.search).get("h") || "1", 10) || 1);
@@ -31,10 +77,11 @@
     drawLocal(h);
     drawBars(h);
     drawCats(h);
+    drawFood(h);
     drawWhy(h);
     drawGenerators(h);
     drawNeighbours(h, byRank, data.relations);
-    pager(h, data.hubs.length);
+    pager(h, data.hubs.length, byRank);
   }).catch((e) => document.getElementById("hub-main").innerHTML =
     `<pre style="color:#c00">Failed to load hubs.json: ${e}</pre>`);
 
@@ -78,19 +125,56 @@
         ctx.globalAlpha = 1;
       }
       h.places.forEach((p, i) => {
-        if (activeFields && !activeFields.has(p.field)) return;
+        if (!passesFilter(p)) return;
         const jx = jit(p.lon * 1000 + i) * 5, jy = jit(p.lat * 1000 + i * 7) * 5;
         const X = x(p.lon) + jx, Y = y(p.lat) + jy;
         ctx.beginPath(); ctx.arc(X, Y, p.chain ? 4.5 : 2.6, 0, 2 * Math.PI);
         ctx.globalAlpha = p.chain ? 1 : 0.62;
-        ctx.fillStyle = FIELD_COLOR[p.field] || FIELD_COLOR.other; ctx.fill();
+        ctx.fillStyle = p.food
+          ? (FG[p.food.group] || FG.unclassified).color
+          : (FIELD_COLOR[p.field] || FIELD_COLOR.other);
+        ctx.fill();
         if (p.chain) { ctx.globalAlpha = 1; ctx.lineWidth = 1.6;
           ctx.strokeStyle = "#fffdf8"; ctx.stroke(); }
+        if (p.food && isSpecialty(p.food.group, h.food_breakdown[p.food.group] || 0)) {
+          ctx.beginPath(); ctx.arc(X, Y, 6.5, 0, 2 * Math.PI);
+          ctx.globalAlpha = 1; ctx.lineWidth = 1.4;
+          ctx.strokeStyle = "#d4af37"; ctx.stroke();
+        }
       });
       ctx.globalAlpha = 1;
     }
     paint();
     drawChips(h, paint);
+
+    // per-dot debug tooltip — canvas hover hit-test
+    cv.onmousemove = (ev) => {
+      const r = cv.getBoundingClientRect();
+      const mx = (ev.clientX - r.left) * (W / r.width);
+      const my = (ev.clientY - r.top) * (H / r.height);
+      let best = null, bd = 64;  // 8px squared, in canvas units
+      h.places.forEach((p) => {
+        if (!passesFilter(p)) return;
+        const dx = x(p.lon) - mx, dy = y(p.lat) - my;
+        const d = dx * dx + dy * dy;
+        if (d < bd) { bd = d; best = p; }
+      });
+      const tip = ensureTip();
+      if (best) {
+        tip.innerHTML = tooltipHTML(best);
+        tip.style.display = "block";
+        const tw = tip.offsetWidth, th = tip.offsetHeight;
+        let lx = ev.clientX + 14, ly = ev.clientY + 14;
+        if (lx + tw > window.innerWidth) lx = ev.clientX - tw - 14;
+        if (ly + th > window.innerHeight) ly = ev.clientY - th - 14;
+        tip.style.left = Math.max(4, lx) + "px";
+        tip.style.top = Math.max(4, ly) + "px";
+      } else {
+        tip.style.display = "none";
+      }
+    };
+    cv.onmouseleave = () => { if (_tip) _tip.style.display = "none"; };
+
     const gt = document.getElementById("genToggle");
     if (gt) gt.onclick = () => {
       showGen = !showGen;
@@ -101,21 +185,85 @@
   }
 
   function drawChips(h, repaint) {
-    const present = [...new Set(h.places.map(p => p.field))]
-      .sort((a, b) => a === "other" ? 1 : b === "other" ? -1 : 0);
+    // food groups present, sorted by region order
+    const present = [...new Set(h.places.filter(p => p.food).map(p => p.food.group))]
+      .sort((a, b) => FREG.indexOf((FG[a] || {}).region) -
+                      FREG.indexOf((FG[b] || {}).region));
+    // non-food fields present (layers), hidden by default
+    const layers = [...new Set(h.places.filter(p => !p.food).map(p => p.field))]
+      .filter(Boolean).sort();
     const box = document.getElementById("fieldchips");
-    box.innerHTML = present.map(f =>
-      `<button class="fchip" data-f="${f}">` +
-      `<i style="background:${FIELD_COLOR[f]}"></i>${FIELD_LABEL[f]}</button>`).join("");
-    box.querySelectorAll(".fchip").forEach(btn => btn.onclick = () => {
+
+    const foodRow = `<div class="chip-row food">` + present.map(g => {
+      const fg = FG[g] || FG.unclassified;
+      const extra = g === "unclassified" ? " ◌" : "";
+      return `<button class="fchip" data-g="${g}">` +
+        `<i style="background:${fg.color}"></i>${fg.label}${extra}</button>`;
+    }).join("") + `</div>`;
+
+    const layerRow = `<div class="chip-row layers"><span class="chip-lbl">+ add</span>` +
+      layers.map(f =>
+        `<button class="lchip" data-f="${f}">${FIELD_LABEL[f] || f}</button>`
+      ).join("") + `</div>`;
+
+    const key = `<p class="specialty-key"><b>✦</b> rare here — a specialty worth the trip</p>`;
+    box.innerHTML = foodRow + layerRow + key;
+
+    const fchips = [...box.querySelectorAll(".fchip")];
+    function syncGroups() {
+      activeGroups = new Set(fchips.filter(b => !b.classList.contains("off"))
+        .map(b => b.dataset.g));
+      if (activeGroups.size === present.length) activeGroups = null;
+    }
+    fchips.forEach(btn => {
+      btn.onclick = () => {
+        if (!activeGroups) activeGroups = new Set(present);
+        btn.classList.toggle("off");
+        syncGroups();
+        repaint();
+      };
+      btn.ondblclick = () => {
+        const g = btn.dataset.g;
+        activeGroups = new Set([g]);
+        fchips.forEach(b => b.classList.toggle("off", b.dataset.g !== g));
+        repaint();
+      };
+    });
+
+    box.querySelectorAll(".lchip").forEach(btn => btn.onclick = () => {
       const f = btn.dataset.f;
-      if (!activeFields) activeFields = new Set(present);
-      btn.classList.toggle("off");
-      activeFields = new Set([...box.querySelectorAll(".fchip")]
-        .filter(b => !b.classList.contains("off")).map(b => b.dataset.f));
-      if (activeFields.size === present.length) activeFields = null;
+      const on = btn.classList.toggle("on");
+      if (on) activeLayers.add(f); else activeLayers.delete(f);
       repaint();
     });
+  }
+
+  function drawFood(h) {
+    const entries = Object.entries(h.food_breakdown || {})
+      .sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1));
+    const box = document.getElementById("foodbreak");
+    if (!entries.length) {
+      box.innerHTML = "<span class='muted'>No food places here.</span>";
+      document.getElementById("foodline").textContent = "";
+      return;
+    }
+    box.innerHTML = entries.map(([g, n]) => {
+      const G = FG[g] || FG.unclassified;
+      const spec = isSpecialty(g, n);   // same rule the map ✦ ring uses
+      return `<span class="food-stat"><i style="background:${G.color}"></i>` +
+        `${G.label} <b>${n}</b>${spec ? " ✦" : ""}</span>`;
+    }).join("");
+    const total = entries.reduce((s, e) => s + e[1], 0);
+    const lab = (g) => ((FG[g] || FG.unclassified).label).toLowerCase();
+    let line = "";
+    if (total > 0) {
+      const top1 = lab(entries[0][0]);
+      const top2 = entries[1] ? lab(entries[1][0]) : null;
+      line = top2
+        ? `${total} places to eat or drink — mostly ${top1} and ${top2}.`
+        : `${total} places to eat or drink — mostly ${top1}.`;
+    }
+    document.getElementById("foodline").textContent = line;
   }
 
   function stacked(el, counts, parts, colors, labels) {
@@ -204,9 +352,17 @@
     ).join("") || "<li>—</li>";
   }
 
-  function pager(h, total) {
+  function pager(h, total, byRank) {
     const prev = document.getElementById("prev"), next = document.getElementById("next");
-    if (h.rank > 1) { prev.href = `hub.html?h=${h.rank-1}`; prev.textContent = "← Hub " + (h.rank-1); }
-    if (h.rank < total) { next.href = `hub.html?h=${h.rank+1}`; next.textContent = "Hub " + (h.rank+1) + " →"; }
+    if (h.rank > 1) {
+      const p = byRank.get(h.rank - 1);
+      prev.href = `hub.html?h=${h.rank-1}`;
+      prev.textContent = "← " + (p ? p.title : "Hub " + (h.rank-1));
+    }
+    if (h.rank < total) {
+      const n = byRank.get(h.rank + 1);
+      next.href = `hub.html?h=${h.rank+1}`;
+      next.textContent = (n ? n.title : "Hub " + (h.rank+1)) + " →";
+    }
   }
 })();
