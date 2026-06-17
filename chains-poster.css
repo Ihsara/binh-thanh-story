@@ -180,6 +180,18 @@ body[data-page="chains-poster"] {
   background: var(--ink, #1d1a16); color: #fff;
   cursor: pointer;
 }
+/* hub on/off toggle — accent when ON, hollow when OFF */
+.poster-toggle-btn {
+  font-family: var(--body, "Barlow", sans-serif);
+  font-size: .78rem; font-weight: 600;
+  padding: .35rem .7rem;
+  border: 1px solid var(--accent, #c0532a);
+  border-radius: 7px;
+  background: var(--accent, #c0532a); color: #fff;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.poster-toggle-btn.off { background: #fff; color: var(--accent, #c0532a); }
 
 /* ---- dark "Night map" style: invert the sheet so the glow luminesces ---- */
 body.poster-dark {
@@ -204,6 +216,9 @@ body.poster-dark .poster-knot-label-bg { stroke: #101626; }
 body.poster-dark .poster-back,
 body.poster-dark .style-btn { background: #18213a; border-color: #2a3550; color: #d8d0bd; }
 body.poster-dark .style-btn.on { background: #ffb061; color: #1a1206; border-color: #ffb061; }
+body.poster-dark .poster-toggle-btn { background: #ffb061; color: #1a1206; border-color: #ffb061; }
+body.poster-dark .poster-toggle-btn.off { background: #18213a; color: #ffb061; }
+body.poster-dark .poster-4k-btn { background: #f4ead8; color: #101626; border-color: #f4ead8; }
 
 /* ---- 4K poster mode: pin a 3840px-wide canvas for a print-res screenshot ----
    The page becomes a fixed huge sheet; everything is vector so it stays crisp.
@@ -261,7 +276,7 @@ body.poster-4k .poster-knot-label { font-size: 13px; }  /* svg units, scales wit
   }
   .poster-switcher { flex-direction: row; flex-wrap: wrap; justify-content: flex-end; gap: .3rem; }
   .style-btn { font-size: .68rem; padding: .28rem .5rem; }
-  .poster-4k-btn { font-size: .68rem; padding: .28rem .5rem; }
+  .poster-4k-btn, .poster-toggle-btn { font-size: .68rem; padding: .28rem .5rem; }
   .poster-head { padding-top: 5.5rem; }   /* clear the wrapped control bar */
   .poster-back { width: 34px; height: 34px; opacity: .8; }
 }

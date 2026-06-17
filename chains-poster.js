@@ -199,6 +199,7 @@
   // Render orchestration
   // -------------------------------------------------------------------------
   let currentStyle = STYLES[0];
+  let showHubs = true;     // the hub glow knots + their labels (toggleable)
 
   function renderStyle(style) {
     currentStyle = style;
@@ -209,12 +210,22 @@
       .attr("preserveAspectRatio", "xMidYMid meet");
     fit(data.terr.bounds);
     style.draw(svg);
+    applyHubVisibility();
 
     document.body.classList.toggle("poster-dark", !!style.dark);
     document.getElementById("poster-blurb").textContent = style.blurb;
     // sync switcher buttons
     document.querySelectorAll(".style-btn").forEach(b =>
       b.classList.toggle("on", b.dataset.style === style.id));
+  }
+
+  // Hide/show the hub glow circles + ranked labels without redrawing the streets.
+  function applyHubVisibility() {
+    const fig = document.getElementById("poster-map");
+    const display = showHubs ? null : "none";
+    fig.querySelectorAll(".knots, .knot-labels").forEach(g => {
+      g.style.display = display;
+    });
   }
 
   function buildSwitcher() {
@@ -288,6 +299,23 @@
     });
   }
 
+  // Hub-circles toggle: drop the glow knots so the bare street/territory map shows.
+  function wireHubToggle() {
+    const btn = document.getElementById("poster-hubs");
+    if (!btn) return;
+    const sync = () => {
+      btn.setAttribute("aria-pressed", showHubs ? "true" : "false");
+      btn.classList.toggle("off", !showHubs);
+      btn.textContent = showHubs ? "Hubs: on" : "Hubs: off";
+    };
+    btn.addEventListener("click", () => {
+      showHubs = !showHubs;
+      applyHubVisibility();
+      sync();
+    });
+    sync();
+  }
+
   document.addEventListener("DOMContentLoaded", async () => {
     const fig = document.getElementById("poster-map");
     try {
@@ -308,6 +336,7 @@
       buildLegend();
       fillCopy();
       wire4K();
+      wireHubToggle();
       renderStyle(STYLES[0]);
     } catch (e) {
       fig.textContent = "Poster data failed to load.";
