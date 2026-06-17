@@ -299,10 +299,11 @@ body.poster-dark .g-rank { color: #ffb061; }
 body.poster-dark .guide-sub, body.poster-dark .g-char,
 body.poster-dark .guide-note, body.poster-dark .g-eat-l { color: #b9b29c; }
 
-/* ---- wide-screen: map on the left, blurb + key stacked on the right ---- */
+/* ---- wide-screen: the MAP is the main character (≈70% of the sheet); the
+   blurb + brand key live in a slim secondary rail on the right ---- */
 @media (min-width: 1100px) {
   .poster {
-    grid-template-columns: minmax(0, 1.35fr) minmax(300px, .9fr);
+    grid-template-columns: minmax(0, 2.1fr) minmax(260px, .8fr);
     grid-template-areas:
       "head  head"
       "map   blurb"
@@ -316,9 +317,11 @@ body.poster-dark .guide-note, body.poster-dark .g-eat-l { color: #b9b29c; }
   .poster-map { grid-area: map; max-width: 100%; align-self: start; }
   .poster-blurb {
     grid-area: blurb; text-align: left; margin: 0; max-width: none;
-    align-self: end; font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+    align-self: end; font-size: clamp(1rem, 1.15vw, 1.2rem);
   }
+  /* slim rail: the key reads as a quiet reference, not a co-star */
   .poster-legend { grid-area: legend; justify-content: flex-start; align-self: start; max-width: none; }
+  .poster-legend .p-chip { font-size: .72rem; padding: .22rem .5rem; }
   .poster-stats { grid-area: stats; }
   .poster-foot { grid-area: foot; }
 }

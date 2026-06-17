@@ -51,7 +51,15 @@
     y = lat => VIEW - (oy + (lat - miny) * s);
   }
 
-  function coreR(d) { return 1.6 + d.chains.length * 0.55; }
+  // Stroke/glow weight multiplier. The map renders into a fixed 600-unit viewBox
+  // but DISPLAYS at ~600px normally vs ~2200px in 4K — so a 0.7-unit stroke that
+  // reads crisp small goes hairline-faint when the sheet balloons. WEIGHT > 1 in
+  // 4K thickens strokes + intensifies the glow so the poster reads as bold as the
+  // small version (strokes scale WITH the viewBox now — no non-scaling-stroke).
+  let WEIGHT = 1;
+  const w = v => v * WEIGHT;     // weighted stroke width / radius
+
+  function coreR(d) { return (1.6 + d.chains.length * 0.55) * WEIGHT; }
 
   function territoryColour(cls) {
     if (cls === "contested") return PAL.TERR.contested;
@@ -114,7 +122,6 @@
     g.selectAll("path").data(data.terr.edges).enter().append("path")
       .attr("d", d => line(d.c))
       .attr("fill", "none")
-      .style("vector-effect", "non-scaling-stroke")
       .each(function (d) { styleFn(d3.select(this), d); });
     return g;
   }
@@ -126,17 +133,17 @@
     const knot = g.selectAll("g").data(data.hubs).enter().append("g")
       .attr("transform", d => `translate(${x(d.lon)},${y(d.lat)})`);
     knot.append("circle")
-      .attr("r", d => coreR(d) + 8).attr("fill", halo).attr("opacity", 0.14);
+      .attr("r", d => coreR(d) + w(8)).attr("fill", halo).attr("opacity", 0.14);
     knot.append("circle")
-      .attr("r", d => coreR(d) + 3.5).attr("fill", mid).attr("opacity", 0.30);
+      .attr("r", d => coreR(d) + w(3.5)).attr("fill", mid).attr("opacity", 0.30);
     knot.append("circle")
       .attr("r", coreR).attr("fill", core).attr("opacity", coreOpacity);
     if (ranked) {
       const top = data.hubs.filter(h => h.rank <= 5);
       const lab = svg.append("g").attr("class", "knot-labels");
       const t = lab.selectAll("text").data(top).enter().append("text")
-        .attr("x", d => x(d.lon) + coreR(d) + 6)
-        .attr("y", d => y(d.lat) + 3)
+        .attr("x", d => x(d.lon) + coreR(d) + w(6))
+        .attr("y", d => y(d.lat) + w(3))
         .attr("class", "poster-knot-label")
         .text(d => `${d.chains.length} brands`);
       t.clone(true).lower().attr("class", "poster-knot-label-bg");
@@ -148,7 +155,7 @@
   function drawGlow(svg) {
     addEdges(svg, (sel) =>
       sel.attr("stroke", d => d.cls === "unclaimed" ? PAL.STREET : PAL.STREET_FAINT)
-         .attr("stroke-width", 0.7)
+         .attr("stroke-width", w(0.7))
          .attr("opacity", 0.5));
     addKnots(svg, { core: PAL.HUB_CORE, mid: PAL.HUB_CORE, halo: PAL.HUB_CORE, ranked: true });
   }
@@ -157,7 +164,7 @@
   function drawTerritory(svg) {
     addEdges(svg, (sel) =>
       sel.attr("stroke", d => territoryColour(d.cls))
-         .attr("stroke-width", d => d.cls === "unclaimed" ? 0.7 : 0.85)
+         .attr("stroke-width", d => d.cls === "unclaimed" ? w(0.7) : w(0.85))
          .attr("opacity", d => d.cls === "unclaimed" ? 0.4 : 0.85));
     addKnots(svg, {
       core: PAL.HUB_CORE, mid: PAL.HUB_CORE, halo: PAL.HUB_CORE,
@@ -169,7 +176,7 @@
   function drawContested(svg) {
     addEdges(svg, (sel) =>
       sel.attr("stroke", d => d.cls === "contested" ? PAL.TERR.contested : PAL.STREET)
-         .attr("stroke-width", d => d.cls === "contested" ? 1.4 : 0.6)
+         .attr("stroke-width", d => d.cls === "contested" ? w(1.4) : w(0.6))
          .attr("opacity", d => d.cls === "contested" ? 0.98 : 0.18));
     addKnots(svg, {
       core: PAL.HUB_CORE, mid: PAL.HUB_CORE, halo: PAL.HUB_CORE, coreOpacity: 0.85,
@@ -182,14 +189,14 @@
       .attr("x", 0).attr("y", 0).attr("width", VIEW).attr("height", VIEW)
       .attr("fill", DARK.ground);
     addEdges(svg, (sel) =>
-      sel.attr("stroke", DARK.street).attr("stroke-width", 0.6).attr("opacity", 0.7));
+      sel.attr("stroke", DARK.street).attr("stroke-width", w(0.6)).attr("opacity", 0.7));
     addKnots(svg, { core: DARK.glow, mid: DARK.glowMid, halo: DARK.glow, ranked: true });
   }
 
   // ===== Style 5: ink & ember =====
   function drawInk(svg) {
     addEdges(svg, (sel) =>
-      sel.attr("stroke", "#2a221b").attr("stroke-width", 0.45).attr("opacity", 0.55));
+      sel.attr("stroke", "#2a221b").attr("stroke-width", w(0.45)).attr("opacity", 0.55));
     addKnots(svg, {
       core: "#b8431a", mid: "#b8431a", halo: "#b8431a", coreOpacity: 0.92, ranked: true,
     });
@@ -210,13 +217,13 @@
       .attr("preserveAspectRatio", "xMidYMid meet");
     fit(data.terr.bounds);
     style.draw(svg);
-    applyHubVisibility();
 
     document.body.classList.toggle("poster-dark", !!style.dark);
     document.getElementById("poster-blurb").textContent = style.blurb;
     // sync switcher buttons
     document.querySelectorAll(".style-btn").forEach(b =>
       b.classList.toggle("on", b.dataset.style === style.id));
+    applyHubVisibility();   // last word on knot visibility + the matching caption
   }
 
   // Hide/show the hub glow circles + ranked labels without redrawing the streets.
@@ -226,6 +233,19 @@
     fig.querySelectorAll(".knots, .knot-labels").forEach(g => {
       g.style.display = display;
     });
+    // glow style leaves streets faint on purpose (the glow sits on top); with the
+    // glow off they'd look washed out, so lift the street opacity to fill the map.
+    if (currentStyle.id === "glow") {
+      fig.querySelectorAll(".edges path").forEach(p => {
+        p.setAttribute("opacity", showHubs ? "0.5" : "0.85");
+      });
+    }
+    // keep the caption honest: with the glow off, describe the bare map instead.
+    const blurb = document.getElementById("poster-blurb");
+    if (blurb) {
+      blurb.textContent = showHubs ? currentStyle.blurb
+        : "Just the street mesh — every road Bình Thạnh's chains can walk to, with the density glow stripped away. Toggle the hubs back on to see where they pile up.";
+    }
   }
 
   function buildSwitcher() {
@@ -319,6 +339,7 @@
   // 4K toggle: pin the poster wrapper to a 3840-wide canvas so a screenshot is
   // print-resolution. Toggling adds a class the CSS sizes; the SVG is vector so it
   // stays crisp at any size.
+  const WEIGHT_4K = 1.9;   // strokes+glow scale up at 4K so the map reads bold, not faint
   function wire4K() {
     const btn = document.getElementById("poster-4k");
     if (!btn) return;
@@ -326,6 +347,9 @@
       const on = document.body.classList.toggle("poster-4k");
       btn.setAttribute("aria-pressed", on ? "true" : "false");
       btn.textContent = on ? "Exit 4K" : "4K poster";
+      // re-render the map at the heavier weight (strokes/glow thicken with the sheet)
+      WEIGHT = on ? WEIGHT_4K : 1;
+      renderStyle(currentStyle);
       if (on) window.scrollTo(0, 0);
     });
   }
