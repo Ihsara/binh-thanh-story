@@ -206,7 +206,7 @@
   // Render orchestration
   // -------------------------------------------------------------------------
   let currentStyle = STYLES[0];
-  let showHubs = true;     // the hub glow knots + their labels (toggleable)
+  let showHubs = false;    // hub glow knots default OFF (bare map first); toggleable
 
   function renderStyle(style) {
     currentStyle = style;
@@ -290,7 +290,7 @@
       `pack in — and what each one is actually good for.</p>` +
       `<div class="guide-cards">` +
       guide.hubs.map(h => {
-        const goods = (h.good_for || []).slice(0, 5)
+        const goods = (h.good_for || []).slice(0, 3)
           .map(s => `<span class="g-tag">${s}</span>`).join("");
         const eat = (h.eat || []).length
           ? `<div class="g-eat"><span class="g-eat-l">Eat:</span> ${h.eat.join(" · ")}</div>` : "";
