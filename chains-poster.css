@@ -1,0 +1,276 @@
+/* chains-poster.css — print/screenshot-friendly poster layout.
+   Wide-screen-first (the poster reads as a single tall sheet), gracefully
+   reflows on phones, and a .poster-4k body class pins a 3840px canvas. */
+
+:root {
+  --poster-max: 1200px;       /* the sheet width on normal desktop */
+  --poster-pad: clamp(1.25rem, 4vw, 4rem);
+}
+
+body[data-page="chains-poster"] {
+  background: var(--paper, #f7f3ea);
+  /* a faint vignette so the sheet reads as paper on a wider viewport */
+  background-image: radial-gradient(120% 90% at 50% 0%, #fffdf7 0%, var(--paper,#f7f3ea) 60%);
+  min-height: 100dvh;
+}
+
+/* ---- the sheet ---- */
+.poster {
+  max-width: var(--poster-max);
+  margin: 0 auto;
+  padding: clamp(2rem, 6vh, 5rem) var(--poster-pad) var(--poster-pad);
+  display: grid;
+  gap: clamp(1rem, 2.5vh, 2rem);
+}
+
+.poster-head { text-align: center; padding-top: 2.5rem; }
+.poster .kicker { display: block; margin-bottom: .5rem; }
+.poster-title {
+  font-family: var(--display, "Fraunces", serif);
+  font-weight: 900;
+  font-size: clamp(2.6rem, 7vw, 5.5rem);
+  line-height: .98;
+  letter-spacing: -.01em;
+  margin: 0;
+}
+.poster-title em { font-style: italic; font-weight: 600; color: var(--accent, #c0532a); }
+.poster-dek {
+  font-family: var(--display, "Fraunces", serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--muted, #8a8175);
+  max-width: 44ch;
+  margin: .75rem auto 0;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  line-height: 1.4;
+}
+
+/* ---- map ---- */
+.poster-map {
+  margin: 0 auto;
+  width: 100%;
+  max-width: min(78vh, 900px);   /* keep the square from dominating tall sheets */
+  aspect-ratio: 1 / 1;
+  background: var(--paper-2, #fbf9f3);
+  border: 1px solid var(--rule, #e4ddcf);
+  border-radius: 10px;
+  padding: clamp(.4rem, 1vw, 1rem);
+  box-shadow: 0 2px 24px rgba(60,40,20,.06);
+}
+.poster-map svg { width: 100%; height: 100%; display: block; }
+
+.poster-knot-label {
+  font: 600 12px var(--body, "Barlow", sans-serif);
+  fill: #4a2a12;
+}
+.poster-knot-label-bg {
+  font: 600 12px var(--body, "Barlow", sans-serif);
+  fill: none; stroke: var(--paper, #faf6ef); stroke-width: 3px;
+  stroke-linejoin: round; paint-order: stroke;
+}
+
+.poster-blurb {
+  text-align: center;
+  max-width: 56ch;
+  margin: 0 auto;
+  color: var(--muted, #8a8175);
+  font-size: clamp(.92rem, 1.3vw, 1.05rem);
+  line-height: 1.5;
+}
+
+/* ---- legend (static printed key, every brand) ---- */
+.poster-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .45rem .55rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.p-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .3rem .65rem;
+  border: 1px solid var(--rule, #e4ddcf);
+  border-radius: .7rem;
+  background: #fff;
+  color: var(--ink, #1d1a16);
+  font-size: clamp(.74rem, 1vw, .85rem);
+  white-space: nowrap;
+}
+.p-chip .sw { width: 11px; height: 11px; border-radius: 50%; flex: 0 0 auto; }
+.p-chip .n { opacity: .5; font-variant-numeric: tabular-nums; }
+
+/* ---- stat strip ---- */
+.poster-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(1.2rem, 4vw, 3.5rem);
+  padding: clamp(1rem, 2vh, 1.75rem) 0 0;
+  border-top: 1px solid var(--rule, #e4ddcf);
+  max-width: 900px;
+  margin: .5rem auto 0;
+}
+.p-stat { text-align: center; min-width: 5rem; }
+.p-stat .v {
+  display: block;
+  font-family: var(--display, "Fraunces", serif);
+  font-weight: 900;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1;
+  color: var(--accent, #c0532a);
+  font-variant-numeric: tabular-nums;
+}
+.p-stat .l {
+  display: block;
+  margin-top: .3rem;
+  color: var(--muted, #8a8175);
+  font-size: clamp(.7rem, 1vw, .82rem);
+}
+
+.poster-foot {
+  text-align: center;
+  color: var(--muted, #8a8175);
+  font-size: .75rem;
+  line-height: 1.5;
+  display: grid;
+  gap: .15rem;
+  margin-top: .5rem;
+}
+
+/* ---- controls: back link + style switcher (quiet, top corners) ---- */
+.poster-back {
+  position: fixed; top: 1rem; left: 1rem; z-index: 20;
+  width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: #fff; border: 1px solid var(--rule, #e4ddcf);
+  color: var(--muted, #8a8175); text-decoration: none;
+  font-size: 1.2rem; line-height: 1;
+  opacity: .35; transition: opacity .15s, color .15s, transform .15s;
+}
+.poster-back:hover { opacity: 1; color: var(--accent, #c0532a); transform: translateX(-2px); }
+
+.poster-controls {
+  position: fixed; top: 1rem; right: 1rem; z-index: 20;
+  display: flex; flex-direction: column; align-items: flex-end; gap: .5rem;
+  opacity: .4; transition: opacity .15s;
+}
+.poster-controls:hover, .poster-controls:focus-within { opacity: 1; }
+.poster-switcher { display: flex; flex-direction: column; gap: .3rem; }
+.style-btn {
+  font-family: var(--body, "Barlow", sans-serif);
+  font-size: .78rem; font-weight: 500;
+  padding: .35rem .7rem;
+  border: 1px solid var(--rule, #e4ddcf);
+  border-radius: 7px;
+  background: #fff; color: var(--ink, #1d1a16);
+  cursor: pointer; text-align: left;
+  transition: border-color .15s, background .15s, color .15s;
+}
+.style-btn:hover { border-color: var(--accent, #c0532a); }
+.style-btn.on { background: var(--accent, #c0532a); color: #fff; border-color: var(--accent, #c0532a); }
+.poster-4k-btn {
+  font-family: var(--body, "Barlow", sans-serif);
+  font-size: .78rem; font-weight: 600;
+  padding: .35rem .7rem;
+  border: 1px solid var(--ink, #1d1a16);
+  border-radius: 7px;
+  background: var(--ink, #1d1a16); color: #fff;
+  cursor: pointer;
+}
+
+/* ---- dark "Night map" style: invert the sheet so the glow luminesces ---- */
+body.poster-dark {
+  background: #0b1020;
+  background-image: radial-gradient(120% 90% at 50% 0%, #16203a 0%, #0b1020 60%);
+  color: #f4ead8;
+}
+body.poster-dark .poster-title { color: #f4ead8; }
+body.poster-dark .poster-dek,
+body.poster-dark .poster-blurb,
+body.poster-dark .poster-foot,
+body.poster-dark .p-stat .l { color: #b9b29c; }
+body.poster-dark .poster-map {
+  background: #101626; border-color: #27324a;
+  box-shadow: 0 2px 40px rgba(255,150,80,.10);
+}
+body.poster-dark .p-chip { background: #18213a; border-color: #2a3550; color: #f4ead8; }
+body.poster-dark .poster-stats { border-top-color: #27324a; }
+body.poster-dark .p-stat .v { color: #ffb061; }
+body.poster-dark .poster-knot-label { fill: #ffd9a8; }
+body.poster-dark .poster-knot-label-bg { stroke: #101626; }
+body.poster-dark .poster-back,
+body.poster-dark .style-btn { background: #18213a; border-color: #2a3550; color: #d8d0bd; }
+body.poster-dark .style-btn.on { background: #ffb061; color: #1a1206; border-color: #ffb061; }
+
+/* ---- 4K poster mode: pin a 3840px-wide canvas for a print-res screenshot ----
+   The page becomes a fixed huge sheet; everything is vector so it stays crisp.
+   Scroll/zoom your browser to frame, or screenshot at 100% on a 4K display. */
+body.poster-4k { overflow: auto; }
+body.poster-4k .poster {
+  max-width: 3840px;
+  width: 3840px;
+  padding: 240px 320px;
+  gap: 80px;
+}
+body.poster-4k .poster-map { max-width: 2200px; }
+body.poster-4k .poster-title { font-size: 280px; }
+body.poster-4k .poster-dek { font-size: 64px; max-width: 40ch; }
+body.poster-4k .poster-blurb { font-size: 44px; max-width: 52ch; }
+body.poster-4k .p-chip { font-size: 38px; padding: .6rem 1.2rem; border-radius: 1.4rem; }
+body.poster-4k .p-chip .sw { width: 34px; height: 34px; }
+body.poster-4k .poster-legend { max-width: 2800px; gap: 1.2rem 1.4rem; }
+body.poster-4k .poster-stats { max-width: 2800px; gap: 180px; padding-top: 80px; }
+body.poster-4k .p-stat .v { font-size: 150px; }
+body.poster-4k .p-stat .l { font-size: 40px; margin-top: 1rem; }
+body.poster-4k .poster-foot { font-size: 34px; gap: .6rem; }
+body.poster-4k .poster-knot-label { font-size: 13px; }  /* svg units, scales with viewBox */
+
+/* ---- wide-screen: map on the left, blurb + key stacked on the right ---- */
+@media (min-width: 1100px) {
+  .poster {
+    grid-template-columns: minmax(0, 1.35fr) minmax(300px, .9fr);
+    grid-template-areas:
+      "head  head"
+      "map   blurb"
+      "map   legend"
+      "stats stats"
+      "foot  foot";
+    align-content: start;
+    gap: clamp(1.25rem, 2.5vw, 2.5rem) clamp(1.5rem, 3vw, 3rem);
+  }
+  .poster-head { grid-area: head; }
+  .poster-map { grid-area: map; max-width: 100%; align-self: start; }
+  .poster-blurb {
+    grid-area: blurb; text-align: left; margin: 0; max-width: none;
+    align-self: end; font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+  }
+  .poster-legend { grid-area: legend; justify-content: flex-start; align-self: start; max-width: none; }
+  .poster-stats { grid-area: stats; }
+  .poster-foot { grid-area: foot; }
+}
+
+/* ---- narrow screens: the fixed controls become a compact, non-overlapping
+   bar so they never sit on top of the centred title ---- */
+@media (max-width: 720px) {
+  .poster-controls {
+    flex-direction: row; flex-wrap: wrap; justify-content: flex-end;
+    max-width: calc(100vw - 4rem); gap: .3rem; opacity: .9;
+  }
+  .poster-switcher { flex-direction: row; flex-wrap: wrap; justify-content: flex-end; gap: .3rem; }
+  .style-btn { font-size: .68rem; padding: .28rem .5rem; }
+  .poster-4k-btn { font-size: .68rem; padding: .28rem .5rem; }
+  .poster-head { padding-top: 5.5rem; }   /* clear the wrapped control bar */
+  .poster-back { width: 34px; height: 34px; opacity: .8; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .poster-back, .poster-controls, .style-btn { transition: none; }
+}
+
+@media print {
+  .poster-controls, .poster-back { display: none; }
+  body[data-page="chains-poster"] { background: #fff; }
+}

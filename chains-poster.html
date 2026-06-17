@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chains vs độc lập — poster</title>
+  <meta name="description" content="A poster of where retail chains pile up across Bình Thạnh: 169 outlets, 42 brands, 22 hubs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,600&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="spine.css">
+  <link rel="stylesheet" href="chains-poster.css">
+</head>
+<body data-page="chains-poster">
+
+  <!-- the one hidden affordance: a quiet "back to the story" link, top-left -->
+  <a class="poster-back" href="chains.html" aria-label="Back to the Chains story">←</a>
+
+  <!-- style switcher + 4K toggle, top-right, fades unless hovered -->
+  <div class="poster-controls">
+    <div id="poster-switcher" class="poster-switcher"></div>
+    <button id="poster-4k" type="button" class="poster-4k-btn" aria-pressed="false">4K poster</button>
+  </div>
+
+  <main class="poster" id="poster">
+    <header class="poster-head">
+      <span class="kicker">Bình Thạnh · Street Life</span>
+      <h1 class="poster-title">Chains vs <em>độc lập</em></h1>
+      <p id="poster-dek" class="poster-dek"></p>
+    </header>
+
+    <figure id="poster-map" class="poster-map" aria-label="Map of Bình Thạnh showing where retail chains cluster into hubs"></figure>
+
+    <p id="poster-blurb" class="poster-blurb"></p>
+
+    <div id="poster-legend" class="poster-legend" aria-label="Brands keyed by colour and outlet count"></div>
+
+    <div id="poster-stats" class="poster-stats"></div>
+
+    <footer class="poster-foot">
+      <span>Places: Overture Maps (CDLA-Permissive-2.0). Streets: OpenStreetMap.</span>
+      <span>Catchments are walked network distance, not circles. Hubs cluster outlets within ~200&nbsp;m; the contested frontier uses a 30&nbsp;m margin.</span>
+    </footer>
+  </main>
+
+  <script src="hem/vendor/d3.v7.min.js"></script>
+  <script src="chains-poster.js"></script>
+</body>
+</html>
