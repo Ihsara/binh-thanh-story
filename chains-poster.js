@@ -258,6 +258,37 @@
     }
   }
 
+  // Visitor guide (4K only): name the top corners and say what a person would
+  // actually come for — a coffee, a meal, bubble tea, a date, a movie, a gadget.
+  // Built from the lean chains-poster-guide.json (a Python bake off hubs.json).
+  function buildGuide(guide) {
+    const host = document.getElementById("poster-guide");
+    if (!host || !guide || !guide.hubs) return;
+    host.innerHTML =
+      `<h2 class="guide-title">Coming to Bình Thạnh? Here's where to go.</h2>` +
+      `<p class="guide-sub">The ${guide.hubs.length} busiest corners, ranked by how many brands ` +
+      `pack in — and what each one is actually good for.</p>` +
+      `<div class="guide-cards">` +
+      guide.hubs.map(h => {
+        const goods = (h.good_for || []).slice(0, 5)
+          .map(s => `<span class="g-tag">${s}</span>`).join("");
+        const eat = (h.eat || []).length
+          ? `<div class="g-eat"><span class="g-eat-l">Eat:</span> ${h.eat.join(" · ")}</div>` : "";
+        return `<div class="g-card">` +
+          `<div class="g-rank">${h.rank}</div>` +
+          `<div class="g-body">` +
+            `<div class="g-name">${h.title}</div>` +
+            `<div class="g-char">${h.character}</div>` +
+            (goods ? `<div class="g-tags">${goods}</div>` : "") +
+            eat +
+          `</div></div>`;
+      }).join("") +
+      `</div>` +
+      `<p class="guide-note">“Good for” = a named chain actually present at that corner ` +
+      `(walked within ~1&nbsp;km of its heart). Everything else — the independent cafés, ` +
+      `the bún and cơm shops — outnumbers the chains many times over.</p>`;
+  }
+
   // Fill the headline stat-line + caption from the baked totals (never hard-coded).
   function fillCopy() {
     const t = data.chains.totals;
@@ -319,10 +350,12 @@
   document.addEventListener("DOMContentLoaded", async () => {
     const fig = document.getElementById("poster-map");
     try {
-      const [chains, hubs, terr] = await Promise.all([
+      const [chains, hubs, terr, guide] = await Promise.all([
         fetch("chains.json").then(r => r.json()),
         fetch("chains-hubs.json").then(r => r.json()),
         fetch("chains-territory.json").then(r => r.json()),
+        // the 4K visitor guide is a small, optional enhancement — tolerate absence.
+        fetch("chains-poster-guide.json").then(r => r.ok ? r.json() : null).catch(() => null),
       ]);
       data = { chains, hubs: hubs.hubs, terr };
       rosterCat = new Map(chains.roster.map(r => [r.id, r.category]));
@@ -334,6 +367,7 @@
       fit(terr.bounds);
       buildSwitcher();
       buildLegend();
+      buildGuide(guide);
       fillCopy();
       wire4K();
       wireHubToggle();

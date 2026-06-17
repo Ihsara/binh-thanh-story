@@ -102,6 +102,9 @@ body[data-page="chains-poster"] {
 .p-chip .sw { width: 11px; height: 11px; border-radius: 50%; flex: 0 0 auto; }
 .p-chip .n { opacity: .5; font-variant-numeric: tabular-nums; }
 
+/* ---- 4K visitor guide (hidden until 4K mode) ---- */
+.poster-guide { display: none; }
+
 /* ---- stat strip ---- */
 .poster-stats {
   display: flex;
@@ -242,6 +245,59 @@ body.poster-4k .p-stat .v { font-size: 150px; }
 body.poster-4k .p-stat .l { font-size: 40px; margin-top: 1rem; }
 body.poster-4k .poster-foot { font-size: 34px; gap: .6rem; }
 body.poster-4k .poster-knot-label { font-size: 13px; }  /* svg units, scales with viewBox */
+
+/* In 4K, the 42-brand reference key is noise — drop it and show the visitor
+   guide (named corners + what each is good for) in its place instead. */
+body.poster-4k .poster-legend { display: none; }
+body.poster-4k .poster-guide { display: block; grid-area: legend; align-self: start; }
+body.poster-4k .guide-title { font-size: 96px; line-height: 1.05; margin: 0 0 .25em; }
+body.poster-4k .guide-sub { font-size: 46px; line-height: 1.35; margin: 0 0 1.5rem; }
+body.poster-4k .guide-cards { gap: 1.5rem; }
+body.poster-4k .g-card { padding: 1.5rem 1.8rem; border-radius: 1.4rem; gap: 1.6rem; }
+body.poster-4k .g-rank { font-size: 96px; min-width: 1.4em; }
+body.poster-4k .g-name { font-size: 64px; }
+body.poster-4k .g-char { font-size: 42px; margin: .35rem 0 .6rem; }
+body.poster-4k .g-tag { font-size: 36px; padding: .35rem .9rem; border-radius: 1.2rem; }
+body.poster-4k .g-eat { font-size: 38px; }
+body.poster-4k .guide-note { font-size: 34px; line-height: 1.4; }
+
+/* ---- visitor-guide card styling (used at every size once shown) ---- */
+.guide-title {
+  font-family: var(--display, "Fraunces", serif);
+  font-weight: 900; line-height: 1.06; margin: 0 0 .3em;
+}
+.guide-sub { color: var(--muted, #8a8175); margin: 0 0 1.1rem; max-width: 60ch; }
+.guide-cards { display: grid; gap: .85rem; }
+.g-card {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: .9rem 1.1rem; border: 1px solid var(--rule, #e4ddcf);
+  border-radius: 12px; background: var(--paper-2, #fbf9f3);
+}
+.g-rank {
+  font-family: var(--display, "Fraunces", serif); font-weight: 900;
+  font-size: 1.9rem; line-height: 1; color: var(--accent, #c0532a);
+  min-width: 1.4em; text-align: center; font-variant-numeric: tabular-nums;
+}
+.g-body { flex: 1; min-width: 0; }
+.g-name { font-family: var(--display, "Fraunces", serif); font-weight: 600; font-size: 1.25rem; }
+.g-char { color: var(--muted, #8a8175); margin: .15rem 0 .5rem; }
+.g-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+.g-tag {
+  font-size: .8rem; padding: .2rem .6rem; border-radius: .7rem;
+  background: #fff; border: 1px solid var(--rule, #e4ddcf); color: var(--ink, #1d1a16);
+  white-space: nowrap;
+}
+.g-eat { margin-top: .5rem; font-size: .88rem; color: var(--ink, #1d1a16); }
+.g-eat-l { color: var(--muted, #8a8175); font-weight: 600; }
+.guide-note { color: var(--muted, #8a8175); font-size: .82rem; line-height: 1.5; margin: 1rem 0 0; max-width: 70ch; }
+
+/* dark Night style: guide reads on navy too */
+body.poster-dark .g-card { background: #18213a; border-color: #2a3550; }
+body.poster-dark .g-tag { background: #101626; border-color: #2a3550; color: #f4ead8; }
+body.poster-dark .g-name, body.poster-dark .g-eat { color: #f4ead8; }
+body.poster-dark .g-rank { color: #ffb061; }
+body.poster-dark .guide-sub, body.poster-dark .g-char,
+body.poster-dark .guide-note, body.poster-dark .g-eat-l { color: #b9b29c; }
 
 /* ---- wide-screen: map on the left, blurb + key stacked on the right ---- */
 @media (min-width: 1100px) {
