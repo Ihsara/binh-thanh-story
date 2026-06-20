@@ -67,11 +67,46 @@
   const want = Math.max(1, parseInt(
     new URLSearchParams(location.search).get("h") || "1", 10) || 1);
 
+  const TYPE_LABEL = {heritage:"Heritage corner", food:"Food street",
+    riverside:"Riverside", bridge:"Bridge & gateway", knot:"Everyday knot"};
+  const TOD_COLOR = {0:"#d9d2c6", 1:"#c08a4a", 2:"#a23b1e"};
+
+  function renderFieldGuide(h) {
+    document.getElementById("fg-glyph").innerHTML =
+      (window.glyphSVG ? window.glyphSVG(h.glyph, {size:48}) : "");
+    const badge = document.getElementById("fg-type-badge");
+    badge.textContent = TYPE_LABEL[h.type] || h.type;
+    badge.setAttribute("data-type", h.type);
+    document.getElementById("fg-portrait").textContent = h.portrait || "";
+    document.getElementById("fg-expect").textContent = h.what_to_expect || "";
+
+    const tod = h.time_of_day || {morning:1, noon:1, evening:1};
+    const TOD_HEIGHT = {0:"30%", 1:"65%", 2:"100%"};
+    const TOD_WORD = {0:"quiet", 1:"moderate", 2:"busy"};
+    document.getElementById("fg-timeofday").innerHTML =
+      `<span class="tod-cap">When it's alive · <span class="tod-swatch" style="background:${TOD_COLOR[0]}"></span>quiet → <span class="tod-swatch" style="background:${TOD_COLOR[1]}"></span>moderate → <span class="tod-swatch" style="background:${TOD_COLOR[2]}"></span>busy</span>` +
+      ["morning","noon","evening"].map(k => {
+        const v = tod[k] !== undefined ? tod[k] : 1;
+        return `<span class="tod" style="background:${TOD_COLOR[v]};height:${TOD_HEIGHT[v]}" title="${k}: ${TOD_WORD[v]}">${k}</span>`;
+      }).join("");
+
+    const picks = h.picks || [];
+    document.getElementById("fg-picks").innerHTML = picks.length
+      ? picks.map(p =>
+          `<div class="fg-pick"><span class="intent">${p.intent}</span>` +
+          `<span class="name">${p.name}</span><span class="why">${p.why}</span></div>`
+        ).join("")
+      : `<span class="muted">No standout picks on file for this corner.</span>`;
+
+    document.getElementById("fg-footnote").textContent = h.footnote || "";
+  }
+
   d3.json("hubs.json").then((data) => {
     const byRank = new Map(data.hubs.map((h) => [h.rank, h]));
     const h = byRank.get(want) || data.hubs[0];
     document.title = `${h.title} · Bình Thạnh Atlas`;
     document.getElementById("title").textContent = h.title;
+    renderFieldGuide(h);
     document.getElementById("sig").textContent =
       `${h.split.chain + h.split.indep} places · diversity ${h.diversity.toFixed(2)} · ${h.signature}`;
     drawLocal(h);

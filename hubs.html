@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,400&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="spine.css">
-  <link rel="stylesheet" href="hubs.css">
+  <link rel="stylesheet" href="hubs.css?v=20260620a">
 </head>
 <body data-page="hubs">
   <div id="site-nav"></div>
@@ -24,12 +24,21 @@
       <button id="viewTerr" class="vbtn on">Territories</button>
       <button id="viewRel" class="vbtn">Relations</button>
     </div>
+    <div id="intent-filter">
+      <button data-type="all" class="on">All</button>
+      <button data-type="heritage">Heritage</button>
+      <button data-type="food">Food</button>
+      <button data-type="riverside">Riverside</button>
+      <button data-type="bridge">Bridge</button>
+      <button data-type="knot">Everyday knot</button>
+    </div>
     <figure class="atlas-map" style="position:relative" aria-label="District map
       of Bình Thạnh's chain hubs as colored street territories; click a territory
       for its profile">
       <svg id="map"></svg>
       <div class="kpop" id="kpop"></div>
     </figure>
+    <div id="type-legend"></div>
     <svg id="relmap" class="relmap" hidden aria-label="How Bình Thạnh's hubs relate:
       a node-link map placing each hub at its true location, linked where their
       street territories share nodes — competing or merely bordering"></svg>
@@ -48,6 +57,7 @@
     <a class="how" href="method.html#chains">Method, parameters &amp; limits →</a></p></footer>
   <script src="hem/vendor/d3.v7.min.js"></script>
   <script src="nav.js"></script>
-  <script src="hubs.js"></script>
+  <script src="glyphs.js?v=20260620a"></script>
+  <script src="hubs.js?v=20260620a"></script>
 </body>
 </html>

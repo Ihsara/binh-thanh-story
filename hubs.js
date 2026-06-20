@@ -5,6 +5,13 @@
   const CHAIN = "#7a3f1d", INDEP = "#44608c";
   const LIVES = ["sustenance","anchors","third_places","display"];
 
+  const TYPE_COLOR = {heritage:"#8a5a2b", food:"#b5532a", riverside:"#2f7d8a",
+                      bridge:"#6a6f3a", knot:"#7a6a6a"};
+  const TYPE_LABEL = {heritage:"Heritage", food:"Food", riverside:"Riverside",
+                      bridge:"Bridge", knot:"Everyday knot"};
+  const TYPE_GLYPH  = {heritage:"shrine", food:"bowl", riverside:"tower",
+                       bridge:"bridge", knot:"bikes"};
+
   // 22 distinct paper-friendly hues, one per hub (IDENTITY). Tested against the
   // live territory render for adjacency separability.
   const HUE = d3.quantize(t => d3.interpolateRainbow(t * 0.92 + 0.02), 22);
@@ -80,6 +87,57 @@
           .attr("d", e => line(e.c)).attr("fill", "none").attr("stroke", col)
           .attr("stroke-width", 1.6).attr("stroke-opacity", 0.85);
       }
+
+      // Glyph pin layer — one marker per hub, colored by type
+      const pinLayer = svg.append("g").attr("class", "pin-layer");
+      data.hubs.forEach(hub => {
+        if (hub.lon == null || hub.lat == null) return;
+        const glyphMarkup = (window.HUB_GLYPHS && window.HUB_GLYPHS[hub.glyph])
+          ? window.HUB_GLYPHS[hub.glyph]
+          : (window.glyphSVG ? window.glyphSVG(hub.glyph, {size: 24}) : "");
+        const fo = pinLayer.append("foreignObject")
+          .attr("class", "hub-pin")
+          .attr("data-type", hub.type)
+          .attr("x", x(hub.lon) - 14)
+          .attr("y", y(hub.lat) - 14)
+          .attr("width", 28)
+          .attr("height", 28)
+          .style("cursor", "pointer")
+          .style("color", TYPE_COLOR[hub.type] || "#7a6a6a")
+          .on("click", (ev) => {
+            ev.stopPropagation();
+            window.location.href = `hub.html?h=${hub.rank}`;
+          });
+        fo.append("xhtml:div")
+          .style("width", "28px")
+          .style("height", "28px")
+          .style("color", TYPE_COLOR[hub.type] || "#7a6a6a")
+          .html(glyphMarkup);
+      });
+
+      // Type legend
+      const legEl = document.getElementById("type-legend");
+      if (legEl && window.glyphSVG) {
+        legEl.innerHTML = Object.keys(TYPE_LABEL).map(t =>
+          `<span class="leg" style="color:${TYPE_COLOR[t]}">${
+            window.glyphSVG(TYPE_GLYPH[t], {size: 18})
+          } ${TYPE_LABEL[t]}</span>`
+        ).join("");
+      }
+
+      // Type filter — keys on data-type (varied across the 22 hubs)
+      document.querySelectorAll("#intent-filter button").forEach(b => {
+        b.addEventListener("click", () => {
+          document.querySelectorAll("#intent-filter button")
+            .forEach(x => x.classList.remove("on"));
+          b.classList.add("on");
+          const want = b.dataset.type;
+          document.querySelectorAll(".hub-pin").forEach(pin => {
+            const match = want === "all" || pin.getAttribute("data-type") === want;
+            pin.classList.toggle("dim", !match);
+          });
+        });
+      });
     }).catch((e) => d3.select("#map").append("text").attr("x", 16).attr("y", 28)
       .attr("fill", "#c00").text(`Failed to load chains-territory.json: ${e}`));
   }
