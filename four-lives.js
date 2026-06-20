@@ -11,10 +11,10 @@ fetch("data.json").then((r) => r.json()).then((data) => {
   const lv = data.streetlife.lives;
   if (lv && el("lives-stepper")) {
     const LIFE_DESC = {
-      sustenance: "markets, groceries, pharmacies, banks, motorbike repair — the errands",
-      anchors: "schools, temples, offices, government — the fixed points",
-      third_places: "cà phê, quán ăn, bia, karaoke, billiards — the social street",
-      display: "fashion, beauty, electronics, hotels — the optional stroll",
+      sustenance: "markets, groceries, pharmacies, banks, motorbike repair — who feeds shift workers and runs the daily errands",
+      anchors: "schools, temples, ward offices, government buildings — the fixed points the neighbourhood orients itself by",
+      third_places: "cà phê at dawn, quán ăn at noon, bia and karaoke at dusk — where the city socializes",
+      display: "fashion, beauty, electronics, hotel lobbies — the optional stroll, not the daily need",
     };
     const cnt = (k) => lv.counts.find((c) => c.life === k);
     const chips = lv.counts.map((c) =>
@@ -46,21 +46,21 @@ fetch("data.json").then((r) => r.json()).then((data) => {
     const sens = (t) => lv.sensitivity.find((r) => r.threshold === t);
     const liveSteps = [
       { kind: "intro", kicker: "The four lives", headline: "Coffee is the headline. It isn't the <em>whole street</em>.",
-        narrative: `Sort the ${lv.total.toLocaleString("en")} places the open graph lists here by what people come to DO, and the district resolves into four overlapping lives: ${chips}. (${lv.unclassified.n.toLocaleString("en")} of them are back-office pages the street never shows — counted, not hidden. <a class="how" href="method.html#lives">The sorting →</a>)` },
-      { kind: "data", kicker: "Four inks", headline: "Four lives, four <em>districts</em>.",
-        narrative: `Each life drawn as its own ink. ${cnt("display").label} (${cnt("display").n.toLocaleString("en")}) is the biggest bucket of pages — but tighten the existence-confidence dial and the order flips: at ≥0.75 it's ${cnt("third_places").label.toLowerCase()} (${sens(0.75).counts.third_places.toLocaleString("en")} vs ${sens(0.75).counts.display.toLocaleString("en")}) that leads the street the data is surest about.`,
+        narrative: `Ask what people come to DO — not what the category column says — and the ${lv.total.toLocaleString("en")} places the open graph lists resolve into four overlapping lives: ${chips}. (${lv.unclassified.n.toLocaleString("en")} of them are back-office pages the street never shows — counted, not hidden. <a class="how" href="method.html#lives">The sorting →</a>)` },
+      { kind: "data", kicker: "Four inks", headline: "Four lives, four <em>districts within the district</em>.",
+        narrative: `Each life drawn as its own ink — the social hum, the daily errand, the fixed shrine, the shopfront stroll. ${cnt("display").label} (${cnt("display").n.toLocaleString("en")}) is the biggest bucket of records — but tighten the existence-confidence dial and the picture shifts: at ≥0.75 it's ${cnt("third_places").label.toLowerCase()} (${sens(0.75).counts.third_places.toLocaleString("en")} vs ${sens(0.75).counts.display.toLocaleString("en")}) that leads the street the data is surest about.`,
         render: fourMaps },
-      { kind: "data", kicker: "Two streets in one", headline: "The social street and the <em>errand street</em>.",
-        narrative: `${LIFE_DESC.third_places} — against ${LIFE_DESC.sustenance}. Top of each: ${topcat("third_places", 0)} vs ${topcat("sustenance", 0)}.`,
+      { kind: "data", kicker: "Two streets in one", headline: "The plastic-stool parliament and the <em>market run</em>.",
+        narrative: `${LIFE_DESC.third_places} — alongside ${LIFE_DESC.sustenance}. The top draw of each: ${topcat("third_places", 0)} vs ${topcat("sustenance", 0)}.`,
         render: pairMaps },
-      { kind: "data", kicker: "The overlap", headline: "Where all four lives <em>stack</em>.",
-        narrative: `Jane Jacobs called it: vitality is density times <em>diversity</em>. Darker cells host more kinds of life; ${lv.grid.all_four.toLocaleString("en")} of ${lv.grid.active.toLocaleString("en")} inhabited ${lv.grid.cell_m}-metre cells host all four. The pale monocultures are mostly ${cnt(lv.grid.mono_top_life).label.toLowerCase()}.`,
+      { kind: "data", kicker: "Where lives meet", headline: "Where all four lives <em>stack</em>.",
+        narrative: `Jane Jacobs called it: vitality is density times <em>diversity</em>. Darker cells host more kinds of life; ${lv.grid.all_four.toLocaleString("en")} of ${lv.grid.active.toLocaleString("en")} inhabited ${lv.grid.cell_m}-metre cells host all four at once. The pale monocultures are mostly ${cnt(lv.grid.mono_top_life).label.toLowerCase()}.`,
         render: mapImg("lives-grid.png", "Cells shaded by how many kinds of life they host") },
       { kind: "data", kicker: "Boulevard & hẻm", headline: "The lives <em>sort themselves</em> by street.",
-        narrative: `Share of each life whose nearest lane is alley-class. ${hemiest.label} leans deepest into the hẻm (${Math.round(100 * hemiest.share)}%); ${least.label.toLowerCase()} hugs the boulevard (${Math.round(100 * least.share)}%). The alley scholarship predicted necessity inside, display out front — here is the district's own answer. <a class="how" href="hem/">The hẻm story →</a>`,
+        narrative: `Which life retreats deepest into the alleys? ${hemiest.label} leans hardest into the hẻm (${Math.round(100 * hemiest.share)}%); ${least.label.toLowerCase()} stays closest to the boulevard (${Math.round(100 * least.share)}%). The alley scholarship predicted necessity inside, display out front — here is the district's own answer. <a class="how" href="hem/">The hẻm story →</a>`,
         render: mixBars },
       { kind: "intro", kicker: "What the data can't see", headline: "The fourth life of the <em>sidewalk</em> is invisible.",
-        narrative: `Everything above is FIXED commerce — places with a name and a pin. The roving layer (the cart, the basket, the evening stall) that <em>Sidewalk City</em> documented riding on top of HCMC's sidewalks appears in no database. The street is bigger than any map of it. <a class="how" href="method.html#lives">How we sorted →</a>` },
+        narrative: `Everything above is fixed commerce — places with a name and a pin. The roving layer (the cart, the basket, the evening stall) that <em>Sidewalk City</em> documented riding on top of HCMC's sidewalks appears in no database. The street has always been bigger than any map of it. <a class="how" href="method.html#lives">How we sorted →</a>` },
     ];
     Stepper.mount(el("lives-stepper"), liveSteps);
   }
