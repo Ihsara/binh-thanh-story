@@ -20,6 +20,8 @@
       stories: [
         { href: "hubs.html", label: "The field guide", page: "hubs" },
         { href: "cuisine.html", label: "Where the food is", page: "cuisine" },
+        { href: "rhythm.html", label: "The rhythm of a day", page: "rhythm" },
+        { href: "history.html", label: "The history ribbon", page: "history" },
       ] },
     { id: "alleys", label: "The Alleys", href: "hem/", stories: [] },
     { id: "method", label: "Method", href: "method.html", stories: [] },
