@@ -1,5 +1,7 @@
 // hub.js — one hub's profile: local map + lives bar + split bar + categories.
 (function () {
+  function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
   const PALETTE = {sustenance:"#3e7a5e", anchors:"#44608c",
                    third_places:"#c0532a", display:"#c99a2e", unclassified:"#9c8a72"};
   const CHAIN = "#7a3f1d", INDEP = "#44608c", STREET = "#cfc6b6";
@@ -101,9 +103,34 @@
     document.getElementById("fg-footnote").textContent = h.footnote || "";
   }
 
-  function esc(s) {
-    return String(s == null ? "" : s)
-      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  function renderHero(h) {
+    const fig = document.getElementById("hub-hero");
+    if (!fig) return;
+    if (h.hero_image && h.hero_image.src) {
+      const img = h.hero_image;
+      const cr = h.hero_credit || {};
+      const licLink = cr.license_url
+        ? `<a href="${esc(cr.license_url)}" target="_blank" rel="noopener">${esc(cr.license) || "license"}</a>`
+        : esc(cr.license || "");
+      const srcLink = cr.source_url
+        ? `<a href="${esc(cr.source_url)}" target="_blank" rel="noopener">${esc(cr.source) || "source"}</a>`
+        : esc(cr.source || "");
+      fig.innerHTML =
+        `<img src="${esc(img.src)}"` +
+        (img.srcset ? ` srcset="${esc(img.srcset)}" sizes="(max-width:600px) 100vw, 720px"` : "") +
+        ` alt="${esc(img.alt || "")}" loading="lazy">` +
+        `<figcaption class="hub-credit">Photo: ${esc(cr.author || "")}` +
+        (licLink ? ` · ${licLink}` : "") +
+        (srcLink ? ` · ${srcLink}` : "") +
+        `</figcaption>`;
+      fig.hidden = false;
+    } else if (h.research && h.research.photo_verdict === "data-art") {
+      fig.hidden = true;
+      fig.innerHTML = "";
+    } else {
+      fig.innerHTML = window.HUB_VIGNETTE ? window.HUB_VIGNETTE(h.id, h.type) : "";
+      fig.hidden = !fig.innerHTML;
+    }
   }
 
   // food_breakdown group -> readable label (subset; mirrors hub_field_guide)
@@ -202,6 +229,7 @@
     document.title = `${h.title} · Bình Thạnh Atlas`;
     document.getElementById("title").textContent = h.title;
     renderFieldGuide(h);
+    renderHero(h);
     renderSkin(h);
     renderUnique(h);
     renderAround(h);

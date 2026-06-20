@@ -1,4 +1,13 @@
 /* hub.css — one hub's profile page. */
+
+/* hero slot (Phase E) */
+.hub-hero{margin:0 0 1rem;border-radius:10px;overflow:hidden;background:#f1eadc;}
+.hub-hero img{display:block;width:100%;height:auto;}
+.hub-credit{font-size:.72rem;color:#6a6052;padding:.35rem .6rem;background:#faf6ef;}
+.hub-credit a{color:#7a3f1d;}
+.hub-vignette,.hub-hero svg{display:block;width:100%;height:auto;background:#faf6ef;}
+@media(max-width:520px){.hub-credit{font-size:.68rem;}}
+
 .hub-map svg{width:100%;height:auto;background:#faf6ef;
   border:1px solid var(--rule,#e4ddcf);border-radius:8px}
 .hub-bars h3,.hub-cats h3{font-size:1rem;margin:1.2rem 0 .4rem}

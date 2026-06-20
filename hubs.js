@@ -1,5 +1,7 @@
 // hubs.js — the atlas index: district map of 22 hubs + a sortable card grid.
 (function () {
+  function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
   const PALETTE = {sustenance:"#3e7a5e", anchors:"#44608c",
                    third_places:"#c0532a", display:"#c99a2e"};
   const CHAIN = "#7a3f1d", INDEP = "#44608c";
@@ -278,6 +280,7 @@
     const n = h.split.chain + h.split.indep;
     const lifeTotal = LIVES.reduce((s, l) => s + (h.lives[l]||0), 0);
     return `<a class="hub-card" href="hub.html?h=${h.rank}">
+      ${h.hero_image ? `<img class="card-thumb" src="${esc(h.hero_image.src)}" alt="" loading="lazy">` : ""}
       <h3>${h.title}</h3>
       <div class="hub-stat">${n} places · diversity ${h.diversity.toFixed(2)}</div>
       ${bar(h.lives, lifeTotal, LIVES, PALETTE)}
