@@ -163,3 +163,8 @@
 #hub-main[data-skin="heritage"] .fg-anchors .anchor{border-left-width:3px}
 #hub-main[data-skin="knot"] .fg-cross-line{font-style:italic}
 #fg-pullquote[hidden]{display:none}
+
+/* Phase Z: cross-link block back to the tourist viz */
+#fg-viz-links .fg-viz-row { display: flex; flex-wrap: wrap; gap: 1rem; }
+#fg-viz-links a { color: var(--accent); font-weight: 600; text-decoration: none;
+  border-bottom: 1px dotted var(--accent); }

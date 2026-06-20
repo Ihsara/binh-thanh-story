@@ -163,6 +163,8 @@ table.params th,table.params td{text-align:left;padding:.32rem .55rem;border-bot
 table.params thead th{font-weight:600;color:var(--muted,#8a8175);font-size:.78rem;
   text-transform:uppercase;letter-spacing:.04em}
 table.params td:nth-child(2){white-space:nowrap;font-variant-numeric:tabular-nums}
+/* --- Phase Z: Street Life → Field Guide bridge --- */
+.fg-bridge{margin-top:2rem;font-family:var(--body)}
 /* --- cover: featured card + section blocks --- */
 .featured-card { display: block; padding: 1.4rem 1.6rem; border: 1px solid var(--rule, #e4ddcf);
   border-left: 4px solid var(--accent, #c0532a); text-decoration: none; color: inherit; }
@@ -170,3 +172,12 @@ table.params td:nth-child(2){white-space:nowrap;font-variant-numeric:tabular-num
 .cover-section { margin: 2rem 0; }
 .cover-section-label a { text-decoration: none; color: var(--muted, #8a8175);
   font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
+.featured-card.has-img { display: grid; grid-template-columns: 200px 1fr; gap: 1.2rem;
+  align-items: stretch; padding: 0; overflow: hidden; }
+.featured-card .featured-img { width: 100%; height: 100%; object-fit: cover;
+  min-height: 140px; display: block; }
+.featured-card .featured-body { padding: 1.3rem 1.5rem; }
+@media (max-width: 560px) {
+  .featured-card.has-img { grid-template-columns: 1fr; }
+  .featured-card .featured-img { max-height: 180px; }
+}

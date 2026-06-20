@@ -212,6 +212,19 @@
       `<p class="fg-cross-line">${esc(h.cross_hub_draw)}</p>`;
   }
 
+  function renderVizLinks(h) {
+    const box = document.getElementById("fg-viz-links");
+    if (!box) return;
+    const hash = "";
+    box.innerHTML =
+      `<h3>See this corner elsewhere</h3>
+       <p class="fg-viz-row">
+         <a href="rhythm.html${hash}">Its daily rhythm →</a>
+         <a href="history.html${hash}">On the history ribbon →</a>
+         <a href="cuisine.html">What it eats →</a>
+       </p>`;
+  }
+
   function renderSkin(h) {
     const root = document.getElementById("hub-main");
     if (root && h.type_skin) root.setAttribute("data-skin", h.type_skin);
@@ -235,6 +248,7 @@
     renderAround(h);
     renderWalk(h);
     renderCross(h);
+    renderVizLinks(h);
     document.getElementById("sig").textContent =
       `${h.split.chain + h.split.indep} places · diversity ${h.diversity.toFixed(2)} · ${h.signature}`;
     drawLocal(h);
