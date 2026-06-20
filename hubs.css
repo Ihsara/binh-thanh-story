@@ -21,7 +21,7 @@
 .kpop{position:absolute;min-width:200px;max-width:240px;background:#fffdf8;
   border:1px solid #d8cdb8;border-radius:10px;padding:12px 14px;
   box-shadow:0 10px 28px rgba(40,30,10,.18);display:none;z-index:5}
-.kpop h3{margin:0 0 2px;font-family:Fraunces,Georgia,serif;font-size:17px}
+.kpop h3{margin:0 0 2px;font-family:var(--display);font-size:17px}
 .kpop .kmeta{margin:0 0 8px;color:#8a7d68;font-size:12px}
 .kpop .kbar{display:flex;height:8px;border-radius:4px;overflow:hidden;margin:6px 0 8px}
 .kpop .kbar span{display:block;height:100%}

@@ -26,11 +26,11 @@
 .hem-wrap--wide .tree-layout svg { flex: 1 1 640px; }
 .hem-hero { padding: 3rem 1.2rem 1rem; }
 .hem-hero h1 { font-size: clamp(2rem, 6vw, 3.4rem); margin-bottom: .4rem; }
-.thesis { font-family: Fraunces, Georgia, serif; font-style: italic;
+.thesis { font-family: "Alegreya",Georgia,serif; font-style: italic;
           font-size: clamp(1.1rem, 3vw, 1.5rem); color: var(--d1); margin: .6rem 0 1.4rem; }
 .lede { max-width: 54ch; color: #5b5247; }
 
-.worked-example { font-family: "Barlow", system-ui, sans-serif; background: #fbf3ec;
+.worked-example { font-family: "Be Vietnam Pro", system-ui, sans-serif; background: #fbf3ec;
                   border: 1px solid #ecdcc9; border-radius: 6px; padding: .5rem .8rem;
                   display: inline-block; font-size: .95rem; }
 .worked-example b { color: var(--d1); }
@@ -55,10 +55,10 @@
 
 /* Busiest-streets section: a follow-up block under the depth-inversion chart. */
 .streets { margin-top:2.4rem; border-top:1px solid #e4ddcf; padding-top:1.4rem; }
-.streets h2 { font-family:Fraunces,Georgia,serif; font-size:clamp(1.4rem,4vw,2rem);
+.streets h2 { font-family:"Alegreya",Georgia,serif; font-size:clamp(1.4rem,4vw,2rem);
               color:var(--ink); margin:.2rem 0 .4rem; }
 #streets-svg { width:100%; height:auto; display:block; margin:.6rem 0; }
-#streets-svg text { font-family:"Barlow",system-ui,sans-serif; }
+#streets-svg text { font-family:"Be Vietnam Pro",system-ui,sans-serif; }
 .streets-key { font-size:.8rem; color:#7a6f60; margin:.2rem 0 1rem;
                display:flex; gap:.4rem; align-items:center; flex-wrap:wrap; }
 .streets-key .sk-bar { display:inline-block; width:22px; height:10px; border-radius:2px;
@@ -67,16 +67,16 @@
                         background:#7c2d16; vertical-align:middle; }
 
 .year-bar { display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; margin:1rem 0; }
-.year-readout { font-family:Fraunces,Georgia,serif; font-size:1.1rem; color:var(--ink); }
+.year-readout { font-family:"Alegreya",Georgia,serif; font-size:1.1rem; color:var(--ink); }
 .year-bar input[type=range] { flex:1; min-width:160px; accent-color: var(--accent); }
-.year-bar button { font-family:"Barlow",system-ui,sans-serif; font-size:.9rem;
+.year-bar button { font-family:"Be Vietnam Pro",system-ui,sans-serif; font-size:.9rem;
                    background:var(--accent); color:#fff; border:none; border-radius:5px;
                    padding:.4rem .9rem; cursor:pointer; }
 .year-bar button:hover { background:#a8481f; }
 
 .maptype { display:flex; gap:1rem; font-size:.9rem; color:#5b5247; margin:.6rem 0; }
 
-.cta { display:inline-block; margin-top:1rem; font-family:"Barlow",system-ui,sans-serif;
+.cta { display:inline-block; margin-top:1rem; font-family:"Be Vietnam Pro",system-ui,sans-serif;
        background:var(--accent); color:#fff; text-decoration:none; border-radius:6px;
        padding:.6rem 1.2rem; font-size:1rem; }
 .cta:hover { background:#a8481f; }
@@ -86,20 +86,20 @@
 .hem-mag { max-width:960px; margin:0 auto; display:flex; gap:1rem; align-items:baseline;
            font-size:.78rem; padding:.3rem 1.2rem; opacity:.85;
            border-bottom:1px solid #ede6d8; }
-.hem-mag-brand { font-family:Fraunces,Georgia,serif; font-weight:700;
+.hem-mag-brand { font-family:"Alegreya",Georgia,serif; font-weight:700;
                  color:var(--ink); text-decoration:none; }
 .hem-mag nav { display:flex; gap:.8rem; }
-.hem-mag a { font-family:"Barlow",system-ui,sans-serif; color:#8a8175;
+.hem-mag a { font-family:"Be Vietnam Pro",system-ui,sans-serif; color:#8a8175;
              text-decoration:none; }
 .hem-mag a:hover { color:var(--ink); }
 .hem-mag a.is-active { color:var(--accent); font-weight:600; }
 .hem-bar { max-width:960px; margin:0 auto; display:flex; align-items:center;
            justify-content:space-between; gap:1rem; padding:.5rem 1.2rem; flex-wrap:wrap; }
-.hem-brand { font-family:Fraunces,Georgia,serif; font-size:1.05rem; color:var(--ink);
+.hem-brand { font-family:"Alegreya",Georgia,serif; font-size:1.05rem; color:var(--ink);
              text-decoration:none; font-weight:600; }
 .hem-brand span { color:#a99f8f; font-weight:400; }
 .hem-tabs { display:flex; gap:1rem; flex-wrap:wrap; }
-.hem-tabs a { font-family:"Barlow",system-ui,sans-serif; font-size:.9rem; color:#8a8175;
+.hem-tabs a { font-family:"Be Vietnam Pro",system-ui,sans-serif; font-size:.9rem; color:#8a8175;
               text-decoration:none; padding:.15rem 0; border-bottom:2px solid transparent; }
 .hem-tabs a:hover { color:var(--ink); }
 .hem-tabs a.is-active { color:var(--accent); font-weight:600; border-bottom-color:var(--accent); }
@@ -108,7 +108,7 @@
              var(--d2) 60% 80%, var(--d3) 80% 100%); }
 @media (max-width:560px){ .hem-bar{ justify-content:center; } .hem-brand{ flex-basis:100%; text-align:center; } }
 
-select#arterial { font-family:"Barlow",system-ui,sans-serif; font-size:1rem;
+select#arterial { font-family:"Be Vietnam Pro",system-ui,sans-serif; font-size:1rem;
                   padding:.35rem .5rem; border:1px solid #d8c4a8; border-radius:5px;
                   background:#fff; color:var(--ink); }
 
@@ -127,14 +127,14 @@ svg#tree-svg, svg#inv-svg, svg#growth-svg { width:100%; height:auto; display:blo
            touch-action:none; }
 #map-svg:active { cursor:grabbing; }
 #map-reset { position:absolute; top:8px; right:8px; font:inherit; font-size:.8rem;
-             font-family:"Barlow",system-ui,sans-serif; background:#fff;
+             font-family:"Be Vietnam Pro",system-ui,sans-serif; background:#fff;
              border:1px solid #d8c4a8; border-radius:5px; padding:.25rem .5rem;
              cursor:pointer; color:var(--ink); z-index:6; }
 #map-reset:hover { background:var(--paper); }
 .map-hint { font-size:.8rem; color:#8a8175; text-align:center; margin:.3rem 0 0; }
 .map-card { position:absolute; min-width:150px; max-width:200px; background:#fbf3ec;
             border:1px solid #ecdcc9; border-radius:6px; padding:.5rem .7rem;
-            font-size:.85rem; font-family:"Barlow",system-ui,sans-serif;
+            font-size:.85rem; font-family:"Be Vietnam Pro",system-ui,sans-serif;
             box-shadow:0 4px 14px rgba(60,30,10,.18); z-index:5; }
 .map-card b { color:var(--d1); }
 .map-card .mc-x { position:absolute; top:4px; right:6px; border:none; background:none;
@@ -150,9 +150,9 @@ svg#tree-svg, svg#inv-svg, svg#growth-svg { width:100%; height:auto; display:blo
 .tree-howto { font-size:.85rem; color:#7a6f60; font-style:italic; margin:.2rem 0 .6rem; max-width:60ch; }
 .tree-layout { display:flex; gap:1rem; align-items:flex-start; flex-wrap:wrap; position:relative; }
 .tree-layout svg { flex:1 1 420px; min-width:300px; }
-.tree-stats { flex:0 1 220px; font-family:"Barlow",system-ui,sans-serif; font-size:.9rem;
+.tree-stats { flex:0 1 220px; font-family:"Be Vietnam Pro",system-ui,sans-serif; font-size:.9rem;
               background:#fbf3ec; border:1px solid #ecdcc9; border-radius:6px; padding:.7rem .9rem; }
-.tree-stats h3 { margin:0 0 .4rem; font-family:Fraunces,Georgia,serif; color:var(--d1); }
+.tree-stats h3 { margin:0 0 .4rem; font-family:"Alegreya",Georgia,serif; color:var(--d1); }
 .tree-stats p { margin:.3rem 0; color:#5b5247; }
 .tree-stats b { color:var(--d1); }
 .tree-tip { position:absolute; background:#fbf3ec; border:1px solid #ecdcc9; border-radius:6px;

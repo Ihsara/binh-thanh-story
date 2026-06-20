@@ -56,7 +56,7 @@
   background:#23201c;color:#ece7df;border-radius:8px;padding:9px 11px;
   font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;
   box-shadow:0 6px 24px rgba(0,0,0,.28);pointer-events:none}
-#dot-tip .tip-name{font-family:Fraunces,serif;font-size:14px;color:#9cd1a0}
+#dot-tip .tip-name{font-family:var(--display);font-size:14px;color:#9cd1a0}
 #dot-tip .tip-sub{color:#9c948a;margin-bottom:5px}
 #dot-tip .tip-final{margin:4px 0}
 #dot-tip .tip-rule{color:#9c948a}
