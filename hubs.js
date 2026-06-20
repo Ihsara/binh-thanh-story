@@ -72,7 +72,9 @@
         const hub = byId.get(cls);
         if (!hub) continue;
         const col = hueOf(cls);
-        const g = svg.append("g").attr("class", "kingdom").style("cursor", "pointer")
+        const g = svg.append("g").attr("class", "kingdom")
+          .attr("data-type", hub.type).attr("data-id", hub.id)
+          .style("cursor", "pointer")
           .on("mouseenter", function () {
             d3.select(this).selectAll(".vis").attr("stroke-width", 2.6).attr("stroke-opacity", 1);
           })
@@ -125,17 +127,31 @@
         ).join("");
       }
 
-      // Type filter — keys on data-type (varied across the 22 hubs)
+      // Type filter — drives BOTH the hero territory layer AND the pins, and
+      // reports a count. On "all", everything is full color and the count clears.
+      const TOTAL = data.hubs.length;
+      function applyFilter(want) {
+        let shown = 0;
+        document.querySelectorAll("svg#map .kingdom").forEach(g => {
+          const match = want === "all" || g.getAttribute("data-type") === want;
+          g.classList.toggle("muted", !match);
+          g.classList.toggle("match", match && want !== "all");
+          if (match) shown++;
+        });
+        document.querySelectorAll(".hub-pin").forEach(pin => {
+          const match = want === "all" || pin.getAttribute("data-type") === want;
+          pin.classList.toggle("dim", !match);
+        });
+        const cnt = document.getElementById("filter-count");
+        if (cnt) cnt.textContent =
+          want === "all" ? "" : `${shown} of ${TOTAL} hubs`;
+      }
       document.querySelectorAll("#intent-filter button").forEach(b => {
         b.addEventListener("click", () => {
           document.querySelectorAll("#intent-filter button")
             .forEach(x => x.classList.remove("on"));
           b.classList.add("on");
-          const want = b.dataset.type;
-          document.querySelectorAll(".hub-pin").forEach(pin => {
-            const match = want === "all" || pin.getAttribute("data-type") === want;
-            pin.classList.toggle("dim", !match);
-          });
+          applyFilter(b.dataset.type);
         });
       });
     }).catch((e) => d3.select("#map").append("text").attr("x", 16).attr("y", 28)

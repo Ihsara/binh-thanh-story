@@ -54,3 +54,10 @@
 /* Hub glyph pins */
 .hub-pin{cursor:pointer;transition:opacity .25s}
 .hub-pin.dim{opacity:.2}
+
+/* Phase B: filter drives the hero territory layer */
+.kingdom{transition:opacity .25s}
+.kingdom.muted{opacity:.12}
+.kingdom.match .vis{stroke-width:2.4px;stroke-opacity:1}
+.filter-count{font-size:.8rem;color:var(--muted,#8a8175);align-self:center;
+  margin-left:.4rem;font-style:italic}

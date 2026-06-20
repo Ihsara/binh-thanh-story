@@ -101,12 +101,112 @@
     document.getElementById("fg-footnote").textContent = h.footnote || "";
   }
 
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  // food_breakdown group -> readable label (subset; mirrors hub_field_guide)
+  const FOOD_LBL = {ca_phe:"coffee", pho:"pho", bun:"bún", com:"cơm",
+    banh_mi:"bánh mì", bbq:"BBQ", korean:"Korean", japanese:"Japanese",
+    thai:"Thai", chinese:"Chinese", italian:"Italian", pizza:"pizza",
+    seafood:"seafood", bakery:"bakeries", hu_tieu:"hủ tiếu",
+    vegetarian:"vegetarian", fast_food:"fast food", chao:"cháo",
+    vn_other:"Vietnamese", western_other:"Western", indian:"Indian"};
+
+  function renderUnique(h) {
+    const box = document.getElementById("fg-unique");
+    if (!box || !h.whats_unique) { if (box) box.innerHTML = ""; return; }
+    const s = (h.research && h.research.stats) || {};
+    // one honest stat chip when the data supports it (never invented)
+    const chips = [];
+    if (s.cafes) chips.push(`${s.cafes} cafés`);
+    if (s.offices) chips.push(`${s.offices} offices`);
+    if (s.schools) chips.push(`${s.schools} schools`);
+    const stat = chips.length
+      ? `<p class="fg-unique-stat">${chips.map(esc).join(" · ")}</p>` : "";
+    box.innerHTML =
+      `<h3>What's unique here</h3>` +
+      `<p class="fg-unique-line">${esc(h.whats_unique)}</p>` + stat;
+  }
+
+  function renderAround(h) {
+    const box = document.getElementById("fg-around");
+    if (!box) return;
+    const anchors = (h.named_anchors || []).slice(0, 3);
+    const anchorLis = anchors.map(a =>
+      `<li class="anchor"><b>${esc(a.name)}</b>` +
+      `<span class="what">${esc(a.what)}</span>` +
+      `<span class="why">${esc(a.why)}</span></li>`).join("");
+    // top named categories present in the hub (real place names, baked)
+    const cats = (h.top_cats || []).slice(0, 6)
+      .map(c => `<li class="cat">${esc(c.cat)} <b>×${c.n}</b></li>`).join("");
+    // a food-count line (counts only, no invented names)
+    const fb = Object.entries(h.food_breakdown || {})
+      .sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).slice(0, 3)
+      .map(([g, n]) => `${n} ${esc(FOOD_LBL[g] || g)}`);
+    const foodLine = fb.length
+      ? `<p class="fg-around-food">Mostly ${fb.join(", ")}.</p>` : "";
+    if (!anchorLis && !cats && !foodLine) { box.innerHTML = ""; return; }
+    box.innerHTML = `<h3>What's around</h3>` +
+      (anchorLis ? `<ul class="fg-anchors">${anchorLis}</ul>` : "") +
+      (cats ? `<ul class="fg-around-cats">${cats}</ul>` : "") +
+      foodLine;
+  }
+
+  const SHAPE_LBL = {loop: "a loop", oneway: "one way", out_back: "out and back"};
+
+  function renderWalk(h) {
+    const box = document.getElementById("fg-walk");
+    if (!box) return;
+    const wf = h.walking_flow;
+    if (!wf || !Array.isArray(wf.stops) || !wf.stops.length) {
+      box.innerHTML = ""; return;
+    }
+    const shape = SHAPE_LBL[wf.shape] || "";
+    const head = `<h3>A walking flow${shape ? ` <span class="walk-shape">· ${esc(shape)}</span>` : ""}</h3>`;
+    const premise = wf.premise ? `<p class="walk-premise">${esc(wf.premise)}</p>` : "";
+    const steps = wf.stops.map((s, i) => {
+      const mins = (s.minutes != null)
+        ? `<span class="walk-min">${s.minutes === 0 ? "start" : "+" + s.minutes + " min"}</span>` : "";
+      return `<li class="walk-step"><span class="walk-n">${i + 1}</span>` +
+        `<div class="walk-body"><span class="walk-stop">${esc(s.stop)}</span>` +
+        `<span class="walk-intent">${esc(s.intent)}</span>${mins}</div></li>`;
+    }).join("");
+    box.innerHTML = head + premise + `<ol class="walk-list">${steps}</ol>`;
+  }
+
+  function renderCross(h) {
+    const box = document.getElementById("fg-cross");
+    if (!box) return;
+    if (!h.cross_hub_draw) { box.innerHTML = ""; return; }
+    box.innerHTML =
+      `<h3>Why come here from elsewhere</h3>` +
+      `<p class="fg-cross-line">${esc(h.cross_hub_draw)}</p>`;
+  }
+
+  function renderSkin(h) {
+    const root = document.getElementById("hub-main");
+    if (root && h.type_skin) root.setAttribute("data-skin", h.type_skin);
+    const acc = h.accent || {};
+    const pq = document.getElementById("fg-pullquote");
+    if (pq) {
+      if (acc.pull_quote) { pq.textContent = acc.pull_quote; pq.hidden = false; }
+      else { pq.textContent = ""; pq.hidden = true; }
+    }
+  }
+
   d3.json("hubs.json").then((data) => {
     const byRank = new Map(data.hubs.map((h) => [h.rank, h]));
     const h = byRank.get(want) || data.hubs[0];
     document.title = `${h.title} · Bình Thạnh Atlas`;
     document.getElementById("title").textContent = h.title;
     renderFieldGuide(h);
+    renderSkin(h);
+    renderUnique(h);
+    renderAround(h);
+    renderWalk(h);
+    renderCross(h);
     document.getElementById("sig").textContent =
       `${h.split.chain + h.split.indep} places · diversity ${h.diversity.toFixed(2)} · ${h.signature}`;
     drawLocal(h);
