@@ -32,6 +32,8 @@
   }
   let showGen = false;      // generator-ring underlay toggle on the local map
 
+  const HUB_MAP_SLUG = { "hub:0": "van-thanh" };
+
   // --- debug tooltip helpers (module scope) ---
   let _tip = null;
   function ensureTip() {
@@ -240,10 +242,16 @@
     d3.json("hubs.json"),
     d3.json("uniques.json").catch(() => ({candidates:[]})),
     d3.json("images/uniques/UNIQUES.json").catch(() => ({images:[]})),
-    d3.json("hub_illustrations.json").catch(() => ({hubs:{}}))
-  ]).then(([data, uniquesData, uniquesLedger, illustLedger]) => {
+  ]).then(async ([data, uniquesData, uniquesLedger]) => {
     const byRank = new Map(data.hubs.map((h) => [h.rank, h]));
     const h = byRank.get(want) || data.hubs[0];
+    // V1.5 per-hub illustrated map — only the pilot hubs have one; others fall
+    // back to the OSM-edges path. Skip the fetch entirely when there's no slug
+    // so non-pilot hubs don't log a 404.
+    const mapSlug = HUB_MAP_SLUG[h.id];
+    const hubMap = mapSlug
+      ? await d3.json("hub_maps/" + mapSlug + ".json?v=20260622v1_5").catch(() => null)
+      : null;
     document.title = `${h.title} · Bình Thạnh Atlas`;
     document.getElementById("title").textContent = h.title;
     renderFieldGuide(h);
@@ -263,10 +271,8 @@
     const ledgerMap = new Map((uniquesLedger.images || []).map(img => [img.unique_name, img.file]));
     // annotate each unique with its svg file path so card rendering can use it
     hubUniques.forEach(u => { u._svgFile = ledgerMap.get(u.name) || null; });
-    // illustrated map sidecar — null when no entry for this hub
-    const illust = (illustLedger.hubs || {})[h.id] || null;
-    drawLocal(h, hubUniques, ledgerMap, illust);
-    wireFieldSpotlight(illust);
+    drawLocal(h, hubUniques, ledgerMap, hubMap);
+    wireFieldSpotlight(hubMap);
     renderHubCards(h, hubUniques);
     drawBars(h);
     drawCats(h);
@@ -344,8 +350,8 @@
 
   function _handleSpotlight(sel, box, h, uniques) {
     if (!sel) { _renderDefaultCards(box, h, uniques); return; }
-    // pick/walkstop are handled exclusively by wireFieldSpotlight — don't fight it
-    if (sel.type === "pick" || sel.type === "walkstop") return;
+    // pick/walkstop/feature are handled exclusively by wireFieldSpotlight — don't fight it
+    if (sel.type === "pick" || sel.type === "walkstop" || sel.type === "feature") return;
 
     if (sel.type === "unique") {
       // Highlight the matching card; scroll it into view
@@ -397,7 +403,7 @@
     if (cv) cv.dispatchEvent(new CustomEvent("hub:select", { detail: selection, bubbles: true }));
   }
 
-  function drawLocal(h, hubUniques, ledgerMap, illust) {
+  function drawLocal(h, hubUniques, ledgerMap, hubMap) {
     hubUniques = hubUniques || [];
     ledgerMap  = ledgerMap  || new Map();
 
@@ -410,13 +416,12 @@
     const svg = d3.select("#lmap").attr("viewBox", `0 0 ${W} ${H}`);
     svg.selectAll("*").remove();
 
-    // show/hide the honesty caption depending on whether we have an illustration
+    // show/hide the honesty caption depending on whether we have a hub map
     const cap = document.getElementById("map-caption");
-    if (cap) cap.hidden = !illust;
+    if (cap) cap.hidden = !hubMap;
 
-    if (illust) {
-      // illustrated map path — base art + hand-placed pins + drawn walking route
-      drawIllustrated(h, illust, svg, x, y, W, H);
+    if (hubMap) {
+      drawHubMap(h, hubMap, svg, W, H);
     } else {
       // ----- existing OSM path: edges, anchor legend, clusters, vignettes -----
       const line = d3.line().x(p => x(p[0])).y(p => y(p[1]));
@@ -606,63 +611,106 @@
     };
   }
 
-  // ---- illustrated map: base art + hand-placed pins + drawn walking route ----
-  function drawIllustrated(h, illust, svg, x, y, W, H) {
-    // illustration base, scaled to the map frame
-    svg.append("image")
-      .attr("href", illust.art).attr("x", 0).attr("y", 0)
-      .attr("width", W).attr("height", H)
-      .attr("preserveAspectRatio", "xMidYMid slice");
-
-    const px = (u) => u * W, py = (u) => u * H;  // normalized 0–1 → pixels
-
-    // --- drawn walking route (curve through stop points), dashed ink ---
-    const stops = (illust.walk && illust.walk.stops) || [];
-    if (stops.length >= 2) {
-      const pts = stops.map(s => [px(s.x), py(s.y)]);
-      const routeLine = d3.line().curve(d3.curveCatmullRom.alpha(0.6));
-      svg.append("path").attr("class", "walk-route")
-        .attr("d", routeLine(pts)).attr("fill", "none")
-        .attr("stroke", "#c0532a").attr("stroke-width", 2.4)
-        .attr("stroke-dasharray", "7,5").attr("stroke-linecap", "round")
-        .attr("opacity", 0.85);
-      // numbered stop markers ①②③ — clickable, shine the walking-flow step
-      const sg = svg.append("g").attr("class", "walk-stops");
-      stops.forEach((s, k) => {
-        const g = sg.append("g").attr("transform", `translate(${px(s.x)},${py(s.y)})`)
-          .attr("data-stop", s.i)
-          .style("cursor", "pointer").attr("aria-label", `Walk stop ${k + 1}`);
-        g.append("circle").attr("r", 11).attr("fill", "#fffdf8")
-          .attr("stroke", "#c0532a").attr("stroke-width", 2);
-        g.append("text").attr("text-anchor", "middle").attr("dy", "0.35em")
-          .attr("font-size", "11px").attr("font-weight", "700")
-          .attr("fill", "#c0532a").text(k + 1);
-        g.on("click mouseenter", () => spotlight({ type: "walkstop", i: s.i, k }));
-      });
-    }
-
-    // --- pick pins (hand-placed), numbered, clickable → shine the pick card ---
-    const PIN = {coffee:"#a9683b", eat:"#c0453a"};
-    const pg = svg.append("g").attr("class", "pick-pins");
-    (illust.picks || []).forEach(p => {
-      const g = pg.append("g").attr("transform", `translate(${px(p.x)},${py(p.y)})`)
-        .attr("data-pin", p.name)
-        .style("cursor", "pointer").attr("aria-label", p.name);
-      g.append("circle").attr("r", 13).attr("fill", PIN[p.intent] || "#7a3f1d")
-        .attr("stroke", "#fffdf8").attr("stroke-width", 2);
-      g.append("text").attr("text-anchor", "middle").attr("dy", "0.35em")
-        .attr("font-size", "12px").attr("font-weight", "700").attr("fill", "#fff")
-        .text(p.n != null ? p.n : "•");
-      g.append("title").text(p.name);
-      g.on("click mouseenter", () => spotlight({ type: "pick", name: p.name }));
+  // ---- 4-layer real-geometry illustrated map (V1.5) ----
+  const CAT_FILL = {
+    "heritage-temple":"#C47B45","heritage-colonial":"#C47B45",
+    "food-restaurant":"#E8A838","food-cafe":"#E8A838","food-pho":"#E8A838",
+    "food-market":"#E8A838","park-tree":"#7A9B6A","school":"#7A6AA8",
+    "hotel":"#A87A6A","transit-bus":"#4A8FA8","water-bridge":"#4A8FA8",
+    "office-building":"#6A7A8A","star-unique":"#C43838"
+  };
+  function sprite(svg, icon, cx, cy, size, color, deg) {
+    const g = svg.append("g").attr("transform",
+      `translate(${cx},${cy})` + (deg != null ? ` rotate(${deg})` : ""));
+    g.append("circle").attr("r", size * 0.85).attr("fill", color).attr("opacity", 0.22);
+    g.append("use").attr("href", "icons/hub-icons.svg#" + icon)
+      .attr("x", -size/2).attr("y", -size/2).attr("width", size).attr("height", size)
+      .attr("color", "#2A1F14");   // currentColor for the stroke
+    return g;
+  }
+  function drawHubMap(h, m, svg, W, H) {
+    // Ledger coords are all in 0-1, but the fetched OSM geometry can extend past
+    // the hub bbox, so streets/water may project beyond [0,1] (x>1, y<0, etc).
+    // That's intentional full-bleed texture; the SVG viewBox clips it. Not a bug.
+    const px = (u) => u * W, py = (u) => u * H;          // 0-1 -> pixels (y down)
+    const line = d3.line().x(p => px(p[0])).y(p => py(p[1]));
+    const ring = d3.line().x(p => px(p[0])).y(p => py(p[1])).curve(d3.curveLinearClosed);
+    // L0 ground
+    svg.append("rect").attr("width", W).attr("height", H).attr("fill", "#F5EDD8");
+    (m.geometry.blocks||[]).forEach(b =>
+      svg.append("path").attr("d", ring(b)).attr("fill", "#EDE0C4").attr("stroke","none"));
+    (m.geometry.parks||[]).forEach(p =>
+      svg.append("path").attr("d", ring(p.ring)).attr("fill", "#C8D4B0").attr("stroke","none"));
+    (m.geometry.water||[]).forEach(w =>
+      svg.append("path").attr("d", ring(w.ring)).attr("fill", "#9BBFCF").attr("stroke","none"));
+    // L1 streets (weighted by class) + bridge as its own way
+    const SW = {primary:3, secondary:2.2, tertiary:1.6, residential:1.2, service:0.8};
+    (m.geometry.streets||[]).forEach(s =>
+      svg.append("path").attr("d", line(s.pts)).attr("fill","none")
+        .attr("stroke", "#B8A080").attr("stroke-width", SW[s.cls]||1.2)
+        .attr("stroke-dasharray", s.cls==="service" ? "2,2" : null));
+    (m.geometry.bridges||[]).forEach(br => {
+      svg.append("path").attr("d", line(br.pts)).attr("fill","none")
+        .attr("stroke", "#fffdf8").attr("stroke-width", 6);          // railing
+      svg.append("path").attr("d", line(br.pts)).attr("fill","none")
+        .attr("stroke", "#8C7055").attr("stroke-width", 4);
     });
-
-    // Reverse hover: card/step → pin lit up
-    // (wired after DOM settles — called from wireFieldSpotlight)
+    // L3 route band (beneath icons)
+    if ((m.route||[]).length >= 2) {
+      const byN = new Map(m.ledger.map(e => [e.n, e]));
+      const pts = m.route.map(n => byN.get(n)).filter(Boolean).map(e => [px(e.x), py(e.y)]);
+      if (pts.length >= 2)
+        svg.append("path").attr("class","route-band")
+          .attr("d", d3.line().curve(d3.curveCatmullRom.alpha(0.6))(pts))
+          .attr("fill","none").attr("stroke","#7BA7BC").attr("stroke-width", 9)
+          .attr("opacity", 0.35).attr("stroke-linecap","round");
+    }
+    // L2/L3 icons + numbered badges
+    (m.ledger||[]).forEach(e => {
+      const size = e.layer === 2 ? 24 : 18;
+      const deg = e.icon === "water-bridge" ? bridgeDegFor(m, e) : null;
+      const g = sprite(svg, e.icon, px(e.x), py(e.y), size,
+                       CAT_FILL[e.icon] || "#6A7A8A", deg);
+      g.attr("data-n", e.n).style("cursor","pointer").attr("aria-label", e.name_vn);
+      // numbered badge (L3 only)
+      if (e.layer === 3) {
+        const bg = g.append("g").attr("transform", `translate(${size/2-2},${-size/2+2})`);
+        bg.append("circle").attr("r", 7).attr("fill","#2A1F14");
+        bg.append("text").attr("text-anchor","middle").attr("dy","0.35em")
+          .attr("font-size","9px").attr("fill","#fff").attr("font-weight","700").text(e.n);
+      }
+      g.on("click mouseenter", () => spotlight({ type:"feature", n:e.n, name:e.name_vn,
+        blurb:e.blurb }));
+      g.on("mousemove", (ev) => showFeatureTip(ev, e));
+      g.on("mouseleave", () => { if (_tip) _tip.style.display = "none"; });
+    });
+    renderMapLedger(m);   // numbered margin panel
+  }
+  function bridgeDegFor(m, e) {
+    // nearest bridge way to this icon -> use its baked bearing
+    const br = (m.geometry.bridges||[])[0];
+    return br ? br.bearing_deg : null;
+  }
+  function showFeatureTip(ev, e) {
+    const tip = ensureTip();
+    tip.innerHTML = "<b>" + esc(e.name_vn) + "</b>" + (e.blurb ? "<br>"+esc(e.blurb) : "");
+    tip.style.display = "block";
+    tip.style.left = Math.max(4, ev.clientX + 14) + "px";
+    tip.style.top  = Math.max(4, ev.clientY + 14) + "px";
+  }
+  function renderMapLedger(m) {
+    const box = document.getElementById("map-ledger");
+    if (!box) return;
+    box.innerHTML = (m.ledger||[]).map(e =>
+      `<li data-n="${e.n}"><b>${e.n}.</b> ${esc(e.name_vn)}` +
+      (e.blurb ? ` — <span class="led-blurb">${esc(e.blurb)}</span>` : "") + `</li>`).join("");
+    box.querySelectorAll("li").forEach(li =>
+      li.addEventListener("mouseenter", () => spotlight({ type:"feature",
+        n: +li.dataset.n })));
   }
 
-  // ---- field-guide spotlight wiring for pick/walkstop ----
-  function wireFieldSpotlight(illust) {
+  // ---- field-guide spotlight wiring for pick/walkstop/feature ----
+  function wireFieldSpotlight(hubMap) {
     const cv = document.getElementById("ldots");
     if (!cv) return;
     cv.addEventListener("hub:select", (ev) => {
@@ -675,30 +723,21 @@
       } else if (sel.type === "walkstop") {
         const el = document.querySelector(`.walk-step[data-walk="${sel.i}"]`);
         if (el) el.classList.add("spotlight");
+      } else if (sel.type === "feature") {
+        // light matching icon + ledger row
+        document.querySelectorAll("[data-n].lit").forEach(el => el.classList.remove("lit"));
+        document.querySelectorAll("#map-ledger li.lit").forEach(el => el.classList.remove("lit"));
+        if (sel.n != null) {
+          document.querySelectorAll(`[data-n="${sel.n}"]`).forEach(el => el.classList.add("lit"));
+          const ledRow = document.querySelector(`#map-ledger li[data-n="${sel.n}"]`);
+          if (ledRow) { ledRow.classList.add("lit"); ledRow.scrollIntoView({behavior:"smooth",block:"nearest"}); }
+        }
       }
     });
-
-    // Reverse hover: DOM card/step → SVG pin/stop lit
-    if (!illust) return;
-    document.querySelectorAll(".fg-pick[data-pick]").forEach(card => {
-      card.addEventListener("mouseenter", () => {
-        const g = document.querySelector(`.pick-pins g[data-pin="${CSS.escape(card.dataset.pick)}"]`);
-        if (g) g.classList.add("pin-lit");
-      });
-      card.addEventListener("mouseleave", () => {
-        document.querySelectorAll(".pick-pins g.pin-lit").forEach(g => g.classList.remove("pin-lit"));
-      });
-    });
-    document.querySelectorAll(".walk-step[data-walk]").forEach(step => {
-      step.addEventListener("mouseenter", () => {
-        const i = step.dataset.walk;
-        const g = document.querySelector(`.walk-stops g[data-stop="${i}"]`);
-        if (g) g.classList.add("pin-lit");
-      });
-      step.addEventListener("mouseleave", () => {
-        document.querySelectorAll(".walk-stops g.pin-lit").forEach(g => g.classList.remove("pin-lit"));
-      });
-    });
+    // (V1's reverse card→pin/stop hover targeted .pick-pins/.walk-stops SVG
+    // groups that only the retired V1 freehand renderer drew. Both are gone in
+    // V1.5, so that wiring is removed — drawHubMap's reverse hover runs via
+    // [data-n] + #map-ledger above.)
   }
 
   function drawChips(h, repaint) {
