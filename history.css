@@ -16,6 +16,34 @@
   line-height: 1.55;
 }
 
+/* ── Excluded-hub chip row (quiet links, not a wall paragraph) ───────── */
+.gap-note {
+  font: 400 .82rem/1.5 var(--body);
+  color: var(--muted);
+  margin: 1rem 0 .4rem;
+  max-width: 52ch;
+}
+.gap-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin: 0 0 1rem;
+}
+.excluded-chip {
+  font: 500 .78rem/1 var(--label);
+  color: var(--muted);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: .3rem .6rem;
+  text-decoration: none;
+  background: var(--paper-2);
+  transition: border-color .12s, color .12s;
+}
+.excluded-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 /* ── Ribbon scroll wrapper ───────────────────────────────────────────── */
 .ribbon-slot {
   width: 100%;

@@ -9,6 +9,16 @@
 (function () {
   "use strict";
 
+  // ── HTML escape helper (safe interpolation of Vietnamese titles) ──────────
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
   // ── Palette (verbatim from hubs.js) ──────────────────────────────────────
   const TYPE_COLOR = {
     heritage: "#8a5a2b",
@@ -219,11 +229,33 @@
   }
 
   // ── Main ──────────────────────────────────────────────────────────────────
-  d3.json("history.json").then(function (data) {
-    // Render excluded note verbatim from JSON (excluded_note field)
+  Promise.all([d3.json("history.json"), d3.json("hubs.json")]).then(function ([data, hubsData]) {
+    // Build a rank+title lookup keyed by hub id (e.g. "hub:4")
+    const hubMeta = new Map(
+      (hubsData.hubs || []).map(function (h) { return [h.id, { rank: h.rank, title: h.title }]; })
+    );
+
+    // Render excluded corners as a quiet chip row instead of a wall paragraph.
+    // #excluded-note is a <p>; put chips as a sibling <div> (valid HTML).
     const noteEl = document.getElementById("excluded-note");
-    if (noteEl && data.excluded_note) {
-      noteEl.textContent = data.excluded_note;
+    if (noteEl) {
+      if (data.excluded && data.excluded.length > 0) {
+        // Set the honesty text on the <p> itself; .gap-note styles it
+        noteEl.classList.add("gap-note");
+        noteEl.textContent = data.excluded_note || "";
+        // Build chip HTML for each excluded hub id
+        const chips = data.excluded.map(function (id) {
+          const meta = hubMeta.get(id);
+          if (!meta) return "";
+          return '<a class="excluded-chip" href="hub.html?h=' + meta.rank + '">' + esc(meta.title) + '</a>';
+        }).join("");
+        // Insert chips div as sibling AFTER the <p> (not inside it — invalid HTML)
+        noteEl.insertAdjacentHTML("afterend", '<div class="gap-chips">' + chips + '</div>');
+      } else {
+        // Nothing excluded → no wall, no chips
+        noteEl.classList.remove("gap-note");
+        noteEl.textContent = "";
+      }
     }
 
     const dated   = data.beats.filter((b) => b.dated && b.year !== null);
