@@ -171,6 +171,14 @@
 .cluster-glyphs g:hover circle { stroke: #6a6052; }
 .anchor-legend text { font-size: 10px; }
 
+/* V1: illustrated map — Bình Lợi pilot */
+.map-caption{font:italic 400 .76rem/1.4 var(--body);color:var(--muted);margin:.4rem 0 0}
+.walk-route{pointer-events:none}
+.pick-pins g.pin-lit circle,.walk-stops g.pin-lit circle{stroke:#1d1a16;stroke-width:3}
+.fg-pick.spotlight{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft,rgba(192,83,42,.18))}
+.walk-step.spotlight .walk-stop{color:var(--accent)}
+.walk-step.spotlight .walk-n{box-shadow:0 0 0 2px var(--accent-soft,rgba(192,83,42,.3))}
+
 /* Phase Z: cross-link block back to the tourist viz */
 #fg-viz-links .fg-viz-row { display: flex; flex-wrap: wrap; gap: 1rem; }
 #fg-viz-links a { color: var(--accent); font-weight: 600; text-decoration: none;
