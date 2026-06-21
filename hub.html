@@ -9,47 +9,81 @@
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;0,900;1,400&family=Be+Vietnam+Pro:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="spine.css?v=20260621r1">
   <link rel="stylesheet" href="hubs.css?v=20260620g">
-  <link rel="stylesheet" href="hub.css?v=20260621z">
+  <link rel="stylesheet" href="hub.css?v=20260621r3t7">
 </head>
 <body data-page="hubs">
   <div id="site-nav"></div>
   <main id="hub-main">
     <p class="hub-back"><a href="hubs.html">← The Field Guide</a></p>
-    <figure id="hub-hero" class="hub-hero" hidden></figure>
-    <header class="fg-header">
-      <span id="fg-glyph" class="fg-glyph"></span>
-      <div>
-        <span class="kicker">Bình Thạnh · Field Guide</span>
-        <h2 id="title">…</h2>
-        <span id="fg-type-badge" class="fg-badge"></span>
+
+    <div class="hub-grid">
+
+      <!-- masthead: header + hero + pull-quote (full-width row 1) -->
+      <div class="hub-grid-masthead">
+        <figure id="hub-hero" class="hub-hero" hidden></figure>
+        <header class="fg-header">
+          <span id="fg-glyph" class="fg-glyph"></span>
+          <div>
+            <span class="kicker">Bình Thạnh · Field Guide</span>
+            <h2 id="title">…</h2>
+            <span id="fg-type-badge" class="fg-badge"></span>
+          </div>
+        </header>
+        <blockquote id="fg-pullquote" class="pullquote"></blockquote>
       </div>
-    </header>
 
-    <blockquote id="fg-pullquote" class="pullquote"></blockquote>
+      <!-- b1: overview prose (portrait + expect + unique + around + picks + footnote) -->
+      <div class="hub-grid-b1">
+        <p id="fg-portrait" class="fg-portrait"></p>
+        <p id="fg-expect" class="fg-expect"></p>
+        <section id="fg-unique" class="fg-unique" aria-label="What's unique here"></section>
+        <section id="fg-around" class="fg-around" aria-label="What's around"></section>
+        <section class="fg-picks-wrap"><h3>If you go</h3><div id="fg-picks" class="fg-picks"></div></section>
+        <p id="fg-footnote" class="fg-footnote"></p>
+      </div>
 
-    <p id="fg-portrait" class="fg-portrait"></p>
-    <p id="fg-expect" class="fg-expect"></p>
-    <div id="fg-timeofday" class="fg-timeofday" aria-label="When this corner is alive"></div>
-    <section class="fg-picks-wrap"><h3>If you go</h3><div id="fg-picks" class="fg-picks"></div></section>
-    <p id="fg-footnote" class="fg-footnote"></p>
+      <!-- b2: local map — crown jewel (placeholder; map rendered into #lmap / #ldots) -->
+      <div class="hub-grid-b2">
+        <div class="explore-bar">
+          <button id="exploreToggle" class="explore-toggle" aria-pressed="false">Explore this corner ⇆ Read</button>
+        </div>
+        <section class="hub-map" style="position:relative">
+          <svg id="lmap" aria-label="Local streets of this hub"></svg>
+          <canvas id="ldots" aria-hidden="true"></canvas>
+          <button id="genToggle" class="gen-toggle">Show what draws people</button>
+          <div id="fieldchips" class="field-chips"></div>
+        </section>
+      </div>
 
-    <section id="fg-unique" class="fg-unique" aria-label="What's unique here"></section>
-    <section id="fg-around" class="fg-around" aria-label="What's around"></section>
-    <section id="fg-walk" class="fg-walk" aria-label="A walking flow"></section>
-    <section id="fg-cross" class="fg-cross" aria-label="Why come here from elsewhere"></section>
-    <section id="fg-viz-links" class="fg-block"></section>
+      <!-- b3: exploration cards (empty; populated by later tasks) -->
+      <div class="hub-grid-b3">
+        <div id="hub-cards"></div>
+      </div>
 
+      <!-- c1: day-rhythm -->
+      <div class="hub-grid-c1">
+        <div id="fg-timeofday" class="fg-timeofday" aria-label="When this corner is alive"></div>
+      </div>
+
+      <!-- c2: walking flow -->
+      <div class="hub-grid-c2">
+        <section id="fg-walk" class="fg-walk" aria-label="A walking flow"></section>
+      </div>
+
+      <!-- c3: why-come / cross-links -->
+      <div class="hub-grid-c3">
+        <section id="fg-cross" class="fg-cross" aria-label="Why come here from elsewhere"></section>
+        <section id="fg-viz-links" class="fg-block"></section>
+      </div>
+
+    </div><!-- /.hub-grid -->
+
+    <!-- analyst dashboard — kept BELOW the grid -->
     <details id="hub-data" class="hub-data">
       <summary>The data behind this corner</summary>
       <p id="sig" class="dek"></p>
       <p id="why" class="why-line"></p>
       <div id="builtup" class="builtup"></div>
-      <section class="hub-map" style="position:relative">
-        <svg id="lmap" aria-label="Local streets of this hub"></svg>
-        <canvas id="ldots" aria-hidden="true"></canvas>
-        <button id="genToggle" class="gen-toggle">Show what draws people</button>
-        <div id="fieldchips" class="field-chips"></div>
-      </section>
       <section class="hub-bars">
         <h3>The four lives here</h3><div id="lives"></div>
         <h3>Chain vs independent</h3><div id="split"></div>
@@ -76,6 +110,6 @@
   <script src="food_groups.js"></script>
   <script src="glyphs.js?v=20260620e"></script>
   <script src="hub-vignettes.js?v=20260620e"></script>
-  <script src="hub.js?v=20260621z"></script>
+  <script src="hub.js?v=20260621r3t7"></script>
 </body>
 </html>

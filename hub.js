@@ -95,8 +95,8 @@
     const picks = h.picks || [];
     document.getElementById("fg-picks").innerHTML = picks.length
       ? picks.map(p =>
-          `<div class="fg-pick"><span class="intent">${p.intent}</span>` +
-          `<span class="name">${p.name}</span><span class="why">${p.why}</span></div>`
+          `<div class="fg-pick"><span class="intent">${esc(p.intent)}</span>` +
+          `<span class="name">${esc(p.name)}</span><span class="why">${esc(p.why)}</span></div>`
         ).join("")
       : `<span class="muted">No standout picks on file for this corner.</span>`;
 
@@ -236,7 +236,11 @@
     }
   }
 
-  d3.json("hubs.json").then((data) => {
+  Promise.all([
+    d3.json("hubs.json"),
+    d3.json("uniques.json").catch(() => ({candidates:[]})),
+    d3.json("images/uniques/UNIQUES.json").catch(() => ({images:[]}))
+  ]).then(([data, uniquesData, uniquesLedger]) => {
     const byRank = new Map(data.hubs.map((h) => [h.rank, h]));
     const h = byRank.get(want) || data.hubs[0];
     document.title = `${h.title} · Bình Thạnh Atlas`;
@@ -251,7 +255,15 @@
     renderVizLinks(h);
     document.getElementById("sig").textContent =
       `${h.split.chain + h.split.indep} places · diversity ${h.diversity.toFixed(2)} · ${h.signature}`;
-    drawLocal(h);
+    // filter confirmed uniques for this hub
+    const hubUniques = (uniquesData.candidates || [])
+      .filter(c => c.hub_id === h.id && c.research && c.research.confirmed === true);
+    // build ledger map: unique_name → file path
+    const ledgerMap = new Map((uniquesLedger.images || []).map(img => [img.unique_name, img.file]));
+    // annotate each unique with its svg file path so card rendering can use it
+    hubUniques.forEach(u => { u._svgFile = ledgerMap.get(u.name) || null; });
+    drawLocal(h, hubUniques, ledgerMap);
+    renderHubCards(h, hubUniques);
     drawBars(h);
     drawCats(h);
     drawFood(h);
@@ -262,7 +274,127 @@
   }).catch((e) => document.getElementById("hub-main").innerHTML =
     `<pre style="color:#c00">Failed to load hubs.json: ${e}</pre>`);
 
-  function drawLocal(h) {
+  // lives palette for quiet dot colouring (maps life → muted colour)
+  const LIFE_COLOR = {
+    sustenance: "#6faa88", anchors: "#7898b8",
+    third_places: "#d4826a", display: "#d4b460", unclassified: "#c0b49e"
+  };
+
+  // ---- B3 exploration cards ----
+
+  // Module-scope: the confirmed uniques for the currently displayed hub
+  // (set during renderHubCards so spotlight can reference them)
+  let _hubUniques = [];
+
+  function renderHubCards(h, uniques) {
+    const box = document.getElementById("hub-cards");
+    if (!box) return;
+    _hubUniques = uniques || [];
+    _renderDefaultCards(box, h, _hubUniques);
+    // Wire the map→card spotlight event from Task 5
+    const cv = document.getElementById("ldots");
+    if (cv) {
+      cv.addEventListener("hub:select", (ev) => {
+        _handleSpotlight(ev.detail, box, h, _hubUniques);
+      });
+      // clicking on the map backdrop (canvas itself, not a vignette/cluster)
+      // clears back to the default all-cards view
+      cv.addEventListener("click", (ev) => {
+        // only clear if the click landed on the canvas, not a bubbling cluster/vignette
+        if (ev.target === cv) _renderDefaultCards(box, h, _hubUniques);
+      });
+    }
+  }
+
+  function _renderDefaultCards(box, h, uniques) {
+    if (!uniques.length) {
+      box.innerHTML =
+        `<p class="hub-cards-empty">` +
+        `No single stall here is district-unique in our data — ` +
+        `the corner's character is in its mix.` +
+        `</p>`;
+      return;
+    }
+    box.innerHTML =
+      `<h3 class="hub-cards-title">Only here in the district</h3>` +
+      uniques.map(u => _uniqueCardHTML(u, false)).join("");
+  }
+
+  function _uniqueCardHTML(u, highlighted) {
+    const r = u.research || {};
+    const what = esc(r.what || u.category || "");
+    const note = esc(r.note || "");
+    const name = esc(u.name || "");
+    const caveat = "the only one we found in the district";
+    // optional vignette image (small, from the ledger)
+    const imgHref = u._svgFile
+      ? `<img class="hub-card-vig" src="${esc(u._svgFile)}" alt="${name}" loading="lazy">` : "";
+    return `<div class="hub-card unique-card${highlighted ? " spotlight" : ""}" data-unique="${name}">` +
+      imgHref +
+      (name ? `<span class="hub-card-name">${name}</span>` : "") +
+      (what  ? `<span class="hub-card-what">${what}</span>` : "") +
+      (note  ? `<p class="hub-card-note">${note}</p>` : "") +
+      `<span class="hub-card-caveat">${esc(caveat)}</span>` +
+      `</div>`;
+  }
+
+  function _handleSpotlight(sel, box, h, uniques) {
+    if (!sel) { _renderDefaultCards(box, h, uniques); return; }
+
+    if (sel.type === "unique") {
+      // Highlight the matching card; scroll it into view
+      const name = sel.name || "";
+      if (!uniques.length) { _renderDefaultCards(box, h, uniques); return; }
+      // Re-render all cards, spotlighting the matching one
+      box.innerHTML =
+        `<h3 class="hub-cards-title">Only here in the district</h3>` +
+        uniques.map(u => _uniqueCardHTML(u, u.name === name)).join("") +
+        `<button class="hub-cards-clear">Show all →</button>`;
+      const target = box.querySelector(`.hub-card[data-unique="${CSS.escape(name)}"]`);
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      box.querySelector(".hub-cards-clear").onclick =
+        () => _renderDefaultCards(box, h, uniques);
+      return;
+    }
+
+    if (sel.type === "cluster") {
+      // List the cluster's contents: named by name (escaped), anonymous by count only
+      const places = sel.places || [];
+      const named = places.filter(p => p.name);
+      const anonCount = places.length - named.length;
+      const nameList = named.map(p =>
+        `<li class="hub-card-cluster-item">${esc(p.name)}</li>`
+      ).join("");
+      const anonLine = anonCount > 0
+        ? `<li class="hub-card-cluster-anon">+ ${anonCount} unnamed here</li>` : "";
+      box.innerHTML =
+        `<div class="hub-card cluster-card">` +
+        `<span class="hub-card-name">${sel.count} places co-located</span>` +
+        `<ul class="hub-card-cluster-list">${nameList}${anonLine}</ul>` +
+        `</div>` +
+        (uniques.length
+          ? `<button class="hub-cards-clear">Back to district-unique →</button>` : "");
+      const clearBtn = box.querySelector(".hub-cards-clear");
+      if (clearBtn) clearBtn.onclick = () => _renderDefaultCards(box, h, uniques);
+      return;
+    }
+
+    // Fallback: clear to default
+    _renderDefaultCards(box, h, uniques);
+  }
+
+  // ---- selection state + event dispatch ----
+  let _selected = null;
+  function spotlight(selection) {
+    _selected = selection;
+    const cv = document.getElementById("ldots");
+    if (cv) cv.dispatchEvent(new CustomEvent("hub:select", { detail: selection, bubbles: true }));
+  }
+
+  function drawLocal(h, hubUniques, ledgerMap) {
+    hubUniques = hubUniques || [];
+    ledgerMap  = ledgerMap  || new Map();
+
     const W = 720, H = 460, pad = 16;
     const [x0, y0, x1, y1] = h.bbox;
     const x = d3.scaleLinear([x0, x1], [pad, W - pad]);
@@ -276,7 +408,108 @@
       .attr("d", line).attr("fill", "none").attr("stroke", STREET)
       .attr("stroke-width", 1.4);
 
-    // dots on canvas (scales to ~1000+ places)
+    // named_anchors legend (no lon/lat — placed as a small overlay inside SVG)
+    const anchors = (h.named_anchors || []).slice(0, 3);
+    if (anchors.length) {
+      const ag = svg.append("g").attr("class", "anchor-legend")
+        .attr("transform", `translate(${W - pad - 4}, ${pad + 4})`);
+      ag.append("rect")
+        .attr("x", -148).attr("y", -2)
+        .attr("width", 152).attr("height", anchors.length * 22 + 6)
+        .attr("fill", "rgba(250,246,239,0.88)").attr("rx", 5);
+      anchors.forEach((a, i) => {
+        const row = ag.append("g").attr("transform", `translate(0, ${i * 22 + 14})`);
+        row.append("circle").attr("cx", -140).attr("cy", -4).attr("r", 4)
+          .attr("fill", "none").attr("stroke", "#8a5a2b").attr("stroke-width", 1.5);
+        row.append("text")
+          .attr("x", -132).attr("y", 0)
+          .attr("font-size", "10px").attr("fill", "#4a3020")
+          .attr("font-family", "var(--body, sans-serif)")
+          .text(a.name.length > 22 ? a.name.slice(0, 21) + "…" : a.name)
+          .append("title").text(esc(a.name) + " — " + esc(a.what));
+      });
+    }
+
+    // ---- cluster detection ----
+    // Group places whose projected pixel positions are within CLUSTER_PX of each other
+    const CLUSTER_PX = 8;
+    const clusters = []; // [{cx, cy, places:[]}]
+    h.places.forEach((p) => {
+      const px = x(p.lon), py = y(p.lat);
+      let found = false;
+      for (const cl of clusters) {
+        if (Math.abs(cl.cx - px) < CLUSTER_PX && Math.abs(cl.cy - py) < CLUSTER_PX) {
+          cl.places.push(p); found = true; break;
+        }
+      }
+      if (!found) clusters.push({ cx: px, cy: py, places: [p] });
+    });
+    // multi-place clusters (2+)
+    const multiClusters = clusters.filter(cl => cl.places.length >= 2);
+
+    // ---- cluster glyphs (SVG, above roads, below vignettes) ----
+    const clusterG = svg.append("g").attr("class", "cluster-glyphs");
+    multiClusters.forEach(cl => {
+      const cg = clusterG.append("g")
+        .attr("transform", `translate(${cl.cx}, ${cl.cy})`)
+        .style("cursor", "pointer")
+        .attr("aria-label", `${cl.places.length} places co-located here`);
+      cg.append("circle").attr("r", 9)
+        .attr("fill", "rgba(255,253,248,0.82)").attr("stroke", "#9c8a72")
+        .attr("stroke-width", 1.2);
+      cg.append("text").attr("text-anchor", "middle").attr("dy", "0.35em")
+        .attr("font-size", "8px").attr("fill", "#4a4030")
+        .attr("font-family", "var(--body, sans-serif)").attr("font-weight", "600")
+        .text(cl.places.length);
+      cg.append("title").text(`${cl.places.length} here`);
+      cg.on("click", () => spotlight({ type: "cluster", count: cl.places.length,
+        cx: cl.cx, cy: cl.cy, places: cl.places }));
+      cg.on("mouseenter", () => spotlight({ type: "cluster", count: cl.places.length,
+        cx: cl.cx, cy: cl.cy, places: cl.places }));
+    });
+
+    // ---- unique dish vignettes (SVG <image> at projected lon/lat) ----
+    // Honest caveat: "the only one we found in the district" — never an absolute claim
+    const VIGNETTE_SIZE = 36;
+    const vigG = svg.append("g").attr("class", "unique-vignettes");
+    hubUniques.forEach(u => {
+      const svgFile = ledgerMap.get(u.name);
+      if (!svgFile) return;
+      const px = x(u.lon), py = y(u.lat);
+      // connector line from anchor point to vignette centre
+      const vx = Math.min(W - pad - VIGNETTE_SIZE, Math.max(pad, px));
+      const vy = Math.min(H - pad - VIGNETTE_SIZE, Math.max(pad, py - VIGNETTE_SIZE - 6));
+      const vg = vigG.append("g").attr("class", "unique-vignette").style("cursor", "pointer");
+      // dot at exact location
+      vg.append("circle").attr("cx", px).attr("cy", py).attr("r", 4)
+        .attr("fill", "#c0453a").attr("stroke", "#fffdf8").attr("stroke-width", 1.5);
+      // connector
+      vg.append("line")
+        .attr("x1", px).attr("y1", py)
+        .attr("x2", vx + VIGNETTE_SIZE / 2).attr("y2", vy + VIGNETTE_SIZE)
+        .attr("stroke", "#c0453a").attr("stroke-width", 1).attr("stroke-dasharray", "3,2")
+        .attr("opacity", 0.6);
+      // vignette frame
+      vg.append("rect")
+        .attr("x", vx).attr("y", vy)
+        .attr("width", VIGNETTE_SIZE).attr("height", VIGNETTE_SIZE)
+        .attr("fill", "#faf6ef").attr("stroke", "#c0453a").attr("stroke-width", 1.2)
+        .attr("rx", 5);
+      // SVG illustration via <image> (browser resolves relative to the page URL)
+      vg.append("image")
+        .attr("href", svgFile)
+        .attr("x", vx + 2).attr("y", vy + 2)
+        .attr("width", VIGNETTE_SIZE - 4).attr("height", VIGNETTE_SIZE - 4)
+        .attr("alt", esc("the only one we found in the district") + " · " + esc(u.name))
+        .append("title")
+          .text(esc(u.name) + " — the only one we found in the district");
+      vg.on("click", () => spotlight({ type: "unique", name: u.name, hub_id: u.hub_id,
+        lon: u.lon, lat: u.lat, svgFile, caveat: "the only one we found in the district" }));
+      vg.on("mouseenter", () => spotlight({ type: "unique", name: u.name, hub_id: u.hub_id,
+        lon: u.lon, lat: u.lat, svgFile, caveat: "the only one we found in the district" }));
+    });
+
+    // dots on canvas (scales to ~1000+ places) — QUIET / low-contrast: life colours, low alpha
     const cv = document.getElementById("ldots");
     const dpr = Math.min(2, window.devicePixelRatio || 1);
     cv.width = W * dpr; cv.height = H * dpr;
@@ -301,23 +534,17 @@
         });
         ctx.globalAlpha = 1;
       }
+      // Quiet uniform dots: life-coloured, low alpha — texture, not clutter;
+      // vignettes carry the emphasis now
       h.places.forEach((p, i) => {
         if (!passesFilter(p)) return;
-        const jx = jit(p.lon * 1000 + i) * 5, jy = jit(p.lat * 1000 + i * 7) * 5;
+        const jx = jit(p.lon * 1000 + i) * 4, jy = jit(p.lat * 1000 + i * 7) * 4;
         const X = x(p.lon) + jx, Y = y(p.lat) + jy;
-        ctx.beginPath(); ctx.arc(X, Y, p.chain ? 4.5 : 2.6, 0, 2 * Math.PI);
-        ctx.globalAlpha = p.chain ? 1 : 0.62;
-        ctx.fillStyle = p.food
-          ? (FG[p.food.group] || FG.unclassified).color
-          : (FIELD_COLOR[p.field] || FIELD_COLOR.other);
+        const life = p.life || (p.food ? "sustenance" : "unclassified");
+        ctx.beginPath(); ctx.arc(X, Y, 2.2, 0, 2 * Math.PI);
+        ctx.globalAlpha = 0.38;
+        ctx.fillStyle = LIFE_COLOR[life] || LIFE_COLOR.unclassified;
         ctx.fill();
-        if (p.chain) { ctx.globalAlpha = 1; ctx.lineWidth = 1.6;
-          ctx.strokeStyle = "#fffdf8"; ctx.stroke(); }
-        if (p.food && isSpecialty(p.food.group, h.food_breakdown[p.food.group] || 0)) {
-          ctx.beginPath(); ctx.arc(X, Y, 6.5, 0, 2 * Math.PI);
-          ctx.globalAlpha = 1; ctx.lineWidth = 1.4;
-          ctx.strokeStyle = "#d4af37"; ctx.stroke();
-        }
       });
       ctx.globalAlpha = 1;
     }
@@ -542,4 +769,48 @@
       next.textContent = (n ? n.title : "Hub " + (h.rank+1)) + " →";
     }
   }
+
+  // ---- Read↔Explore choreography ----
+  // Toggle and IntersectionObserver cooperate as follows:
+  //   • The toggle is a real <button> that always works, JS or no-IO.
+  //   • When the user clicks the toggle, a "manual" flag is set.
+  //     While the flag is set the IO will not override the class.
+  //     Clicking the toggle again clears the manual flag (and the IO resumes).
+  //   • The IO adds .explore when the map cell scrolls to viewport centre,
+  //     and removes it when the map cell leaves — but only if no manual flag.
+  //   • No-JS: the base grid shows everything; the toggle is inert without JS
+  //     but the <button> is still visible (no content is hidden by default).
+  (function wireExplore() {
+    const grid = document.querySelector(".hub-grid");
+    const btn  = document.getElementById("exploreToggle");
+    const mapCell = document.querySelector(".hub-grid-b2");
+    if (!grid || !btn) return;
+
+    // State: manual means the user explicitly clicked; IO won't override.
+    let manualExplore = false;
+
+    function setExplore(on) {
+      grid.classList.toggle("explore", on);
+      btn.setAttribute("aria-pressed", String(on));
+    }
+
+    btn.addEventListener("click", () => {
+      const next = !grid.classList.contains("explore");
+      manualExplore = next;   // true when manually ON; false when manually OFF
+      setExplore(next);
+    });
+
+    // IntersectionObserver — feature-detected; degrades gracefully when absent.
+    if ('IntersectionObserver' in window && mapCell) {
+      // rootMargin: trigger when the map cell is ~30% into the viewport
+      // (negative top margin pulls the trigger point down from the top edge).
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (manualExplore) return;   // honour explicit toggle
+          setExplore(entry.isIntersecting);
+        });
+      }, { rootMargin: "-30% 0px -30% 0px", threshold: 0 });
+      io.observe(mapCell);
+    }
+  })();
 })();
