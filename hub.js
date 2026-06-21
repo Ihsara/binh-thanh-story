@@ -32,7 +32,7 @@
   }
   let showGen = false;      // generator-ring underlay toggle on the local map
 
-  const HUB_MAP_SLUG = { "hub:0": "van-thanh" };
+  const HUB_MAP_SLUG = { "hub:0": "van-thanh", "hub:1": "hang-xanh", "hub:5": "cau-do", "hub:2": "tan-cang", "hub:4": "ung-van-khiem", "hub:3": "thi-nghe", "hub:6": "cau-sai-gon", "hub:7": "phan-van-tri", "hub:11": "dien-bien-phu", "hub:8": "cau-bong", "hub:9": "nguyen-van-dau", "hub:10": "no-trang-long", "hub:12": "cho-cay-thi", "hub:13": "thanh-da", "hub:14": "dinh-tien-hoang", "hub:15": "binh-loi", "hub:16": "lang-ong", "hub:17": "da-kao", "hub:18": "cho-ba-chieu", "hub:19": "cau-kieu", "hub:20": "ung-van-khiem-tay", "hub:21": "tan-cang-nam" };
 
   // --- debug tooltip helpers (module scope) ---
   let _tip = null;
@@ -250,7 +250,7 @@
     // so non-pilot hubs don't log a 404.
     const mapSlug = HUB_MAP_SLUG[h.id];
     const hubMap = mapSlug
-      ? await d3.json("hub_maps/" + mapSlug + ".json?v=20260622v1_5").catch(() => null)
+      ? await d3.json("hub_maps/" + mapSlug + ".json?v=20260622v1_5b").catch(() => null)
       : null;
     document.title = `${h.title} · Bình Thạnh Atlas`;
     document.getElementById("title").textContent = h.title;
@@ -687,9 +687,16 @@
     renderMapLedger(m);   // numbered margin panel
   }
   function bridgeDegFor(m, e) {
-    // nearest bridge way to this icon -> use its baked bearing
-    const br = (m.geometry.bridges||[])[0];
-    return br ? br.bearing_deg : null;
+    // rotate the bridge icon to match the NEAREST bridge way's baked bearing
+    const brs = m.geometry.bridges || [];
+    if (!brs.length) return null;
+    let best = brs[0], bestD = Infinity;
+    for (const br of brs) {
+      const mid = br.pts[Math.floor(br.pts.length / 2)] || br.pts[0];
+      const d = Math.hypot(mid[0] - e.x, mid[1] - e.y);
+      if (d < bestD) { bestD = d; best = br; }
+    }
+    return best.bearing_deg;
   }
   function showFeatureTip(ev, e) {
     const tip = ensureTip();
