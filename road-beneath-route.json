@@ -1,0 +1,27 @@
+{
+  "schema": "road-beneath-route-v1",
+  "note": "AUTHORED reconstruction, NOT survey data. An approximate polyline tracing the 1748 northern Thiên Lý / Mandarin Road branch as it threaded through what is now Bình Thạnh — Thị Nghè → Cầu Sơn → Cầu Kinh → the Thanh Đa / Bình Quới ferry. Coordinates are hand-placed along the known corridor (Xô Viết Nghệ Tĩnh + đường Bình Quới) for cartographic illustration; they are a scholarly reconstruction per Phạm Hoàng Quân / Nguyễn Đình Đầu, not a surviving physical marker or a GPS trace.",
+  "route_1748": {
+    "label": "Đường Thiên Lý (1748) — reconstructed corridor",
+    "coords": [
+      [106.7058, 10.7930],
+      [106.7095, 10.7975],
+      [106.7140, 10.8020],
+      [106.7180, 10.8065],
+      [106.7210, 10.8110],
+      [106.7228, 10.8160],
+      [106.7235, 10.8215],
+      [106.7250, 10.8270],
+      [106.7270, 10.8320],
+      [106.7300, 10.8360]
+    ]
+  },
+  "crossings": [
+    {"name": "Cầu Thị Nghè", "lon": 106.7045, "lat": 10.7918, "note": "rạch Thị Nghè crossing — the route's southern gate into the district"},
+    {"name": "Cầu Sơn", "lon": 106.7150, "lat": 10.8030, "note": "historic crossing on the corridor"},
+    {"name": "Cầu Kinh", "lon": 106.7232, "lat": 10.8185, "note": "Thanh Đa canal crossing"},
+    {"name": "Bến đò Bình Quới", "lon": 106.7300, "lat": 10.8360, "note": "the Bình Quới / Thanh Đa ferry — the route's far end"},
+    {"name": "Cầu Bình Lợi (1902)", "lon": 106.7150, "lat": 10.8270, "note": "first bridge across the Saigon River, 1902 — a later crossing near the corridor"}
+  ],
+  "water_hint": "rạch Thị Nghè runs along the southern edge; the Saigon River wraps the eastern and northern (Thanh Đa) peninsula"
+}

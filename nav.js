@@ -9,6 +9,7 @@
       stories: [
         { href: "roads.html", label: "Roads", page: "roads" },
         { href: "places.html", label: "Places", page: "places" },
+        { href: "road-beneath.html", label: "The road beneath the road", page: "road-beneath" },
       ] },
     { id: "street-life", label: "Street Life", href: "street-life.html",
       stories: [
