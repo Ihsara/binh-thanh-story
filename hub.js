@@ -30,6 +30,29 @@
     if (p.food) return !activeGroups || activeGroups.has(p.food.group);
     return activeLayers.has(p.field);   // non-food only if its layer is on
   }
+  // Map a V1.5 ledger icon-category to the active food/layer filter. Mirrors the
+  // dot rule: food icons follow the food chips; non-food icons follow the +add layers.
+  // star-unique is the corner's signature find and is NEVER dimmed.
+  const ICON_FIELD = {                  // ledger icon -> coarse class for filtering
+    "food-restaurant":"food","food-cafe":"coffee","food-pho":"food",
+    "food-market":"food","heritage-temple":"keep","heritage-colonial":"keep",
+    "park-tree":"keep","school":"education","hotel":"hotel",
+    "transit-bus":"keep","water-bridge":"keep","office-building":"other",
+    "star-unique":"keep"
+  };
+  function iconPasses(icon) {
+    const cls = ICON_FIELD[icon] || "keep";
+    if (cls === "keep") return true;                      // heritage/water/park/star always shown
+    if (cls === "coffee" || cls === "food")              // food-ish icon -> food chips
+      return !activeGroups || activeGroups.size > 0;     // dim only when ALL food groups are off
+    return activeLayers.has(cls);                        // non-food icon -> its +add layer must be on
+  }
+  function applyMapIconFilter() {
+    document.querySelectorAll("#lmap g[data-icon]").forEach(g => {
+      const on = iconPasses(g.getAttribute("data-icon"));
+      g.classList.toggle("filtered-out", !on);
+    });
+  }
   let showGen = false;      // generator-ring underlay toggle on the local map
 
   const HUB_MAP_SLUG = { "hub:0": "van-thanh", "hub:1": "hang-xanh", "hub:5": "cau-do", "hub:2": "tan-cang", "hub:4": "ung-van-khiem", "hub:3": "thi-nghe", "hub:6": "cau-sai-gon", "hub:7": "phan-van-tri", "hub:11": "dien-bien-phu", "hub:8": "cau-bong", "hub:9": "nguyen-van-dau", "hub:10": "no-trang-long", "hub:12": "cho-cay-thi", "hub:13": "thanh-da", "hub:14": "dinh-tien-hoang", "hub:15": "binh-loi", "hub:16": "lang-ong", "hub:17": "da-kao", "hub:18": "cho-ba-chieu", "hub:19": "cau-kieu", "hub:20": "ung-van-khiem-tay", "hub:21": "tan-cang-nam" };
@@ -397,7 +420,7 @@
         uniques.map(u => _uniqueCardHTML(u, u.name === name)).join("") +
         `<button class="hub-cards-clear">Show all →</button>`;
       const target = box.querySelector(`.hub-card[data-unique="${CSS.escape(name)}"]`);
-      if (target) target.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      if (target && sel.scroll) target.scrollIntoView({ behavior: "smooth", block: "nearest" });
       box.querySelector(".hub-cards-clear").onclick =
         () => _renderDefaultCards(box, h, uniques);
       return;
@@ -705,7 +728,8 @@
       const deg = e.icon === "water-bridge" ? bridgeDegFor(m, e) : null;
       const g = sprite(svg, e.icon, px(e.x), py(e.y), size,
                        CAT_FILL[e.icon] || "#6A7A8A", deg);
-      g.attr("data-n", e.n).style("cursor","pointer").attr("aria-label", e.name_vn);
+      g.attr("data-n", e.n).attr("data-icon", e.icon)
+        .style("cursor","pointer").attr("aria-label", e.name_vn);
       // numbered badge (L3 only)
       if (e.layer === 3) {
         const bg = g.append("g").attr("transform", `translate(${size/2-2},${-size/2+2})`);
@@ -713,8 +737,10 @@
         bg.append("text").attr("text-anchor","middle").attr("dy","0.35em")
           .attr("font-size","9px").attr("fill","#fff").attr("font-weight","700").text(e.n);
       }
-      g.on("click mouseenter", () => spotlight({ type:"feature", n:e.n, name:e.name_vn,
-        blurb:e.blurb }));
+      g.on("click", () => spotlight({ type:"feature", n:e.n, name:e.name_vn,
+        blurb:e.blurb, scroll:true }));
+      g.on("mouseenter", () => spotlight({ type:"feature", n:e.n, name:e.name_vn,
+        blurb:e.blurb, scroll:false }));
       g.on("mousemove", (ev) => showFeatureTip(ev, e));
       g.on("mouseleave", () => { if (_tip) _tip.style.display = "none"; });
     });
@@ -747,7 +773,7 @@
       (e.blurb ? ` — <span class="led-blurb">${esc(e.blurb)}</span>` : "") + `</li>`).join("");
     box.querySelectorAll("li").forEach(li =>
       li.addEventListener("mouseenter", () => spotlight({ type:"feature",
-        n: +li.dataset.n })));
+        n: +li.dataset.n, scroll:false })));
   }
 
   // ---- field-guide spotlight wiring for pick/walkstop/feature ----
@@ -760,7 +786,8 @@
         .forEach(el => el.classList.remove("spotlight"));
       if (sel.type === "pick") {
         const el = document.querySelector(`.fg-pick[data-pick="${CSS.escape(sel.name)}"]`);
-        if (el) { el.classList.add("spotlight"); el.scrollIntoView({behavior:"smooth",block:"nearest"}); }
+        if (el) { el.classList.add("spotlight");
+          if (sel.scroll) el.scrollIntoView({behavior:"smooth",block:"nearest"}); }
       } else if (sel.type === "walkstop") {
         const el = document.querySelector(`.walk-step[data-walk="${sel.i}"]`);
         if (el) el.classList.add("spotlight");
@@ -771,7 +798,8 @@
         if (sel.n != null) {
           document.querySelectorAll(`[data-n="${sel.n}"]`).forEach(el => el.classList.add("lit"));
           const ledRow = document.querySelector(`#map-ledger li[data-n="${sel.n}"]`);
-          if (ledRow) { ledRow.classList.add("lit"); ledRow.scrollIntoView({behavior:"smooth",block:"nearest"}); }
+          if (ledRow) { ledRow.classList.add("lit");
+            if (sel.scroll) ledRow.scrollIntoView({behavior:"smooth",block:"nearest"}); }
         }
       }
     });
@@ -782,10 +810,11 @@
   }
 
   function drawChips(h, repaint) {
-    // food groups present, sorted by region order
+    const counts = h.food_breakdown || {};
+    // food groups present, sorted by count desc (region as a stable tiebreak)
     const present = [...new Set(h.places.filter(p => p.food).map(p => p.food.group))]
-      .sort((a, b) => FREG.indexOf((FG[a] || {}).region) -
-                      FREG.indexOf((FG[b] || {}).region));
+      .sort((a, b) => (counts[b] || 0) - (counts[a] || 0) ||
+        FREG.indexOf((FG[a] || {}).region) - FREG.indexOf((FG[b] || {}).region));
     // non-food fields present (layers), hidden by default
     const layers = [...new Set(h.places.filter(p => !p.food).map(p => p.field))]
       .filter(Boolean).sort();
@@ -794,7 +823,8 @@
     const foodRow = `<div class="chip-row food">` + present.map(g => {
       const fg = FG[g] || FG.unclassified;
       const extra = g === "unclassified" ? " ◌" : "";
-      return `<button class="fchip" data-g="${g}">` +
+      const rare = (counts[g] || 0) <= 2 ? " rare" : "";   // demote singletons
+      return `<button class="fchip${rare}" data-g="${g}">` +
         `<i style="background:${fg.color}"></i>${fg.label}${extra}</button>`;
     }).join("") + `</div>`;
 
@@ -818,12 +848,14 @@
         btn.classList.toggle("off");
         syncGroups();
         repaint();
+        applyMapIconFilter();
       };
       btn.ondblclick = () => {
         const g = btn.dataset.g;
         activeGroups = new Set([g]);
         fchips.forEach(b => b.classList.toggle("off", b.dataset.g !== g));
         repaint();
+        applyMapIconFilter();
       };
     });
 
@@ -832,7 +864,10 @@
       const on = btn.classList.toggle("on");
       if (on) activeLayers.add(f); else activeLayers.delete(f);
       repaint();
+      applyMapIconFilter();
     });
+
+    applyMapIconFilter();   // sync icon layer to the initial filter state
   }
 
   function drawFood(h) {
