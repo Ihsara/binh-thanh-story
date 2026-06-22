@@ -272,6 +272,40 @@
     // annotate each unique with its svg file path so card rendering can use it
     hubUniques.forEach(u => { u._svgFile = ledgerMap.get(u.name) || null; });
     drawLocal(h, hubUniques, ledgerMap, hubMap);
+    // C1: fullscreen lightbox — redraw() re-runs the current hub's map at the new size
+    const redrawMap = () => drawLocal(h, hubUniques, ledgerMap, hubMap);
+    initMapLightbox(redrawMap);
+    // C3: 1895 ghost overlay — only on the 7 verified anchor hubs
+    fetch("hist1895.json").then(r => r.ok ? r.json() : {}).then(man => {
+      const entry = man[h.id];
+      if (!entry) return;
+      const section = document.querySelector(".hub-grid-b2 .hub-map");
+      if (!section) return;
+      const img = document.createElement("img");
+      img.className = "hist1895-img";
+      img.src = entry.img;
+      img.alt = "1895 Gia Định survey (Plan des environs de Saïgon), georeferenced to ±400 m";
+      section.insertBefore(img, section.firstChild);
+
+      const ctl = document.createElement("div");
+      ctl.className = "hist1895-ctl";
+      ctl.innerHTML =
+        '<label>1895 Gia Định ghost <span class="pm">±400 m</span></label>' +
+        '<input type="range" min="0" max="50" value="0" aria-label="1895 overlay opacity">';
+      // Append ctl inside the .hub-map section so it travels into the
+      // fullscreen lightbox alongside the canvas (approach a).
+      section.appendChild(ctl);
+      ctl.querySelector("input").addEventListener("input", (e) => {
+        img.style.opacity = String(e.target.value / 100);  // 0–0.5 (cap 50%)
+      });
+
+      const note = document.createElement("details");
+      note.className = "hist1895-note";
+      note.innerHTML = `<summary>What survived from 1895</summary><p>${entry.note}</p>` +
+        `<p class="muted">Source: Plan des environs de Saïgon (1895), public domain. ` +
+        `Georeferenced to RMSE ${entry.rmse_m} m — atmospheric, not survey-accurate.</p>`;
+      section.appendChild(note);
+    });
     wireFieldSpotlight(hubMap);
     renderHubCards(h, hubUniques);
     drawBars(h);
@@ -667,7 +701,7 @@
     }
     // L2/L3 icons + numbered badges
     (m.ledger||[]).forEach(e => {
-      const size = e.layer === 2 ? 24 : 18;
+      const size = e.layer === 2 ? 30 : 22;
       const deg = e.icon === "water-bridge" ? bridgeDegFor(m, e) : null;
       const g = sprite(svg, e.icon, px(e.x), py(e.y), size,
                        CAT_FILL[e.icon] || "#6A7A8A", deg);
@@ -927,6 +961,60 @@
       next.href = `hub.html?h=${h.rank+1}`;
       next.textContent = (n ? n.title : "Hub " + (h.rank+1)) + " →";
     }
+  }
+
+  // ---- C1: fullscreen lightbox ----
+  let _lightboxInited = false;
+  function initMapLightbox(redraw) {
+    if (_lightboxInited) return;   // only wire once per page load
+    _lightboxInited = true;
+    const mapSection = document.querySelector(".hub-grid-b2 .hub-map");
+    if (!mapSection) return;
+    // inject the ⛶ button
+    const btn = document.createElement("button");
+    btn.className = "map-fs-toggle";
+    btn.type = "button";
+    btn.setAttribute("aria-label", "View map fullscreen");
+    btn.textContent = "⛶";
+    mapSection.appendChild(btn);
+
+    // build the overlay shell once
+    const lb = document.createElement("div");
+    lb.className = "map-lightbox";
+    lb.hidden = true;
+    lb.innerHTML =
+      '<button class="lb-close" aria-label="Close fullscreen">×</button>' +
+      '<div class="lb-stage"><div class="lb-map"></div><div class="lb-ledger"></div></div>';
+    document.body.appendChild(lb);
+    const lbMap = lb.querySelector(".lb-map");
+    const lbLedger = lb.querySelector(".lb-ledger");
+    const closeBtn = lb.querySelector(".lb-close");
+
+    let placeholder = null;       // where the map section came from
+    let ledgerHome = null, ledgerEl = null;
+
+    function open() {
+      placeholder = document.createComment("map-home");
+      mapSection.parentNode.replaceChild(placeholder, mapSection);
+      lbMap.appendChild(mapSection);
+      ledgerEl = document.getElementById("map-ledger");
+      if (ledgerEl) { ledgerHome = document.createComment("ledger-home");
+        ledgerEl.parentNode.replaceChild(ledgerHome, ledgerEl); lbLedger.appendChild(ledgerEl); }
+      lb.hidden = false; document.body.classList.add("lightbox-open");
+      if (typeof redraw === "function") redraw();   // re-size canvas to big box
+      closeBtn.focus();
+    }
+    function close() {
+      if (placeholder) placeholder.parentNode.replaceChild(mapSection, placeholder), placeholder = null;
+      if (ledgerHome && ledgerEl) ledgerHome.parentNode.replaceChild(ledgerEl, ledgerHome), ledgerHome = null;
+      lb.hidden = true; document.body.classList.remove("lightbox-open");
+      if (typeof redraw === "function") redraw();   // re-size canvas back to inline box
+      btn.focus();
+    }
+    btn.addEventListener("click", open);
+    closeBtn.addEventListener("click", close);
+    lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !lb.hidden) close(); });
   }
 
   // ---- Read↔Explore choreography ----

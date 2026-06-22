@@ -46,6 +46,23 @@
   border:1px solid #d8cdb8;border-radius:14px;padding:4px 10px;font-size:12px;
   color:#5a5040;cursor:pointer}
 .gen-toggle.on{background:#3e7a5e;color:#fff;border-color:#3e7a5e}
+/* C1: fullscreen lightbox */
+.map-fs-toggle{position:absolute;top:8px;left:8px;z-index:2;background:#fffdf8;
+  border:1px solid #d8cdb8;border-radius:14px;padding:4px 10px;font-size:14px;
+  line-height:1;color:#5a5040;cursor:pointer}
+.map-fs-toggle:hover{border-color:var(--accent,#c0532a);color:var(--accent,#c0532a)}
+body.lightbox-open{overflow:hidden}
+.map-lightbox{position:fixed;inset:0;z-index:100;background:#101420ee;
+  display:flex;flex-direction:column;padding:2.5vmin;box-sizing:border-box}
+.map-lightbox[hidden]{display:none}
+.map-lightbox .lb-close{position:absolute;top:12px;right:16px;z-index:2;
+  background:transparent;border:none;color:#ece7df;font-size:26px;cursor:pointer;line-height:1}
+.map-lightbox .lb-stage{flex:1;min-height:0;display:flex;gap:2vmin}
+.map-lightbox .lb-map{flex:1;min-width:0;position:relative;background:#faf6ef;border-radius:8px}
+.map-lightbox .lb-map svg{width:100%;height:100%}
+.map-lightbox .lb-ledger{width:min(320px,28vw);overflow:auto;color:#ece7df}
+@media(max-width:700px){.map-lightbox .lb-stage{flex-direction:column}
+  .map-lightbox .lb-ledger{width:auto;max-height:30vh}}
 .hub-rel ul{list-style:none;padding:0}.hub-rel li{margin:.3rem 0;font-size:.9rem}
 .rel{display:inline-block;width:1.3em}.rel.compete{color:#c0453a}
 .rel.complement{color:#3e7a5e}.rel-note{color:#8a7f6a;font-size:.8rem}
@@ -80,7 +97,7 @@
 
 /* field-guide sections */
 .fg-header{display:flex;gap:1rem;align-items:flex-start;margin:.5rem 0 1rem}
-.fg-glyph svg{width:48px;height:48px;color:var(--accent)}
+.fg-glyph svg{width:clamp(44px,6vw,72px);height:auto;color:var(--accent)}
 .fg-badge{display:inline-block;margin-top:.3rem;padding:.15rem .6rem;border:1px solid currentColor;
   border-radius:999px;font:600 .72rem/1 var(--body);text-transform:uppercase;letter-spacing:.05em}
 .fg-badge[data-type="heritage"]{color:#8a5a2b}.fg-badge[data-type="food"]{color:#b5532a}
@@ -191,10 +208,12 @@
     "masthead masthead masthead"
     "b1 b2 b3"
     "c1 c2 c3";
-  grid-template-columns: 1fr 1.4fr 1fr;
+  grid-template-columns: 0.85fr 2fr 0.85fr;   /* map column dominates (~2/3) */
   gap: 1.5rem 1.25rem;
   margin: 0 0 2rem;
 }
+/* map cell becomes the page hero: let the SVG fill it */
+.hub-grid-b2 .hub-map svg { min-height: 380px; }
 .hub-grid-masthead { grid-area: masthead; }
 .hub-grid-b1       { grid-area: b1; }
 .hub-grid-b2       { grid-area: b2; }
@@ -366,3 +385,15 @@
 #map-ledger li:hover,#map-ledger li.lit{background:#f3e9d4}
 .route-band{pointer-events:none}
 [data-n].lit use{color:#c0453a}
+
+/* C3: 1895 ghost overlay */
+.hist1895-img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;
+  opacity:0;pointer-events:none;z-index:2;border-radius:8px;
+  mix-blend-mode:multiply;transition:opacity .12s}
+.hub-map svg{position:relative;z-index:1}
+.hist1895-ctl{display:flex;align-items:center;gap:.5rem;margin:.5rem 0 0;
+  font:.78rem/1.4 var(--body);color:var(--muted)}
+.hist1895-ctl input[type=range]{flex:0 0 140px}
+.hist1895-ctl .pm{color:var(--accent);font-weight:600}
+.hist1895-note{font:.82rem/1.5 var(--body);color:#4a4030;margin:.4rem 0 0}
+.hist1895-note summary{cursor:pointer;color:var(--accent);font-weight:600}
