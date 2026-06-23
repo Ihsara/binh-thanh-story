@@ -1,5 +1,5 @@
 {
-  "schema": "road-beneath-route-v2",
+  "schema": "road-beneath-route-v3",
   "note": "The line now follows the real OSM centerlines of the streets the reconstruction names (Xô Viết Nghệ Tĩnh, đường Bình Quới); water crossings are drawn as bridged ghost spans. WHICH streets carry the 1748 route is the scholarly reconstruction (Nguyễn Đình Đầu / Phạm Hoàng Quân); the street geometry is real OSM.",
   "route_1748": {
     "label": "Đường Thiên Lý (1748) — reconstructed corridor, snapped to OSM",
@@ -1122,33 +1122,66 @@
   "crossings": [
     {
       "name": "Cầu Thị Nghè",
-      "lon": 106.7045,
-      "lat": 10.7918,
-      "note": "rạch Thị Nghè crossing — the route's southern gate into the district"
+      "note": "rạch Thị Nghè crossing — the route's southern gate into the district",
+      "glyph": "bridge",
+      "on_route": true,
+      "lon": 106.7068016,
+      "lat": 10.7919286,
+      "approx_lonlat": [
+        106.7045,
+        10.7918
+      ],
+      "snapped": true
     },
     {
       "name": "Cầu Sơn",
-      "lon": 106.715,
-      "lat": 10.803,
-      "note": "historic crossing on the corridor"
+      "note": "historic crossing on the corridor",
+      "glyph": "bridge",
+      "on_route": true,
+      "lon": 106.7114228610048,
+      "lat": 10.803190289832369,
+      "approx_lonlat": [
+        106.715,
+        10.803
+      ],
+      "snapped": true
     },
     {
       "name": "Cầu Kinh",
-      "lon": 106.7232,
-      "lat": 10.8185,
-      "note": "Thanh Đa canal crossing"
+      "note": "Thanh Đa canal crossing",
+      "glyph": "bridge",
+      "on_route": true,
+      "lon": 106.72322107414305,
+      "lat": 10.818457460806957,
+      "approx_lonlat": [
+        106.7232,
+        10.8185
+      ],
+      "snapped": true
     },
     {
       "name": "Bến đò Bình Quới",
-      "lon": 106.73,
-      "lat": 10.836,
-      "note": "the Bình Quới / Thanh Đa ferry — the route's far end"
+      "note": "the Bình Quới / Thanh Đa ferry — the route's far end",
+      "glyph": "ferry",
+      "on_route": true,
+      "lon": 106.7441355,
+      "lat": 10.8335682,
+      "approx_lonlat": [
+        106.73,
+        10.836
+      ],
+      "snapped": true
     },
     {
       "name": "Cầu Bình Lợi (1902)",
+      "note": "first bridge across the Saigon River, 1902 — a later crossing near the corridor",
+      "glyph": "truss",
+      "on_route": false,
       "lon": 106.715,
       "lat": 10.827,
-      "note": "first bridge across the Saigon River, 1902 — a later crossing near the corridor"
+      "snapped": false,
+      "feature_card": true,
+      "card": "1902 — the first permanent bridge across the Saigon River; the old road itself crossed by ferry."
     }
   ]
 }
