@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;0,900;1,400&family=Be+Vietnam+Pro:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="spine.css?v=20260622v0">
-  <link rel="stylesheet" href="road-beneath.css?v=20260622hist">
+  <link rel="stylesheet" href="road-beneath.css?v=20260623road">
 </head>
 <body data-page="road-beneath">
   <div id="site-nav"></div>
@@ -38,8 +38,14 @@
         <a href="https://cuoituan.tuoitre.vn/binh-quoi-khuc-duong-thien-ly-bi-bo-quen-1617154.htm"
            rel="noopener" target="_blank">Phạm Hoàng Quân</a> (Tuổi Trẻ Cuối Tuần),
         tracing to Nguyễn-dynasty gazetteers. No physical marker survives to confirm it.
-        The aged base beneath the route is the <em>Plan des environs de Saïgon</em> (1895),
-        public domain, georeferenced to ±400 m; the river and canals are real OSM geodata.
+        The route polyline follows the real OSM centerlines of the streets the reconstruction names
+        (Xô Viết Nghệ Tĩnh → đường Bình Quới); water crossings are drawn as bridged ghost spans.
+        Which streets carry the 1748 route remains the scholarly reconstruction — the street
+        geometry is real OSM, the street choice is not a confirmed marker.
+        The historical base is the <em>Plan des environs de Saïgon</em> (1895 French survey),
+        licensed CC BY-SA 4.0 via Wikimedia Commons, georeferenced to ±~400 m. The inset shows the <em>Bản đồ Gia Định</em> (1815)
+        by Trần Văn Học — the oldest known Vietnamese map of the city, pictorial rather than a survey.
+        The river and canals are real OSM geodata.
       </figcaption>
     </figure>
 
@@ -93,7 +99,7 @@
       </p>
       <p>
         Per the reconstruction by Phạm Hoàng Quân (citing the <em>Gia Định thành thông chí</em>
-        ~1806–1820 and <em>Hoàng Việt nhứt thống dư địa chí</em> 1806), the northern route left
+        ~1806–1820 and <em>Hoàng Việt nhứt thống dư địa chí</em> (<em>nhứt</em> in the older Southern orthography; 1806), the northern route left
         the lost NE gate of the old citadel (roughly today's TV station / Đài Truyền Hình) and
         ran:
       </p>
@@ -239,6 +245,44 @@
       </p>
     </section>
 
+    <!-- ── SECTION 5b: ROUTE CITATION ── -->
+    <section class="article-section" id="route-citation">
+      <h2>The scholarly reconstruction: sources and limits</h2>
+      <p>
+        The 1748 northern Thiên Lý route through Bình Thạnh is a <strong>scholarly
+        reconstruction</strong>, not a confirmed physical marker. The reconstruction rests on two
+        Nguyễn-dynasty gazetteers:
+      </p>
+      <ul>
+        <li>
+          <em>Gia Định thành thông chí</em> (c.&nbsp;1820), compiled by Trịnh Hoài Đức —
+          the primary geographical record of early 19th-century Gia Định province,
+          describing roads, rivers, and administrative divisions.
+        </li>
+        <li>
+          <em>Hoàng Việt nhất thống dư địa chí</em> (1806), an imperial geographical
+          survey of all Nguyễn territories that includes road itineraries through the South.
+        </li>
+      </ul>
+      <p>
+        From these sources, historian <strong>Nguyễn Đình Đầu</strong> and cartography researcher
+        <strong>Phạm Hoàng Quân</strong> independently traced the alignment
+        (Xô Viết Nghệ Tĩnh → đường Bình Quới) as the modern street-level expression of the
+        northern route. The modern alignment is their reconstruction — no physical marker or
+        archival map pins the 1748 road to today's street grid with certainty.
+      </p>
+      <p class="honesty-note">
+        <strong>Then vs now:</strong> the road you ride today is older than the map it sits on.
+        The <em>Plan des environs de Saïgon</em> was surveyed by French colonial engineers in
+        <strong>1895</strong> — a century and a half after the Thiên Lý route was first recorded
+        in <strong>1748</strong>. The 1895 survey is the oldest georeferenced base available for
+        this district (measured accuracy ±~400 m). The inset shows the <em>Bản đồ Gia Định</em>
+        (<strong>1815</strong>) by Trần Văn Học — the oldest known Vietnamese map of the city,
+        drawn forty-seven years before any French survey of the area, pictorial rather than a
+        geodetic survey. The route predates both maps; the maps are the best ground we have.
+      </p>
+    </section>
+
     <!-- ── SECTION 6: WHAT SURVIVES ── -->
     <section class="article-section" id="what-survives">
       <h2>What survives, what's forgotten</h2>
@@ -265,6 +309,33 @@
       <p>
         The road beneath the road is still there. You just have to know where to look.
       </p>
+
+      <aside class="attribution-box">
+        <h3>Map data attribution</h3>
+        <ul>
+          <li>
+            <strong>1815 <em>Bản đồ Gia Định</em></strong> (Trần Văn Học) and
+            <strong>1895 <em>Plan des environs de Saïgon</em></strong> (French colonial survey):
+            sourced from <a href="https://commons.wikimedia.org/" rel="noopener" target="_blank">Wikimedia Commons</a>,
+            licensed <strong>CC BY-SA 4.0</strong>. This project's derivative historical layer
+            (georeferenced composite) inherits CC BY-SA 4.0.
+          </li>
+          <li>
+            <strong>Georeferencing</strong> carried out by this project. Ground-control points (GCPs)
+            seeded from <a href="https://allmaps.org/" rel="noopener" target="_blank"><strong>Allmaps</strong></a>
+            (<strong>CC0</strong>); independently verified and adjusted.
+          </li>
+          <li>
+            Maps surfaced via the
+            <a href="https://github.com/lqtue" rel="noopener" target="_blank"><strong>Vietnam Map Archive</strong></a>
+            (lqtue) — goodwill credit for curation and access.
+          </li>
+          <li>
+            <strong>Street geodata:</strong> © <a href="https://www.openstreetmap.org/copyright"
+            rel="noopener" target="_blank">OpenStreetMap</a> contributors (ODbL).
+          </li>
+        </ul>
+      </aside>
 
       <aside class="sources-box">
         <h3>Sources</h3>
