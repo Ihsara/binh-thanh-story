@@ -26,6 +26,49 @@
   // food-group / non-food-layer filter state
   let activeGroups = null;        // null = all food groups shown; else Set of shown groups
   let activeLayers = new Set();   // non-food fields toggled ON (hidden by default)
+  // company-demotion sidecar (hub-demote.json) — lazy-loaded once, cached
+  let _demote = null;  // { slug: [n, ...] }
+  async function loadDemote() {
+    if (_demote === null) {
+      _demote = await d3.json("hub-demote.json?v=20260623hub")
+        .then(d => d.hubs || {}).catch(() => ({}));
+    }
+    return _demote;
+  }
+  // curated sub-hubs sidecar (hub-subhubs.json) — lazy-loaded once, cached
+  let _subhubs = null;  // { slug: [{kind, name, lon, lat, note}, ...] }
+  async function loadSubhubs() {
+    if (_subhubs === null) {
+      _subhubs = await d3.json("hub-subhubs.json?v=20260623hub")
+        .then(d => d.hubs || {}).catch(() => ({}));
+    }
+    return _subhubs;
+  }
+  let _subhubsOn = false;
+  function applyDemotion(h, m) {
+    const slug = (m && m.hub_id) || h.map_slug || "";
+    const list = (_demote && _demote[slug]) || [];
+    if (!list.length) return;
+    let counted = 0;
+    list.forEach(n => {
+      const g = document.querySelector(`#lmap g[data-n="${n}"]`);
+      if (!g) return;
+      if (g.getAttribute("data-icon") === "star-unique") return;  // never the signature
+      g.classList.add("demoted");
+      counted++;
+    });
+    if (counted) {
+      // counted-not-hidden: a single trade & services note
+      const note = document.getElementById("map-ledger-note") || (() => {
+        const p = document.createElement("p");
+        p.id = "map-ledger-note"; p.className = "trade-note";
+        const host = document.getElementById("map-ledger") || document.querySelector(".hub-map");
+        if (host) host.appendChild(p);
+        return p;
+      })();
+      note.textContent = `+ ${counted} trade & services (offices, shops, garages) shown muted.`;
+    }
+  }
   function passesFilter(p) {
     if (p.food) return !activeGroups || activeGroups.has(p.food.group);
     return activeLayers.has(p.field);   // non-food only if its layer is on
@@ -294,6 +337,8 @@
     const ledgerMap = new Map((uniquesLedger.images || []).map(img => [img.unique_name, img.file]));
     // annotate each unique with its svg file path so card rendering can use it
     hubUniques.forEach(u => { u._svgFile = ledgerMap.get(u.name) || null; });
+    await loadDemote();
+    await loadSubhubs();
     drawLocal(h, hubUniques, ledgerMap, hubMap);
     // C1: fullscreen lightbox — redraw() re-runs the current hub's map at the new size
     const redrawMap = () => drawLocal(h, hubUniques, ledgerMap, hubMap);
@@ -666,6 +711,25 @@
       gt.textContent = showGen ? "Hide what draws people" : "Show what draws people";
       paint();
     };
+
+    // Sub-hubs toggle: curated malls + auto trade strips
+    const st = document.getElementById("subhub-toggle") || (() => {
+      const b = document.createElement("button"); b.id = "subhub-toggle";
+      b.type = "button"; b.textContent = "Sub-hubs";
+      const sec = document.querySelector(".hub-map"); if (sec) sec.appendChild(b);
+      return b;
+    })();
+    if (st) st.onclick = () => {
+      _subhubsOn = !_subhubsOn;
+      st.classList.toggle("on", _subhubsOn);
+      svg.select("g.subhub-layer").remove();
+      if (_subhubsOn && hubMap) {
+        const ext = hubMap.extent;  // [lon0, lat0, lon1, lat1]
+        const subProjX = (lon) => (lon - ext[0]) / (ext[2] - ext[0]) * W;
+        const subProjY = (lat) => (ext[3] - lat) / (ext[3] - ext[1]) * H;
+        drawSubhubs(h, svg, subProjX, subProjY);
+      }
+    };
   }
 
   // ---- 4-layer real-geometry illustrated map (V1.5) ----
@@ -684,6 +748,38 @@
       .attr("x", -size/2).attr("y", -size/2).attr("width", size).attr("height", size)
       .attr("color", "#2A1F14");   // currentColor for the stroke
     return g;
+  }
+  // Quiet always-on de-clash: nudge overlapping ledger icons apart, but keep each
+  // within MAX_NUDGE of its true position (honesty leash) and never move the signature.
+  function declashIcons(items) {
+    // items: [{n, x, y, icon}] in viewBox px. Returns same array with x,y nudged.
+    const MIN_SEP = 22;        // px below which two icons are "clashing"
+    const MAX_NUDGE = 18;      // px hard cap on total displacement (~4% of the 460px frame)
+    const ITERS = 24;
+    const orig = items.map(it => ({ x: it.x, y: it.y }));
+    for (let k = 0; k < ITERS; k++) {
+      for (let i = 0; i < items.length; i++) {
+        for (let j = i + 1; j < items.length; j++) {
+          const a = items[i], b = items[j];
+          let dx = b.x - a.x, dy = b.y - a.y;
+          let d = Math.hypot(dx, dy) || 0.01;
+          if (d < MIN_SEP) {
+            const push = (MIN_SEP - d) / 2;
+            const ux = dx / d, uy = dy / d;
+            if (a.icon !== "star-unique") { a.x -= ux * push; a.y -= uy * push; }
+            if (b.icon !== "star-unique") { b.x += ux * push; b.y += uy * push; }
+          }
+        }
+      }
+      // enforce the leash: clamp each icon to MAX_NUDGE from its origin
+      items.forEach((it, idx) => {
+        if (it.icon === "star-unique") { it.x = orig[idx].x; it.y = orig[idx].y; return; }
+        const dx = it.x - orig[idx].x, dy = it.y - orig[idx].y;
+        const d = Math.hypot(dx, dy);
+        if (d > MAX_NUDGE) { it.x = orig[idx].x + dx / d * MAX_NUDGE; it.y = orig[idx].y + dy / d * MAX_NUDGE; }
+      });
+    }
+    return items;
   }
   function drawHubMap(h, m, svg, W, H) {
     // Ledger coords are all in 0-1, but the fetched OSM geometry can extend past
@@ -723,10 +819,13 @@
           .attr("opacity", 0.35).attr("stroke-linecap","round");
     }
     // L2/L3 icons + numbered badges
+    const placed = declashIcons((m.ledger||[]).map(e => ({ n: e.n, icon: e.icon, x: px(e.x), y: py(e.y) })));
+    const posByN = new Map(placed.map(p => [p.n, p]));
     (m.ledger||[]).forEach(e => {
       const size = e.layer === 2 ? 30 : 22;
       const deg = e.icon === "water-bridge" ? bridgeDegFor(m, e) : null;
-      const g = sprite(svg, e.icon, px(e.x), py(e.y), size,
+      const pos = posByN.get(e.n) || { x: px(e.x), y: py(e.y) };
+      const g = sprite(svg, e.icon, pos.x, pos.y, size,
                        CAT_FILL[e.icon] || "#6A7A8A", deg);
       g.attr("data-n", e.n).attr("data-icon", e.icon)
         .style("cursor","pointer").attr("aria-label", e.name_vn);
@@ -745,6 +844,7 @@
       g.on("mouseleave", () => { if (_tip) _tip.style.display = "none"; });
     });
     renderMapLedger(m);   // numbered margin panel
+    applyDemotion(h, m);
   }
   function bridgeDegFor(m, e) {
     // rotate the bridge icon to match the NEAREST bridge way's baked bearing
@@ -758,6 +858,83 @@
     }
     return best.bearing_deg;
   }
+
+  // Auto trade-strip sub-hubs: group raw places by dominant field within a radius.
+  // Honest — derived from real coords + the field tag; labels come from FIELD_LABEL,
+  // never a specific trade the anonymous data can't confirm.
+  function clusterStrips(places, projX, projY) {
+    const STRIP_MIN = 5;       // a strip needs >= 5 same-field places
+    const RADIUS = 36;         // px grouping radius
+    const byField = {};
+    places.forEach(p => { if (p.field) (byField[p.field] ||= []).push(p); });
+    const strips = [];
+    Object.entries(byField).forEach(([field, ps]) => {
+      const used = new Array(ps.length).fill(false);
+      ps.forEach((p, i) => {
+        if (used[i]) return;
+        const group = [p]; used[i] = true;
+        const px0 = projX(p.lon), py0 = projY(p.lat);
+        ps.forEach((q, j) => {
+          if (used[j]) return;
+          if (Math.hypot(projX(q.lon) - px0, projY(q.lat) - py0) < RADIUS) {
+            group.push(q); used[j] = true;
+          }
+        });
+        if (group.length >= STRIP_MIN) {
+          const cx = group.reduce((s, g) => s + projX(g.lon), 0) / group.length;
+          const cy = group.reduce((s, g) => s + projY(g.lat), 0) / group.length;
+          strips.push({ field, n: group.length, cx, cy });
+        }
+      });
+    });
+    return strips;
+  }
+
+  // Draw auto trade-strip sub-hubs + curated malls onto the hub SVG.
+  // All output lives under a single <g class="subhub-layer"> so the toggle
+  // can remove everything in one svg.select("g.subhub-layer").remove() call.
+  function drawSubhubs(h, svg, projX, projY) {
+    // remove any previous sub-hub layer
+    svg.select("g.subhub-layer").remove();
+
+    const layer = svg.append("g").attr("class", "subhub-layer");
+
+    // --- auto trade-strip half ---
+    if (h.places && h.places.length) {
+      const strips = clusterStrips(h.places, projX, projY);
+      strips.forEach(({ field, n, cx, cy }) => {
+        const color = FIELD_COLOR[field] || "#999";
+        const label = (FIELD_LABEL[field] || field) + " \xb7 " + n;
+        const g = layer.append("g").attr("class", "subhub-strip");
+        g.append("circle")
+          .attr("cx", cx).attr("cy", cy)
+          .attr("r", Math.max(18, Math.sqrt(n) * 5))
+          .attr("fill", color)
+          .attr("stroke", color);
+        g.append("text")
+          .attr("x", cx).attr("y", cy + 4)
+          .attr("text-anchor", "middle")
+          .text(label);
+      });
+    }
+
+    // --- curated malls half (Task 4) ---
+    const slug = HUB_MAP_SLUG[h.id] || "";
+    const malls = (_subhubs && _subhubs[slug]) || [];
+    malls.filter(m => m.kind === "mall").forEach(m => {
+      const cx = projX(m.lon), cy = projY(m.lat);
+      const SZ = 10;  // half-side of the square marker
+      const g = layer.append("g").attr("class", "subhub-mall");
+      g.append("title").text(m.note || m.name);
+      g.append("rect")
+        .attr("x", cx - SZ).attr("y", cy - SZ)
+        .attr("width", SZ * 2).attr("height", SZ * 2);
+      g.append("text")
+        .attr("x", cx + SZ + 4).attr("y", cy + 4)
+        .text(m.name);
+    });
+  }
+
   function showFeatureTip(ev, e) {
     const tip = ensureTip();
     tip.innerHTML = "<b>" + esc(e.name_vn) + "</b>" + (e.blurb ? "<br>"+esc(e.blurb) : "");
