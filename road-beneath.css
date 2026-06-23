@@ -160,3 +160,49 @@
   display: block;
   margin-bottom: 0.5rem;
 }
+
+/* ── Magazine layout: sticky locator + inline figures ── */
+@media (min-width: 960px) {
+  .article-main { max-width: 60rem; }
+  .locator {
+    position: sticky;
+    top: 1.5rem;
+    float: right;
+    width: 16rem;
+    margin: 0 0 1rem 1.5rem;
+    z-index: 5;
+  }
+}
+.locator {
+  background: var(--bg-warm, #fdf8f2);
+  border: 1px solid var(--ink-faint, #e8e0d0);
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+.locator svg { width: 100%; height: auto; display: block; }
+.locator .loc-caption {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 0.72rem;
+  color: var(--ink-mid, #555);
+  margin-top: 0.4rem;
+  min-height: 1.2em;
+}
+@media (max-width: 959px) {
+  .locator {
+    position: sticky;
+    top: 0;
+    margin: 0 0 1.5rem;
+  }
+}
+
+/* inline figures (ride-strip, name-stack, three-fates, arteries) */
+.fig-block { margin: 1.75rem 0; }
+.fig-svg { width: 100%; }
+.fig-svg svg { width: 100%; height: auto; display: block; }
+.fig-block figcaption {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 0.8rem;
+  color: var(--ink-mid, #555);
+  margin-top: 0.5rem;
+  line-height: 1.45;
+}
