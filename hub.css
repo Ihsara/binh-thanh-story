@@ -387,9 +387,16 @@ body.lightbox-open{overflow:hidden}
 #map-ledger li:hover,#map-ledger li.lit{background:#f3e9d4}
 .route-band{pointer-events:none}
 /* Legible hover/lit highlight that reads on cream (inline) AND dark (lightbox):
-   a dark ring + scale-up + soft cream halo on the icon group, never a glyph recolor. */
-#lmap g[data-n].lit,.map-lightbox g[data-n].lit{transform-box:fill-box;
-  transform-origin:center;transform:scale(1.18);transition:transform .12s}
+   a dark ring + scale-up + soft cream halo on the icon, never a glyph recolor.
+   NB scale the INNER glyph (<use>) + halo, NOT the <g> — the group carries an
+   inline transform="translate(cx,cy)" attribute, and a CSS `transform` on the
+   group would OVERRIDE it (CSS wins over the presentation attr), teleporting the
+   icon to the top-left. Per-child fill-box scaling leaves the translate intact. */
+#lmap g[data-n].lit use,.map-lightbox g[data-n].lit use,
+#lmap g[data-n].lit circle:first-of-type,
+.map-lightbox g[data-n].lit circle:first-of-type{
+  transform-box:fill-box;transform-origin:center;transform:scale(1.18);
+  transition:transform .12s}
 #lmap g[data-n].lit circle:first-of-type,
 .map-lightbox g[data-n].lit circle:first-of-type{
   opacity:.55;stroke:#2A1F14;stroke-width:1.5;

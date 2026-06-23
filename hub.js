@@ -30,7 +30,7 @@
   let _demote = null;  // { slug: [n, ...] }
   async function loadDemote() {
     if (_demote === null) {
-      _demote = await d3.json("hub-demote.json?v=20260623hub")
+      _demote = await d3.json("hub-demote.json?v=20260623hub2")
         .then(d => d.hubs || {}).catch(() => ({}));
     }
     return _demote;
@@ -39,7 +39,7 @@
   let _subhubs = null;  // { slug: [{kind, name, lon, lat, note}, ...] }
   async function loadSubhubs() {
     if (_subhubs === null) {
-      _subhubs = await d3.json("hub-subhubs.json?v=20260623hub")
+      _subhubs = await d3.json("hub-subhubs.json?v=20260623hub2")
         .then(d => d.hubs || {}).catch(() => ({}));
     }
     return _subhubs;
@@ -727,7 +727,7 @@
         const ext = hubMap.extent;  // [lon0, lat0, lon1, lat1]
         const subProjX = (lon) => (lon - ext[0]) / (ext[2] - ext[0]) * W;
         const subProjY = (lat) => (ext[3] - lat) / (ext[3] - ext[1]) * H;
-        drawSubhubs(h, svg, subProjX, subProjY);
+        drawSubhubs(h, svg, subProjX, subProjY, W, H);
       }
     };
   }
@@ -862,9 +862,17 @@
   // Auto trade-strip sub-hubs: group raw places by dominant field within a radius.
   // Honest — derived from real coords + the field tag; labels come from FIELD_LABEL,
   // never a specific trade the anonymous data can't confirm.
-  function clusterStrips(places, projX, projY) {
-    const STRIP_MIN = 5;       // a strip needs >= 5 same-field places
-    const RADIUS = 36;         // px grouping radius
+  //
+  // Only ON-FRAME, GENUINELY-DENSE strips survive, and at most MAX_STRIPS of them:
+  // raw places spill past the illustrated-map crop, so a naive pass produced ~89
+  // overlapping blobs (many off the top edge). The design wants a *few* readable
+  // labelled blobs ("Retail · 24"), so we use a wider merge radius + higher floor,
+  // drop any centroid outside the visible [0,W]×[0,H] frame, and keep the biggest.
+  function clusterStrips(places, projX, projY, W, H) {
+    const STRIP_MIN = 8;       // a strip needs >= 8 same-field places to be a "strip"
+    const RADIUS = 64;         // px grouping radius (wider -> fewer, bigger strips)
+    const MAX_STRIPS = 6;      // cap: keep only the densest few so the map stays legible
+    const MARGIN = 12;         // centroid must sit this far inside the frame
     const byField = {};
     places.forEach(p => { if (p.field) (byField[p.field] ||= []).push(p); });
     const strips = [];
@@ -883,17 +891,20 @@
         if (group.length >= STRIP_MIN) {
           const cx = group.reduce((s, g) => s + projX(g.lon), 0) / group.length;
           const cy = group.reduce((s, g) => s + projY(g.lat), 0) / group.length;
-          strips.push({ field, n: group.length, cx, cy });
+          // honesty + legibility: only strips whose centroid lands inside the map
+          if (cx >= MARGIN && cx <= W - MARGIN && cy >= MARGIN && cy <= H - MARGIN)
+            strips.push({ field, n: group.length, cx, cy });
         }
       });
     });
-    return strips;
+    // keep only the densest few
+    return strips.sort((a, b) => b.n - a.n).slice(0, MAX_STRIPS);
   }
 
   // Draw auto trade-strip sub-hubs + curated malls onto the hub SVG.
   // All output lives under a single <g class="subhub-layer"> so the toggle
   // can remove everything in one svg.select("g.subhub-layer").remove() call.
-  function drawSubhubs(h, svg, projX, projY) {
+  function drawSubhubs(h, svg, projX, projY, W, H) {
     // remove any previous sub-hub layer
     svg.select("g.subhub-layer").remove();
 
@@ -901,7 +912,7 @@
 
     // --- auto trade-strip half ---
     if (h.places && h.places.length) {
-      const strips = clusterStrips(h.places, projX, projY);
+      const strips = clusterStrips(h.places, projX, projY, W, H);
       strips.forEach(({ field, n, cx, cy }) => {
         const color = FIELD_COLOR[field] || "#999";
         const label = (FIELD_LABEL[field] || field) + " \xb7 " + n;
