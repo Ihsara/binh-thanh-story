@@ -16,6 +16,7 @@
         { href: "yardstick.html", label: "The yardstick", page: "yardstick" },
         { href: "four-lives.html", label: "The four lives", page: "four-lives" },
         { href: "chains.html", label: "Chains vs độc lập", page: "chains" },
+        { href: "chains-poster.html", label: "Chains poster", page: "chains-poster" },
       ] },
     { id: "atlas", label: "Field Guide", href: "hubs.html",
       stories: [
