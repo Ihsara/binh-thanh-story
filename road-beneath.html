@@ -9,6 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;0,900;1,400&family=Be+Vietnam+Pro:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="spine.css?v=20260622v0">
   <link rel="stylesheet" href="road-beneath.css?v=20260623mag">
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="road-beneath-overlay.css?v=20260626hov">
 </head>
 <body data-page="road-beneath">
   <div id="site-nav"></div>
@@ -48,6 +50,44 @@
         The river and canals are real OSM geodata.
       </figcaption>
     </figure>
+
+    <!-- ── SECTION 0b: MAPS THROUGH TIME — interactive Leaflet overlay ── -->
+    <section class="article-section" id="maps-through-time">
+      <h2>The maps through time</h2>
+      <p>
+        Five historical maps, georeferenced to the same district. Drag the slider to fade
+        each layer in and out — see how the surveyors drew the same canals and roads
+        across 200 years. The 1748 Thiên Lý route is drawn on top.
+      </p>
+      <div id="ovl-map" aria-label="Interactive historical map overlay of Bình Thạnh district"></div>
+      <div id="ovl-filter"><!-- Task 4: toggle/opacity controls --></div>
+      <p class="ovl-caption">
+        Historical layers are georeferenced to roughly ±300–600 m — atmospheric, not
+        street-accurate (the 1984 sheet is the exception, accurate to a few metres).
+        The 1815 map is illustrative only — not survey-aligned.
+        Toggle and fade the layers to compare how the same streets shift across eras.
+        Base tiles © <a href="https://www.openstreetmap.org/copyright"
+          rel="noopener" target="_blank">OpenStreetMap</a> contributors.
+      </p>
+      <aside class="ovl-attribution" aria-label="Map source attribution">
+        <h3>Map sources &amp; licences</h3>
+        <ul>
+          <li><strong>1984</strong> — DMA L7014 6330-4 — US Federal government work,
+            <strong>public domain</strong></li>
+          <li><strong>1961</strong> — AMS L9012 Saigon Sheet 2 — US Federal government work,
+            <strong>public domain</strong></li>
+          <li><strong>1895</strong> — <em>Plan des environs de Saïgon</em> (Joly) —
+            Wikimedia Commons, <strong>public domain</strong> mark (PD-Mark)</li>
+          <li><strong>1878</strong> — <em>Plan de la ville de Saïgon</em> (Dufour) —
+            Wikimedia Commons, <strong>public domain</strong> mark (PD-Mark)</li>
+          <li><strong>1815</strong> — <em>Bản đồ Gia Định</em> (Trần Văn Học) —
+            licensed <strong>CC BY-SA</strong> 4.0 via Wikimedia Commons</li>
+          <li><strong>Base streets</strong> — ©
+            <a href="https://www.openstreetmap.org/copyright"
+               rel="noopener" target="_blank">OpenStreetMap</a> contributors (ODbL)</li>
+        </ul>
+      </aside>
+    </section>
 
     <!-- ── SECTION 0: INTRO OVERVIEW — the district's arteries ── -->
     <section class="article-section" id="arteries">
@@ -439,5 +479,7 @@
 
   <script src="nav.js?v=20260621r4"></script>
   <script src="road-beneath.js?v=20260623mag"></script>
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="road-beneath-overlay.js?v=20260626hov"></script>
 </body>
 </html>

@@ -1,0 +1,232 @@
+/* road-beneath-overlay.css — Task 3: maps-through-time section + Leaflet map */
+
+#maps-through-time {
+  margin: 2.5rem auto;
+  max-width: 900px;
+  padding: 0 1rem;
+}
+
+#ovl-map {
+  height: 480px;
+  width: 100%;
+  margin: 1rem 0;
+  border-radius: 4px;
+  border: 1px solid #d0c8bc;
+}
+
+#ovl-filter {
+  margin: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* Header row */
+.ovl-filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.ovl-filter-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #5a4a3a;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Reset button */
+.ovl-reset {
+  font-size: 0.78rem;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid #b0a090;
+  border-radius: 3px;
+  background: #f5f0eb;
+  color: #5a4a3a;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.ovl-reset:hover {
+  background: #e8ddd0;
+}
+
+/* Layer card */
+.ovl-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+/* Toggle button — base */
+.ovl-toggle {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid #c8bfb0;
+  border-radius: 4px;
+  background: #faf8f5;
+  color: #3a2e24;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.ovl-toggle:hover {
+  background: #f0ebe3;
+  border-color: #a09080;
+}
+.ovl-toggle.on,
+.ovl-toggle[aria-pressed="true"] {
+  background: #e8ddd0;
+  border-color: #8a6a4a;
+  font-weight: 600;
+  color: #2a1e14;
+}
+
+/* Illustrative toggle — dashed border + sepia chip accent */
+.ovl-toggle--illustrative {
+  border-style: dashed;
+  border-color: #b08060;
+  background: #fdf8f0;
+  color: #6b4c2a;
+}
+.ovl-toggle--illustrative::before {
+  content: "✦ ";
+  font-size: 0.7em;
+  opacity: 0.7;
+}
+.ovl-toggle--illustrative.on,
+.ovl-toggle--illustrative[aria-pressed="true"] {
+  background: #f0e0c8;
+  border-color: #8a5a30;
+}
+
+/* Opacity slider row */
+.ovl-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.2rem 0.6rem 0.3rem;
+  background: #f5f0ea;
+  border-radius: 0 0 3px 3px;
+}
+.ovl-slider-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.76rem;
+  color: #6a5a4a;
+  width: 100%;
+}
+.ovl-opacity-slider {
+  flex: 1;
+  accent-color: #8a6a4a;
+}
+
+/* 1815 illustrative ghost overlay image — sepia + multiply blend */
+.ovl-illustrative {
+  mix-blend-mode: multiply;
+  filter: sepia(0.55) saturate(0.7);
+}
+
+/* ── Responsive: 820 px breakpoint ── */
+@media (max-width: 820px) {
+  #ovl-map {
+    height: 380px;
+  }
+
+  #ovl-filter {
+    /* Collapse layer cards into a horizontal scrolling chip row */
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.35rem;
+    padding-bottom: 0.25rem;
+  }
+
+  /* In chip-row mode: hide the title label but keep the header (reset button must stay reachable) */
+  .ovl-filter-title {
+    display: none;
+  }
+
+  .ovl-filter-header {
+    justify-content: flex-end;
+    margin-bottom: 0.15rem;
+  }
+
+  /* Each card becomes a compact chip */
+  .ovl-card {
+    flex: 0 0 auto;
+    max-width: 160px;
+  }
+
+  /* Toggle chips are narrower and wrap their text */
+  .ovl-toggle {
+    white-space: normal;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  /* Slider rows stay but narrow to fit the chip width */
+  .ovl-slider-row {
+    padding: 0.15rem 0.4rem 0.25rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .ovl-filter-header {
+    flex-wrap: wrap;
+  }
+  .ovl-toggle {
+    font-size: 0.78rem;
+  }
+}
+
+.ovl-caption {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0.25rem 0 0;
+  font-style: italic;
+}
+
+/* Attribution aside */
+.ovl-attribution {
+  margin: 1rem 0 0;
+  padding: 0.75rem 1rem;
+  background: #faf8f5;
+  border: 1px solid #ddd5c8;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: #5a4a3a;
+}
+.ovl-attribution h3 {
+  margin: 0 0 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.ovl-attribution ul {
+  margin: 0;
+  padding: 0 0 0 1.2em;
+  line-height: 1.6;
+}
+.ovl-attribution li {
+  margin: 0.15rem 0;
+}
+.ovl-attribution a {
+  color: #6b4c2a;
+}
+
+@media (max-width: 600px) {
+  #ovl-map {
+    height: 320px;
+  }
+  .ovl-attribution {
+    font-size: 0.75rem;
+  }
+}

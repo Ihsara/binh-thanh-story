@@ -1,0 +1,80 @@
+{
+  "schema": "overlay-maps-v1",
+  "layers": [
+    {
+      "id": "1984",
+      "label": "1984 · ±~5 m",
+      "tier": "precise",
+      "img": "overlays/1984.png",
+      "bbox": [
+        106.49413,
+        10.749654,
+        106.754484,
+        11.000713
+      ],
+      "license": "US Federal (public domain)",
+      "source": "DMA L7014 6330-4",
+      "illustrative": false
+    },
+    {
+      "id": "1961",
+      "label": "1961 · ±~300 m · southern/central only",
+      "tier": "moderate",
+      "img": "overlays/1961.png",
+      "bbox": [
+        106.671814,
+        10.683412,
+        106.729666,
+        10.825267
+      ],
+      "license": "US Federal (public domain)",
+      "source": "AMS L9012 Saigon Sheet 2",
+      "illustrative": false
+    },
+    {
+      "id": "1895",
+      "label": "1895 · ±~400 m",
+      "tier": "soft",
+      "img": "overlays/1895.png",
+      "bbox": [
+        106.49038,
+        10.688316,
+        106.93407,
+        10.918223
+      ],
+      "license": "Wikimedia (public domain mark)",
+      "source": "Plan des environs de Saïgon (Joly)",
+      "illustrative": false
+    },
+    {
+      "id": "1878",
+      "label": "1878 · ±~300 m · city-core/SW only",
+      "tier": "soft",
+      "img": "overlays/1878.png",
+      "bbox": [
+        106.665439,
+        10.746278,
+        106.722199,
+        10.818099
+      ],
+      "license": "Wikimedia (public domain mark)",
+      "source": "Plan de la ville de Saïgon (Dufour)",
+      "illustrative": false
+    },
+    {
+      "id": "1815",
+      "label": "1815 · illustrative — not survey-aligned",
+      "tier": "illustrative",
+      "img": "overlays/1815.png",
+      "bbox": [
+        106.682,
+        10.785,
+        106.752,
+        10.84
+      ],
+      "license": "CC BY-SA 4.0",
+      "source": "Bản đồ Gia Định (Trần Văn Học)",
+      "illustrative": true
+    }
+  ]
+}
