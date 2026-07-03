@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A census, not a newsfeed · Bình Thạnh Atlas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;0,900;1,400&family=Be+Vietnam+Pro:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="spine.css?v=20260703c">
+  <link rel="stylesheet" href="census.css?v=20260703c">
+</head>
+<body data-page="census">
+  <div id="site-nav"></div>
+  <main id="census-main">
+    <header>
+      <span class="kicker">The Map · Behind the data</span>
+      <h2>A census, not a newsfeed</h2>
+      <p class="dek">We hold three monthly snapshots of Bình Thạnh from Overture Maps —
+        April, May, June 2026. Put side by side, they answer a tempting question:
+        <em>how many shops opened here this spring?</em> The honest answer is that
+        this data <b>cannot tell you</b> — and seeing <em>why</em> is the whole point.</p>
+      <p class="honesty-note">This page compares Overture only against itself, release
+        to release. No external ground truth — so it measures the data's own behaviour,
+        not the neighbourhood's.</p>
+    </header>
+
+    <section class="stepper" aria-label="Choose a comparison">
+      <button id="prev" aria-label="Previous comparison">‹ Prev</button>
+      <div class="dots" id="dots" role="tablist"></div>
+      <button id="next" aria-label="Next comparison">Next ›</button>
+      <span class="step-label" id="steplabel"></span>
+    </section>
+
+    <section class="chart-card">
+      <h3 class="chart-head" id="chartHead"></h3>
+      <p class="chart-sub" id="chartSub"></p>
+      <svg id="bars" viewBox="0 0 640 300" role="img" aria-labelledby="chartHead"></svg>
+      <div class="legend">
+        <span><i style="background:#2f7d5b"></i>Net change — the real movement</span>
+        <span><i style="background:#c9b79a"></i>Churn — IDs added &amp; removed</span>
+        <span><i style="background:#b06a3a"></i>Recategorized — vocabulary, not shops</span>
+      </div>
+      <p class="takeaway" id="takeaway"></p>
+    </section>
+
+    <section class="rename-callout">
+      <h3>The 1,167 that weren't changes</h3>
+      <p>Between May and June, Overture reported zero new places and 1,167
+        "recategorized" — which looks like upheaval. It isn't. Overture's June
+        schema (v1.17.0) <b>renamed its category vocabulary</b>. The same shops kept
+        their doors; only the label Overture files them under changed. The six most
+        common renames, all pure vocabulary swaps:</p>
+      <table class="rename-table" id="renameTable"></table>
+    </section>
+
+    <section>
+      <h3 class="chart-head" style="margin-top:2.5rem">And the streets stood still</h3>
+      <p class="chart-sub">The physical layers barely move over a quarter — expected for
+        a built-out inner district. Overture is refreshing its <em>map</em>, not watching
+        the district change.</p>
+      <div class="bulk-strip" id="bulkStrip"></div>
+    </section>
+
+    <p class="takeaway" style="border-top:none;margin-top:2.5rem">
+      <b>The takeaway.</b> Across three months, Overture's Bình Thạnh holds steady at
+      about <b>25,300 places</b> — a net drift of just <span class="sig"><b>+101</b></span>.
+      The thousands of IDs churning underneath are the source recycling identifiers, and
+      the biggest apparent "change" was a rename. Overture is a dependable monthly
+      <b>census</b> of what stands here. It is not a feed of what opened this week — and
+      the data itself, compared only to its own past, is what proves it.</p>
+
+    <p class="note">Places joined by GERS id, clipped to the district polygon (OSM
+      relation −3797166, ≈21.7 km²). Bulk-theme counts are district-clipped per release.
+      <a class="how" href="method.html">Method →</a></p>
+  </main>
+  <footer><p class="note">Places: Overture Maps Foundation (CDLA-Permissive-2.0). Streets: OpenStreetMap.</p></footer>
+  <script src="hem/vendor/d3.v7.min.js"></script>
+  <script src="nav.js?v=20260703c"></script>
+  <script src="census.js?v=20260703c"></script>
+</body>
+</html>

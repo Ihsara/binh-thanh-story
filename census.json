@@ -1,0 +1,254 @@
+{
+  "district": "Quận Bình Thạnh",
+  "district_osm_id": -3797166,
+  "releases": [
+    "2026-04-15.0",
+    "2026-05-20.0",
+    "2026-06-17.0"
+  ],
+  "months": [
+    "April",
+    "May",
+    "June"
+  ],
+  "steps": [
+    {
+      "old_release": "2026-04-15.0",
+      "new_release": "2026-05-20.0",
+      "old_month": "April",
+      "new_month": "May",
+      "old_total": 25267,
+      "new_total": 25379,
+      "added": 3047,
+      "removed": 2935,
+      "renamed": 135,
+      "recat": 232,
+      "recat_value_to_value": 209,
+      "recat_to_null": 15,
+      "recat_from_null": 8,
+      "net": 112,
+      "rename_examples": [
+        {
+          "from": "restaurant",
+          "to": "vietnamese_restaurant",
+          "n": 6
+        },
+        {
+          "from": "beauty_service",
+          "to": "nail_salon",
+          "n": 5
+        },
+        {
+          "from": "cafe",
+          "to": "coffee_shop",
+          "n": 4
+        },
+        {
+          "from": "diner",
+          "to": "restaurant",
+          "n": 4
+        },
+        {
+          "from": "coffee_shop",
+          "to": "cafe",
+          "n": 3
+        },
+        {
+          "from": "real_estate_service",
+          "to": "appraisal_service",
+          "n": 3
+        }
+      ]
+    },
+    {
+      "old_release": "2026-05-20.0",
+      "new_release": "2026-06-17.0",
+      "old_month": "May",
+      "new_month": "June",
+      "old_total": 25379,
+      "new_total": 25368,
+      "added": 0,
+      "removed": 11,
+      "renamed": 0,
+      "recat": 1167,
+      "recat_value_to_value": 1154,
+      "recat_to_null": 13,
+      "recat_from_null": 0,
+      "net": -11,
+      "rename_examples": [
+        {
+          "from": "flowers_and_gifts_shop",
+          "to": "flowers_and_gifts_store",
+          "n": 450
+        },
+        {
+          "from": "beauty_service",
+          "to": "personal_or_beauty_service",
+          "n": 299
+        },
+        {
+          "from": "construction_service",
+          "to": "building_or_construction_service",
+          "n": 216
+        },
+        {
+          "from": "bank_credit_union",
+          "to": "bank_or_credit_union",
+          "n": 82
+        },
+        {
+          "from": "arts_and_crafts_store",
+          "to": "arts_crafts_and_hobby_store",
+          "n": 56
+        },
+        {
+          "from": "b2b_science_and_technology",
+          "to": "b2b_science_and_technology_service",
+          "n": 16
+        }
+      ]
+    }
+  ],
+  "span": {
+    "old_release": "2026-04-15.0",
+    "new_release": "2026-06-17.0",
+    "old_month": "April",
+    "new_month": "June",
+    "old_total": 25267,
+    "new_total": 25368,
+    "added": 3044,
+    "removed": 2943,
+    "renamed": 134,
+    "recat": 1199,
+    "recat_value_to_value": 1163,
+    "recat_to_null": 28,
+    "recat_from_null": 8,
+    "net": 101,
+    "rename_examples": [
+      {
+        "from": "flowers_and_gifts_shop",
+        "to": "flowers_and_gifts_store",
+        "n": 361
+      },
+      {
+        "from": "beauty_service",
+        "to": "personal_or_beauty_service",
+        "n": 236
+      },
+      {
+        "from": "construction_service",
+        "to": "building_or_construction_service",
+        "n": 191
+      },
+      {
+        "from": "bank_credit_union",
+        "to": "bank_or_credit_union",
+        "n": 75
+      },
+      {
+        "from": "arts_and_crafts_store",
+        "to": "arts_crafts_and_hobby_store",
+        "n": 48
+      },
+      {
+        "from": "b2b_science_and_technology",
+        "to": "b2b_science_and_technology_service",
+        "n": 13
+      }
+    ]
+  },
+  "net_by_category": [
+    {
+      "cat": "flowers_and_gifts_store",
+      "added": 89,
+      "removed": 0,
+      "net": 89
+    },
+    {
+      "cat": "personal_or_beauty_service",
+      "added": 58,
+      "removed": 0,
+      "net": 58
+    },
+    {
+      "cat": "real_estate_service",
+      "added": 224,
+      "removed": 171,
+      "net": 53
+    },
+    {
+      "cat": "social_media_agency",
+      "added": 36,
+      "removed": 8,
+      "net": 28
+    },
+    {
+      "cat": "building_or_construction_service",
+      "added": 25,
+      "removed": 0,
+      "net": 25
+    },
+    {
+      "cat": "restaurant",
+      "added": 127,
+      "removed": 111,
+      "net": 16
+    },
+    {
+      "cat": "grocery_store",
+      "added": 58,
+      "removed": 47,
+      "net": 11
+    },
+    {
+      "cat": "beauty_supply_store",
+      "added": 34,
+      "removed": 24,
+      "net": 10
+    }
+  ],
+  "bulk": [
+    {
+      "label": "Buildings",
+      "counts": [
+        44695,
+        44686,
+        44741
+      ],
+      "net": 46
+    },
+    {
+      "label": "Road segments",
+      "counts": [
+        6393,
+        6403,
+        6409
+      ],
+      "net": 16
+    },
+    {
+      "label": "Water features",
+      "counts": [
+        196,
+        196,
+        196
+      ],
+      "net": 0
+    },
+    {
+      "label": "Land-use polygons",
+      "counts": [
+        253,
+        254,
+        256
+      ],
+      "net": 3
+    }
+  ],
+  "attribution": "Overture Maps Foundation, CDLA-Permissive-2.0",
+  "place_totals": [
+    25267,
+    25379,
+    25368
+  ]
+}
