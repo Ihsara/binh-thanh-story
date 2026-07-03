@@ -160,6 +160,26 @@
       .attr("fill", "#c00").text(`Failed to load chains-territory.json: ${e}`));
   }
 
+  // D16: light label de-collision for the relations node-link map. Default
+  // label position is dy=-12 (above the node). When another node's default
+  // label point sits within `near` px above this node's own position, flip
+  // this node's label to dy=+16 (below) so the two labels don't overlap the
+  // same circle. Returns a per-node dy accessor.
+  function declashLabels(hubs, x, y) {
+    const above = -12, below = 16, near = 14;
+    const pts = hubs.map(h => ({ h, px: x(h.lon), py: y(h.lat) + above }));
+    const flipped = new Set();
+    pts.forEach((p, i) => {
+      pts.forEach((q, j) => {
+        if (i === j || flipped.has(q.h)) return;
+        if (Math.abs(p.px - q.px) < 40 && Math.abs(p.py - q.py) < near) {
+          flipped.add(q.h);
+        }
+      });
+    });
+    return h => flipped.has(h) ? below : above;
+  }
+
   // Relations view: a node-link map. Hubs sit at true lon/lat; edges link hubs
   // whose street territories touch — red where they compete for the same blocks,
   // faint sand where they merely border. Edge weight = shared boundary nodes.
@@ -195,7 +215,12 @@
       .attr("fill", "#fffdf8").attr("stroke", "#7a3f1d").attr("stroke-width", 1.5)
       .append("title").text(h =>
         `${h.title}: ${h.split.chain + h.split.indep} places`);
-    g.append("text").attr("x", h => x(h.lon)).attr("y", h => y(h.lat) - 12)
+    // D16: default labels sit 12px above the node, but with 22 hubs some
+    // labels collide with a neighbour's circle (e.g. "Văn Thánh" behind Hàng
+    // Xanh). declashLabels flips a label below the node (dy=+16) whenever
+    // another node's label would otherwise sit within N px above it.
+    const labelOffset = declashLabels(hubs, x, y);
+    g.append("text").attr("x", h => x(h.lon)).attr("y", h => y(h.lat) + labelOffset(h))
       .attr("text-anchor", "middle").attr("font-size", 10).attr("fill", "#4a4030")
       .attr("paint-order", "stroke").attr("stroke", "#faf6ef").attr("stroke-width", 2.5)
       .text(h => h.title);

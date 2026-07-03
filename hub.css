@@ -44,27 +44,26 @@
 #generators{display:flex;flex-wrap:wrap;gap:.4rem .9rem;align-items:baseline}
 .gen{font-size:.86rem;color:#4a4030}.gen.muted{color:#9a8f7a}
 .gen-cap{flex-basis:100%;margin:.2rem 0 0;font-size:.72rem;color:#8a7f6a}
-.gen-toggle{position:absolute;top:8px;right:8px;z-index:2;background:#fffdf8;
-  border:1px solid #d8cdb8;border-radius:14px;padding:4px 10px;font-size:12px;
-  color:#5a5040;cursor:pointer}
-.gen-toggle.on{background:#3e7a5e;color:#fff;border-color:#3e7a5e}
 /* C1: fullscreen lightbox */
 .map-fs-toggle{position:absolute;top:8px;left:8px;z-index:2;background:#fffdf8;
   border:1px solid #d8cdb8;border-radius:14px;padding:4px 10px;font-size:14px;
   line-height:1;color:#5a5040;cursor:pointer}
 .map-fs-toggle:hover{border-color:var(--accent,#c0532a);color:var(--accent,#c0532a)}
 body.lightbox-open{overflow:hidden}
-.map-lightbox{position:fixed;inset:0;z-index:100;background:#101420ee;
+.map-lightbox{position:fixed;inset:0;z-index:100;background:#101420;
   display:flex;flex-direction:column;padding:2.5vmin;box-sizing:border-box}
 .map-lightbox[hidden]{display:none}
-.map-lightbox .lb-close{position:absolute;top:12px;right:16px;z-index:2;
+.map-lightbox .lb-close{position:absolute;top:6px;right:8px;z-index:2;
+  min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;
   background:transparent;border:none;color:#ece7df;font-size:26px;cursor:pointer;line-height:1}
 .map-lightbox .lb-stage{flex:1;min-height:0;display:flex;gap:2vmin}
-.map-lightbox .lb-map{flex:1;min-width:0;position:relative;background:#faf6ef;border-radius:8px}
-.map-lightbox .lb-map svg{width:100%;height:100%}
+.map-lightbox .lb-map{flex:1;min-width:0;position:relative;background:#faf6ef;border-radius:8px;
+  overflow:auto}
+.map-lightbox .lb-map svg{width:100%;height:auto;display:block}
 .map-lightbox .lb-ledger{width:min(320px,28vw);overflow:auto;color:#ece7df}
 @media(max-width:700px){.map-lightbox .lb-stage{flex-direction:column}
-  .map-lightbox .lb-ledger{width:auto;max-height:30vh}}
+  .map-lightbox .lb-map{flex:1 1 auto;min-height:55vh}
+  .map-lightbox .lb-ledger{width:auto;max-height:32vh;overflow:auto}}
 .hub-rel ul{list-style:none;padding:0}.hub-rel li{margin:.3rem 0;font-size:.9rem}
 .rel{display:inline-block;width:1.3em}.rel.compete{color:#c0453a}
 .rel.complement{color:#3e7a5e}.rel-note{color:#8a7f6a;font-size:.8rem}
@@ -80,7 +79,7 @@ body.lightbox-open{overflow:hidden}
   color:#7a6f5c;border-radius:11px;padding:2px 9px;cursor:pointer}
 .lchip.on{background:#7a6f5c;color:#fff;border-color:#7a6f5c}
 .fchip.off{opacity:.32}
-#dot-tip{position:fixed;z-index:50;display:none;max-width:320px;
+#dot-tip{position:fixed;z-index:200;display:none;max-width:320px;
   background:#23201c;color:#ece7df;border-radius:8px;padding:9px 11px;
   font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;
   box-shadow:0 6px 24px rgba(0,0,0,.28);pointer-events:none}
@@ -115,7 +114,7 @@ body.lightbox-open{overflow:hidden}
   border-radius:2px;vertical-align:middle}
 .fg-timeofday .tod{flex:1;text-align:center;font:600 .7rem/1 var(--body);padding:.5rem 0;border-radius:6px;
   text-transform:uppercase;letter-spacing:.04em;color:#fff;
-  min-height:2rem;transition:height .2s ease;display:flex;align-items:center;justify-content:center}
+  min-height:2rem;display:flex;align-items:center;justify-content:center}
 .fg-picks{display:flex;flex-wrap:wrap;gap:.7rem}
 .fg-pick{border:1px solid rgba(0,0,0,.12);border-radius:8px;padding:.6rem .8rem;min-width:9rem;background:var(--paper)}
 .fg-pick .intent{font:600 .68rem/1 var(--body);text-transform:uppercase;letter-spacing:.05em;color:var(--accent)}
@@ -161,33 +160,8 @@ body.lightbox-open{overflow:hidden}
   background:rgba(192,83,42,.06);border-left:3px solid var(--accent);
   padding:.7rem .9rem;border-radius:0 6px 6px 0}
 
-/* Phase B: per-personality type-skins. One skeleton, different clothing.
-   Each skin re-tints the accent the field-guide blocks already consume. */
-#hub-main[data-skin="heritage"]{--accent:#8a5a2b;--accent-soft:rgba(138,90,43,.08)}
-#hub-main[data-skin="food"]{--accent:#b5532a;--accent-soft:rgba(181,83,42,.08)}
-#hub-main[data-skin="riverside"]{--accent:#2f7d8a;--accent-soft:rgba(47,125,138,.09)}
-#hub-main[data-skin="bridge"]{--accent:#6a6f3a;--accent-soft:rgba(106,111,58,.09)}
-#hub-main[data-skin="knot"]{--accent:#7a6a6a;--accent-soft:rgba(122,106,106,.09)}
-
-/* the accent-tinted blocks read the per-skin --accent-soft where they fill */
-#hub-main .fg-expect{background:var(--accent-soft,rgba(192,83,42,.08))}
-#hub-main .fg-cross-line{background:var(--accent-soft,rgba(192,83,42,.06))}
-
-/* skin lead emphasis: a food hub leads with the dish ribbon, a riverside hub
-   with the water, a bridge hub with its crossing, a heritage hub with its
-   anchor, a knot is honest about the edge. Each promotes a different block. */
-#hub-main[data-skin="food"] .fg-around-food{font-size:1rem;color:var(--accent);font-style:normal;font-weight:600}
-#hub-main[data-skin="riverside"] .fg-unique-line,
-#hub-main[data-skin="bridge"] .fg-unique-line{font-size:1.12rem}
-#hub-main[data-skin="heritage"] .fg-anchors .anchor{border-left-width:3px}
-#hub-main[data-skin="knot"] .fg-cross-line{font-style:italic}
-#fg-pullquote[hidden]{display:none}
-
 /* R3 Task 5: crown-jewel map — unique vignettes + cluster glyphs */
 .unique-vignettes .unique-vignette { pointer-events: all; }
-.unique-vignettes .unique-vignette:hover rect { stroke-width: 2; }
-.cluster-glyphs g { transition: opacity .15s; }
-.cluster-glyphs g:hover circle { stroke: #6a6052; }
 .anchor-legend text { font-size: 10px; }
 
 /* V1: illustrated map — Bình Lợi pilot */
@@ -214,8 +188,12 @@ body.lightbox-open{overflow:hidden}
   gap: 1.5rem 1.25rem;
   margin: 0 0 2rem;
 }
-/* map cell becomes the page hero: let the SVG fill it */
-.hub-grid-b2 .hub-map svg { min-height: 380px; }
+/* map cell becomes the page hero: base .hub-map svg (L11) already sets
+   width:100%;height:auto — that alone lets the SVG fill the b2 column while
+   keeping its true 720:460 viewBox aspect (D1: a min-height here forced the
+   SVG taller than 720:460, letterboxing its content centered while the
+   top-anchored <canvas> did not letterbox, so dots pointed at the wrong
+   streets — removed, not replaced). */
 .hub-grid-masthead { grid-area: masthead; }
 .hub-grid-b1       { grid-area: b1; }
 .hub-grid-b2       { grid-area: b2; }
@@ -228,64 +206,6 @@ body.lightbox-open{overflow:hidden}
     display: block;
   }
   .hub-grid > * { margin-bottom: 1.25rem; }
-}
-
-/* R3 Task 7: read↔explore choreography
-   - Base .hub-grid (no .explore): all cells visible, no display:none.
-   - .hub-grid.explore (desktop only): map (b2) expands ~2×2 into the b1 and c2
-     areas. b1 overview compacts (smaller font + capped height). b3 cards stay
-     alongside the expanded map in the new column. c2 merges into the map area.
-   - Transitions are ADDITIVE layout changes only — no content is hidden.
-   - @media (prefers-reduced-motion: no-preference) guards every transition so
-     reduced-motion users see an instant class swap with zero animation.
-   - At ≤760px explore mode is a no-op: the grid is already `display:block` and
-     all cells stack linearly, so the .explore class adds nothing there.
-*/
-
-/* explore toggle bar — sits above the map in b2 */
-.explore-bar {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: .4rem;
-}
-.explore-toggle {
-  background: var(--paper, #fffdf8);
-  border: 1px solid var(--rule, #e4ddcf);
-  border-radius: 14px;
-  padding: 5px 12px;
-  font: 500 .78rem/1 var(--body);
-  color: var(--muted, #9a8f7a);
-  cursor: pointer;
-  transition: none; /* instant by default; motion added below */
-}
-.explore-toggle:hover { border-color: var(--accent, #c0532a); color: var(--accent, #c0532a); }
-.explore-toggle[aria-pressed="true"] {
-  background: var(--accent, #c0532a);
-  color: #fff;
-  border-color: var(--accent, #c0532a);
-}
-
-/* explore state: map spans into b1 row + c2 column (~2×2) */
-@media (min-width: 761px) {
-  .hub-grid.explore {
-    grid-template-areas:
-      "masthead masthead masthead"
-      "b1       b2       b3"
-      "b1       b2       c3"
-      "c1       c2       c3";
-    grid-template-columns: 1fr 1.8fr 1fr;
-  }
-  .hub-grid.explore .hub-grid-b2 { grid-row: span 2; }
-  .hub-grid.explore .hub-grid-b1 { grid-row: span 2; font-size: .9em; }
-  /* b1 in explore: capped height + scroll so its text doesn't dominate */
-  .hub-grid.explore .hub-grid-b1 { max-height: 520px; overflow-y: auto; }
-}
-
-/* Transitions: ONLY when the user has not opted for reduced motion */
-@media (prefers-reduced-motion: no-preference) {
-  .hub-grid-b2 { transition: grid-column .25s ease, grid-row .25s ease; }
-  .hub-grid-b1 { transition: font-size .2s ease, max-height .25s ease; }
-  .explore-toggle { transition: background .15s, color .15s, border-color .15s; }
 }
 
 /* R3 Task 6: B3 exploration cards — district-unique places + spotlight */
@@ -302,7 +222,6 @@ body.lightbox-open{overflow:hidden}
   padding: .65rem .8rem;
   background: var(--paper, #fffdf8);
   margin-bottom: .6rem;
-  transition: box-shadow .15s, border-color .15s;
 }
 .hub-card.spotlight {
   border-color: var(--accent, #c0532a);
@@ -385,6 +304,11 @@ body.lightbox-open{overflow:hidden}
 #map-ledger{list-style:none;margin:0;padding:0;font:13px/1.5 var(--body,sans-serif)}
 #map-ledger li{padding:2px 4px;border-radius:4px;cursor:pointer}
 #map-ledger li:hover,#map-ledger li.lit{background:#f3e9d4}
+/* D7: lightbox ledger ground is dark (.lb-ledger color:#ece7df on an opaque
+   dark backdrop) — the cream li.lit above is unreadable there, so scope a
+   legible accent-tinted highlight to the lightbox context only. */
+.map-lightbox #map-ledger li:hover,.map-lightbox #map-ledger li.lit{
+  background:rgba(192,83,42,.28);color:#fff}
 .route-band{pointer-events:none}
 /* Legible hover/lit highlight that reads on cream (inline) AND dark (lightbox):
    a dark ring + scale-up + soft cream halo on the icon, never a glyph recolor.
@@ -392,26 +316,39 @@ body.lightbox-open{overflow:hidden}
    inline transform="translate(cx,cy)" attribute, and a CSS `transform` on the
    group would OVERRIDE it (CSS wins over the presentation attr), teleporting the
    icon to the top-left. Per-child fill-box scaling leaves the translate intact. */
-#lmap g[data-n].lit use,.map-lightbox g[data-n].lit use,
-#lmap g[data-n].lit circle:first-of-type,
-.map-lightbox g[data-n].lit circle:first-of-type{
-  transform-box:fill-box;transform-origin:center;transform:scale(1.18);
-  transition:transform .12s}
 #lmap g[data-n].lit circle:first-of-type,
 .map-lightbox g[data-n].lit circle:first-of-type{
   opacity:.55;stroke:#2A1F14;stroke-width:1.5;
   filter:drop-shadow(0 0 3px rgba(250,246,239,.95))}
 
-#lmap g[data-icon]{transition:opacity .15s}
-#lmap g[data-icon].filtered-out{opacity:.18;transition:opacity .15s}
+#lmap g[data-icon].filtered-out{opacity:.18}
+
+/* D3: honest off-extent edge-mark — a ledger place real but off the drawn
+   frame gets a small chevron pinned to the border, pointing toward its true
+   off-frame direction, instead of being silently dropped. It reuses the
+   g[data-n].lit circle:first-of-type rule above (its first child is a
+   circle) so hover/lit highlight works for free; this block only styles the
+   chevron glyph + cursor. */
+.edge-mark{cursor:pointer}
+.edge-mark-chevron{opacity:.9}
 
 /* company-demotion tier (hub-demote.json): muted "trade & services" icons */
-#lmap g[data-n].demoted{opacity:.34;transform-box:fill-box;transform-origin:center;transform:scale(.72);transition:opacity .15s,transform .15s}
-#lmap g[data-n].demoted:hover{opacity:.85;transform:scale(.9)}
+#lmap g[data-n].demoted{opacity:.34;transform-box:fill-box;transform-origin:center;transform:scale(.72)}
 .trade-note{font-size:.78rem;color:var(--ink-soft,#6b5f4e);font-style:italic;margin:.4rem 0 0}
 
-/* C3: 1895 ghost overlay */
-.hist1895-img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;
+/* C3: 1895 ghost overlay
+   D2: anchor to the SVG map box only (same width:100%/aspect as .hub-map svg,
+   L11), not the whole .hub-map section — the section also holds chips/
+   slider/note below the map, and the old inset:0/height:100% fill-stretch
+   rule stretched the image 1.6-2.24x over all of it and sepia-multiplied
+   the controls. With height:auto + aspect-ratio:720/460 + object-fit:contain
+   instead, the img's box is
+   exactly the SVG's box (both are width:100%, height derived from the same
+   720:460 ratio) so top/left/width/height coincide with the SVG's rendered
+   rect and the overlay never reaches the chips/ctl/note that follow it in
+   DOM flow. */
+.hist1895-img{position:absolute;left:0;top:0;width:100%;height:auto;
+  aspect-ratio:720/460;object-fit:contain;
   opacity:0;pointer-events:none;z-index:2;border-radius:8px;
   mix-blend-mode:multiply;transition:opacity .12s}
 .hub-map svg{position:relative;z-index:1}
@@ -421,10 +358,6 @@ body.lightbox-open{overflow:hidden}
 .hist1895-ctl .pm{color:var(--accent);font-weight:600}
 .hist1895-note{font:.82rem/1.5 var(--body);color:#4a4030;margin:.4rem 0 0}
 .hist1895-note summary{cursor:pointer;color:var(--accent);font-weight:600}
-
-/* Task 3: auto trade-strip sub-hub blobs */
-.subhub-strip circle{fill-opacity:.16;stroke-width:1.5}
-.subhub-strip text{font-size:11px;font-weight:600;fill:var(--ink,#2a1f14)}
 
 /* Task 4: sub-hubs toggle + curated mall markers */
 #subhub-toggle{font-size:.8rem;padding:3px 10px;border:1px solid var(--ink-soft,#b9ad97);border-radius:14px;background:#fff;cursor:pointer}

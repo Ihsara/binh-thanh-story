@@ -9,10 +9,6 @@
   const LIFE_LABEL = {sustenance:"Sustenance", anchors:"Anchors",
                       third_places:"Third places", display:"Display",
                       unclassified:"Back office"};
-  const FIELD_COLOR = {coffee:"#a9683b",food:"#c0453a",retail:"#3e7a5e",
-    beauty:"#b8639a",property:"#7a7f96",fashion:"#c99a2e",education:"#4a8fb0",
-    health:"#3fae6a",electronics:"#8a6fc0",finance:"#3a6ea5",hotel:"#b08a4a",
-    other:"#b3a892"};
   const FIELD_LABEL = {coffee:"Coffee/tea",food:"Food",retail:"Retail",
     beauty:"Beauty/care",property:"Property",fashion:"Fashion",
     education:"Education",health:"Health",electronics:"Electronics",
@@ -96,7 +92,6 @@
       g.classList.toggle("filtered-out", !on);
     });
   }
-  let showGen = false;      // generator-ring underlay toggle on the local map
 
   const HUB_MAP_SLUG = { "hub:0": "van-thanh", "hub:1": "hang-xanh", "hub:5": "cau-do", "hub:2": "tan-cang", "hub:4": "ung-van-khiem", "hub:3": "thi-nghe", "hub:6": "cau-sai-gon", "hub:7": "phan-van-tri", "hub:11": "dien-bien-phu", "hub:8": "cau-bong", "hub:9": "nguyen-van-dau", "hub:10": "no-trang-long", "hub:12": "cho-cay-thi", "hub:13": "thanh-da", "hub:14": "dinh-tien-hoang", "hub:15": "binh-loi", "hub:16": "lang-ong", "hub:17": "da-kao", "hub:18": "cho-ba-chieu", "hub:19": "cau-kieu", "hub:20": "ung-van-khiem-tay", "hub:21": "tan-cang-nam" };
 
@@ -106,6 +101,20 @@
     if (!_tip) { _tip = document.createElement("div"); _tip.id = "dot-tip";
       document.body.appendChild(_tip); }
     return _tip;
+  }
+  // D14 review-fix: shared clamp used by every tooltip path (dots, icons,
+  // edge-marks) so all of them stay fully on-screen — including against the
+  // right/bottom viewport edges, not just the top/left floor. Originally
+  // local to drawLocal()'s dot path only; hoisted to module scope so
+  // showFeatureTip() (icon + edge-mark path) can reuse the same math instead
+  // of a divergent, unclamped-right/bottom implementation.
+  function positionTip(tip, clientX, clientY) {
+    const tw = tip.offsetWidth, th = tip.offsetHeight;
+    let lx = clientX + 14, ly = clientY + 14;
+    if (lx + tw > window.innerWidth) lx = clientX - tw - 14;
+    if (ly + th > window.innerHeight) ly = clientY - th - 14;
+    tip.style.left = Math.max(4, lx) + "px";
+    tip.style.top = Math.max(4, ly) + "px";
   }
   function chip(text, color) {
     return `<span class="tag-chip" style="background:${color}">${text}</span>`;
@@ -293,17 +302,6 @@
        </p>`;
   }
 
-  function renderSkin(h) {
-    const root = document.getElementById("hub-main");
-    if (root && h.type_skin) root.setAttribute("data-skin", h.type_skin);
-    const acc = h.accent || {};
-    const pq = document.getElementById("fg-pullquote");
-    if (pq) {
-      if (acc.pull_quote) { pq.textContent = acc.pull_quote; pq.hidden = false; }
-      else { pq.textContent = ""; pq.hidden = true; }
-    }
-  }
-
   Promise.all([
     d3.json("hubs.json"),
     d3.json("uniques.json").catch(() => ({candidates:[]})),
@@ -322,7 +320,6 @@
     document.getElementById("title").textContent = h.title;
     renderFieldGuide(h);
     renderHero(h);
-    renderSkin(h);
     renderUnique(h);
     renderAround(h);
     renderWalk(h);
@@ -353,6 +350,11 @@
       img.className = "hist1895-img";
       img.src = entry.img;
       img.alt = "1895 Gia Định survey (Plan des environs de Saïgon), georeferenced to ±400 m";
+      // D2: insert as the section's first child, same as #lmap was before this
+      // insert — section has no padding, so img top:0/left:0 (hub.css
+      // .hist1895-img, position:absolute against this position:relative
+      // section) lands exactly on the SVG's rendered rect, not the section's
+      // full height (chips/ctl/note below are unaffected).
       section.insertBefore(img, section.firstChild);
 
       const ctl = document.createElement("div");
@@ -370,7 +372,8 @@
       const note = document.createElement("details");
       note.className = "hist1895-note";
       note.innerHTML = `<summary>What survived from 1895</summary><p>${entry.note}</p>` +
-        `<p class="muted">Source: Plan des environs de Saïgon (1895), public domain. ` +
+        `<p class="muted">Source: Plan des environs de Saïgon (Joly, 1895) — ` +
+        `Wikimedia Commons, public domain mark (PD-Mark). ` +
         `Georeferenced to RMSE ${entry.rmse_m} m — atmospheric, not survey-accurate.</p>`;
       section.appendChild(note);
     });
@@ -633,11 +636,22 @@
     });
     } // end else (OSM path)
 
-    // ----- quiet dot texture on canvas: UNCHANGED, runs in both modes -----
+    // ----- quiet dot texture on canvas: runs in both modes -----
     // dots on canvas (scales to ~1000+ places) — QUIET / low-contrast: life colours, low alpha
     const cv = document.getElementById("ldots");
     const dpr = Math.min(2, window.devicePixelRatio || 1);
-    cv.width = W * dpr; cv.height = H * dpr;
+    // D9: size the backing buffer to the box the canvas is ACTUALLY rendered
+    // at (inline card width, or the wider lightbox column), not a fixed
+    // 720x460 — else the browser upscales the small buffer and dots go soft.
+    // The canvas's parentNode (.hub-map) also holds chips/key/slider/note
+    // below the map, so its full box height isn't the map's height — derive
+    // height from the box WIDTH times the fixed W:H aspect ratio instead
+    // (same aspect the SVG viewBox uses), and fall back to W/H if the box
+    // isn't laid out yet (width 0, e.g. hidden ancestor at first paint).
+    const box = cv.parentNode.getBoundingClientRect();
+    const cw = box.width || W;
+    const ch = box.width ? cw * (H / W) : H;
+    cv.width = Math.round(cw * dpr); cv.height = Math.round(ch * dpr);
     cv.style.position = "absolute"; cv.style.left = 0; cv.style.top = 0;
     cv.style.width = "100%"; cv.style.height = "auto";
     const ctx = cv.getContext("2d");
@@ -646,19 +660,12 @@
       return (s - Math.floor(s)) - 0.5; }
 
     function paint() {
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      // Map the fixed 720x460 viewBox coordinate space (which x()/y() paint
+      // into) onto the real backing buffer, whatever size it was measured
+      // at above — this is what keeps dots sharp instead of blurry-upscaled.
+      const sx = cv.width / W, sy = cv.height / H;
+      ctx.setTransform(sx, 0, 0, sy, 0, 0);
       ctx.clearRect(0, 0, W, H);
-      if (showGen && h.gen_points) {
-        const GEN_RING = {school:"#4a8fb0", health:"#3fae6a", office:"#7a7f96",
-                          hotel:"#b08a4a", market:"#3e7a5e"};
-        h.gen_points.forEach((p) => {
-          const X = x(p.lon), Y = y(p.lat);
-          ctx.beginPath(); ctx.arc(X, Y, 9, 0, 2 * Math.PI);
-          ctx.lineWidth = 2; ctx.globalAlpha = 0.8;
-          ctx.strokeStyle = GEN_RING[p.type] || "#999"; ctx.stroke();
-        });
-        ctx.globalAlpha = 1;
-      }
       // Quiet uniform dots: life-coloured, low alpha — texture, not clutter;
       // vignettes carry the emphasis now
       h.places.forEach((p, i) => {
@@ -676,11 +683,13 @@
     paint();
     drawChips(h, paint);
 
-    // per-dot debug tooltip — canvas hover hit-test
-    cv.onmousemove = (ev) => {
+    // per-dot debug tooltip — canvas hover hit-test.
+    // Factored out so the pointerup (touch) path can reuse the exact same
+    // nearest-dot math instead of duplicating it.
+    function nearestDot(clientX, clientY) {
       const r = cv.getBoundingClientRect();
-      const mx = (ev.clientX - r.left) * (W / r.width);
-      const my = (ev.clientY - r.top) * (H / r.height);
+      const mx = (clientX - r.left) * (W / r.width);
+      const my = (clientY - r.top) * (H / r.height);
       let best = null, bd = 64;  // 8px squared, in canvas units
       h.places.forEach((p) => {
         if (!passesFilter(p)) return;
@@ -688,31 +697,44 @@
         const d = dx * dx + dy * dy;
         if (d < bd) { bd = d; best = p; }
       });
+      return best;
+    }
+    cv.onmousemove = (ev) => {
+      const best = nearestDot(ev.clientX, ev.clientY);
       const tip = ensureTip();
       if (best) {
         tip.innerHTML = tooltipHTML(best);
         tip.style.display = "block";
-        const tw = tip.offsetWidth, th = tip.offsetHeight;
-        let lx = ev.clientX + 14, ly = ev.clientY + 14;
-        if (lx + tw > window.innerWidth) lx = ev.clientX - tw - 14;
-        if (ly + th > window.innerHeight) ly = ev.clientY - th - 14;
-        tip.style.left = Math.max(4, lx) + "px";
-        tip.style.top = Math.max(4, ly) + "px";
+        positionTip(tip, ev.clientX, ev.clientY);
       } else {
         tip.style.display = "none";
       }
     };
     cv.onmouseleave = () => { if (_tip) _tip.style.display = "none"; };
 
-    const gt = document.getElementById("genToggle");
-    if (gt) gt.onclick = () => {
-      showGen = !showGen;
-      gt.classList.toggle("on", showGen);
-      gt.textContent = showGen ? "Hide what draws people" : "Show what draws people";
-      paint();
+    // D14 touch parity: dots were mousemove-only and thus unreachable on
+    // touch devices. A tap runs the same nearestDot() hit-test; if it hits a
+    // dot that isn't already shown, show its tooltip, else hide (toggle-off
+    // on repeat tap). Guarded on pointerType so mouse clicks (which already
+    // get hover via onmousemove) don't double-fire this path.
+    let _tappedDot = null;
+    cv.onpointerup = (ev) => {
+      if (ev.pointerType === "mouse") return;
+      ev.stopPropagation();
+      const best = nearestDot(ev.clientX, ev.clientY);
+      const tip = ensureTip();
+      if (best && best !== _tappedDot) {
+        tip.innerHTML = tooltipHTML(best);
+        tip.style.display = "block";
+        positionTip(tip, ev.clientX, ev.clientY);
+        _tappedDot = best;
+      } else {
+        tip.style.display = "none";
+        _tappedDot = null;
+      }
     };
 
-    // Sub-hubs toggle: curated malls + auto trade strips
+    // Sub-hubs toggle: curated malls
     const st = document.getElementById("subhub-toggle") || (() => {
       const b = document.createElement("button"); b.id = "subhub-toggle";
       b.type = "button"; b.textContent = "Sub-hubs";
@@ -749,12 +771,26 @@
       .attr("color", "#2A1F14");   // currentColor for the stroke
     return g;
   }
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+  const MAX_NUDGE = 18;      // px hard cap on total displacement (~4% of the 460px frame);
+                              // shared honesty leash used by both declashIcons and the D15 badge inset
+  // D3 honesty: draw a small chevron pointing FROM the clamped border position
+  // TOWARD the true off-extent location, so a place that's real but off the
+  // drawn frame is never silently dropped or stacked invisibly in a corner.
+  function edgeMark(svg, cx, cy, angleDeg, color) {
+    const g = svg.append("g").attr("class", "edge-mark")
+      .attr("transform", `translate(${cx},${cy}) rotate(${angleDeg})`);
+    g.append("circle").attr("r", 9).attr("fill", color).attr("opacity", 0.28);
+    // simple chevron/arrowhead pointing along +x (rotation aims it off-frame)
+    g.append("path").attr("d", "M -4,-6 L 5,0 L -4,6 Z")
+      .attr("fill", "#2A1F14").attr("class", "edge-mark-chevron");
+    return g;
+  }
   // Quiet always-on de-clash: nudge overlapping ledger icons apart, but keep each
   // within MAX_NUDGE of its true position (honesty leash) and never move the signature.
   function declashIcons(items) {
     // items: [{n, x, y, icon}] in viewBox px. Returns same array with x,y nudged.
     const MIN_SEP = 22;        // px below which two icons are "clashing"
-    const MAX_NUDGE = 18;      // px hard cap on total displacement (~4% of the 460px frame)
     const ITERS = 24;
     const orig = items.map(it => ({ x: it.x, y: it.y }));
     for (let k = 0; k < ITERS; k++) {
@@ -819,19 +855,68 @@
           .attr("opacity", 0.35).attr("stroke-linecap","round");
     }
     // L2/L3 icons + numbered badges
-    const placed = declashIcons((m.ledger||[]).map(e => ({ n: e.n, icon: e.icon, x: px(e.x), y: py(e.y) })));
+    const pad = 10;   // frame border inset for clamped off-extent markers
+    const BADGE_INSET = 9;   // px: badge circle (r=7) + a 2px margin — the reach
+                              // a numbered badge needs clear of the frame edge
+    // D3: honest off-extent detection — a ledger place whose projected pixel
+    // falls outside the drawn [0,W]x[0,H] frame is real, just off the map;
+    // clamp it to the border and edge-mark it rather than let declashIcons
+    // stack it invisibly in a corner (declash only sees in-frame targets).
+    const rawByN = new Map((m.ledger||[]).map(e => [e.n, { x: px(e.x), y: py(e.y) }]));
+    const inFrame = [], offExtent = [];
+    (m.ledger||[]).forEach(e => {
+      const raw = rawByN.get(e.n);
+      const isOffExtent = raw.x < 0 || raw.x > W || raw.y < 0 || raw.y > H;
+      (isOffExtent ? offExtent : inFrame).push(e);
+    });
+    const placed = declashIcons(inFrame.map(e => ({ n: e.n, icon: e.icon, x: px(e.x), y: py(e.y) })));
     const posByN = new Map(placed.map(p => [p.n, p]));
+    offExtent.forEach(e => {
+      const raw = rawByN.get(e.n);
+      posByN.set(e.n, { x: clamp(raw.x, pad, W - pad), y: clamp(raw.y, pad, H - pad), offExtent: true });
+    });
+    // D15: near-edge in-frame icons get their numbered badge (r=7 circle at
+    // translate(size/2-2,-size/2+2)) half-clipped at the frame edge. Nudge the
+    // icon inward by the overflow, capped at the MAX_NUDGE(18px) leash already
+    // spent by declashIcons — never move star-unique.
+    inFrame.forEach(e => {
+      if (e.icon === "star-unique") return;
+      const size = e.layer === 2 ? 30 : 22;
+      const pos = posByN.get(e.n);
+      if (!pos) return;
+      const raw = rawByN.get(e.n);
+      const badgeRight = pos.x + size/2 - 2 + BADGE_INSET;
+      const badgeTop = pos.y - size/2 + 2 - BADGE_INSET;
+      let nx = pos.x, ny = pos.y;
+      if (badgeRight > W) nx -= (badgeRight - W);
+      if (badgeTop < 0) ny -= badgeTop;   // badgeTop negative -> pushes ny down (+)
+      const dx = nx - raw.x, dy = ny - raw.y;
+      const d = Math.hypot(dx, dy);
+      if (d > MAX_NUDGE) {
+        nx = raw.x + dx / d * MAX_NUDGE;
+        ny = raw.y + dy / d * MAX_NUDGE;
+      }
+      pos.x = nx; pos.y = ny;
+    });
     (m.ledger||[]).forEach(e => {
       const size = e.layer === 2 ? 30 : 22;
       const deg = e.icon === "water-bridge" ? bridgeDegFor(m, e) : null;
       const pos = posByN.get(e.n) || { x: px(e.x), y: py(e.y) };
-      const g = sprite(svg, e.icon, pos.x, pos.y, size,
-                       CAT_FILL[e.icon] || "#6A7A8A", deg);
+      let g;
+      if (pos.offExtent) {
+        const raw = rawByN.get(e.n);
+        const angleDeg = Math.atan2(raw.y - pos.y, raw.x - pos.x) * 180 / Math.PI;
+        g = edgeMark(svg, pos.x, pos.y, angleDeg, CAT_FILL[e.icon] || "#6A7A8A");
+      } else {
+        g = sprite(svg, e.icon, pos.x, pos.y, size,
+                   CAT_FILL[e.icon] || "#6A7A8A", deg);
+      }
       g.attr("data-n", e.n).attr("data-icon", e.icon)
         .style("cursor","pointer").attr("aria-label", e.name_vn);
       // numbered badge (L3 only)
       if (e.layer === 3) {
-        const bg = g.append("g").attr("transform", `translate(${size/2-2},${-size/2+2})`);
+        const badgeOffset = pos.offExtent ? 5 : size/2-2;
+        const bg = g.append("g").attr("transform", `translate(${badgeOffset},${-badgeOffset})`);
         bg.append("circle").attr("r", 7).attr("fill","#2A1F14");
         bg.append("text").attr("text-anchor","middle").attr("dy","0.35em")
           .attr("font-size","9px").attr("fill","#fff").attr("font-weight","700").text(e.n);
@@ -842,6 +927,24 @@
         blurb:e.blurb, scroll:false }));
       g.on("mousemove", (ev) => showFeatureTip(ev, e));
       g.on("mouseleave", () => { if (_tip) _tip.style.display = "none"; });
+      // D14 touch parity: this handler is shared by both the normal sprite
+      // path and the T5 edge-mark path (both assign their <g> to `g` above),
+      // so edge-marks get tap-tooltip parity for free. stopPropagation keeps
+      // the tap from immediately re-triggering the document-level dismiss
+      // listener below. Tap-again on the same lit icon toggles it off.
+      g.on("pointerup", (ev) => {
+        if (ev.pointerType === "mouse") return;
+        ev.stopPropagation();
+        const alreadyLit = g.classed("lit");
+        if (alreadyLit) {
+          dismissTip();
+          spotlight({ type:"feature", n:null, scroll:false });
+        } else {
+          spotlight({ type:"feature", n:e.n, name:e.name_vn,
+            blurb:e.blurb, scroll:false });
+          showFeatureTip(ev, e);
+        }
+      });
     });
     renderMapLedger(m);   // numbered margin panel
     applyDemotion(h, m);
@@ -859,49 +962,7 @@
     return best.bearing_deg;
   }
 
-  // Auto trade-strip sub-hubs: group raw places by dominant field within a radius.
-  // Honest — derived from real coords + the field tag; labels come from FIELD_LABEL,
-  // never a specific trade the anonymous data can't confirm.
-  //
-  // Only ON-FRAME, GENUINELY-DENSE strips survive, and at most MAX_STRIPS of them:
-  // raw places spill past the illustrated-map crop, so a naive pass produced ~89
-  // overlapping blobs (many off the top edge). The design wants a *few* readable
-  // labelled blobs ("Retail · 24"), so we use a wider merge radius + higher floor,
-  // drop any centroid outside the visible [0,W]×[0,H] frame, and keep the biggest.
-  function clusterStrips(places, projX, projY, W, H) {
-    const STRIP_MIN = 8;       // a strip needs >= 8 same-field places to be a "strip"
-    const RADIUS = 64;         // px grouping radius (wider -> fewer, bigger strips)
-    const MAX_STRIPS = 6;      // cap: keep only the densest few so the map stays legible
-    const MARGIN = 12;         // centroid must sit this far inside the frame
-    const byField = {};
-    places.forEach(p => { if (p.field) (byField[p.field] ||= []).push(p); });
-    const strips = [];
-    Object.entries(byField).forEach(([field, ps]) => {
-      const used = new Array(ps.length).fill(false);
-      ps.forEach((p, i) => {
-        if (used[i]) return;
-        const group = [p]; used[i] = true;
-        const px0 = projX(p.lon), py0 = projY(p.lat);
-        ps.forEach((q, j) => {
-          if (used[j]) return;
-          if (Math.hypot(projX(q.lon) - px0, projY(q.lat) - py0) < RADIUS) {
-            group.push(q); used[j] = true;
-          }
-        });
-        if (group.length >= STRIP_MIN) {
-          const cx = group.reduce((s, g) => s + projX(g.lon), 0) / group.length;
-          const cy = group.reduce((s, g) => s + projY(g.lat), 0) / group.length;
-          // honesty + legibility: only strips whose centroid lands inside the map
-          if (cx >= MARGIN && cx <= W - MARGIN && cy >= MARGIN && cy <= H - MARGIN)
-            strips.push({ field, n: group.length, cx, cy });
-        }
-      });
-    });
-    // keep only the densest few
-    return strips.sort((a, b) => b.n - a.n).slice(0, MAX_STRIPS);
-  }
-
-  // Draw auto trade-strip sub-hubs + curated malls onto the hub SVG.
+  // Draw curated malls onto the hub SVG.
   // All output lives under a single <g class="subhub-layer"> so the toggle
   // can remove everything in one svg.select("g.subhub-layer").remove() call.
   function drawSubhubs(h, svg, projX, projY, W, H) {
@@ -909,25 +970,6 @@
     svg.select("g.subhub-layer").remove();
 
     const layer = svg.append("g").attr("class", "subhub-layer");
-
-    // --- auto trade-strip half ---
-    if (h.places && h.places.length) {
-      const strips = clusterStrips(h.places, projX, projY, W, H);
-      strips.forEach(({ field, n, cx, cy }) => {
-        const color = FIELD_COLOR[field] || "#999";
-        const label = (FIELD_LABEL[field] || field) + " \xb7 " + n;
-        const g = layer.append("g").attr("class", "subhub-strip");
-        g.append("circle")
-          .attr("cx", cx).attr("cy", cy)
-          .attr("r", Math.max(18, Math.sqrt(n) * 5))
-          .attr("fill", color)
-          .attr("stroke", color);
-        g.append("text")
-          .attr("x", cx).attr("y", cy + 4)
-          .attr("text-anchor", "middle")
-          .text(label);
-      });
-    }
 
     // --- curated malls half (Task 4) ---
     const slug = HUB_MAP_SLUG[h.id] || "";
@@ -950,15 +992,39 @@
     const tip = ensureTip();
     tip.innerHTML = "<b>" + esc(e.name_vn) + "</b>" + (e.blurb ? "<br>"+esc(e.blurb) : "");
     tip.style.display = "block";
-    tip.style.left = Math.max(4, ev.clientX + 14) + "px";
-    tip.style.top  = Math.max(4, ev.clientY + 14) + "px";
+    // D14 review-fix: route through the same positionTip() clamp used by the
+    // dot tooltip so icon/edge-mark tooltips also stay on-screen against the
+    // right/bottom viewport edges (not just the top/left floor) — matters on
+    // narrow touch viewports where a tap near the map's right/bottom edge
+    // would otherwise push the tooltip off-screen.
+    positionTip(tip, ev.clientX, ev.clientY);
   }
+  // D14 touch parity: hide the tooltip (used by both the icon toggle-off and
+  // the tap-elsewhere dismiss below).
+  function dismissTip() {
+    if (_tip) _tip.style.display = "none";
+  }
+  // Tap-elsewhere dismiss: any pointerup that reaches `document` (i.e. wasn't
+  // stopPropagation()'d by a dot/icon show-handler above) landed outside the
+  // interactive map targets, so clear the tooltip + any lit icon/ledger row.
+  document.addEventListener("pointerup", (ev) => {
+    if (ev.pointerType === "mouse") return;
+    dismissTip();
+    spotlight({ type:"feature", n:null, scroll:false });
+  });
   function renderMapLedger(m) {
     const box = document.getElementById("map-ledger");
     if (!box) return;
-    box.innerHTML = (m.ledger||[]).map(e =>
-      `<li data-n="${e.n}"><b>${e.n}.</b> ${esc(e.name_vn)}` +
-      (e.blurb ? ` — <span class="led-blurb">${esc(e.blurb)}</span>` : "") + `</li>`).join("");
+    box.innerHTML = (m.ledger||[]).map(e => {
+      // D13: h=22 blurbs sometimes just echo the name back ("Starbucks —
+      // Starbucks."). Suppress the redundant echo — data untouched.
+      const nm = (e.name_vn||"").trim().toLowerCase();
+      const bl = (e.blurb||"").trim();
+      const echoes = bl && nm && bl.toLowerCase().replace(/[.。]$/, "") === nm;
+      const showBlurb = e.blurb && !echoes && !bl.toLowerCase().startsWith(nm);
+      return `<li data-n="${e.n}"><b>${e.n}.</b> ${esc(e.name_vn)}` +
+      (showBlurb ? ` — <span class="led-blurb">${esc(e.blurb)}</span>` : "") + `</li>`;
+    }).join("");
     box.querySelectorAll("li").forEach(li =>
       li.addEventListener("mouseenter", () => spotlight({ type:"feature",
         n: +li.dataset.n, scroll:false })));
@@ -1240,47 +1306,4 @@
     document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !lb.hidden) close(); });
   }
 
-  // ---- Read↔Explore choreography ----
-  // Toggle and IntersectionObserver cooperate as follows:
-  //   • The toggle is a real <button> that always works, JS or no-IO.
-  //   • When the user clicks the toggle, a "manual" flag is set.
-  //     While the flag is set the IO will not override the class.
-  //     Clicking the toggle again clears the manual flag (and the IO resumes).
-  //   • The IO adds .explore when the map cell scrolls to viewport centre,
-  //     and removes it when the map cell leaves — but only if no manual flag.
-  //   • No-JS: the base grid shows everything; the toggle is inert without JS
-  //     but the <button> is still visible (no content is hidden by default).
-  (function wireExplore() {
-    const grid = document.querySelector(".hub-grid");
-    const btn  = document.getElementById("exploreToggle");
-    const mapCell = document.querySelector(".hub-grid-b2");
-    if (!grid || !btn) return;
-
-    // State: manual means the user explicitly clicked; IO won't override.
-    let manualExplore = false;
-
-    function setExplore(on) {
-      grid.classList.toggle("explore", on);
-      btn.setAttribute("aria-pressed", String(on));
-    }
-
-    btn.addEventListener("click", () => {
-      const next = !grid.classList.contains("explore");
-      manualExplore = next;   // true when manually ON; false when manually OFF
-      setExplore(next);
-    });
-
-    // IntersectionObserver — feature-detected; degrades gracefully when absent.
-    if ('IntersectionObserver' in window && mapCell) {
-      // rootMargin: trigger when the map cell is ~30% into the viewport
-      // (negative top margin pulls the trigger point down from the top edge).
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (manualExplore) return;   // honour explicit toggle
-          setExplore(entry.isIntersecting);
-        });
-      }, { rootMargin: "-30% 0px -30% 0px", threshold: 0 });
-      io.observe(mapCell);
-    }
-  })();
 })();
