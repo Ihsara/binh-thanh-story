@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;0,900;1,400&family=Be+Vietnam+Pro:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="spine.css?v=20260704a">
-  <link rel="stylesheet" href="census.css?v=20260704a">
+  <link rel="stylesheet" href="census.css?v=20260704anat">
 </head>
 <body data-page="census">
   <div id="site-nav"></div>
@@ -95,10 +95,21 @@
     <p class="note">Places joined by GERS id, clipped to the district polygon (OSM
       relation −3797166, ≈21.7 km²). Bulk-theme counts are district-clipped per release.
       <a class="how" href="method.html">Method →</a></p>
+
+    <section id="anatomy-explorer" class="anatomy-explorer" hidden>
+      <h2 class="mini-h">The anatomy, <span>walkable</span></h2>
+      <p class="chart-sub">Walk the district by type — from the broad domains down to the
+        one-off shops. Each bar's badge shows whether its April→June change is
+        <b class="sig">real</b>, a <b class="art">rename</b>, or just <b class="noi">recycling</b>.</p>
+      <nav id="anatomy-crumbs" class="crumbs" aria-label="drill-down path"></nav>
+      <div id="anatomy-bars" class="anatomy-bars"></div>
+      <div id="anatomy-dots"></div>
+    </section>
   </main>
   <footer><p class="note">Places: Overture Maps Foundation (CDLA-Permissive-2.0). Streets: OpenStreetMap.</p></footer>
   <script src="hem/vendor/d3.v7.min.js"></script>
   <script src="nav.js?v=20260704a"></script>
   <script src="census.js?v=20260704a"></script>
+  <script type="module" src="anatomy.js?v=20260704anat"></script>
 </body>
 </html>
