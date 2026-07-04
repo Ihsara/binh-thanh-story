@@ -7,8 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;0,900;1,400&family=Be+Vietnam+Pro:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="spine.css?v=20260703c">
-  <link rel="stylesheet" href="census.css?v=20260703c">
+  <link rel="stylesheet" href="spine.css?v=20260704a">
+  <link rel="stylesheet" href="census.css?v=20260704a">
 </head>
 <body data-page="census">
   <div id="site-nav"></div>
@@ -54,6 +54,28 @@
       <table class="rename-table" id="renameTable"></table>
     </section>
 
+    <!-- The pivot: from "the churn isn't real" to "here's what actually IS here" -->
+    <section id="anatomy" class="anatomy">
+      <span class="kicker" style="margin-top:2.5rem;display:block">The anatomy · what's actually here</span>
+      <h3 class="chart-head" id="anatomyHead"></h3>
+      <p class="chart-sub" id="anatomySub"></p>
+
+      <h4 class="mini-h">The long tail — how <span id="ncatInline"></span> categories spread by size</h4>
+      <p class="chart-sub">A handful of giants, then a vast tail of near-unique kinds of place.
+        Each bar is a size band; the number is how many <em>categories</em> fall in it.</p>
+      <svg id="distBars" viewBox="0 0 640 220" role="img" aria-label="Category size distribution"></svg>
+
+      <h4 class="mini-h">The 10 that define the district</h4>
+      <p class="chart-sub">Bar length = how many places carry that category in June.</p>
+      <div id="topCats" class="topcats"></div>
+
+      <h4 class="mini-h">The one-of-a-kind — <span id="nSingleInline"></span> categories with a single place</h4>
+      <p class="chart-sub">The district contains exactly one of each of these. The whole
+        oddball tail — reshuffle for a different draw.</p>
+      <div class="singleton-cloud" id="singletonCloud"></div>
+      <button id="reshuffle" class="reshuffle">↻ Show me others</button>
+    </section>
+
     <section>
       <h3 class="chart-head" style="margin-top:2.5rem">And the streets stood still</h3>
       <p class="chart-sub">The physical layers barely move over a quarter — expected for
@@ -76,7 +98,7 @@
   </main>
   <footer><p class="note">Places: Overture Maps Foundation (CDLA-Permissive-2.0). Streets: OpenStreetMap.</p></footer>
   <script src="hem/vendor/d3.v7.min.js"></script>
-  <script src="nav.js?v=20260703c"></script>
-  <script src="census.js?v=20260703c"></script>
+  <script src="nav.js?v=20260704a"></script>
+  <script src="census.js?v=20260704a"></script>
 </body>
 </html>

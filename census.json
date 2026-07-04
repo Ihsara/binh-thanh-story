@@ -207,6 +207,352 @@
       "net": 10
     }
   ],
+  "anatomy": {
+    "release": "2026-06-17.0",
+    "month": "June",
+    "total": 25368,
+    "n_categories": 651,
+    "uncategorized": 1055,
+    "top": [
+      {
+        "cat": "coffee_shop",
+        "n": 1230
+      },
+      {
+        "cat": "restaurant",
+        "n": 1218
+      },
+      {
+        "cat": "real_estate_service",
+        "n": 1047
+      },
+      {
+        "cat": "professional_service",
+        "n": 979
+      },
+      {
+        "cat": "shopping",
+        "n": 839
+      },
+      {
+        "cat": "cafe",
+        "n": 560
+      },
+      {
+        "cat": "event_or_party_service",
+        "n": 459
+      },
+      {
+        "cat": "flowers_and_gifts_store",
+        "n": 450
+      },
+      {
+        "cat": "beauty_salon",
+        "n": 449
+      },
+      {
+        "cat": "diner",
+        "n": 439
+      },
+      {
+        "cat": "clothing_store",
+        "n": 410
+      },
+      {
+        "cat": "spa",
+        "n": 331
+      },
+      {
+        "cat": "grocery_store",
+        "n": 320
+      },
+      {
+        "cat": "historic_site",
+        "n": 306
+      },
+      {
+        "cat": "personal_or_beauty_service",
+        "n": 299
+      },
+      {
+        "cat": "hotel",
+        "n": 294
+      },
+      {
+        "cat": "education",
+        "n": 289
+      },
+      {
+        "cat": "beauty_supply_store",
+        "n": 287
+      },
+      {
+        "cat": "furniture_store",
+        "n": 282
+      },
+      {
+        "cat": "bakery",
+        "n": 270
+      },
+      {
+        "cat": "vietnamese_restaurant",
+        "n": 254
+      },
+      {
+        "cat": "real_estate_agent",
+        "n": 235
+      },
+      {
+        "cat": "building_or_construction_service",
+        "n": 216
+      },
+      {
+        "cat": "mobile_phone_store",
+        "n": 210
+      },
+      {
+        "cat": "nail_salon",
+        "n": 209
+      },
+      {
+        "cat": "bubble_tea_shop",
+        "n": 202
+      },
+      {
+        "cat": "barber",
+        "n": 190
+      },
+      {
+        "cat": "hair_salon",
+        "n": 186
+      },
+      {
+        "cat": "shoe_store",
+        "n": 168
+      },
+      {
+        "cat": "interior_design",
+        "n": 166
+      },
+      {
+        "cat": "fashion_and_apparel_store",
+        "n": 160
+      },
+      {
+        "cat": "college_university",
+        "n": 156
+      },
+      {
+        "cat": "travel_service",
+        "n": 153
+      },
+      {
+        "cat": "womens_clothing_store",
+        "n": 152
+      },
+      {
+        "cat": "fast_food_restaurant",
+        "n": 150
+      },
+      {
+        "cat": "school",
+        "n": 140
+      },
+      {
+        "cat": "health_food_store",
+        "n": 139
+      },
+      {
+        "cat": "food_and_drink",
+        "n": 137
+      },
+      {
+        "cat": "elementary_school",
+        "n": 136
+      },
+      {
+        "cat": "language_school",
+        "n": 136
+      }
+    ],
+    "distribution": [
+      {
+        "label": "500+",
+        "n_categories": 6
+      },
+      {
+        "label": "101–500",
+        "n_categories": 47
+      },
+      {
+        "label": "21–100",
+        "n_categories": 140
+      },
+      {
+        "label": "6–20",
+        "n_categories": 152
+      },
+      {
+        "label": "2–5",
+        "n_categories": 161
+      },
+      {
+        "label": "1",
+        "n_categories": 145
+      }
+    ],
+    "cover_50_k": 27,
+    "cover_80_k": 110,
+    "n_le3": 254,
+    "n_singletons": 145,
+    "singletons_sample": [
+      "adult_education_center",
+      "adult_entertainment_venue",
+      "aircraft_dealer",
+      "airport",
+      "ambulance_or_ems_service",
+      "animal_shelter",
+      "apartment",
+      "architect",
+      "art_restoration_service",
+      "audiovisual_equipment_rental",
+      "auditorium",
+      "auto_restoration_service",
+      "avionics_shop",
+      "b2b_environmental_service",
+      "bagel_shop",
+      "bartender",
+      "basketball_court",
+      "beach_resort",
+      "bike_rental",
+      "bingo_hall",
+      "boat_tour",
+      "book_magazine_distribution",
+      "books_music_and_video_store",
+      "boxing_gym",
+      "brazilian_restaurant",
+      "business_law",
+      "cabin",
+      "car_stereo_store",
+      "car_window_tinting",
+      "carpet_cleaning",
+      "casino",
+      "cave",
+      "cheese_shop",
+      "collection_agency",
+      "comedy_club",
+      "commercial_refrigeration",
+      "computer_wholesaler",
+      "contract_law",
+      "cosmetology_school",
+      "credit_and_debt_counseling",
+      "criminal_defense_law",
+      "department_of_motor_vehicles",
+      "designer_clothing",
+      "disability_services_and_support_organization",
+      "doner_kebab_restaurant",
+      "drive_in_theater",
+      "ear_nose_and_throat",
+      "electronic_parts_supplier",
+      "embassy",
+      "endodontics",
+      "esports_team",
+      "european_restaurant",
+      "fish_and_chips_restaurant",
+      "fishing_charter",
+      "fitness_exercise_store",
+      "food_bank",
+      "forestry_service",
+      "freight_forwarding_agency",
+      "garage_door_service",
+      "garbage_collection_service",
+      "gay_bar",
+      "gelato_shop",
+      "generator_installation_repair",
+      "german_restaurant",
+      "golf_cart_dealer",
+      "golf_course",
+      "granite_supplier",
+      "handyman",
+      "health_department",
+      "hiking_trail",
+      "historic_mission",
+      "history_museum",
+      "hong_kong_style_cafe",
+      "hospice",
+      "hot_dog_restaurant",
+      "housing_authority",
+      "indo_chinese_restaurant",
+      "indonesian_restaurant",
+      "internal_medicine",
+      "jewish_place_of_worship",
+      "junk_removal_and_hauling",
+      "land_surveying",
+      "laser_tag",
+      "laundry_service",
+      "logging_contractor",
+      "logging_service",
+      "marina",
+      "matchmaker",
+      "mattress_manufacturing",
+      "media_restoration_service",
+      "modern_art_museum",
+      "mortgage_broker",
+      "mountain",
+      "muay_thai_club",
+      "museum",
+      "music_and_dvd_store",
+      "nursing",
+      "opera_and_ballet",
+      "orthopedics",
+      "osteopathic_medicine",
+      "paddleboarding_center",
+      "panamanian_restaurant",
+      "pet_boarding",
+      "pet_breeder",
+      "plastics_company",
+      "political_party_office",
+      "pop_up_store",
+      "prenatal_and_perinatal_care",
+      "psychiatry",
+      "public_plaza",
+      "public_utility",
+      "publisher",
+      "radio_station",
+      "retirement_home",
+      "rheumatology",
+      "roller_skating_rink",
+      "school_sport_team",
+      "security_service",
+      "singaporean_restaurant",
+      "skate_store",
+      "souvenir_store",
+      "supplier_or_distributor",
+      "surgery",
+      "taiwanese_restaurant",
+      "tapas_bar",
+      "taxi_service",
+      "tennis_stadium",
+      "test_preparation",
+      "theatre_venue",
+      "tobacco_company",
+      "truck_rental_service",
+      "urban_farm",
+      "vegan_restaurant",
+      "vending_machine_supplier",
+      "venezuelan_restaurant",
+      "video_film_production",
+      "visitor_center",
+      "vocational_and_technical_school",
+      "washer_and_dryer_repair_service",
+      "waterfall",
+      "waxing",
+      "web_hosting_service",
+      "whiskey_bar",
+      "wholesale_grocer",
+      "wholesaler"
+    ]
+  },
   "bulk": [
     {
       "label": "Buildings",

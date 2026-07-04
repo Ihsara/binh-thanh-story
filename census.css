@@ -142,7 +142,58 @@
   padding-left: .75rem; margin: .75rem 0 1.25rem; max-width: 60ch;
 }
 
+/* ---- The anatomy section (651 shapes of a district) ---- */
+.anatomy { margin-top: 1rem; }
+.mini-h {
+  font: 600 1rem var(--display, "Alegreya", Georgia, serif);
+  color: var(--ink); margin: 2rem 0 .3rem;
+}
+.mini-h span { color: var(--c-signal); font-weight: 700; }
+
+#distBars { width: 100%; height: auto; display: block; margin-top: .4rem; }
+.dist-band { font: 500 13px var(--label, "Be Vietnam Pro", system-ui, sans-serif); fill: var(--ink); }
+.dist-count { font: 700 14px var(--label, "Be Vietnam Pro", system-ui, sans-serif); fill: #6b5d49; }
+
+/* horizontal top-10 category bars */
+.topcats { margin: .6rem 0 0; }
+.topcat-row {
+  display: grid; grid-template-columns: 168px 1fr 52px; align-items: center;
+  gap: .6rem; padding: .18rem 0;
+}
+.topcat-row .name {
+  font: 500 .85rem var(--label, "Be Vietnam Pro", system-ui, sans-serif);
+  color: var(--ink); text-align: right; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.topcat-row .track { height: 18px; border-radius: 4px; background: #f0e9db; overflow: hidden; }
+.topcat-row .fill { height: 100%; border-radius: 4px; background: var(--c-signal);
+  transform-origin: left; transition: transform .7s cubic-bezier(.3,1,.4,1); }
+.topcat-row .val {
+  font: 700 .82rem var(--label, "Be Vietnam Pro", system-ui, sans-serif);
+  color: #6b5d49; font-variant-numeric: tabular-nums; text-align: right;
+}
+
+/* singleton "cloud" — the one-of-a-kind tail */
+.singleton-cloud {
+  display: flex; flex-wrap: wrap; gap: .45rem; margin: .7rem 0 .9rem;
+}
+.singleton-cloud .chip {
+  font: 400 .82rem var(--label, "Be Vietnam Pro", system-ui, sans-serif);
+  color: #6b4a2f; background: #f7efe2; border: 1px solid #e7d6bf;
+  border-radius: 999px; padding: .28rem .7rem; white-space: nowrap;
+  animation: chip-in .35s ease both;
+}
+@keyframes chip-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.reshuffle {
+  font: 500 .82rem var(--label, "Be Vietnam Pro", system-ui, sans-serif);
+  color: var(--c-artifact); background: #fff; border: 1px solid #e0c9ae;
+  border-radius: 999px; padding: .35rem .9rem; cursor: pointer; transition: background .15s;
+}
+.reshuffle:hover { background: #f7efe2; }
+
 @media (max-width: 560px) {
   .step-label { display: none; }
   .stepper { gap: .6rem; }
+  .topcat-row { grid-template-columns: 118px 1fr 44px; gap: .4rem; }
+  .topcat-row .name { font-size: .78rem; }
 }

@@ -151,6 +151,76 @@ d3.json("census.json?v=20260703c").then((D) => {
       .text(b.net === 0 ? "no change · Apr→Jun" : `${signed(b.net)} · Apr→Jun`);
   });
 
+  // ---- ANATOMY: 651 shapes of a district ----
+  const A = D.anatomy;
+  d3.select("#anatomyHead").text(
+    `${fmt(A.total)} places sort into ${fmt(A.n_categories)} kinds of place`);
+  d3.select("#anatomySub").html(
+    `Just <b>${A.cover_50_k}</b> categories hold half of everything; it takes ` +
+    `<b>${A.cover_80_k}</b> to reach 80%. The rest is a long tail — ` +
+    `<b>${fmt(A.n_le3)}</b> categories have three or fewer places, and ` +
+    `<b class="art">${fmt(A.n_singletons)}</b> are one-of-a-kind. ` +
+    `(${fmt(A.uncategorized)} places carry no category at all.)`);
+  d3.select("#ncatInline").text(fmt(A.n_categories));
+  d3.select("#nSingleInline").text(fmt(A.n_singletons));
+
+  // 1) distribution bars (horizontal count of categories per size band)
+  (function distChart() {
+    const svg = d3.select("#distBars");
+    const W = 640, H = 220, M = { t: 8, r: 46, b: 8, l: 116 };
+    const bands = A.distribution;
+    const y = d3.scaleBand().domain(bands.map((d) => d.label))
+      .range([M.t, H - M.b]).padding(0.22);
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(bands, (d) => d.n_categories)]).range([M.l, W - M.r]);
+    svg.selectAll("*").remove();
+    const g = svg.selectAll("g").data(bands).join("g");
+    g.append("text").attr("class", "dist-band")
+      .attr("x", M.l - 8).attr("y", (d) => y(d.label) + y.bandwidth() / 2)
+      .attr("dy", ".35em").attr("text-anchor", "end")
+      .text((d) => d.label + (d.label === "1" ? " place" : " places"));
+    g.append("rect")
+      .attr("x", M.l).attr("y", (d) => y(d.label)).attr("height", y.bandwidth())
+      .attr("rx", 4).attr("fill", "#c9b79a").attr("width", 0)
+      .transition().duration(600).delay((_, i) => i * 60)
+      .attr("width", (d) => x(d.n_categories) - M.l);
+    g.append("text").attr("class", "dist-count")
+      .attr("y", (d) => y(d.label) + y.bandwidth() / 2).attr("dy", ".35em")
+      .attr("x", (d) => x(d.n_categories) + 8).attr("opacity", 0)
+      .text((d) => d.n_categories)
+      .transition().delay((_, i) => 300 + i * 60).attr("opacity", 1);
+  })();
+
+  // 2) top-10 category horizontal bars
+  (function topCats() {
+    const top = A.top.slice(0, 10);
+    const max = top[0].n;
+    const rows = d3.select("#topCats").selectAll(".topcat-row").data(top).join("div")
+      .attr("class", "topcat-row");
+    rows.append("div").attr("class", "name").text((d) => pretty(d.cat));
+    rows.append("div").attr("class", "track")
+      .append("div").attr("class", "fill")
+      .style("transform", "scaleX(0)")
+      .style("width", (d) => (d.n / max * 100) + "%");
+    rows.append("div").attr("class", "val").text((d) => fmt(d.n));
+    // animate fills in after paint
+    requestAnimationFrame(() => setTimeout(() =>
+      d3.selectAll("#topCats .fill").style("transform", "scaleX(1)"), 60));
+  })();
+
+  // 3) singleton cloud — a rotating sample of the one-of-a-kind tail
+  const pool = A.singletons_sample.slice();
+  function drawSingletons() {
+    // shuffle a copy, take ~26 of the most "interesting" (skip generic ones)
+    const shuffled = pool.slice().sort(() => Math.random() - 0.5).slice(0, 26);
+    const cloud = d3.select("#singletonCloud");
+    cloud.selectAll("*").remove();
+    cloud.selectAll(".chip").data(shuffled).join("span")
+      .attr("class", "chip").text((d) => pretty(d));
+  }
+  drawSingletons();
+  d3.select("#reshuffle").on("click", drawSingletons);
+
   go(0);
 });
 
