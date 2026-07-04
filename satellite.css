@@ -1,0 +1,87 @@
+/* Bình Thạnh from orbit — dark-canvas "watching from a ground station" register.
+   The frames luminesce on a near-black ground; color is NOT a data encoder here
+   (the imagery carries its own color) — the only encoded hue is sensor-era
+   identity on the ribbon ticks + provenance chip. */
+#orbit-main {
+  --orbit-bg: #0d1117;      /* near-black, never pure #000 */
+  --orbit-ink: #e8edf3;
+  --orbit-dim: #8b95a3;
+  --era-tm:  #6ea8fe;       /* Landsat TM/ETM+ 30m */
+  --era-oli: #63c2a6;       /* Landsat OLI 30m */
+  --era-s2:  #f0a860;       /* Sentinel-2 10m */
+  --era-gap: #3a3f47;       /* no image this month */
+  background: var(--orbit-bg);
+  color: var(--orbit-ink);
+  padding: 2rem clamp(1rem, 4vw, 3rem) 4rem;
+}
+#orbit-main header .kicker,
+#orbit-main header h2 { color: var(--orbit-ink); }
+#orbit-main .dek, #orbit-main .note { color: var(--orbit-dim); }
+
+#orbit-player {
+  max-width: 640px; margin: 1.5rem auto 0;
+}
+/* Stage: the frame sits on a subtle vignette; the district shape is the mark. */
+#orbit-stage {
+  position: relative; width: 100%; aspect-ratio: 739 / 596;  /* extent grid */
+  background: radial-gradient(ellipse at center, #12181f 0%, #0a0d12 100%);
+  border-radius: 10px; overflow: hidden;
+}
+#orbit-stage img.orbit-frame {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: contain; image-rendering: auto;
+}
+#orbit-stage .orbit-gap-card {
+  position: absolute; inset: 0; display: grid; place-content: center;
+  text-align: center; color: var(--orbit-dim); font-family: var(--label, "Be Vietnam Pro"), sans-serif;
+  letter-spacing: .04em;
+}
+
+/* Provenance HUD — telemetry readout in a monospace accent. */
+#orbit-readout {
+  display: flex; flex-wrap: wrap; gap: .35rem .9rem; justify-content: center;
+  margin: .7rem 0 .2rem; font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: .78rem; color: var(--orbit-dim);
+}
+#orbit-readout .prov-era {
+  color: var(--orbit-bg); padding: .05rem .45rem; border-radius: 999px;
+  font-weight: 600; background: var(--era-tm);  /* recolored per era by JS */
+}
+#orbit-readout b { color: var(--orbit-ink); font-weight: 600; }
+
+/* Timeline ribbon — one thin tick per month (a filmstrip / archive heartbeat). */
+#orbit-ribbon {
+  display: flex; align-items: flex-end; gap: 1px; height: 34px;
+  margin: .9rem 0; cursor: pointer;
+}
+.ribbon-tick {
+  flex: 1 1 0; min-width: 0; height: 60%; background: var(--tick-hue, var(--era-tm));
+  opacity: .55; border-radius: 1px; transition: opacity .1s, height .1s;
+}
+.ribbon-tick.gap { height: 22%; background: var(--era-gap); opacity: .5; }
+.ribbon-tick.on  { opacity: 1; height: 100%; box-shadow: 0 0 6px 1px currentColor; }
+
+/* Controls. */
+#orbit-controls { display: flex; align-items: center; gap: .8rem; }
+#orbit-controls input[type="range"] { flex: 1; accent-color: var(--era-s2); }
+.orbit-btn {
+  background: #1b2330; color: var(--orbit-ink); border: 1px solid #2c3646;
+  border-radius: 8px; padding: .5rem .9rem; font: inherit; cursor: pointer;
+}
+.orbit-btn:hover { background: #232d3d; }
+
+/* Chapters stepper theming — the shared stepper on the dark ground. */
+#orbit-chapters { max-width: 640px; margin: 2rem auto 0; }
+#orbit-chapters .stage { background: #131a23; border: 1px solid #222c39; border-radius: 12px; }
+#orbit-chapters .kicker, #orbit-chapters h2 { color: var(--orbit-ink); }
+#orbit-chapters .narr { color: var(--orbit-dim); }
+
+#orbit-attribution { max-width: 640px; margin: 2rem auto 0; line-height: 1.6; }
+
+@media (max-width: 640px) {
+  #orbit-main { padding: 1.2rem .8rem 3rem; }
+  #orbit-readout { font-size: .72rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ribbon-tick { transition: none; }
+}

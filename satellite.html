@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bình Thạnh from orbit · Bình Thạnh Atlas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;0,900;1,400&family=Be+Vietnam+Pro:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="spine.css?v=20260622v0">
+  <link rel="stylesheet" href="satellite.css?v=20260704sat">
+</head>
+<body data-page="satellite">
+  <div id="site-nav"></div>
+  <main id="orbit-main">
+    <header>
+      <span class="kicker">The Map · From orbit</span>
+      <h2>Bình Thạnh from orbit</h2>
+      <p class="dek">One real satellite pass a month, cut to the district
+        boundary and pinned to the same frame, from 1988 to today. Watch the
+        fields fill in. The archive is honestly gappy — clouded months are
+        left blank, not faked.</p>
+    </header>
+
+    <section id="orbit-player" aria-label="Satellite flipbook">
+      <div id="orbit-stage"><!-- current frame img injected here --></div>
+      <div id="orbit-readout"><!-- date · sensor · cloud% · resolution --></div>
+      <div id="orbit-ribbon"><!-- 655 month ticks, gaps hollow --></div>
+      <div id="orbit-controls"><!-- play/pause + range slider + step --></div>
+    </section>
+
+    <div id="orbit-chapters"><!-- era-chapter stepper mounts here --></div>
+
+    <p id="orbit-attribution" class="note"><!-- split attribution injected --></p>
+  </main>
+  <footer><p class="note">Imagery: USGS/NASA Landsat &amp; Copernicus Sentinel-2 (see attribution above). District boundary: OpenStreetMap relation −3797166.</p></footer>
+  <script src="nav.js?v=20260704sat"></script>
+  <script src="stepper.js?v=20260620g"></script>
+  <script src="satellite.js?v=20260704sat"></script>
+</body>
+</html>
