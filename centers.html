@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Anatomy of Centers · Bình Thạnh Atlas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;0,900;1,400&family=Be+Vietnam+Pro:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="spine.css?v=20260622v0">
+  <link rel="stylesheet" href="centers.css?v=20260705">
+</head>
+<body data-page="centers">
+  <div id="site-nav"></div>
+  <main class="wrap">
+    <header class="page-head">
+      <p class="kicker">The Map · Bình Thạnh</p>
+      <h1 class="dek">The Anatomy of Centers</h1>
+      <p class="lede">Bình Thạnh's real centers of place-life — found from all
+        25,368 mapped places, not 49 chains, and named by the landmarks people
+        actually use.</p>
+    </header>
+
+    <section id="centers-hero">
+      <div class="hero-toolbar">
+        <button data-tint="character" class="on" type="button">Character</button>
+        <button data-tint="density" type="button">Density</button>
+        <label><input type="checkbox" id="chains-layer"> Chains layer</label>
+      </div>
+      <svg id="hero-map" viewBox="0 0 900 700" preserveAspectRatio="xMidYMid meet"
+        role="img" aria-label="Bình Thạnh's streets, coloured by their nearest center"></svg>
+      <ol id="center-list"></ol>
+    </section>
+
+    <section id="center-portrait" hidden>
+      <!-- filled on center click: name, character, over-index, domain bars, examples -->
+    </section>
+
+    <section id="anatomy-explorer">
+      <!-- Task 5 -->
+    </section>
+
+    <details id="method">
+      <summary>Method &amp; honesty</summary>
+      <p>Centers are the peaks of a <b>draw-weighted</b> density field over every
+         mapped place. The weight table (below) is a <b>design choice</b> — it up-
+         weights destinations (markets, cinemas, food, culture) over incidental
+         services. Disclosed, not truth. The weighting reshapes each center's
+         <b>character</b>; it barely moves a center's <b>location</b> — Bình Thạnh
+         is uniformly walk-dense, so the same 13 peaks emerge either way.
+         Territories reuse the walk-network partition (every street awarded to its
+         nearest center). Over-index = a center's domain share ÷ the district
+         baseline. Dots in the explorer are anonymous (coordinates only).</p>
+      <table id="weight-table"></table>
+    </details>
+  </main>
+  <footer><p class="note">Places: Overture Maps (CDLA-Permissive-2.0). Streets:
+    OpenStreetMap.</p></footer>
+  <script src="hem/vendor/d3.v7.min.js"></script>
+  <script src="nav.js"></script>
+  <script src="centers.js?v=20260705"></script>
+</body>
+</html>

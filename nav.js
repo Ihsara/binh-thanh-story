@@ -12,6 +12,7 @@
         { href: "road-beneath.html", label: "The road beneath the road", page: "road-beneath" },
         { href: "census.html", label: "Census, not newsfeed", page: "census" },
         { href: "satellite.html", label: "From orbit", page: "satellite" },
+        { href: "centers.html", label: "Centers", page: "centers" },
       ] },
     { id: "street-life", label: "Street Life", href: "street-life.html",
       stories: [
