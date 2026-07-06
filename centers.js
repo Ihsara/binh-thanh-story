@@ -1,5 +1,5 @@
 // centers.js — hero district-of-centers map for centers.html
-// Consumes web/centers.json (schema centers-v1). Task 5 fills the portrait +
+// Consumes web/centers.json (schema centers-v2). Task 5 fills the portrait +
 // explorer registers; this file only wires the hero SVG + toolbar + list.
 (function () {
   const SVG_NS = "http://www.w3.org/2000/svg";
@@ -39,6 +39,7 @@
     tree: null,          // census.json anatomy_tree
     dots: null,          // anatomy_dots.json leaves map: "a/b/c" -> {count, dots:[[lon,lat],...]}
     dotsBounds: null,
+    lastPath: null,      // Task 5: last drawn explorer path, for the specials toggle redraw
   };
 
   // Domain label helper: title-case fallback over real Overture root keys
@@ -75,6 +76,30 @@
   };
   function domainColor(key) {
     return DOMAIN_PALETTE[key] || "#c6c6c6"; // .unknown tail
+  }
+
+  // Child shade: walk the domain hue toward lighter as you drill deeper, so a
+  // category reads as "a shade of its domain". depth 0 = the domain hue itself.
+  function domainShade(domainKey, depth, maxDepth) {
+    const hex = domainColor(domainKey);
+    const r = parseInt(hex.slice(1, 3), 16) / 255;
+    const g = parseInt(hex.slice(3, 5), 16) / 255;
+    const b = parseInt(hex.slice(5, 7), 16) / 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h = 0, s = 0; const l = (max + min) / 2;
+    const d = max - min;
+    if (d) {
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      if (max === r) h = ((g - b) / d + (g < b ? 6 : 0));
+      else if (max === g) h = (b - r) / d + 2;
+      else h = (r - g) / d + 4;
+      h /= 6;
+    }
+    const steps = Math.max(1, maxDepth);
+    const t = Math.min(1, depth / (steps + 1));       // 0..~0.75 lightness lift
+    const ll = Math.min(0.92, l + (0.92 - l) * t);
+    return "hsl(" + Math.round(h * 360) + "," + Math.round(s * 100) + "%," +
+           Math.round(ll * 100) + "%)";
   }
 
   function makeProjector(bounds) {
@@ -447,45 +472,49 @@
     });
   }
 
-  function renderExplorerRows(node, path) {
-    const box = document.getElementById("explorer-rows");
-    if (!box) return;
-    box.innerHTML = "";
-    const kids = (node.children || []).slice();
-    const max = Math.max(1, ...kids.map((c) => c.count));
-    for (const c of kids) {
-      const hasKids = !!(c.children && c.children.length);
-      const row = document.createElement(hasKids ? "button" : "div");
-      row.className = "arow" + (hasKids ? " has-children" : "");
-      const name = document.createElement("span");
-      name.className = "aname";
-      name.title = c.key;
-      name.textContent = c.label;
-      const track = document.createElement("span");
-      track.className = "atrack";
-      const fill = document.createElement("span");
-      fill.className = "afill";
-      // Gotcha 2 again: block + explicit width, never a scaleX on a
-      // zero-basis flex/grid child.
-      fill.style.width = Math.max(0, Math.min(100, (c.count / max) * 100)) + "%";
-      track.appendChild(fill);
-      const val = document.createElement("span");
-      val.className = "aval";
-      val.textContent = c.count.toLocaleString();
-      row.appendChild(name);
-      row.appendChild(track);
-      row.appendChild(val);
-      if (hasKids) {
-        const chev = document.createElement("span");
-        chev.className = "achev";
-        chev.textContent = "›";
-        row.appendChild(chev);
-      }
-      // All clicks route through go() -> hash -> the single onhashchange
-      // handler -> renderExplorer. Never call renderExplorer directly here.
-      row.onclick = () => go("a=" + encodeURIComponent(path.concat(c.key).join("/")));
-      box.appendChild(row);
+  function renderExplorerColumns(path) {
+    const wrap = document.getElementById("explorer-columns");
+    if (!wrap) return;
+    wrap.innerHTML = "";
+    // Build one column per level: level 0 = domains (root children), then the
+    // children along the selected path, then the selected node's children.
+    const levels = [];
+    let node = anatomyState.tree;
+    levels.push({ node: node, selected: path[0] });          // domains
+    for (let i = 0; i < path.length; i++) {
+      node = (node.children || []).find((c) => c.key === path[i]);
+      if (!node) break;
+      levels.push({ node: node, selected: path[i + 1] });    // this branch's children
     }
+    levels.forEach((lv, depth) => {
+      const kids = (lv.node.children || []).slice();
+      if (!kids.length) return;                               // leaf: no column
+      const col = document.createElement("div");
+      col.className = "explorer-col";
+      kids.forEach((c) => {
+        const domainKey = depth === 0 ? c.key : path[0];
+        const row = document.createElement("button");
+        row.type = "button";
+        row.className = "explorer-cell" +
+          (c.key === lv.selected ? " sel" : "") +
+          ((c.children && c.children.length) ? " has-children" : "");
+        const sw = document.createElement("span");
+        sw.className = "cell-sw";
+        sw.style.background = domainShade(domainKey, depth, 3);
+        const nm = document.createElement("span");
+        nm.className = "cell-name";
+        nm.textContent = c.label;                             // FULL label, no clip
+        nm.title = c.key;
+        const ct = document.createElement("span");
+        ct.className = "cell-count";
+        ct.textContent = c.count.toLocaleString();
+        row.appendChild(sw); row.appendChild(nm); row.appendChild(ct);
+        const childPath = path.slice(0, depth).concat(c.key);
+        row.onclick = () => go("a=" + encodeURIComponent(childPath.join("/")));
+        col.appendChild(row);
+      });
+      wrap.appendChild(col);
+    });
   }
 
   function ensureExplorerAssets() {
@@ -512,6 +541,29 @@
       );
     }
     return Promise.all(need);
+  }
+
+  function drawSpecials(gParent) {
+    // Pins the rare one/two-of-a-kind places as diamonds. Coords + label only.
+    if (!state.data || !state.data.specials || !state.showSpecials) return;
+    const project = state.project;
+    const g = document.createElementNS(SVG_NS, "g");
+    g.setAttribute("id", "specials-layer");
+    for (const sp of state.data.specials) {
+      for (const coord of sp.coords) {
+        const [x, y] = project(coord);
+        const dia = document.createElementNS(SVG_NS, "path");
+        const rr = 3.2;
+        dia.setAttribute("d", "M" + x + " " + (y - rr) + " L" + (x + rr) + " " + y +
+                              " L" + x + " " + (y + rr) + " L" + (x - rr) + " " + y + " Z");
+        dia.setAttribute("class", "explorer-special");
+        const t = document.createElementNS(SVG_NS, "title");
+        t.textContent = sp.label;              // label only, no place name
+        dia.appendChild(t);
+        g.appendChild(dia);
+      }
+    }
+    gParent.appendChild(g);
   }
 
   function drawExplorerMap(path) {
@@ -557,6 +609,8 @@
     }
     svg.appendChild(gDots);
 
+    drawSpecials(svg);
+
     // The 13 named center anchors, always labeled for orientation.
     const gAnchors = document.createElementNS(SVG_NS, "g");
     gAnchors.setAttribute("id", "explorer-anchors");
@@ -599,10 +653,21 @@
     if (!section || document.getElementById("explorer-crumbs")) return;
     section.innerHTML =
       '<nav id="explorer-crumbs"></nav>' +
-      '<svg id="explorer-map" viewBox="0 0 900 700" preserveAspectRatio="xMidYMid meet" ' +
-      'role="img" aria-label="The current anatomy slice, plotted on Bình Thạnh\'s streets"></svg>' +
-      '<p id="explorer-caption"></p>' +
-      '<div id="explorer-rows"></div>';
+      '<button id="specials-toggle" type="button" aria-pressed="false">Show rarities</button>' +
+      '<div id="explorer-body">' +
+        '<div id="explorer-columns"></div>' +
+        '<div id="explorer-mapwrap">' +
+          '<svg id="explorer-map" viewBox="0 0 900 700" preserveAspectRatio="xMidYMid meet" ' +
+          'role="img" aria-label="The current anatomy slice, plotted on Bình Thạnh\'s streets"></svg>' +
+          '<p id="explorer-caption"></p>' +
+        '</div>' +
+      '</div>';
+    const tog = document.getElementById("specials-toggle");
+    if (tog) tog.onclick = function () {
+      state.showSpecials = !state.showSpecials;
+      tog.setAttribute("aria-pressed", state.showSpecials ? "true" : "false");
+      drawExplorerMap(anatomyState.lastPath || []);
+    };
   }
 
   function renderExplorer(path) {
@@ -610,19 +675,12 @@
     if (!section) return;
     section.hidden = false;
     ensureExplorerSkeleton();
+    anatomyState.lastPath = path;
     ensureExplorerAssets().then(() => {
       const node = anatomyNodeAtPath(anatomyState.tree, path);
-      if (!node) {
-        go("a=");
-        return;
-      }
+      if (!node) { go("a="); return; }
       renderExplorerCrumbs(path);
-      if (node.children && node.children.length) {
-        renderExplorerRows(node, path);
-      } else {
-        const box = document.getElementById("explorer-rows");
-        if (box) box.innerHTML = "";
-      }
+      renderExplorerColumns(path);
       drawExplorerMap(path);
       renderExplorerCaption(node, path);
     });
@@ -665,6 +723,7 @@
       .then((r) => r.json())
       .then((data) => {
         state.data = data;
+        state.showSpecials = false;
         state.bounds = data.bounds;
         state.project = makeProjector(data.bounds);
         const peaks = data.centers.map((c) => c.peak);
