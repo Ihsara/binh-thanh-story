@@ -13,6 +13,8 @@
         { href: "census.html", label: "Census, not newsfeed", page: "census" },
         { href: "satellite.html", label: "From orbit", page: "satellite" },
         { href: "centers.html", label: "Centers", page: "centers" },
+        { href: "wards.html", label: "The five", page: "wards" },
+        { href: "redraw.html", label: "The redraw", page: "redraw" },
       ] },
     { id: "street-life", label: "Street Life", href: "street-life.html",
       stories: [

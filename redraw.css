@@ -1,0 +1,68 @@
+/* redraw.html — Act 2: old ward numbers into new ward names */
+:root{--paper:#faf6ef}
+body[data-page="redraw"]{background:var(--paper)}
+body[data-page="redraw"] main{max-width:min(1180px,94vw)}
+
+.page-head{margin-bottom:1.25rem}
+.page-head .lede{color:var(--muted);max-width:62ch;margin:.4rem 0 0}
+
+#redraw-stepper{margin-top:1.25rem}
+body[data-page="redraw"] .stage{min-height:690px}
+body[data-page="redraw"] .stage .narr{max-width:64ch}
+
+.alluvial-card{background:#fff;border:1px solid var(--rule);border-radius:8px;
+  overflow:hidden;box-shadow:0 12px 35px rgba(49,39,28,.07)}
+.alluvial-card svg{display:block;width:100%;height:auto;background:#fbf9f3}
+.ribbon{fill:none;stroke:#cfc2ac;stroke-opacity:.82;stroke-linecap:butt}
+.ribbon.clean{stroke:#d8cdb9}
+.ribbon.fork{stroke:#c0532a;stroke-opacity:.95}
+.ribbon.ghost{stroke:#e7dfd1;stroke-opacity:.45}
+.ward-node{fill:#f4ecdf;stroke:#d6cbb8;stroke-width:1}
+.ward-node.new{fill:#efe3d0;stroke:#2f291f;stroke-width:1.2}
+.ward-node.cut{fill:#f8e4d8;stroke:#c0532a;stroke-width:1.3}
+.node-label{font-family:var(--label);font-size:12px;fill:#332d25}
+.node-label.muted{fill:#8a8175}
+.node-label.strong{font-weight:600;fill:#5a2c1c}
+.node-label.right{text-anchor:start}
+.node-label.left{text-anchor:end}
+.node-metric{font-family:var(--label);font-size:10px;fill:#8a8175}
+.fork-callout text{font-family:var(--label);fill:#5a2c1c}
+.fork-callout .title{font-size:13px;font-weight:600}
+.fork-callout .sub{font-size:11px}
+.fork-callout path{fill:none;stroke:#c0532a;stroke-width:1.3;stroke-dasharray:4 4}
+.zero-panel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem;margin:1rem 0}
+.zero-panel div{background:#fff;border:1px solid var(--rule);border-radius:8px;padding:.85rem}
+.zero-panel b{display:block;font-family:var(--display);font-size:2rem;line-height:1;color:#c0532a}
+.zero-panel span{display:block;margin-top:.35rem;font-family:var(--label);font-size:.78rem;color:var(--muted)}
+.gap-grid{display:flex;flex-wrap:wrap;gap:.45rem;margin:1rem 0}
+.gap-grid span{font-family:var(--label);font-size:.88rem;border:1px solid var(--rule);
+  border-radius:7px;background:#fff;padding:.4rem .62rem}
+.gap-grid .gap{color:#9c8a72;text-decoration:line-through;background:#f3ecdf}
+/* The five the resolution never names. NOT struck through — they exist on the
+   ground; it is the law's vocabulary they have dropped out of. Dashed outline in
+   the accent: present, but unaccounted for. */
+.gap-grid .unnamed{color:var(--accent);border:1px dashed var(--accent);
+  background:#fbf1ea}
+.gap-key{margin-top:.2rem;font-size:.85rem}
+.gap-key .swatch{display:inline-block;width:.72rem;height:.72rem;border-radius:3px;
+  vertical-align:-1px;margin-right:.25rem}
+.gap-key .swatch.gap{background:#f3ecdf;border:1px solid var(--rule)}
+.gap-key .swatch.unnamed{background:#fbf1ea;border:1px dashed var(--accent)}
+.name-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.7rem;margin-top:1rem}
+.name-grid article{background:#fff;border:1px solid var(--rule);border-radius:8px;padding:.85rem}
+.name-grid h3{font-size:1.05rem;margin:0 0 .35rem}
+.name-grid p{font-size:.84rem;margin:0;color:#5d5449}
+.redraw-links{margin-top:1rem;color:var(--muted)}
+.redraw-links a{color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent)}
+
+#redraw-method{margin:1.5rem 0 1rem;border-top:1px solid var(--rule);padding-top:1rem}
+#redraw-method summary{cursor:pointer;font-weight:600;color:var(--muted)}
+#redraw-method p{max-width:78ch}
+.load-error{color:#b02c14;white-space:pre-wrap}
+
+@media (max-width:760px){
+  body[data-page="redraw"] .stage{min-height:620px}
+  .zero-panel,.name-grid{grid-template-columns:1fr}
+  .alluvial-card{overflow-x:auto}
+  .alluvial-card svg{min-width:760px}
+}
