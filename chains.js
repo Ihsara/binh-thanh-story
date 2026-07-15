@@ -9,7 +9,7 @@
 //                    only as a fallback if that file is missing).
 //   "exemplar"     — the honest-catchment beat: the naive 1km circle ghost around the
 //                    baked Highlands outlet, vs. the dense hẻm network it really walks.
-//   "hubs"         — THE HERO: streets fade to faint; the 22 hubs glow as gradient-core
+//   "hubs"         — THE HERO: streets fade to faint; the 23 hubs glow as gradient-core
 //                    knots, radius scaled by #chains, the two 12-chain mega-knots dominating.
 //   "hubs-ranked"  — like "hubs" but the top-5-by-rank knots gain "<n> brands" labels
 //                    and a gentle pulse: this names the biggest knots.

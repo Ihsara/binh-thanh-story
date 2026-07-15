@@ -35,7 +35,7 @@ const SECTION_BLOCKS = [
     { href: "chains.html", title: "Chains vs độc lập", blurb: "169 chain outlets pile into a handful of corners." },
   ]},
   { label: "Field Guide", href: "hubs.html", stories: [
-    { href: "hubs.html", title: "The 22 hubs", blurb: "A walkable field guide to the district's corners." },
+    { href: "hubs.html", title: "The 23 hubs", blurb: "A walkable field guide to the district's corners." },
     { href: "cuisine.html", title: "Where the food is", blurb: "The dishes each corner is known for." },
     { href: "rhythm.html", title: "The rhythm of a day", blurb: "When each hub wakes, peaks, and winds down." },
     { href: "history.html", title: "The history ribbon", blurb: "Three centuries of the district, hub by hub." },

@@ -1,11 +1,12 @@
 /**
  * hub-vignettes.js — inline SVG vignettes for illustration hubs
  *
- * Exposes: window.HUB_VIGNETTE(hubId, type) → "<svg …>…</svg>" string
+ * Exposes: window.HUB_VIGNETTE(slug, type) → "<svg …>…</svg>" string
  *          window.HUB_VIGNETTE.DEFAULT        → neutral fallback string
  *
  * Keying order:
- *   1. Bespoke by hub id  (hub:1 Hàng Xanh flyover, hub:10 Nơ Trang Long typographic)
+ *   1. Bespoke by place slug (hang-xanh flyover, no-trang-long typographic) —
+ *      slug is place-derived (hubs_build._TITLE_SLUG), stable across renumbering
  *   2. Fallback by type   (knot / food / bridge / heritage / riverside)
  *   3. DEFAULT neutral
  *
@@ -163,10 +164,10 @@
   + ' fill="' + M + '" letter-spacing=".15em">BỜ KÊNH</text>'
   );
 
-  /* ── bespoke by hub id ──────────────────────────────────────────── */
+  /* ── bespoke by place slug ──────────────────────────────────────── */
 
   /**
-   * hub:1 Hàng Xanh — five-road flyover convergence
+   * hang-xanh (Hàng Xanh) — five-road flyover convergence
    * A bolder version of the knot glyph: thicker roads, overpass arc, accent ring.
    */
   var HANG_XANH = svg(
@@ -189,7 +190,7 @@
   );
 
   /**
-   * hub:10 Nơ Trang Long — street name as styled typographic vignette
+   * no-trang-long (Nơ Trang Long) — street name as styled typographic vignette
    * The street name set large in the display serif, with a thin accent underline.
    */
   var NO_TRANG_LONG = svg(
@@ -242,15 +243,15 @@
     riverside: RIVERSIDE
   };
 
-  /* ── bespoke id map ─────────────────────────────────────────────── */
+  /* ── bespoke slug map ───────────────────────────────────────────── */
   var ID_MAP = {
-    "hub:1":  HANG_XANH,
-    "hub:10": NO_TRANG_LONG
+    "hang-xanh":    HANG_XANH,
+    "no-trang-long": NO_TRANG_LONG
   };
 
   /* ── public API ─────────────────────────────────────────────────── */
-  function HUB_VIGNETTE(id, type) {
-    if (id && ID_MAP[id])     return ID_MAP[id];
+  function HUB_VIGNETTE(slug, type) {
+    if (slug && ID_MAP[slug])   return ID_MAP[slug];
     if (type && TYPE_MAP[type]) return TYPE_MAP[type];
     return DEFAULT;
   }

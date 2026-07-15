@@ -93,8 +93,6 @@
     });
   }
 
-  const HUB_MAP_SLUG = { "hub:0": "van-thanh", "hub:1": "hang-xanh", "hub:5": "cau-do", "hub:2": "tan-cang", "hub:4": "ung-van-khiem", "hub:3": "thi-nghe", "hub:6": "cau-sai-gon", "hub:7": "phan-van-tri", "hub:11": "dien-bien-phu", "hub:8": "cau-bong", "hub:9": "nguyen-van-dau", "hub:10": "no-trang-long", "hub:12": "cho-cay-thi", "hub:13": "thanh-da", "hub:14": "dinh-tien-hoang", "hub:15": "binh-loi", "hub:16": "lang-ong", "hub:17": "da-kao", "hub:18": "cho-ba-chieu", "hub:19": "cau-kieu", "hub:20": "ung-van-khiem-tay", "hub:21": "tan-cang-nam" };
-
   // --- debug tooltip helpers (module scope) ---
   let _tip = null;
   function ensureTip() {
@@ -205,7 +203,7 @@
       fig.hidden = true;
       fig.innerHTML = "";
     } else {
-      fig.innerHTML = window.HUB_VIGNETTE ? window.HUB_VIGNETTE(h.id, h.type) : "";
+      fig.innerHTML = window.HUB_VIGNETTE ? window.HUB_VIGNETTE(h.map_slug, h.type) : "";
       fig.hidden = !fig.innerHTML;
     }
   }
@@ -312,7 +310,7 @@
     // V1.5 per-hub illustrated map — only the pilot hubs have one; others fall
     // back to the OSM-edges path. Skip the fetch entirely when there's no slug
     // so non-pilot hubs don't log a 404.
-    const mapSlug = HUB_MAP_SLUG[h.id];
+    const mapSlug = h.map_slug || "";
     const hubMap = mapSlug
       ? await d3.json("hub_maps/" + mapSlug + ".json?v=20260622v1_5b").catch(() => null)
       : null;
@@ -972,7 +970,7 @@
     const layer = svg.append("g").attr("class", "subhub-layer");
 
     // --- curated malls half (Task 4) ---
-    const slug = HUB_MAP_SLUG[h.id] || "";
+    const slug = h.map_slug || "";
     const malls = (_subhubs && _subhubs[slug]) || [];
     malls.filter(m => m.kind === "mall").forEach(m => {
       const cx = projX(m.lon), cy = projY(m.lat);

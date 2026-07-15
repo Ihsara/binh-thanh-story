@@ -1,4 +1,4 @@
-// hubs.js — the atlas index: district map of 22 hubs + a sortable card grid.
+// hubs.js — the atlas index: district map of 23 hubs + a sortable card grid.
 (function () {
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 
@@ -14,9 +14,9 @@
   const TYPE_GLYPH  = {heritage:"shrine", food:"bowl", riverside:"tower",
                        bridge:"bridge", knot:"bikes"};
 
-  // 22 distinct paper-friendly hues, one per hub (IDENTITY). Tested against the
+  // 23 distinct paper-friendly hues, one per hub (IDENTITY). Tested against the
   // live territory render for adjacency separability.
-  const HUE = d3.quantize(t => d3.interpolateRainbow(t * 0.92 + 0.02), 22);
+  const HUE = d3.quantize(t => d3.interpolateRainbow(t * 0.92 + 0.02), 23);
   const CONTESTED = "#9c8a5a", FAINT = "#cfc6b6";
 
   d3.json("hubs.json").then(render).catch((e) =>
@@ -45,7 +45,7 @@
   function drawMap(data) {
     const W = 760, H = 560, pad = 16;
     const byId = new Map(data.hubs.map(h => [h.id, h]));
-    const hueOf = id => HUE[((byId.get(id)?.rank || 1) - 1) % 22];
+    const hueOf = id => HUE[((byId.get(id)?.rank || 1) - 1) % 23];
     const svg = d3.select("#map").attr("viewBox", `0 0 ${W} ${H}`)
       .on("click", dismissPop);
 
@@ -215,7 +215,7 @@
       .attr("fill", "#fffdf8").attr("stroke", "#7a3f1d").attr("stroke-width", 1.5)
       .append("title").text(h =>
         `${h.title}: ${h.split.chain + h.split.indep} places`);
-    // D16: default labels sit 12px above the node, but with 22 hubs some
+    // D16: default labels sit 12px above the node, but with 23 hubs some
     // labels collide with a neighbour's circle (e.g. "Văn Thánh" behind Hàng
     // Xanh). declashLabels flips a label below the node (dy=+16) whenever
     // another node's label would otherwise sit within N px above it.

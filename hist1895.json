@@ -1,5 +1,5 @@
 {
-  "hub:15": {
+  "hub:17": {
     "img": "hist1895/binh-loi.png",
     "bbox": [
       106.69843,
@@ -11,7 +11,7 @@
     "title": "Bình Lợi",
     "note": "1895 ferry landing ('Appontement de Binh Loï') at the same crossing the bridge now spans (±400 m)."
   },
-  "hub:13": {
+  "hub:15": {
     "img": "hist1895/thanh-da.png",
     "bbox": [
       106.71472,
@@ -35,7 +35,7 @@
     "title": "Hàng Xanh",
     "note": "The diagonal Gia Định spoke on the 1895 map runs toward here — approximate road direction only (±400 m)."
   },
-  "hub:18": {
+  "hub:20": {
     "img": "hist1895/cho-ba-chieu.png",
     "bbox": [
       106.69282,
@@ -47,7 +47,7 @@
     "title": "Chợ Bà Chiểu",
     "note": "'Cho-Ba-Chieu' sits in the 1895 interior at district-center scale (±400 m), not block scale."
   },
-  "hub:16": {
+  "hub:18": {
     "img": "hist1895/lang-ong.png",
     "bbox": [
       106.69593,
