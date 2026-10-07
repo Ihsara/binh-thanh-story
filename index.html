@@ -3,34 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bình Thạnh — a district magazine</title>
+  <title>The old names came back · Bình Thạnh</title>
+  <meta name="description" content="For fifty years this place was a list of numbers. In 2025 the numbers were deleted, and the old names came back.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;0,900;1,400&family=Be+Vietnam+Pro:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="spine.css?v=20260622v0">
+  <link rel="stylesheet" href="story.css?v=20261007b">
 </head>
-<body data-page="cover">
+<body data-page="story">
   <div id="site-nav"></div>
-  <main>
-    <header>
-      <span class="kicker">A district magazine · built from open map data</span>
-      <h1>Bình Thạnh</h1>
-      <p id="subtitle" class="dek"></p>
-      <div id="bignum-hero" class="bignums"></div>
-    </header>
-    <section>
-      <div id="featured"></div>
-    </section>
-    <section>
-      <div id="section-blocks"></div>
+  <main class="story">
+    <figure class="story-map" aria-label="Map of the old Bình Thạnh district">
+      <svg id="map-svg" role="group" aria-labelledby="step-headline"></svg>
+      <aside id="lost-numbers" class="lost-numbers" hidden></aside>
+      <figcaption id="map-note" class="map-note"></figcaption>
+    </figure>
+    <section class="story-text">
+      <div id="step-body" aria-live="polite"></div>
+      <div id="ward-card" class="ward-card" aria-live="polite" hidden></div>
+      <nav class="step-nav" aria-label="Story steps">
+        <button id="step-back" type="button">← Back</button>
+        <span id="step-dots" class="step-dots"></span>
+        <button id="step-next" type="button">Begin →</button>
+      </nav>
     </section>
   </main>
-  <footer>
-    <p id="boundary-note" class="note"></p>
-    <p class="note">Source: OpenStreetMap full history + Overture Maps places.
-      Built with osmkit. <a class="how" href="method.html">How we know →</a></p>
-  </footer>
-  <script src="nav.js"></script>
-  <script src="spine.js?v=20260621z"></script>
+  <noscript><p class="dek">This story is an interactive map and needs JavaScript. The short version: in 2025 Bình Thạnh's numbered wards became five named ones — Gia Định, Bình Thạnh, Bình Lợi Trung, Thạnh Mỹ Tây and Bình Quới — and not one square metre left the old outline. <a href="method.html">How we know</a>.</p></noscript>
+  <script src="vendor/d3.v7.min.js"></script>
+  <script src="nav.js?v=20261007b"></script>
+  <script src="story.js?v=20261007b"></script>
 </body>
 </html>

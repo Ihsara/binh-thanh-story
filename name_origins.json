@@ -1,0 +1,75 @@
+{
+  "schema": "name-origins-v1",
+  "origins": [
+    {
+      "name": "Phường Gia Định",
+      "origin_text": "Gia Định was the name of the province this land belonged to. Lê Văn Duyệt governed Gia Định as viceroy, and his tomb still stands in Bà Chiểu. Bình Hòa, one of the two villages Bình Thạnh was made from, was the seat of Gia Định province until 1975. Why this particular ward was given the name is not stated in the sources we checked.",
+      "sources": [
+        {
+          "title": "Bình Thạnh (quận), Wikipedia tiếng Việt",
+          "ref": "https://vi.wikipedia.org/wiki/B%C3%ACnh_Th%E1%BA%A1nh_(qu%E1%BA%ADn)"
+        },
+        {
+          "title": "Tomb of Lê Văn Duyệt, Wikipedia",
+          "ref": "https://en.wikipedia.org/wiki/Tomb_of_L%C3%AA_V%C4%83n_Duy%E1%BB%87t"
+        }
+      ],
+      "undocumented": false
+    },
+    {
+      "name": "Phường Bình Thạnh",
+      "origin_text": "Bình Thạnh was the district's own name. On 20 May 1976 the 1975–76 districts of Bình Hòa and Thạnh Mỹ Tây (both former villages) were merged, and the new district's name is drawn from those two: Bình from Bình Hòa, Thạnh from Thạnh Mỹ Tây. Since the 2025 resolution the name belongs to one ward of five.",
+      "sources": [
+        {
+          "title": "Bình Thạnh (quận), Wikipedia tiếng Việt",
+          "ref": "https://vi.wikipedia.org/wiki/B%C3%ACnh_Th%E1%BA%A1nh_(qu%E1%BA%ADn)"
+        },
+        {
+          "title": "Nghị quyết 1685/NQ-UBTVQH15 (16 June 2025), as summarised on Bình Quới, Wikipedia tiếng Việt",
+          "ref": "https://vi.wikipedia.org/wiki/B%C3%ACnh_Qu%E1%BB%9Bi"
+        }
+      ],
+      "undocumented": false
+    },
+    {
+      "name": "Phường Bình Lợi Trung",
+      "origin_text": "Under the Nguyễn this land was already called thôn Bình Lợi, the village recorded in Gia Định thành thông chí (1815). The new ward joins the old Phường 5, 11 and 13; our measured redraw adds 45.0% of Phường 6. The 1902 Bình Lợi railway bridge, the first across the Saigon River, is a separate landmark bearing the same name.",
+      "sources": [
+        {
+          "title": "Bình Lợi Trung, Wikipedia tiếng Việt (citing Gia Định thành thông chí, 1815)",
+          "ref": "https://vi.wikipedia.org/wiki/B%C3%ACnh_L%E1%BB%A3i_Trung"
+        },
+        {
+          "title": "This project's redraw measurement (web/redraw.json)",
+          "ref": "method.html"
+        },
+        {
+          "title": "Saigon to preserve part of old Bình Lợi railway bridge, Saigoneer",
+          "ref": "https://saigoneer.com/saigon-heritage/18271-saigon-to-preserve-part-of-old-binh-loi-railway-bridge"
+        }
+      ],
+      "undocumented": false
+    },
+    {
+      "name": "Phường Thạnh Mỹ Tây",
+      "origin_text": "Before 1975 Thạnh Mỹ Tây was a village (xã) of quận Gò Vấp, in Gia Định province. In May 1975 it was split off as a district of its own, and in 1976 it was merged with Bình Hòa to form Bình Thạnh, which drew the second half of its name from it. Where the village's own name comes from, our sources do not say.",
+      "sources": [
+        {
+          "title": "Bình Thạnh (quận), Wikipedia tiếng Việt",
+          "ref": "https://vi.wikipedia.org/wiki/B%C3%ACnh_Th%E1%BA%A1nh_(qu%E1%BA%ADn)"
+        },
+        {
+          "title": "Thạnh Mỹ Tây, Wikipedia tiếng Việt",
+          "ref": "https://vi.wikipedia.org/wiki/Th%E1%BA%A1nh_M%E1%BB%B9_T%C3%A2y"
+        }
+      ],
+      "undocumented": false
+    },
+    {
+      "name": "Phường Bình Quới",
+      "origin_text": "The origin of this name is not documented in the sources we checked. The ward is the old Phường 27 and 28, on the Bình Quới – Thanh Đa peninsula.",
+      "sources": [],
+      "undocumented": true
+    }
+  ]
+}

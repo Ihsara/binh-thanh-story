@@ -85,7 +85,7 @@ fetch("data.json").then((r)=>r.json()).then((data)=>{
       narrative:`${sl.overture.chains[0].name} has ${sl.overture.chains[0].n} branches here — and still the street belongs to the one-offs: ${sl.overture.oneoffs.slice(0,5).join(", ")}… The franchise is the footnote; the independent is the sentence.`,
       render: barRows(sl.overture.chains.map((c)=>({ label:c.name, n:c.n, cls:"bar old" }))) },
     { kind:"intro", kicker:"The end", headline:"The map is still <em>learning</em> the street.",
-      narrative:`Of the ${surv.then} cafés mapped in ${surv.cohort}, ${surv.still} (${survPct}%) are still on the map — the rest churned, as streets and mapping both do. Some closed; some were never reopened under the same name; some simply moved beyond the map's resolution. <a class='how' href='method.html#churn'>What "survival" means →</a> Three threads, one decade. <a class='how' href='street-life.html'>Back to Street Life →</a>` },
+      narrative:`Of the ${surv.then} cafés mapped in ${surv.cohort}, ${surv.still} (${survPct}%) are still on the map — the rest churned, as streets and mapping both do. Some closed; some were never reopened under the same name; some simply moved beyond the map's resolution. <a class='how' href='method.html#churn'>What "survival" means →</a> Three threads, one decade. <a class='how' href='method.html#lab'>Back to the Lab →</a>` },
   ];
   Stepper.mount(el("streetlife-stepper"), steps);
 }).catch((e)=>document.body.insertAdjacentHTML("afterbegin",

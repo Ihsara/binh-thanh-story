@@ -1,0 +1,51 @@
+/* The story overrides spine.css's 820px reading column: the map needs the width. */
+main.story { max-width: none; margin: 0; padding: 0 1rem 2rem;
+  display: grid; grid-template-columns: minmax(0, 3fr) minmax(18rem, 2fr);
+  gap: 2rem; align-items: start; }
+.story-map { position: sticky; top: 0; margin: 0; height: calc(100vh - 3.5rem); }
+#map-svg { width: 100%; height: 100%; display: block; }
+.story-text { padding-top: 2rem; max-width: 36rem; }
+.story-text .kicker { font-family: var(--label); letter-spacing: .08em; text-transform: uppercase;
+  font-size: .75rem; color: var(--accent); }
+.story-text h2 { font-family: var(--display); font-weight: 700; font-size: 2.1rem; line-height: 1.15; margin: .3rem 0 1rem; }
+.story-text p { font-family: var(--body); line-height: 1.6; }
+.step-nav { display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem; }
+.step-nav button { font-family: var(--label); padding: .5rem 1rem; border: 1px solid var(--ink);
+  background: var(--paper-2); cursor: pointer; }
+.step-nav button[disabled] { opacity: .3; cursor: default; }
+.step-dots { display: flex; gap: .4rem; }
+.step-dots button { width: .7rem; height: .7rem; padding: 0; border-radius: 50%;
+  border: 1px solid var(--ink); background: transparent; }
+.step-dots button[aria-current="step"] { background: var(--ink); }
+.map-note { position: absolute; left: .5rem; bottom: .5rem; font-family: var(--label);
+  font-size: .75rem; color: var(--muted); }
+.lost-numbers { position: absolute; right: .5rem; top: .5rem; display: flex; flex-direction: column;
+  gap: .3rem; font-family: var(--label); font-size: .8rem; color: var(--muted); text-align: right;
+  background: var(--paper); padding: .5rem .6rem; border: 1px solid var(--rule); }
+.lost-numbers[hidden] { display: none; }
+.lost-numbers .lost { opacity: .75; text-decoration: line-through; }
+.lost-numbers .cap { font-size: .7rem; max-width: 9rem; }
+/* map marks — colours for the five names come from story.json, inline */
+.outline { fill: none; stroke: var(--ink); stroke-width: 1.6; }
+.old-ward { fill: var(--paper-2); stroke: var(--ink); stroke-width: .6; }
+.old-ward.unnamed { fill: var(--rule); }
+.old-label { font-family: var(--label); font-size: 11px; fill: var(--ink); text-anchor: middle; pointer-events: none; }
+.piece { stroke: none; }
+.piece.cut { stroke: var(--ink); stroke-width: 2; stroke-dasharray: 4 3; }
+.new-ward { stroke: var(--paper); stroke-width: 1.5; cursor: pointer; }
+.new-ward:focus-visible { outline: none; stroke: var(--ink); stroke-width: 3; }
+.new-label { font-family: var(--display); font-size: 14px; font-weight: 700; fill: var(--ink);
+  text-anchor: middle; pointer-events: none; paint-order: stroke; stroke: var(--paper); stroke-width: 3px; }
+.ward-card { margin-top: 1.5rem; padding: 1rem 1.2rem; border-left: 4px solid var(--accent); background: var(--paper-2); }
+.ward-card h3 { font-family: var(--display); margin: 0 0 .5rem; }
+.lives-bar { display: flex; height: .6rem; margin: .5rem 0; }
+.lives-bar span { display: block; height: 100%; }
+.ward-card .cite { font-size: .75rem; color: var(--muted); }
+.story-text .cite { font-size: .75rem; color: var(--muted); }
+@media (max-width: 720px) {
+  main.story { grid-template-columns: 1fr; gap: 0; padding: 0 1rem 2rem; }
+  .story-map { position: relative; height: 45vh; }
+  .story-text { padding-top: 1rem; }
+  .story-text h2 { font-size: 1.6rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
