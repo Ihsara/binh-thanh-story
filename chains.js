@@ -356,7 +356,7 @@
           `<b>${beyond} of ${t.independents.toLocaleString()} independent shops (${beyondShare}%)</b>, lie ` +
           `beyond every chain's reach. Those few dark threads — picked out in ink here — are the whole of ` +
           `Bình Thạnh a chain can't already walk to. The district is saturated. ` +
-          `<a class="how" href="hem/">The hẻm story →</a>`,
+          `<a class="how" href="https://ihsara.github.io/binh-thanh-field-guide/hem/">The hẻm story →</a>`,
         render() { ChainsMap.setMode("saturation"); },
       },
       {

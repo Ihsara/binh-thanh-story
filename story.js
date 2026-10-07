@@ -3,7 +3,7 @@ window.__storyEngine = true;   // the map engine below boots the controller once
 // Each step is a declarative STATE; applyState() restyles the map to it. Back,
 // Next and #step=N deep links jump straight to a state (no replay).
 // Spec: docs/superpowers/specs/2026-10-07-old-names-story-design.md
-const FIELD_GUIDE_BASE = "";   // the ONE field-guide base; the spin-out flips it
+const FIELD_GUIDE_BASE = "https://ihsara.github.io/binh-thanh-field-guide/";   // the ONE field-guide base (binh-thanh-field-guide/v1.0.0)
 
 (function () {
   const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

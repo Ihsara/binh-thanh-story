@@ -4,15 +4,16 @@
 // Pages declare document.body.dataset.page: "story", a section id ("atlas",
 // "method") or a story page id ("roads", "yardstick", ...).
 (function () {
+  const FIELD_GUIDE_BASE = "https://ihsara.github.io/binh-thanh-field-guide/";   // same value as story.js
   const SECTIONS = [
     { id: "story", label: "Story", href: "index.html", stories: [] },
-    { id: "atlas", label: "Field guide", href: "hubs.html",
+    { id: "atlas", label: "Field guide", href: `${FIELD_GUIDE_BASE}hubs.html`,
       stories: [
-        { href: "hubs.html", label: "The 23 hubs", page: "hubs" },
-        { href: "cuisine.html", label: "Where the food is", page: "cuisine" },
-        { href: "rhythm.html", label: "The rhythm of a day", page: "rhythm" },
-        { href: "history.html", label: "The history ribbon", page: "history" },
-        { href: "hem/", label: "The alleys", page: "hem" },
+        { href: `${FIELD_GUIDE_BASE}hubs.html`, label: "The 23 hubs", page: "hubs" },
+        { href: `${FIELD_GUIDE_BASE}cuisine.html`, label: "Where the food is", page: "cuisine" },
+        { href: `${FIELD_GUIDE_BASE}rhythm.html`, label: "The rhythm of a day", page: "rhythm" },
+        { href: `${FIELD_GUIDE_BASE}history.html`, label: "The history ribbon", page: "history" },
+        { href: `${FIELD_GUIDE_BASE}hem/`, label: "The alleys", page: "hem" },
       ] },
     { id: "method", label: "How we know", href: "method.html",
       stories: [
