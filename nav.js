@@ -7,8 +7,9 @@
   const FIELD_GUIDE_BASE = "https://ihsara.github.io/binh-thanh-field-guide/";   // same value as story.js
   const SECTIONS = [
     { id: "story", label: "Story", href: "index.html", stories: [] },
-    { id: "atlas", label: "Field guide", href: `${FIELD_GUIDE_BASE}hubs.html`,
+    { id: "atlas", label: "The atlas", href: `${FIELD_GUIDE_BASE}`,
       stories: [
+        { href: `${FIELD_GUIDE_BASE}`, label: "An atlas for curious visitors", page: "atlas" },
         { href: `${FIELD_GUIDE_BASE}hubs.html`, label: "The 23 hubs", page: "hubs" },
         { href: `${FIELD_GUIDE_BASE}cuisine.html`, label: "Where the food is", page: "cuisine" },
         { href: `${FIELD_GUIDE_BASE}rhythm.html`, label: "The rhythm of a day", page: "rhythm" },
