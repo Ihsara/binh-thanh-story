@@ -15,11 +15,11 @@ const FIELD_GUIDE_BASE = "https://ihsara.github.io/binh-thanh-field-guide/";   /
       state: { r1895: 0, r1984: 0, layer: "outline", labels: "faint-names", lost: false, cards: false } },
     { kicker: "1895",
       headline: "Before the numbers, <em>Gia Định</em>",
-      body: "<p>On Joly's 1895 plan of the Saigon outskirts, the land inside today's outline carries no numbers at all. This was Gia Định country — the name of the citadel, of the province, and loosely of the whole south.</p><p>The French sheet is warped onto today's streets. Its fit is good to about ±400 m: read it as a ghost, not a survey.</p>",
+      body: "<p>On Joly's 1895 plan of the Saigon outskirts, the land inside today's outline carries no numbers at all. This was Gia Định country — the name of the citadel, of the province, and loosely of the whole south.</p><p>The French sheet is warped onto today's streets. It is approximate and not street-aligned: it is off by about a kilometre (median 1,218 m on 7 check points). Read it as a ghost, not a survey.</p>",
       state: { r1895: 0.85, r1984: 0, layer: "outline", labels: "none", lost: false, cards: false } },
     { kicker: "The numbered era",
       headline: "Twenty wards, numbered up to 28",
-      body: "<p>Under the 1984 survey sheet, fitted to today's streets to about ±5 m, lie the twenty wards on the last numbered map (OSM, January 2024). Addresses all ran on these numbers. The old names survived on markets, streets and in memory.</p>",
+      body: "<p>Under the 1984 survey sheet, registered to its drawn roads and bridges (median error 22.6 m), lie the twenty wards on the last numbered map (OSM, January 2024). Addresses all ran on these numbers. The old names survived on markets, streets and in memory.</p>",
       state: { r1895: 0, r1984: 0.6, layer: "old", labels: "numbers", lost: false, cards: false } },
     { kicker: "The vanishing",
       headline: "Numbers were disappearing long before 2025",
@@ -155,8 +155,8 @@ const FIELD_GUIDE_BASE = "https://ihsara.github.io/binh-thanh-field-guide/";   /
     const A = (sel) => t ? sel.interrupt().transition(t) : sel.interrupt();
     A(gR.select("image.r1895")).attr("opacity", st.r1895);
     A(gR.select("image.r1984")).attr("opacity", st.r1984);
-    const L = { "1895": "1895 · Joly, Plan des environs de Saïgon · fit ±400 m",
-                "1984": "1984 · DMA L7014 survey sheet · fit ±5 m" };
+    const L = { "1895": "1895 · Joly, Plan des environs de Saïgon · approximate · not street-aligned (off by about a kilometre)",
+                "1984": "1984 · DMA L7014 survey sheet · " + overlays.layers.find((l) => l.id === "1984").label.replace(/^1984 · /, "") };
     d3.select("#map-note").text(st.r1895 ? L["1895"] : st.r1984 ? L["1984"] : "");
     A(gOld.selectAll("path"))
       .attr("opacity", st.layer === "old" ? 0.9 : st.layer === "redraw" ? 0.35 : 0)

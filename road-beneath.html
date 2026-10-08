@@ -45,7 +45,7 @@
         Which streets carry the 1748 route remains the scholarly reconstruction — the street
         geometry is real OSM, the street choice is not a confirmed marker.
         The historical base is the <em>Plan des environs de Saïgon</em> (1895 French survey),
-        licensed CC BY-SA 4.0 via Wikimedia Commons, georeferenced to ±~400 m. The inset shows the <em>Bản đồ Gia Định</em> (1815)
+        licensed CC BY-SA 4.0 via Wikimedia Commons, only approximately georeferenced (not street-aligned; about a kilometre off). The inset shows the <em>Bản đồ Gia Định</em> (1815)
         by Trần Văn Học — the oldest known Vietnamese map of the city, pictorial rather than a survey.
         The river and canals are real OSM geodata.
       </figcaption>
@@ -62,8 +62,9 @@
       <div id="ovl-map" aria-label="Interactive historical map overlay of Bình Thạnh district"></div>
       <div id="ovl-filter"><!-- Task 4: toggle/opacity controls --></div>
       <p class="ovl-caption">
-        Historical layers are georeferenced to roughly ±300–600 m — atmospheric, not
-        street-accurate (the 1984 sheet is the exception, accurate to a few metres).
+        The 1895 layer is approximate and not street-aligned: it misses 7 independent check
+        points by a median of 1,218 m (about a kilometre) — atmospheric, not street-accurate.
+        The 1984 sheet is registered to its drawn roads and bridges, median error 22.6 m.
         The 1815 map is illustrative only — not survey-aligned.
         Toggle and fade the layers to compare how the same streets shift across eras.
         Base tiles © <a href="https://www.openstreetmap.org/copyright"
@@ -81,7 +82,7 @@
           <li><strong>1878</strong> — <em>Plan de la ville de Saïgon</em> (Dufour) —
             Wikimedia Commons, <strong>public domain</strong> mark (PD-Mark)</li>
           <li><strong>1815</strong> — <em>Bản đồ Gia Định</em> (Trần Văn Học) —
-            licensed <strong>CC BY-SA</strong> 4.0 via Wikimedia Commons</li>
+            public domain in the US (published before 1931), via Wikimedia Commons</li>
           <li><strong>Base streets</strong> — ©
             <a href="https://www.openstreetmap.org/copyright"
                rel="noopener" target="_blank">OpenStreetMap</a> contributors (ODbL)</li>
@@ -350,7 +351,7 @@
         The <em>Plan des environs de Saïgon</em> was surveyed by French colonial engineers in
         <strong>1895</strong> — a century and a half after the Thiên Lý route was first recorded
         in <strong>1748</strong>. The 1895 survey is the oldest georeferenced base available for
-        this district (measured accuracy ±~400 m). The inset shows the <em>Bản đồ Gia Định</em>
+        this district (approximate, not street-aligned; median 1,218 m off on 7 check points). The inset shows the <em>Bản đồ Gia Định</em>
         (<strong>1815</strong>) by Trần Văn Học — the oldest known Vietnamese map of the city,
         drawn forty-seven years before any French survey of the area, pictorial rather than a
         geodetic survey. The route predates both maps; the maps are the best ground we have.
@@ -388,10 +389,11 @@
         <h3>Map data attribution</h3>
         <ul>
           <li>
-            <strong>1815 <em>Bản đồ Gia Định</em></strong> (Trần Văn Học) and
+            <strong>1815 <em>Bản đồ Gia Định</em></strong> (Trần Văn Học; photo of a 1987 reproduction,
+            public domain in the US, published before 1931) and
             <strong>1895 <em>Plan des environs de Saïgon</em></strong> (French colonial survey):
             sourced from <a href="https://commons.wikimedia.org/" rel="noopener" target="_blank">Wikimedia Commons</a>,
-            licensed <strong>CC BY-SA 4.0</strong>. This project's derivative historical layer
+            the 1895 plan licensed <strong>CC BY-SA 4.0</strong>. This project's derivative historical layer
             (georeferenced composite) inherits CC BY-SA 4.0.
           </li>
           <li>

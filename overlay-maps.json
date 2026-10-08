@@ -3,14 +3,14 @@
   "layers": [
     {
       "id": "1984",
-      "label": "1984 · ±~5 m",
+      "label": "1984 · re-georeferenced · median error 22.6 m",
       "tier": "precise",
       "img": "overlays/1984.png",
       "bbox": [
-        106.49413,
-        10.749654,
-        106.754484,
-        11.000713
+        106.678469,
+        10.779952,
+        106.756779,
+        10.844427
       ],
       "license": "US Federal (public domain)",
       "source": "DMA L7014 6330-4",
@@ -18,7 +18,7 @@
     },
     {
       "id": "1961",
-      "label": "1961 · ±~300 m · southern/central only",
+      "label": "1961 · approximate · not street-aligned · southern/central only",
       "tier": "moderate",
       "img": "overlays/1961.png",
       "bbox": [
@@ -33,7 +33,7 @@
     },
     {
       "id": "1895",
-      "label": "1895 · ±~400 m",
+      "label": "1895 · approximate · not street-aligned",
       "tier": "soft",
       "img": "overlays/1895.png",
       "bbox": [
@@ -48,7 +48,7 @@
     },
     {
       "id": "1878",
-      "label": "1878 · ±~300 m · city-core/SW only",
+      "label": "1878 · approximate · not street-aligned",
       "tier": "soft",
       "img": "overlays/1878.png",
       "bbox": [
@@ -72,7 +72,7 @@
         106.752,
         10.84
       ],
-      "license": "CC BY-SA 4.0",
+      "license": "Public domain in the US (Wikimedia Commons)",
       "source": "Bản đồ Gia Định (Trần Văn Học)",
       "illustrative": true
     }
